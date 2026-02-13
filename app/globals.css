@@ -47,7 +47,19 @@ body {
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem
+    --radius: 0.5rem;
+    /* Dashboard header colors (Business Hub) */
+    --dashboard-header-dark: 221 58% 30%;   /* #0B3D91 */
+    --dashboard-nav: 218 83% 35%;          /* #0A42A6 */
+    --dashboard-content-bg: 210 14% 96%;  /* light grey content */
+    /* Cash Flow colors */
+    --neutral-pale-grey-color: #CED3D9;
+    --neutral-pale-grey-15-color: #F8F8FA;
+    --secondary-135-color: #003FCA;
+    --secondary-color: #0051FF;
+    --accent-2-color: #00164E;
+    /* Primary color variants */
+    --primary-4-color: #F2F6FF;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -106,4 +118,25 @@ body {
   margin-right: auto;
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+/* Typography - Header Styles */
+.header-text-bold {
+  font-family: var(--font-bspro), sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 130%;
+  letter-spacing: 0px;
+}
+
+.header-text-regular {
+  font-family: var(--font-bspro), sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+  letter-spacing: 0px;
+}
+
+.header-text-bg {
+  background: var(--primary-4-color);
 }

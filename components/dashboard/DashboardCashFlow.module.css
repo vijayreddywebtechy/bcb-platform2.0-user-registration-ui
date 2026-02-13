@@ -1,0 +1,289 @@
+/* Cash Flow Component Styles */
+
+.cashFlowSection {
+  background: #ffffff;
+  border: 1px solid hsl(var(--border));
+  border-radius: 8px;
+  padding: 1.25rem;
+  font-family: 'Benton Sans Pro', sans-serif;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.headerSection {
+  margin-bottom: 1rem;
+}
+
+.titleWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.titleIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.sectionTitle {
+  font-family: 'Benton Sans Pro', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 130%;
+  color: #0033AA;
+  vertical-align: middle;
+}
+
+.filterContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.filterWrapper {
+  width: 240px;
+  height: 48px;
+  border-radius: 8px;
+  justify-content: space-between;
+  padding-right: 12px;
+  padding-left: 12px;
+  opacity: 1;
+  border-width: 1px;
+  border: 1px solid var(--neutral-pale-grey-color, #CED3D9);
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.filterSelect {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  font-size: 0.875rem;
+  color: hsl(var(--secondary));
+  outline: none;
+  appearance: none;
+  padding-right: 2rem;
+  cursor: pointer;
+}
+
+.accountsDropdown {
+  width: 420px;
+  height: 48px;
+  gap: 16px;
+  opacity: 1;
+  border-radius: 8px;
+  border: 1px solid var(--neutral-pale-grey-color, #CED3D9);
+  background: #FFFFFF;
+  padding: 0 12px;
+  font-size: 0.875rem;
+  color: hsl(var(--secondary));
+  cursor: pointer;
+}
+
+.calendarButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.calendarIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.trackText {
+  font-family: 'Benton Sans Pro', sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 130%;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: hsl(var(--secondary));
+  margin-bottom: 1rem;
+}
+
+.graphWrapper {
+  background: #F5F7FA;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.graphOuterContainer {
+  display: flex;
+  gap: 1rem;
+  max-width: 857px;
+  margin: 0 auto;
+}
+
+.yAxisLabels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 260px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  font-size: 0.75rem;
+  color: #697786;
+  text-align: right;
+  min-width: 40px;
+}
+
+.graphContainer {
+  flex: 1;
+  height: 260px;
+  opacity: 1;
+  gap: 10px;
+  padding-top: 6px;
+  padding-right: 22px;
+  padding-bottom: 6px;
+  padding-left: 22px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.monthBar {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  align-items: flex-end;
+  height: 100%;
+  justify-content: center;
+}
+
+.inflowBar {
+  flex: 1;
+  background: #0051FF;
+  border-radius: 4px 4px 0 0;
+  min-height: 4px;
+  min-width: 8px;
+  transition: height 0.3s ease;
+}
+
+.outflowBar {
+  flex: 1;
+  background: #1A314D;
+  border-radius: 4px 4px 0 0;
+  min-height: 4px;
+  min-width: 8px;
+  transition: height 0.3s ease;
+}
+
+.monthLabels {
+  display: flex;
+  justify-content: space-between;
+  max-width: 857px;
+  margin: 0.5rem auto 0;
+  padding: 0 22px;
+  margin-left: 56px;
+  font-size: 0.75rem;
+  color: #697786;
+}
+
+.legend {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legendDot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 9999px;
+}
+
+.legendDotInflow {
+  background: #0051FF;
+}
+
+.legendDotOutflow {
+  background: #1A314D;
+}
+
+.summaryBoxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.summaryBox1 {
+  width: 277.67px;
+  max-width: 100%;
+  height: 127px;
+  border-radius: 8px;
+  justify-content: space-between;
+  opacity: 1;
+  padding: 16px;
+  background: var(--secondary-135-color, #003FCA);
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.summaryBox2 {
+  width: 277.67px;
+  max-width: 100%;
+  height: 127px;
+  border-radius: 8px;
+  justify-content: space-between;
+  opacity: 1;
+  padding: 16px;
+  background: var(--secondary-color, #0051FF);
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.summaryBox3 {
+  width: 277.67px;
+  max-width: 100%;
+  height: 127px;
+  border-radius: 8px;
+  justify-content: space-between;
+  opacity: 1;
+  padding: 16px;
+  background: var(--accent-2-color, #00164E);
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.summaryLabel {
+  font-size: 0.875rem;
+  opacity: 0.9;
+}
+
+.summaryValue {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.disclaimer {
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+  margin-top: 0.75rem;
+}
