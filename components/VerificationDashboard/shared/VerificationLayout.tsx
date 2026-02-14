@@ -1,0 +1,20 @@
+import Header from "./Header";
+import MiniNavbar from "./MiniNavbar";
+import Footer from "@/components/layout/Footer";
+
+export default function VerificationLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="min-h-screen flex flex-col bg-background">
+      <div>
+        <MiniNavbar />
+        <Header />
+      </div>
+      <main className="flex-1">{children}</main>
+      <Footer />
+    </div>
+  );
+}

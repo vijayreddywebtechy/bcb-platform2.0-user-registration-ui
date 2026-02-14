@@ -15,6 +15,7 @@ export default function AuthWelcomeLayout({
         className="absolute inset-0 -z-[1] w-auto h-auto object-cover left-1/2 top-0 -translate-x-1/2"
       />
       <Image src={sbBrandIcon} alt="sb brand icon" className="my-4" width={88} height={103} />
+      <span className="text-xs text-blue-500 inline-block mt-1">Version 2.0</span>
       <div className="w-full max-w-4xl flex-1 flex flex-col justify-center">{children}</div>
     </div>
   );

@@ -42,19 +42,19 @@ const ActionCard: React.FC<ActionCardProps> = ({
   const getIconBackground = () => {
     switch (status) {
       case 'completed':
-        return 'bg-green-700';
+        return 'bg-green-500';
       case 'active':
-        return 'bg-blue-700';
+        return 'bg-blue-500';
       case 'pending':
-        return 'bg-gray-700';
+        return 'bg-gray-500';
       default:
-        return 'bg-gray-700';
+        return 'bg-gray-500';
     }
   };
 
   return (
     <div
-      className={`${getBackgroundColor()} rounded-3xl p-8 min-h-[240px] flex flex-col justify-between transition-all duration-300 hover:scale-105 cursor-pointer relative overflow-hidden`}
+      className={`${getBackgroundColor()} rounded-2xl p-4 min-h-[186px] flex flex-col justify-between transition-all duration-300 cursor-pointer relative overflow-hidden`}
       onClick={onActionClick}
     >
       {/* Close Button */}
@@ -72,30 +72,30 @@ const ActionCard: React.FC<ActionCardProps> = ({
       )}
 
       {/* Icon */}
-      <div className={`${getIconBackground()} w-14 h-14 rounded-2xl flex items-center justify-center mb-6`}>
-        <Icon className="w-7 h-7 text-white" strokeWidth={2} />
+      <div className={`${getIconBackground()} w-10 h-10 rounded-md flex items-center justify-center mb-4`}>
+        <Icon className="w-6 h-6 text-white" strokeWidth={1.5} />
       </div>
 
       {/* Content */}
       <div className="flex-1">
-        <h3 className="text-white text-xl font-semibold mb-3">
+        <h3 className="text-white text-sm font-medium mb-2">
           Step {stepNumber} - {title}
         </h3>
-        <p className="text-white/90 text-sm leading-relaxed">
+        <p className="text-white/90 text-xs leading-relaxed">
           {description}
         </p>
       </div>
 
       {/* Status Indicator */}
-      <div className="flex items-center justify-end mt-6">
+      <div className="flex items-center justify-end mt-2">
         {status === 'completed' ? (
-          <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm">
-            <span className="text-white text-sm font-medium">Done</span>
-            <CheckCircle2 className="w-5 h-5 text-white" />
+          <div className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-300/40 transition-colors">
+            <span className="text-white text-xs">Done</span>
+            <CheckCircle2 className="w-6 h-6 text-green-600" strokeWidth={1.5} fill="white" />
           </div>
         ) : (
-          <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm">
-            <ArrowRight className="w-5 h-5 text-white" />
+          <div className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-300/40 transition-colors">
+            <ArrowRight className="w-6 h-6 text-white" strokeWidth={1.5} />
           </div>
         )}
       </div>

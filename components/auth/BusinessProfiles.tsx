@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ChevronRight, Building } from "lucide-react";
 import AuthLayout from "./shared/AuthLayout";
 import AuthCard from "./shared/AuthCard";
-import SearchBox from "./shared/SearchBox";
+import SearchBox from "../dynamic/SearchBox";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import companyIcon from "@/assets/images/icons/icn_company.png";

@@ -99,6 +99,12 @@ body {
 }
 
 /* Container */
+
+
+/* .page-container {
+  @apply mx-auto max-w-[1296px] px-[12px];
+} */
+
 .page-container {
   width: 100%;
   max-width: 1328px;
