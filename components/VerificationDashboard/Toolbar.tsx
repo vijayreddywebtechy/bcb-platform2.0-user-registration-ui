@@ -28,7 +28,7 @@ function Toolbar({
       {/* Left Section */}
       <div className="text-white">
         {userName && (
-          <h1 className="text-3xl font-bold">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-medium md:font-bold">
             {userName}
           </h1>
         )}
@@ -71,7 +71,7 @@ function Toolbar({
             variant="outline"
             size="md"
             onClick={action.onClick}
-            className="text-white border-white bg-transparent hover:bg-white hover:text-black px-6"
+            className="text-white border-white bg-transparent hover:bg-white hover:text-primary-dark px-6"
           >
             {action.label}
           </Button>

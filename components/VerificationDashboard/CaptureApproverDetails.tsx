@@ -2,10 +2,9 @@
 
 import React, { useState } from "react";
 import { Link2, Info, ChevronDown, ChevronUp } from "lucide-react";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import { ReactSelect } from "../ui/react-select";
+import { Button } from "@/components/ui/button";
+import { FloatingSelect, SelectOption } from "@/components/ui/FloatingReactSelect";
+import { FloatingTextField } from "@/components/ui/FloatingTextField";
 
 interface Approver {
   id: string;
@@ -14,7 +13,7 @@ interface Approver {
   initials: string;
   mobileNumber: string;
   email: string;
-  permissions: { value: string; label: string } | null;
+  permissions: SelectOption | null;
 }
 
 interface CaptureApproverDetailsProps {
@@ -144,57 +143,35 @@ function CaptureApproverDetails({
 
               {/* Approver Details Form */}
               {isExpanded && (
-                <div className="py-4 pt-0 space-y-4 bg-white mb-5">
+                <div className="py-4 pt-0 space-y-6 bg-white mb-5">
                   {/* Mobile Number */}
-                  <div>
-                    <Label
-                      htmlFor={`mobile-${approver.id}`}
-                      className="mb-2 block"
-                    >
-                      Mobile Number*
-                    </Label>
-                    <Input
-                      id={`mobile-${approver.id}`}
-                      type="tel"
-                      placeholder="079 123 4567"
-                      value={approver.mobileNumber}
-                      onChange={(e) =>
-                        updateApprover(approver.id, "mobileNumber", e.target.value)
-                      }
-                    />
-                    <p className="text-xs text-secondary mt-1">*Required</p>
-                  </div>
+                  <FloatingTextField
+                    label="Mobile Number"
+                    type="tel"
+                    placeholder="079 123 4567"
+                    value={approver.mobileNumber}
+                    onChange={(e) =>
+                      updateApprover(approver.id, "mobileNumber", e.target.value)
+                    }
+                    helperText="*Required"
+                  />
 
                   {/* Email Address */}
-                  <div>
-                    <Label
-                      htmlFor={`email-${approver.id}`}
-                      className="mb-2 block"
-                    >
-                      Email Address*
-                    </Label>
-                    <Input
-                      id={`email-${approver.id}`}
-                      type="email"
-                      placeholder="jonathan.khumalo@company.com"
-                      value={approver.email}
-                      onChange={(e) =>
-                        updateApprover(approver.id, "email", e.target.value)
-                      }
-                    />
-                    <p className="text-xs text-secondary mt-1">*Required</p>
-                  </div>
+                  <FloatingTextField
+                    label="Email Address"
+                    type="email"
+                    placeholder="jonathan.khumalo@company.com"
+                    value={approver.email}
+                    onChange={(e) =>
+                      updateApprover(approver.id, "email", e.target.value)
+                    }
+                    helperText="*Required"
+                  />
 
                   {/* Role/Permissions */}
                   <div>
-                    <Label
-                      htmlFor={`permissions-${approver.id}`}
-                      className="mb-2 block"
-                    >
-                      Role/Permissions*
-                    </Label>
-                    <ReactSelect
-                      id={`permissions-${approver.id}`}
+                    <FloatingSelect
+                      label="Role/Permissions"
                       options={roleOptions}
                       value={approver.permissions}
                       onChange={(selectedOption) =>
@@ -204,6 +181,7 @@ function CaptureApproverDetails({
                     />
                     <p className="text-xs text-secondary mt-1">*Required</p>
                   </div>
+
                 </div>
               )}
             </div>

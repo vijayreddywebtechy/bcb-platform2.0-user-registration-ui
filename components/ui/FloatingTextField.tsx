@@ -1,7 +1,7 @@
 import React, { useState, InputHTMLAttributes } from 'react';
-import styles from './FloatingLabelInput.module.css';
+import styles from './FloatingTextField.module.css';
 
-export interface FloatingLabelInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'className'> {
+export interface FloatingTextFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'className'> {
   /** Label text that floats above the input */
   label: string;
   /** Optional helper text displayed below the input */
@@ -15,27 +15,41 @@ export interface FloatingLabelInputProps extends Omit<InputHTMLAttributes<HTMLIn
 }
 
 /**
- * Material Design Outlined Text Field with Floating Label
+ * Material Design Outlined TextField with Floating Label
+ * 
+ * This component replicates the exact behavior of Material UI's TextField with outlined variant.
+ * 
+ * States:
+ * 1. Default - Label inside input, default border
+ * 2. Active/Typing - Label floats to top, border highlighted, cursor visible
+ * 3. Populated - Label remains floating, value visible, default border
  * 
  * Features:
- * - Floating label animation
- * - Border cut effect using native fieldset/legend
+ * - Smooth floating label animation
+ * - Native fieldset/legend for border cut effect
  * - Error states with validation messages
  * - Helper text support
- * - Fully accessible
+ * - Fully accessible (ARIA attributes)
  * - Dark mode support
  * - Autofill detection
+ * - Disabled state
  * 
  * @example
  * ```tsx
- * <FloatingLabelInput 
+ * <FloatingTextField 
+ *   label="Username"
+ *   helperText="Create a username using letters only, or a combination of letters, numbers and these special characters ! $ & - ? . @ ^ _ ~"
+ * />
+ * 
+ * <FloatingTextField 
  *   label="Email Address"
  *   type="email"
- *   helperText="We'll never share your email"
+ *   error={true}
+ *   errorText="Please enter a valid email address"
  * />
  * ```
  */
-export const FloatingLabelInput = React.forwardRef<HTMLInputElement, FloatingLabelInputProps>(
+export const FloatingTextField = React.forwardRef<HTMLInputElement, FloatingTextFieldProps>(
   ({ 
     label, 
     helperText, 
@@ -57,23 +71,26 @@ export const FloatingLabelInput = React.forwardRef<HTMLInputElement, FloatingLab
     const isActive = isFocused || hasValue;
 
     // Generate unique ID if not provided
-    const inputId = id || `floating-input-${label.toLowerCase().replace(/\s+/g, '-')}`;
+    const inputId = id || `floating-textfield-${label.toLowerCase().replace(/\s+/g, '-')}`;
 
     return (
-      <div className={`${styles.wrapper} ${wrapperClassName || ''}`}>
-        <div className={styles.container}>
+      <div className={`${styles.textfieldWrapper} ${wrapperClassName || ''}`}>
+        <div className={styles.textfieldContainer}>
+          {/* Fieldset creates the border with native cut effect */}
           <fieldset 
-            className={`${styles.fieldset} ${error ? styles.fieldsetError : ''} ${isFocused ? styles.fieldsetFocused : ''}`}
+            className={`${styles.fieldset} ${error ? styles.fieldsetError : ''} ${isFocused ? styles.fieldsetFocused : ''} ${disabled ? styles.fieldsetDisabled : ''}`}
             aria-hidden="true"
           >
             <legend className={`${styles.legend} ${isActive ? styles.legendActive : ''}`}>
               <span>{label}</span>
             </legend>
           </fieldset>
+          
+          {/* Input field */}
           <input
             ref={ref}
             id={inputId}
-            className={styles.input}
+            className={`${styles.input} ${disabled ? styles.inputDisabled : ''}`}
             value={value !== undefined ? value : internalValue}
             disabled={disabled}
             aria-invalid={error}
@@ -94,17 +111,21 @@ export const FloatingLabelInput = React.forwardRef<HTMLInputElement, FloatingLab
             }}
             {...props}
           />
+          
+          {/* Floating label */}
           <label 
             htmlFor={inputId}
-            className={`${styles.label} ${isActive ? styles.labelActive : ''} ${error ? styles.labelError : ''} ${isFocused ? styles.labelFocused : ''}`}
+            className={`${styles.label} ${isActive ? styles.labelActive : ''} ${error ? styles.labelError : ''} ${isFocused ? styles.labelFocused : ''} ${disabled ? styles.labelDisabled : ''}`}
           >
             {label}
           </label>
         </div>
+        
+        {/* Helper text or error message */}
         {(helperText || errorText) && (
           <span 
             id={`${inputId}-helper-text`}
-            className={`${styles.helperText} ${error ? styles.helperTextError : ''}`}
+            className={`text-neutral-700 ${styles.helperText} ${error ? styles.helperTextError : ''}`}
             role={error ? 'alert' : undefined}
           >
             {error ? errorText : helperText}
@@ -115,5 +136,4 @@ export const FloatingLabelInput = React.forwardRef<HTMLInputElement, FloatingLab
   }
 );
 
-FloatingLabelInput.displayName = 'FloatingLabelInput';
-
+FloatingTextField.displayName = 'FloatingTextField';

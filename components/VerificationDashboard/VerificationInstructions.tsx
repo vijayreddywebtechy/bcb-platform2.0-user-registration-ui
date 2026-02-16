@@ -98,7 +98,7 @@ function VerificationInstructions({
               <AlertTriangle className="w-5 h-5 text-red-600" />
             </div>
             <div className="text-sm text-secondary leading-relaxed">
-              <span className="font-semibold">WARNING:</span> Flashing screens
+              <span className="font-medium">WARNING:</span> Flashing screens
               may potentially trigger seizures for people with photosensitive
               epilepsy.
             </div>

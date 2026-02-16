@@ -75,8 +75,8 @@ const customStyles: StylesConfig<SelectOption, false> = {
     backgroundColor: state.isSelected
       ? "hsl(var(--primary))"
       : state.isFocused
-      ? "hsl(var(--accent))"
-      : "white",
+        ? "hsl(var(--accent))"
+        : "white",
     color: state.isSelected ? "white" : "hsl(var(--secondary))",
     cursor: "pointer",
     padding: "0.5rem 0.75rem",
@@ -109,15 +109,15 @@ const customStyles: StylesConfig<SelectOption, false> = {
 const CustomDropdownIndicator = (props: DropdownIndicatorProps<SelectOption, false>) => {
   return (
     <components.DropdownIndicator {...props}>
-      <Image 
-        src={ArrowDownIcon} 
-        alt="dropdown" 
-        width={24} 
+      <Image
+        src={ArrowDownIcon}
+        alt="dropdown"
+        width={24}
         height={24}
         className="transition-transform duration-200"
-        // style={{
-        //   transform: props.selectProps.menuIsOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-        // }}
+      // style={{
+      //   transform: props.selectProps.menuIsOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+      // }}
       />
     </components.DropdownIndicator>
   );

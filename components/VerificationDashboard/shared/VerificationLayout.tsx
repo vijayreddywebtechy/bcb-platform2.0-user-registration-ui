@@ -8,8 +8,8 @@ export default function VerificationLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <div>
+    <div className="relative min-h-screen flex flex-col bg-background">
+      <div className="sticky top-0 z-50">
         <MiniNavbar />
         <Header />
       </div>

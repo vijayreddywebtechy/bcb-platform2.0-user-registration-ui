@@ -1,5 +1,6 @@
 import ConfirmIdentity from "./ConfirmIdentity";
 import FaceVerificationStep from "./FaceVerificationStep";
+import QRMobileVerification from "./QRMobileVerification";
 import VerificationLayout from "./shared/VerificationLayout";
 import VerificationInstructions from "./VerificationInstructions";
 import VerifyStatus from "./VerifyStatus";
@@ -12,7 +13,8 @@ function IdentityVerification({}: Props) {
        {/* <ConfirmIdentity /> */}
        {/* <FaceVerificationStep /> */}
        {/* <VerificationInstructions/> */}
-       <VerifyStatus />
+       {/* <VerifyStatus /> */}
+       <QRMobileVerification />
     </VerificationLayout>
   );
 }

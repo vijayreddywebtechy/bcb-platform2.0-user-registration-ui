@@ -69,7 +69,7 @@ function BusinessProfiles() {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl text-secondary mb-2">Business Profiles</h1>
-          <p className="text-gray-900 text-base leading-relaxed">
+          <p className="text-neutral-900 text-base leading-relaxed">
             Select a business banking profile
           </p>
         </div>

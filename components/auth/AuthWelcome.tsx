@@ -7,7 +7,8 @@ import AuthWelcomeLayout from "./shared/AuthWelcomeLayout";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import SignInForm from "./signin/SignInForm";
-import { FloatingLabelInput } from "../ui/FloatingLabelInput";
+import { FloatingTextField } from "../ui/FloatingTextField";
+
 
 type ViewType = "welcome" | "signin" | "register" | "invite";
 
@@ -38,15 +39,10 @@ export default function AuthWelcome() {
           </p>
         </div>
 
-
-
-
-
-
-    <FloatingLabelInput 
-      label="Username" 
-    />
-
+        <FloatingTextField 
+          label="Username" 
+          helperText="Create a username using letters only, or a combination of letters, numbers and these special characters ! $ & - ? . @ ^ _ ~"
+        />
 
         <div className="space-y-4">
           <Button onClick={() => setCurrentView("signin")} className="w-full ">
