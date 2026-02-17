@@ -1,0 +1,56 @@
+/* Floating Action Buttons */
+.fabContainer {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  z-index: 50;
+}
+
+.profileButton {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 9999px;
+  background-color: white;
+  border: 2px solid hsl(var(--primary));
+  color: hsl(var(--primary));
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.profileButton:hover {
+  background-color: hsl(var(--primary) / 0.05);
+}
+
+.profileIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.chatButton {
+  width: 48px;
+  height: 48px;
+  border-radius: 60px;
+  padding: 12px 10px;
+  background-color: #0051FF;
+  color: white;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.chatButton:hover {
+  opacity: 0.9;
+}
+
+.chatIcon {
+  width: 24px;
+  height: 24px;
+}

@@ -5,7 +5,11 @@
 
 html,
 body {
-  font-family: var(--font-bspro), sans-serif;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
   color: var(--secondary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -15,6 +19,18 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;       /* Sharper text rendering */
+}
+
+/* Ensure Benton Sans Pro is used throughout the dashboard */
+.font-bspro,
+.font-bspro * {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+}
+
+/* Typography consistency */
+h1, h2, h3, h4, h5, h6,
+p, span, a, button, input, select, textarea {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
 }
 
 @layer base {
@@ -47,7 +63,19 @@ body {
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem
+    --radius: 0.5rem;
+    /* Dashboard header colors (Business Hub) */
+    --dashboard-header-dark: 221 58% 30%;   /* #0B3D91 */
+    --dashboard-nav: 218 83% 35%;          /* #0A42A6 */
+    --dashboard-content-bg: 210 14% 96%;  /* light grey content */
+    /* Cash Flow colors */
+    --neutral-pale-grey-color: #CED3D9;
+    --neutral-pale-grey-15-color: #F8F8FA;
+    --secondary-135-color: #003FCA;
+    --secondary-color: #0051FF;
+    --accent-2-color: #00164E;
+    /* Primary color variants */
+    --primary-4-color: #F2F6FF;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -112,4 +140,80 @@ body {
   margin-right: auto;
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+/* ==================== TYPOGRAPHY SYSTEM ==================== */
+/* All typography using Benton Sans Pro */
+
+.header-text-bold {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 130%;
+  letter-spacing: 0px;
+}
+
+.header-text-regular {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+  letter-spacing: 0px;
+}
+
+.header-text-bg {
+  background: var(--primary-4-color);
+}
+
+/* Section Titles */
+.section-title {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 130%;
+  letter-spacing: 0px;
+  color: var(--primary-color, #0033AA);
+}
+
+/* Body Text */
+.body-text-regular {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+  letter-spacing: 0px;
+}
+
+.body-text-medium {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 130%;
+  letter-spacing: 0px;
+}
+
+.body-text-bold {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 130%;
+  letter-spacing: 0px;
+}
+
+/* Small Text */
+.text-small {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0px;
+}
+
+/* Large Text */
+.text-large {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  letter-spacing: 0px;
 }

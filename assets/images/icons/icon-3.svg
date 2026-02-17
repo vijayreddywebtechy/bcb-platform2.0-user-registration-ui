@@ -1,0 +1,32 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="24" height="24" rx="4.8" fill="#00AF43"/>
+<rect width="14.4" height="14.4" transform="translate(4.8 4.79999)" fill="#00AF43"/>
+<path d="M16.2 10.8H13.8V11.4H16.2V10.8Z" fill="white"/>
+<path d="M13.8 12H16.2V12.6H13.8V12Z" fill="white"/>
+<path d="M16.2 13.2H13.8V13.8H16.2V13.2Z" fill="white"/>
+<path d="M8.4 7.79998H7.8V8.39998H8.4V7.79998Z" fill="white"/>
+<path d="M9 7.79998H9.6V8.39998H9V7.79998Z" fill="white"/>
+<path d="M10.8 7.79998H10.2V8.39998H10.8V7.79998Z" fill="white"/>
+<path d="M11.4 7.79998H12V8.39998H11.4V7.79998Z" fill="white"/>
+<path d="M8.4 8.99998H7.8V9.59998H8.4V8.99998Z" fill="white"/>
+<path d="M9 8.99998H9.6V9.59998H9V8.99998Z" fill="white"/>
+<path d="M10.8 8.99998H10.2V9.59998H10.8V8.99998Z" fill="white"/>
+<path d="M11.4 8.99998H12V9.59998H11.4V8.99998Z" fill="white"/>
+<path d="M8.4 10.2H7.8V10.8H8.4V10.2Z" fill="white"/>
+<path d="M9 10.2H9.6V10.8H9V10.2Z" fill="white"/>
+<path d="M10.8 10.2H10.2V10.8H10.8V10.2Z" fill="white"/>
+<path d="M11.4 10.2H12V10.8H11.4V10.2Z" fill="white"/>
+<path d="M8.4 11.4H7.8V12H8.4V11.4Z" fill="white"/>
+<path d="M9 11.4H9.6V12H9V11.4Z" fill="white"/>
+<path d="M10.8 11.4H10.2V12H10.8V11.4Z" fill="white"/>
+<path d="M11.4 11.4H12V12H11.4V11.4Z" fill="white"/>
+<path d="M8.4 12.6H7.8V13.2H8.4V12.6Z" fill="white"/>
+<path d="M9 12.6H9.6V13.2H9V12.6Z" fill="white"/>
+<path d="M10.8 12.6H10.2V13.2H10.8V12.6Z" fill="white"/>
+<path d="M11.4 12.6H12V13.2H11.4V12.6Z" fill="white"/>
+<path d="M8.4 13.8H7.8V14.4H8.4V13.8Z" fill="white"/>
+<path d="M9 13.8H9.6V14.4H9V13.8Z" fill="white"/>
+<path d="M10.8 13.8H10.2V14.4H10.8V13.8Z" fill="white"/>
+<path d="M11.4 13.8H12V14.4H11.4V13.8Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M6.9 6.59998C6.73431 6.59998 6.6 6.73429 6.6 6.89998V16.8H5.7C5.53431 16.8 5.4 16.9343 5.4 17.1C5.4 17.2657 5.53431 17.4 5.7 17.4H18.3C18.4657 17.4 18.6 17.2657 18.6 17.1C18.6 16.9343 18.4657 16.8 18.3 16.8H17.4V10.5C17.4 10.2613 17.3052 10.0324 17.1364 9.86358C16.9676 9.6948 16.7387 9.59998 16.5 9.59998H13.2V6.89998C13.2 6.73429 13.0657 6.59998 12.9 6.59998H6.9ZM16.7121 10.2878C16.7684 10.3441 16.8 10.4204 16.8 10.5V16.8H13.2V10.2H16.5C16.5796 10.2 16.6559 10.2316 16.7121 10.2878ZM12.6 16.8H7.2V7.19998H12.6V16.8Z" fill="white"/>
+</svg>

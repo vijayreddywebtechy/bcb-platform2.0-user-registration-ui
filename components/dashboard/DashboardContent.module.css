@@ -1,0 +1,117 @@
+/* ==================== MAIN CONTENT SECTION ==================== */
+/* Cash Flow + My Links Container */
+.mainSection {
+  width: 100%;
+  background: var(--primary-4-color, #F2F6FF);
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+}
+
+.contentContainer {
+  display: flex;
+  gap: 24px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 40px 72px 24px 72px;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  align-items: flex-start;
+}
+
+.cashFlowWrapper {
+  width: 929px;
+  max-width: 929px;
+  flex-shrink: 0;
+}
+
+.myLinksWrapper {
+  flex: 1;
+  min-width: 300px;
+  max-width: 100%;
+}
+
+.myLinksWithActions {
+  position: relative;
+  width: 100%;
+}
+
+/* ==================== ADDITIONAL SECTIONS ==================== */
+/* Business Accounts, Links, Statements, Bottom Cards */
+.additionalSections {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+}
+
+.fullWidthSection {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.businessAccountsWrapper {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px 72px;
+  background: var(--primary-4-color, #F2F6FF);
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.businessAccountsContent {
+  max-width: 1296px;
+  margin: 0 auto;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 1440px) {
+  .contentContainer {
+    padding: 40px 32px 24px 32px;
+  }
+  
+  .businessAccountsWrapper {
+    padding: 24px 32px;
+  }
+  
+  .cashFlowWrapper {
+    width: 65%;
+    max-width: 929px;
+    min-width: 600px;
+  }
+  
+  .myLinksWrapper {
+    flex: 1;
+    min-width: 300px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .contentContainer {
+    flex-direction: column;
+  }
+  
+  .cashFlowWrapper {
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .myLinksWrapper {
+    width: 100%;
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .contentContainer {
+    padding: 24px 16px;
+  }
+  
+  .businessAccountsWrapper {
+    padding: 24px 16px;
+  }
+}

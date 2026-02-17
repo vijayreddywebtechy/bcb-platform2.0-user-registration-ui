@@ -7,7 +7,15 @@ import { Button } from "@/components/ui/button";
 import { FloatingTextField } from "@/components/ui/FloatingTextField";
 import { Eye, EyeOff } from "lucide-react";
 
-export default function SignInForm() {
+interface SignInFormProps {
+  onSignInSuccess?: () => void;
+  onBack?: () => void;
+}
+
+export default function SignInForm({
+  onSignInSuccess,
+  onBack,
+}: SignInFormProps) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -16,14 +24,14 @@ export default function SignInForm() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Add your sign in logic here
-    console.log("Sign in with:", { username, password });
-    setTimeout(() => setLoading(false), 2000);
+    // Simulate sign in; then navigate to dashboard
+    await new Promise((r) => setTimeout(r, 1200));
+    setLoading(false);
+    onSignInSuccess?.();
   };
 
   const handleCancel = () => {
-    console.log("Cancel clicked");
-    // Add your navigation or logic here
+    onBack?.();
   };
 
   return (
