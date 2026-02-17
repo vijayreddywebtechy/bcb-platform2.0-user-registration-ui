@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import AuthLayout from "../shared/AuthLayout";
 import AuthCard from "../shared/AuthCard";
 import { Button } from "@/components/ui/button";
@@ -20,7 +21,9 @@ export default function SignInWithQR({
   onCancel,
   onExpandQR,
 }: QRScannerProps) {
+  const router = useRouter();
   const [secondsLeft, setSecondsLeft] = useState(expiryMinutes * 60);
+  const [scanComplete, setScanComplete] = useState(false);
 
   useEffect(() => {
     setSecondsLeft(expiryMinutes * 60);
@@ -51,11 +54,26 @@ export default function SignInWithQR({
   const handleSignInWithPassword = () => {
     console.log("Sign in with password clicked");
     onSignInWithPassword?.();
+    // Navigate back to sign in with password
+    router.push("/auth/signin");
   };
 
   const handleCancel = () => {
     console.log("Cancel clicked");
     onCancel?.();
+    // Navigate back to home/welcome page
+    router.push("/");
+  };
+
+  // Simulate QR scan completion for demo purposes
+  // In production, this would be triggered by actual QR scan event
+  const handleSimulateScan = () => {
+    console.log("QR Code scanned successfully");
+    setScanComplete(true);
+    // Navigate to business profiles after successful QR scan
+    setTimeout(() => {
+      router.push("/auth/business-profiles");
+    }, 1500);
   };
 
   return (
@@ -92,10 +110,29 @@ export default function SignInWithQR({
             </div>
           </div>
 
+          {/* Demo: Simulate QR Scan Button - Remove in production */}
+          {!scanComplete && (
+            <Button
+              onClick={handleSimulateScan}
+              className="w-full mb-4 bg-green-600 hover:bg-green-700"
+            >
+              ✓ SIMULATE QR SCAN (DEMO)
+            </Button>
+          )}
+
+          {/* Success Message */}
+          {scanComplete && (
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4 text-center">
+              <p className="text-green-700 font-medium">✓ QR Scanned Successfully!</p>
+              <p className="text-sm text-green-600">Redirecting...</p>
+            </div>
+          )}
+
           {/* Expand QR Button */}
           <Button
             onClick={handleExpandQR}
             className="w-full mb-4"
+            disabled={scanComplete}
           >
             EXPAND QR CODE
           </Button>

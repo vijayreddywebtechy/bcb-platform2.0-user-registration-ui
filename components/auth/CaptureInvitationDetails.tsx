@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import { useRouter } from "next/navigation";
 import AuthLayout from "./shared/AuthLayout";
 import AuthCard from "./shared/AuthCard";
 import { Button } from "@/components/ui/button";
@@ -9,6 +10,7 @@ import { FloatingSelect, SelectOption } from "@/components/ui/FloatingReactSelec
 import { Mail, Info } from "lucide-react";
 
 export default function CaptureInvitationDetails() {
+  const router = useRouter();
   const [invitationType, setInvitationType] = useState<SelectOption | null>(null);
   const [idPassport, setIdPassport] = useState("");
   const [referenceCode, setReferenceCode] = useState("");
@@ -25,11 +27,19 @@ export default function CaptureInvitationDetails() {
     e.preventDefault();
     setLoading(true);
     console.log("Form submitted:", { invitationType, idPassport, referenceCode });
-    setTimeout(() => setLoading(false), 2000);
+    
+    // Simulate API call to validate invitation details
+    setTimeout(() => {
+      setLoading(false);
+      // Navigate to approval details page after validation
+      router.push("/approval/details");
+    }, 2000);
   };
 
   const handleCancel = () => {
     console.log("Cancel clicked");
+    // Navigate back to home/welcome page
+    router.push("/");
   };
 
   return (

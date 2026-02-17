@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import { Link2, Info, CheckCircle, Clock, Check } from "lucide-react";
 import { Button } from "../ui/button";
 
@@ -20,6 +21,8 @@ interface BusinessApprovalStatusProps {
 }
 
 function BusinessApprovalStatus({ onDone }: BusinessApprovalStatusProps) {
+  const router = useRouter();
+  
   // Mock data for approvers - in real app, this would come from props or state
   const approvers: ApproverStatus[] = [
     {
@@ -46,7 +49,10 @@ function BusinessApprovalStatus({ onDone }: BusinessApprovalStatusProps) {
 
   const handleDone = () => {
     console.log("Done clicked");
+    // Call callback if provided (for custom logic)
     onDone?.();
+    // Navigate to dashboard or home
+    router.push("/dashboard");
   };
 
   return (

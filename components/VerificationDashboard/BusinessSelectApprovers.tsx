@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Link2, Info, ChevronDown, Check } from "lucide-react";
 import { Button } from "../ui/button";
 import { Checkbox } from "../ui/checkbox";
@@ -24,6 +25,7 @@ function BusinessSelectApprovers({
   onCaptureDetails,
   onBack,
 }: BusinessSelectApprovalProps) {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedDirectors, setSelectedDirectors] = useState<string[]>(["1", "2"]);
   const [showDesktopSteps, setShowDesktopSteps] = useState(true);
@@ -50,12 +52,18 @@ function BusinessSelectApprovers({
 
   const handleCaptureDetails = () => {
     console.log("Capture details clicked", { selectedDirectors });
+    // Call callback if provided (for custom logic)
     onCaptureDetails?.();
+    // Navigate to capture approver details page
+    router.push("/business/linking/capture-details");
   };
 
   const handleBack = () => {
     console.log("Back clicked");
+    // Call callback if provided (for custom logic)
     onBack?.();
+    // Navigate back to role definition page
+    router.push("/business/linking/role-definition");
   };
 
 

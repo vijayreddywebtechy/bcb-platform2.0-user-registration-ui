@@ -8,6 +8,7 @@ import {
   KeyboardEvent,
   FormEvent,
 } from "react";
+import { useRouter } from "next/navigation";
 import AuthLayout from "../shared/AuthLayout";
 import AuthCard from "../shared/AuthCard";
 import { Button } from "@/components/ui/button";
@@ -28,6 +29,7 @@ export default function OTPInput({
   onComplete,
   onResend,
 }: OTPInputProps) {
+  const router = useRouter();
   const [otp, setOtp] = useState<string[]>(new Array(length).fill(""));
   const [secondsLeft, setSecondsLeft] = useState(resendCooldownSeconds);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
@@ -110,20 +112,28 @@ export default function OTPInput({
     e.preventDefault();
     const otpString = otp.join("");
 
-    if (otpString.length !== length) {
-      const firstEmpty = otp.findIndex((digit) => !digit);
-      if (firstEmpty !== -1) {
-        inputRefs.current[firstEmpty]?.focus();
-      }
-      return;
-    }
+    // Validation removed for demo - allows navigation without complete OTP
+    // This allows quick demo flow without entering all digits
+    // if (otpString.length !== length) {
+    //   const firstEmpty = otp.findIndex((digit) => !digit);
+    //   if (firstEmpty !== -1) {
+    //     inputRefs.current[firstEmpty]?.focus();
+    //   }
+    //   return;
+    // }
 
+    // Call the callback if provided (for custom logic)
+    console.log("OTP verified:", otpString || "empty (demo mode)");
     onComplete?.(otpString);
+    
+    // Navigate to QR scan page after OTP verification
+    router.push("/auth/qr-scan");
   };
 
   const handleResend = () => {
     if (secondsLeft > 0) return;
 
+    console.log("Resending OTP");
     setOtp(new Array(length).fill(""));
     setSecondsLeft(resendCooldownSeconds);
     onResend?.();

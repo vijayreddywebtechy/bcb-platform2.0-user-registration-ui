@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import AuthLayout from "./shared/AuthLayout";
 import AuthCard from "./shared/AuthCard";
 import { Button } from "@/components/ui/button";
@@ -7,9 +8,12 @@ import Image from "next/image";
 import icnSuccess from "@/assets/images/icons/icn_success_lg.svg";
 
 export default function ApprovalSent() {
+    const router = useRouter();
+    
     const handleDone = () => {
         console.log("Done clicked");
-        // Navigate to dashboard or home
+        // Navigate to home/welcome page
+        router.push("/");
     };
 
     return (

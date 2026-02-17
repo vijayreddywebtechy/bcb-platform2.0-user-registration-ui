@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   ExternalLink,
   ChevronDown,
@@ -61,6 +61,13 @@ function IconButtonWithTooltip({
 
 export default function DashboardHeader() {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleSignOut = () => {
+    console.log("Sign out clicked from dashboard");
+    // Navigate to sign in page
+    router.push("/auth/signin");
+  };
 
   return (
     <>
@@ -163,6 +170,7 @@ export default function DashboardHeader() {
               icon="/assets/images/icons/icn_lock_closed.svg"
               hoverIcon="/assets/images/icons/icn_lock_open.svg"
               tooltip="Sign Out"
+              onClick={handleSignOut}
             />
           </div>
         </div>

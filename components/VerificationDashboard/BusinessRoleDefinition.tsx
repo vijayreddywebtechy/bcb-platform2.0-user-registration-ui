@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Link2, Info } from "lucide-react";
 import { Button } from "../ui/button";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
@@ -15,17 +16,24 @@ function BusinessRoleDefinition({
   onSelectApprovers,
   onCancel,
 }: BusinessRoleDefinitionProps) {
+  const router = useRouter();
   const [isAuthorised, setIsAuthorised] = useState<string>("yes");
   const [isDirector, setIsDirector] = useState<string>("yes");
 
   const handleSelectApprovers = () => {
     console.log("Select approvers clicked", { isAuthorised, isDirector });
+    // Call callback if provided (for custom logic)
     onSelectApprovers?.();
+    // Navigate to select approvers page
+    router.push("/business/linking/select-approvers");
   };
 
   const handleCancel = () => {
     console.log("Cancel clicked");
+    // Call callback if provided (for custom logic)
     onCancel?.();
+    // Navigate back to business profiles
+    router.push("/auth/business-profiles");
   };
 
   return (

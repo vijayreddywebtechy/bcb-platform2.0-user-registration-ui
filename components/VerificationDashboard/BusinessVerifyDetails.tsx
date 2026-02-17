@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import { Link2, Info, Check } from "lucide-react";
 import { Button } from "../ui/button";
 
@@ -23,6 +24,8 @@ function BusinessVerifyDetails({
   onRequestApproval,
   onBack,
 }: BusinessVerifyDetailsProps) {
+  const router = useRouter();
+  
   // Mock data for approvers - in real app, this would come from props or state
   const approvers: ApproverDetail[] = [
     {
@@ -47,12 +50,18 @@ function BusinessVerifyDetails({
 
   const handleRequestApproval = () => {
     console.log("Request approval clicked", { approvers });
+    // Call callback if provided (for custom logic)
     onRequestApproval?.();
+    // Navigate to approval status page
+    router.push("/business/linking/approval-status");
   };
 
   const handleBack = () => {
     console.log("Back clicked");
+    // Call callback if provided (for custom logic)
     onBack?.();
+    // Navigate back to capture details page
+    router.push("/business/linking/capture-details");
   };
 
   return (

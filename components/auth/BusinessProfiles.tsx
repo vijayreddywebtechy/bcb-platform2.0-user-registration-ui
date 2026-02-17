@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { ChevronRight, Building } from "lucide-react";
 import AuthLayout from "./shared/AuthLayout";
 import AuthCard from "./shared/AuthCard";
@@ -36,6 +37,7 @@ const mockProfiles: BusinessProfile[] = [
 ];
 
 function BusinessProfiles() {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProfiles, setFilteredProfiles] = useState(mockProfiles);
 
@@ -55,12 +57,14 @@ function BusinessProfiles() {
 
   const handleProfileSelect = (profile: BusinessProfile) => {
     console.log("Profile selected:", profile);
-    // Add your navigation or logic here
+    // Navigate to business linking flow - role definition
+    router.push("/business/linking/role-definition");
   };
 
   const handleSignOut = () => {
     console.log("Sign out clicked");
-    // Add your sign out logic here
+    // Navigate to sign in page
+    router.push("/auth/signin");
   };
 
   return (

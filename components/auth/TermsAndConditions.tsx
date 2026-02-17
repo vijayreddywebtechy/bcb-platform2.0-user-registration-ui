@@ -1,12 +1,14 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import { useRouter } from "next/navigation";
 import AuthLayout from "./shared/AuthLayout";
 import AuthCard from "./shared/AuthCard";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 
 export default function TermsAndConditions() {
+  const router = useRouter();
   const [agreePersonalInfo, setAgreePersonalInfo] = useState(false);
   const [consentProcessing, setConsentProcessing] = useState(false);
   const [acknowledgeLiability, setAcknowledgeLiability] = useState(false);
@@ -19,12 +21,20 @@ export default function TermsAndConditions() {
       return;
     }
     setLoading(true);
-    console.log("Terms accepted");
-    setTimeout(() => setLoading(false), 2000);
+    console.log("Terms accepted - submitting approval");
+    
+    // Simulate API call to submit approval
+    setTimeout(() => {
+      setLoading(false);
+      // Navigate to approval sent confirmation page
+      router.push("/approval/sent");
+    }, 2000);
   };
 
   const handleBack = () => {
     console.log("Back clicked");
+    // Navigate back to approval details
+    router.push("/approval/details");
   };
 
   const allAccepted = agreePersonalInfo && consentProcessing && acknowledgeLiability;

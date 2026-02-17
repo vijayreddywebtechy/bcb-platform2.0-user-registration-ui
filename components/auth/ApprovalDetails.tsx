@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import AuthLayout from "./shared/AuthLayout";
 import AuthCard from "./shared/AuthCard";
 import { Button } from "@/components/ui/button";
@@ -14,6 +15,7 @@ interface Approver {
 }
 
 export default function ApprovalDetails() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   // Sample data
@@ -41,16 +43,25 @@ export default function ApprovalDetails() {
 
   const handleApprove = () => {
     setLoading(true);
-    console.log("Approved");
-    setTimeout(() => setLoading(false), 2000);
+    console.log("Approved - navigating to terms and conditions");
+    
+    setTimeout(() => {
+      setLoading(false);
+      // Navigate to terms and conditions page
+      router.push("/approval/terms");
+    }, 2000);
   };
 
   const handleDecline = () => {
-    console.log("Declined");
+    console.log("Declined - navigating to decline reasons");
+    // Navigate to decline reasons page
+    router.push("/approval/decline-reasons");
   };
 
   const handleCancel = () => {
-    console.log("Cancelled");
+    console.log("Cancelled - navigating back");
+    // Navigate back to capture invitation page
+    router.push("/approval/capture-invitation");
   };
 
   return (

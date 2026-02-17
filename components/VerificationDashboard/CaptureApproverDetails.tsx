@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Link2, Info, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FloatingSelect, SelectOption } from "@/components/ui/FloatingReactSelect";
@@ -32,6 +33,7 @@ function CaptureApproverDetails({
   onVerifyDetails,
   onBack,
 }: CaptureApproverDetailsProps) {
+  const router = useRouter();
   const [approvers, setApprovers] = useState<Approver[]>([
     {
       id: "1",
@@ -75,12 +77,18 @@ function CaptureApproverDetails({
 
   const handleVerifyDetails = () => {
     console.log("Verify details clicked", { approvers });
+    // Call callback if provided (for custom logic)
     onVerifyDetails?.();
+    // Navigate to verify details page
+    router.push("/business/linking/verify-details");
   };
 
   const handleBack = () => {
     console.log("Back clicked");
+    // Call callback if provided (for custom logic)
     onBack?.();
+    // Navigate back to select approvers page
+    router.push("/business/linking/select-approvers");
   };
 
 

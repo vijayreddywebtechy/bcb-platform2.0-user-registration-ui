@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import RegisterForm from "./register/RegisterForm";
 import InviteForm from "./invite/InviteForm";
 import AuthWelcomeLayout from "./shared/AuthWelcomeLayout";
@@ -13,19 +14,19 @@ import { FloatingTextField } from "../ui/FloatingTextField";
 type ViewType = "welcome" | "signin" | "register" | "invite";
 
 export default function AuthWelcome() {
+  const router = useRouter();
   const [currentView, setCurrentView] = useState<ViewType>("welcome");
 
-  if (currentView === "signin") {
-    return <SignInForm />;
-  }
-
-  if (currentView === "register") {
-    return <RegisterForm />;
-  }
-
-  if (currentView === "invite") {
-    return <InviteForm />;
-  }
+  // Old inline view switching - kept for reference, now using routes
+  // if (currentView === "signin") {
+  //   return <SignInForm />;
+  // }
+  // if (currentView === "register") {
+  //   return <RegisterForm />;
+  // }
+  // if (currentView === "invite") {
+  //   return <InviteForm />;
+  // }
 
   return (
     <AuthWelcomeLayout>
@@ -45,13 +46,23 @@ export default function AuthWelcome() {
         />
 
         <div className="space-y-4">
-          <Button onClick={() => setCurrentView("signin")} className="w-full ">
+          <Button 
+            onClick={() => {
+              console.log("Navigating to Sign In");
+              router.push("/auth/signin");
+            }} 
+            className="w-full"
+          >
             SIGN IN
           </Button>
 
           <Button
             variant="outline"
-            onClick={() => setCurrentView("register")}
+            onClick={() => {
+              console.log("Navigating to Register");
+              // setCurrentView("register"); // Old method - kept for reference
+              router.push("/auth/register");
+            }}
             className="w-full bg-white hover:bg-primary hover:text-white"
           >
             REGISTER
@@ -59,7 +70,11 @@ export default function AuthWelcome() {
 
           <Button
             variant="outline"
-            onClick={() => setCurrentView("invite")}
+            onClick={() => {
+              console.log("Navigating to Use Invite");
+              // setCurrentView("invite"); // Old method - kept for reference
+              router.push("/approval/capture-invitation");
+            }}
             className="w-full bg-transparent text-white border-white hover:text-white hover:bg-primary hover:border-primary"
           >
             USE INVITE
