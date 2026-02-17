@@ -2,8 +2,8 @@
 
 export default function DashboardFooter() {
   return (
-    <footer className="bg-dashboard-header text-white font-bspro">
-      <div className="px-6 py-5 max-w-[1400px] mx-auto">
+    <footer className="w-full bg-dashboard-header text-white font-bspro">
+      <div className="px-6 py-5 max-w-[1440px] mx-auto">
         <div className="flex flex-wrap gap-6 text-[13px] mb-3">
           <a href="#" className="hover:underline uppercase tracking-wide font-medium">
             Conditions of Access

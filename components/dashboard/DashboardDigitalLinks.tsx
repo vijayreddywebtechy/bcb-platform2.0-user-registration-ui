@@ -1,48 +1,112 @@
+/**
+ * DashboardDigitalLinks Component
+ * 
+ * "My digital platforms" section displaying external banking platform links
+ * Features three tiles with hover effects and external link icons
+ * 
+ * All typography uses Benton Sans Pro font family
+ * 
+ * @returns {JSX.Element} The Digital Hub Links section
+ */
 "use client";
 
-import { Link2, Monitor, ClipboardList, Laptop } from "lucide-react";
+import Image from "next/image";
+import icnLinkOut from "@/assets/images/icons/icn_link_out.svg";
+import icnResponsive from "@/assets/images/icons/icn_responsive.svg";
+import styles from "./DashboardDigitalLinks.module.css";
 
-const LINKS = [
+/**
+ * Digital platform tile data
+ * Each represents an external banking platform
+ */
+const DIGITAL_PLATFORMS = [
   {
+    id: 1,
+    prefix: "I want to transact on",
     title: "Online Banking for Business",
-    text: "I want to transact on Online Banking for Business",
     status: "Sign in automatically",
-    icon: Monitor,
+    link: "#",
   },
   {
+    id: 2,
+    prefix: "Submit trade instructions",
     title: "TradeOnline",
-    text: "Submit trade instructions TradeOnline",
     status: "Sign in automatically",
-    icon: ClipboardList,
+    link: "#",
   },
   {
+    id: 3,
+    prefix: "I want to transact on",
     title: "Business Online",
-    text: "I want to transact on Business Online",
     status: "You will need to sign in again",
-    icon: Laptop,
+    link: "#",
   },
 ];
 
+/**
+ * Main DashboardDigitalLinks Component
+ */
 export default function DashboardDigitalLinks() {
   return (
-    <section className="bg-white border border-neutral-200 rounded-lg p-5 font-bspro shadow-sm">
-      <div className="flex items-center gap-2 mb-5">
-        <Link2 className="w-5 h-5 text-secondary" />
-        <h2 className="text-[18px] font-semibold text-secondary leading-tight">Digital hub links</h2>
+    <section className={styles.digitalLinksSection}>
+      {/* Section Header */}
+      <div className={styles.sectionHeader}>
+        <div className={styles.titleWrapper}>
+          <Image
+            src={icnLinkOut}
+            alt="Digital links"
+            width={24}
+            height={24}
+            className={styles.titleIcon}
+          />
+          <h2 className={styles.mainTitle}>My digital platforms</h2>
+        </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {LINKS.map((item) => (
-          <div
-            key={item.title}
-            className="bg-dashboard-nav text-white rounded-lg p-5 relative cursor-pointer hover:opacity-95 transition-opacity min-h-[120px]"
-          >
-            <div className="absolute top-4 right-4 w-8 h-8 rounded bg-white/20 flex items-center justify-center">
-              <item.icon className="w-4 h-4" />
-            </div>
-            <p className="text-[14px] font-medium pr-10 leading-relaxed">{item.text}</p>
-            <p className="text-[12px] text-white/80 mt-3 leading-tight">{item.status}</p>
-          </div>
-        ))}
+
+      {/* Digital Platforms Grid - 1296px width, 248px height */}
+      <div className={styles.platformsContainer}>
+        <div className={styles.platformsGrid}>
+          {DIGITAL_PLATFORMS.map((platform) => (
+            <a
+              key={platform.id}
+              href={platform.link}
+              className={styles.digiHubTile}
+              aria-label={`Open ${platform.title}`}
+            >
+              {/* Top Section - Icons */}
+              <div className={styles.tileTop}>
+                <Image
+                  src={icnLinkOut}
+                  alt="External link"
+                  width={20}
+                  height={20}
+                  className={styles.linkIcon}
+                />
+                <Image
+                  src={icnResponsive}
+                  alt="Responsive"
+                  width={24}
+                  height={24}
+                  className={styles.responsiveIcon}
+                />
+              </div>
+
+              {/* Content Section */}
+              <div className={styles.tileContent}>
+                {/* Prefix Text - "I want to transact on" */}
+                <p className={styles.prefixText}>{platform.prefix}</p>
+                
+                {/* Platform Title - "Online Banking for Business" */}
+                <h3 className={styles.platformTitle}>{platform.title}</h3>
+              </div>
+
+              {/* Bottom Section - Status */}
+              <div className={styles.tileBottom}>
+                <p className={styles.statusText}>{platform.status}</p>
+              </div>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -1,0 +1,319 @@
+/* ==================== BOTTOM SECTION ==================== */
+
+.bottomSection {
+  width: 100%;
+  height: 796px;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 80px;
+  background: var(--primary-color, #0033AA);
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  height: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* ==================== CARD STYLES ==================== */
+
+.card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Header with Badge */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid #E3E6EA;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.headerIcon {
+  width: 24px;
+  height: 24px;
+  color: var(--primary-color, #0033AA);
+}
+
+.cardTitle {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 130%;
+  color: var(--primary-color, #0033AA);
+}
+
+.badge {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  padding: 4px 12px;
+  background: rgba(0, 51, 170, 0.1);
+  color: var(--primary-color, #0033AA);
+  border-radius: 12px;
+}
+
+/* Simple Card Header (without badge) */
+.cardHeaderSimple {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  border-bottom: 1px solid #E3E6EA;
+}
+
+/* Card Body */
+.cardBody {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.cardBodyCenter {
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+/* Image Placeholder */
+.imagePlaceholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #E3E6EA;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholderText {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-size: 14px;
+  color: #697786;
+}
+
+/* Card Text */
+.cardDescription {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: #222E37;
+  flex: 1;
+}
+
+.cardText {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: #465463;
+}
+
+.cardSubtext {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  color: #697786;
+}
+
+/* Buttons */
+.primaryButton {
+  width: 100%;
+  padding: 12px 24px;
+  background: var(--primary-color, #0033AA);
+  color: #FFFFFF;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.primaryButton:hover {
+  background: #002A8A;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 51, 170, 0.2);
+}
+
+.secondaryButton {
+  padding: 12px 24px;
+  background: transparent;
+  color: var(--primary-color, #0033AA);
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border: 2px solid var(--primary-color, #0033AA);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.secondaryButton:hover {
+  background: rgba(0, 51, 170, 0.05);
+}
+
+/* ==================== FX RATE CALCULATOR SPECIFIC ==================== */
+
+.rateBoxes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.rateBox {
+  padding: 16px;
+  border: 1px solid #CED3D9;
+  border-radius: 8px;
+  background: #F8F9FA;
+}
+
+.rateLabel {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  color: #697786;
+  margin-bottom: 8px;
+}
+
+.rateValue {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 130%;
+  color: #222E37;
+  margin-bottom: 4px;
+}
+
+.rateCurrency {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #222E37;
+}
+
+.applicableRate {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: #222E37;
+}
+
+.link {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--primary-color, #0033AA);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+/* ==================== SECURITY STATUS SPECIFIC ==================== */
+
+.securityIcon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(0, 51, 170, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shieldIcon {
+  width: 40px;
+  height: 40px;
+  color: var(--primary-color, #0033AA);
+}
+
+.securityTitle {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 130%;
+  color: #222E37;
+  text-align: center;
+}
+
+.securitySubtitle {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #697786;
+  text-align: center;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+
+@media (max-width: 1440px) {
+  .bottomSection {
+    width: 100%;
+    height: auto;
+    min-height: 796px;
+    padding: 60px 32px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .cardsGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .bottomSection {
+    padding: 40px 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .bottomSection {
+    padding: 32px 16px;
+  }
+  
+  .cardHeader,
+  .cardHeaderSimple,
+  .cardBody,
+  .cardBodyCenter {
+    padding: 16px;
+  }
+  
+  .rateBoxes {
+    grid-template-columns: 1fr;
+  }
+}

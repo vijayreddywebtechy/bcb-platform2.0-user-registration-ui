@@ -1,58 +1,80 @@
+/**
+ * Dashboard Component
+ * 
+ * Main dashboard content following the Business Hub design system.
+ * Layout structure matches the reference design:
+ * 1. Hero Section (Welcome + Next best actions cards)
+ * 2. Main Content (Cash flows + My links side by side)
+ * 3. Business Accounts Section
+ * 4. Bigger Nail Links Section
+ * 5. Formal Statements Section
+ * 6. Bottom Cards Section
+ * 
+ * All typography uses Benton Sans Pro font family
+ * 
+ * @returns {JSX.Element} The dashboard content
+ */
 "use client";
 
-import DashboardHeader from "./DashboardHeader";
-import DashboardWelcome from "./DashboardWelcome";
-import DashboardActions from "./DashboardActions";
+import DashboardHero from "./DashboardHero";
 import DashboardCashFlow from "./DashboardCashFlow";
 import DashboardAccounts from "./DashboardAccounts";
 import DashboardDigitalLinks from "./DashboardDigitalLinks";
 import DashboardStatements from "./DashboardStatements";
 import DashboardMyLinks from "./DashboardMyLinks";
 import DashboardBottomCards from "./DashboardBottomCards";
-import DashboardFooter from "./DashboardFooter";
-import DashboardFAB from "./DashboardFAB";
+import styles from "./DashboardContent.module.css";
 
 export default function Dashboard() {
   return (
-    <div className="h-screen bg-dashboard-content font-bspro flex flex-col overflow-hidden">
-      {/* Fixed Header */}
-      <div className="fixed top-0 left-0 right-0 z-50">
-        <DashboardHeader />
-      </div>
+    <>
+      {/* Hero Section - Welcome + Next best actions */}
+      <DashboardHero />
 
-      {/* Scrollable Content */}
-      <div className="flex-1 overflow-y-auto pt-[104px] pb-[120px]">
-        <DashboardWelcome />
+      {/* Main Content Section - Cash Flow + My Links */}
+      <section className={styles.mainSection}>
+        <div className={styles.contentContainer}>
+          {/* Left: Cash Flow (929px width) */}
+          <div className={styles.cashFlowWrapper}>
+            <DashboardCashFlow />
+          </div>
+          
+          {/* Right: My Links */}
+          <div className={styles.myLinksWrapper}>
+            <div className={styles.myLinksWithActions}>
+              <DashboardMyLinks />
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <main className="px-6 py-5 max-w-[1400px] w-full mx-auto">
-          <DashboardActions />
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-5">
-            <div className="lg:col-span-2 space-y-5">
-              <DashboardCashFlow />
+      {/* ==================== ADDITIONAL SECTIONS ==================== */}
+      <div className={styles.additionalSections}>
+        
+        {/* Business Accounts Section */}
+        <div className={styles.fullWidthSection}>
+          <div className={styles.businessAccountsWrapper}>
+            <div className={styles.businessAccountsContent}>
               <DashboardAccounts />
-              <DashboardDigitalLinks />
-              <DashboardStatements />
-            </div>
-            <div className="lg:col-span-1">
-              <div className="lg:sticky lg:top-5">
-                <DashboardMyLinks />
-              </div>
             </div>
           </div>
+        </div>
 
-          <div className="mt-5">
-            <DashboardBottomCards />
-          </div>
-        </main>
+        {/* Digital Hub Links Section */}
+        <div className={styles.fullWidthSection}>
+          <DashboardDigitalLinks />
+        </div>
+
+        {/* Formal Statements Section */}
+        <div className={styles.fullWidthSection}>
+          <DashboardStatements />
+        </div>
+
+        {/* Bottom Cards Section */}
+        <div className={styles.fullWidthSection}>
+          <DashboardBottomCards />
+        </div>
       </div>
-
-      {/* Fixed Footer */}
-      <div className="fixed bottom-0 left-0 right-0 z-50">
-        <DashboardFooter />
-      </div>
-
-      <DashboardFAB />
-    </div>
+    </>
   );
 }

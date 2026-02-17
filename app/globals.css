@@ -5,7 +5,11 @@
 
 html,
 body {
-  font-family: var(--font-bspro), sans-serif;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
   color: var(--secondary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -15,6 +19,18 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;       /* Sharper text rendering */
+}
+
+/* Ensure Benton Sans Pro is used throughout the dashboard */
+.font-bspro,
+.font-bspro * {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+}
+
+/* Typography consistency */
+h1, h2, h3, h4, h5, h6,
+p, span, a, button, input, select, textarea {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
 }
 
 @layer base {
@@ -120,9 +136,11 @@ body {
   padding-right: 1rem;
 }
 
-/* Typography - Header Styles */
+/* ==================== TYPOGRAPHY SYSTEM ==================== */
+/* All typography using Benton Sans Pro */
+
 .header-text-bold {
-  font-family: var(--font-bspro), sans-serif;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
   font-weight: 700;
   font-size: 14px;
   line-height: 130%;
@@ -130,7 +148,7 @@ body {
 }
 
 .header-text-regular {
-  font-family: var(--font-bspro), sans-serif;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 130%;
@@ -139,4 +157,57 @@ body {
 
 .header-text-bg {
   background: var(--primary-4-color);
+}
+
+/* Section Titles */
+.section-title {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 130%;
+  letter-spacing: 0px;
+  color: var(--primary-color, #0033AA);
+}
+
+/* Body Text */
+.body-text-regular {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+  letter-spacing: 0px;
+}
+
+.body-text-medium {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 130%;
+  letter-spacing: 0px;
+}
+
+.body-text-bold {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 130%;
+  letter-spacing: 0px;
+}
+
+/* Small Text */
+.text-small {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0px;
+}
+
+/* Large Text */
+.text-large {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  letter-spacing: 0px;
 }

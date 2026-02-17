@@ -3,14 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import {
   ExternalLink,
-  Lightbulb,
-  Headphones,
   ChevronDown,
 } from "lucide-react";
 import sbBrandIcon from "@/assets/sb_brand_icon.png";
 import icnSaLang from "@/assets/images/icons/icn_sa_lang_icon.png";
+import icnTelescope from "@/assets/images/icons/icn_telescope_white.svg";
+import icnCallCentre from "@/assets/images/icons/icn_call-centre_white.svg";
 import styles from "./DashboardHeader.module.css";
 
 // Icon button component with tooltip
@@ -59,6 +60,8 @@ function IconButtonWithTooltip({
 }
 
 export default function DashboardHeader() {
+  const pathname = usePathname();
+
   return (
     <>
       {/* Top bar - dark blue */}
@@ -74,12 +77,24 @@ export default function DashboardHeader() {
           </div>
           <div className={styles.topBarRight}>
             <Link href="#" className={styles.topBarLink}>
-              <Lightbulb className={styles.topBarIcon} />
               Explore Solutions
+              <Image
+                src={icnTelescope}
+                alt="Explore Solutions"
+                width={14}
+                height={14}
+                className={styles.topBarIcon}
+              />
             </Link>
             <Link href="#" className={styles.topBarLink}>
-              <Headphones className={styles.topBarIcon} />
               Help Centre
+              <Image
+                src={icnCallCentre}
+                alt="Help Centre"
+                width={16}
+                height={16}
+                className={styles.topBarIcon}
+              />
             </Link>
             <button type="button" className={styles.languageButton} aria-label="Language / Region">
               <Image
@@ -110,19 +125,28 @@ export default function DashboardHeader() {
             </span>
           </div>
           <div className={styles.navLinks}>
-            <Link href="#" className={styles.navLinkActive}>
+            <Link 
+              href="/dashboard" 
+              className={pathname === '/dashboard' ? styles.navLinkActive : styles.navLink}
+            >
               Dashboard <ChevronDown className={styles.chevronIcon} />
             </Link>
             <Link href="#" className={styles.navLink}>
               Accounts
             </Link>
-            <Link href="#" className={styles.navLink}>
+            <Link 
+              href="/documents" 
+              className={pathname === '/documents' ? styles.navLinkActive : styles.navLink}
+            >
               Documents
             </Link>
             <Link href="#" className={styles.navLink}>
               Query Tracker
             </Link>
-            <Link href="#" className={`${styles.navLinkWithIcon} ${styles.navLink}`}>
+            <Link 
+              href="/business-profile" 
+              className={`${styles.navLinkWithIcon} ${pathname === '/business-profile' ? styles.navLinkActive : styles.navLink}`}
+            >
               Business Profile <ChevronDown className={styles.chevronIcon} />
             </Link>
           </div>

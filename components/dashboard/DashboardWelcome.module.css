@@ -1,0 +1,110 @@
+/* Gradient Container */
+.gradientContainer {
+  background: linear-gradient(180deg, #0033AA 55.06%, #00164E 190.18%),
+              linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  width: 100%;
+  min-height: 504px;
+}
+
+/* Dashboard Header */
+.dashboardHeader {
+  width: 100%;
+  max-width: 1440px;
+  height: 144px;
+  /* border-bottom: 1px solid rgba(255, 255, 255, 0.2); */
+  padding: 24px 72px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Breadcrumb with icon */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+  letter-spacing: 0px;
+  color: #F2F6FF;
+  margin-bottom: 8px;
+}
+
+.homeIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Welcome heading */
+.greeting {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 130%;
+  letter-spacing: 0px;
+  color: #FFFFFF;
+  margin-bottom: 8px;
+}
+
+/* Role with building icon */
+.role {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0px;
+  color: #F2F6FF;
+}
+
+.buildingIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Last signed in with clock icon */
+.lastSignIn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0px;
+  color: #F2F6FF;
+}
+
+.clockIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .dashboardHeader {
+    padding: 24px 32px;
+    height: auto;
+    min-height: 144px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboardHeader {
+    padding: 24px 16px;
+  }
+  
+  .greeting {
+    font-size: 28px;
+  }
+}

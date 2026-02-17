@@ -1,24 +1,32 @@
-/* My Links Section Styles */
-.myLinksSection {
-  background-color: white;
-  border: 1px solid hsl(214, 14%, 90%);
-  border-radius: 8px;
-  padding: 1.25rem;
-  font-family: var(--font-bspro), sans-serif;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+/* Quick Actions Section Container */
+.quickActionsSection {
+  width: 100%;
+  max-width: 300px;
+  height: 565px;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
 }
 
+/* Header Section */
 .header {
+  width: 100%;
+  min-height: 79px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  align-items: center;
+  border-bottom: 2px solid rgba(0, 51, 170, 0.1);
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  padding: 24px;
+  background: var(--neutral-white-color, #FFFFFF);
 }
 
-.titleWrapper {
+.headerItems {
+  width: 100%;
+  max-width: 257px;
+  height: 31px;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 12px;
 }
 
 .titleIcon {
@@ -26,85 +34,231 @@
   height: 24px;
 }
 
+.headerDescriptions {
+  width: 100%;
+  max-width: 226px;
+  height: 31px;
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
 .sectionTitle {
-  font-family: var(--font-bspro), sans-serif;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
   font-weight: 500;
   font-size: 24px;
   line-height: 130%;
-  color: #0033AA;
+  letter-spacing: 0px;
+  color: var(--primary-color, #0033AA);
   vertical-align: middle;
 }
 
-.editButton {
-  color: hsl(var(--primary));
-  font-size: 0.875rem;
-  font-weight: 500;
+/* Content Area */
+.contentArea {
+  width: 100%;
+  max-width: 300px;
+  min-height: 486px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+  padding: 16px;
+  background: var(--neutral-white-color, #FFFFFF);
 }
 
-.editButton:hover {
-  text-decoration: underline;
-}
-
+/* Links List */
 .linksList {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.linkItem {
+/* Quick Action Item */
+.quickAction {
+  width: 100%;
+  max-width: 272px;
+  min-height: 72px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 0.5rem;
-  border-bottom: 1px solid hsl(220, 16%, 96%);
-  border-radius: 0.25rem;
-  margin: 0 -0.5rem;
+  gap: 16px;
+  padding: 16px 4px 16px 16px;
+  border-radius: 8px;
+  background: var(--neutral-white-color, #FFFFFF);
   transition: background-color 0.2s;
 }
 
-.linkItem:last-child {
-  border-bottom: none;
+.quickAction:hover {
+  background-color: #F8F9FA;
 }
 
-.linkItem:hover {
-  background-color: hsl(220, 16%, 96%);
-}
-
-.linkContent {
+/* Action Content Area */
+.actionContent {
+  width: 100%;
+  max-width: 235px;
+  min-height: 36px;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 8px;
 }
 
-.linkIcon {
-  width: 1.25rem;
-  height: 1.25rem;
-  color: hsl(211, 12%, 47%);
+.actionIcon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
 }
 
-.linkTextWrapper {
+/* Text Area */
+.textArea {
+  flex: 1;
+  min-height: 36px;
   display: flex;
   flex-direction: column;
+  gap: 0;
 }
 
-.linkLabel {
-  font-family: var(--font-bspro), sans-serif;
+.actionTitle {
+  width: 100%;
+  min-height: 20px;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
   font-weight: 500;
   font-size: 14px;
   line-height: 130%;
-  color: hsl(var(--secondary));
+  letter-spacing: 0px;
+  color: var(--primary-color, #0033AA);
   vertical-align: middle;
 }
 
-.linkSub {
-  font-family: var(--font-bspro), sans-serif;
+.actionDescription {
+  width: 100%;
+  min-height: 16px;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
   font-size: 12px;
-  line-height: 130%;
-  color: hsl(211, 12%, 47%);
+  line-height: 16px;
+  letter-spacing: 0px;
+  color: var(--primary-color, #0033AA);
+  vertical-align: middle;
+  opacity: 0.7;
 }
 
 .chevronIcon {
-  width: 1.25rem;
-  height: 1.25rem;
-  color: hsl(213, 13%, 83%);
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* Edit Links Container */
+.editLinksContainer {
+  width: 100%;
+  max-width: 272px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.textLink {
+  min-width: 95px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-bottom: 1px solid var(--primary-color, #0033AA);
+  background: transparent;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+
+.textLink:hover {
+  opacity: 0.8;
+}
+
+.editLinksText {
+  width: 80px;
+  height: 16px;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-transform: uppercase;
+  color: var(--primary-color, #0033AA);
+  vertical-align: middle;
+}
+
+.editChevron {
+  width: 14px;
+  height: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 1440px) {
+  .quickActionsSection {
+    width: 100%;
+    max-width: 100%;
+    min-height: 565px;
+  }
+  
+  .header {
+    width: 100%;
+  }
+  
+  .contentArea {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .quickAction {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .editLinksContainer {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .quickActionsSection {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 565px;
+  }
+  
+  .header {
+    width: 100%;
+  }
+  
+  .headerItems {
+    width: 100%;
+  }
+  
+  .headerDescriptions {
+    width: auto;
+  }
+  
+  .contentArea {
+    width: 100%;
+  }
+  
+  .quickAction {
+    width: 100%;
+  }
+  
+  .editLinksContainer {
+    width: 100%;
+  }
 }

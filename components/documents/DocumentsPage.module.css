@@ -1,0 +1,568 @@
+/* ==================== DOCUMENTS PAGE CONTAINER ==================== */
+
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 32px 72px;
+  background: transparent;
+  min-height: calc(100vh - 104px - 120px);
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+}
+
+/* ==================== BREADCRUMB ==================== */
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: nowrap;
+}
+
+.breadcrumbItem {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 130%;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.breadcrumbSeparator {
+  font-size: 12px;
+  color: #FFFFFF;
+  flex-shrink: 0;
+}
+
+.homeIcon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* ==================== PAGE HEADER ==================== */
+
+.pageHeader {
+  margin-bottom: 40px;
+}
+
+.pageTitle {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 130%;
+  letter-spacing: 0px;
+  color: #FFFFFF;
+  margin: 0 0 8px 0;
+}
+
+.pageSubtitle {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+/* ==================== FILTER SECTION ==================== */
+
+.filterSection {
+  background: #FFFFFF;
+  padding: 24px;
+  border-radius: 8px;
+  margin-bottom: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.filterLabel {
+  display: block;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+  color: #4B5563;
+  margin-bottom: 12px;
+}
+
+.accountDropdown {
+  width: 100%;
+  max-width: 420px;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid var(--neutral-pale-grey-color, #CED3D9);
+  border-radius: 8px;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #111827;
+  background: #FFFFFF;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.accountDropdown:hover {
+  border-color: var(--primary-color, #0033AA);
+}
+
+.accountDropdown:focus {
+  outline: none;
+  border-color: var(--primary-color, #0033AA);
+  box-shadow: 0 0 0 2px rgba(0, 51, 170, 0.1);
+}
+
+/* ==================== DOCUMENT CARDS ==================== */
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Featured Card - Large Blue */
+.cardFeatured {
+  background: var(--secondary-color, #0051FF);
+  color: #FFFFFF;
+  padding: 32px;
+  min-height: 320px;
+}
+
+.cardIcon {
+  width: 64px;
+  height: 64px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.iconLarge {
+  width: 32px;
+  height: 32px;
+  color: var(--secondary-color, #0051FF);
+}
+
+.cardTitle {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 130%;
+  color: #FFFFFF;
+  margin: 0 0 8px 0;
+}
+
+.cardDate {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 130%;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 16px 0;
+}
+
+.cardDescription {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0 0 24px 0;
+  flex: 1;
+}
+
+.cardActions {
+  display: flex;
+  gap: 12px;
+}
+
+.cardActionButton {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cardActionButton:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.cardActionIcon {
+  width: 20px;
+  height: 20px;
+  color: #FFFFFF;
+}
+
+/* Small Cards */
+.cardIconSmall {
+  width: 48px;
+  height: 48px;
+  background: var(--primary-4-color, #F2F6FF);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.iconSmall {
+  width: 24px;
+  height: 24px;
+  color: var(--primary-color, #0033AA);
+}
+
+.cardTitleSmall {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 130%;
+  color: #111827;
+  margin: 0 0 8px 0;
+}
+
+.cardDateSmall {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 130%;
+  color: #6B7280;
+  margin: 0 0 12px 0;
+}
+
+.cardDescriptionSmall {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 140%;
+  color: #4B5563;
+  margin: 0 0 20px 0;
+  flex: 1;
+}
+
+.cardActionsSmall {
+  display: flex;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid #E5E7EB;
+}
+
+.iconButton {
+  width: 36px;
+  height: 36px;
+  background: var(--primary-4-color, #F2F6FF);
+  border: none;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.iconButton:hover {
+  background: var(--primary-color, #0033AA);
+}
+
+.iconButton:hover .iconAction {
+  color: #FFFFFF;
+}
+
+.iconAction {
+  width: 18px;
+  height: 18px;
+  color: var(--primary-color, #0033AA);
+  transition: color 0.2s;
+}
+
+/* Warning Card */
+.cardWarning {
+  background: #FFF9E6;
+  border: 1px solid #FFE4A3;
+}
+
+.warningIcon {
+  width: 48px;
+  height: 48px;
+  background: #FFB020;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.iconWarning {
+  width: 24px;
+  height: 24px;
+  color: #FFFFFF;
+}
+
+.disclaimerTitle {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 130%;
+  color: #92400E;
+  margin: 0 0 12px 0;
+}
+
+.disclaimerText {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 140%;
+  color: #78350F;
+  margin: 0 0 12px 0;
+}
+
+.disclaimerText:last-child {
+  margin-bottom: 0;
+}
+
+/* ==================== TABLE SECTION ==================== */
+
+.tableSection {
+  background: #FFFFFF;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.tableSectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 32px;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.tableSectionTitle {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 130%;
+  color: #111827;
+  margin: 0;
+}
+
+.yearDropdown {
+  width: 120px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--neutral-pale-grey-color, #CED3D9);
+  border-radius: 6px;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #111827;
+  background: #FFFFFF;
+  cursor: pointer;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableHeaderRow {
+  background: #F9FAFB;
+  border-bottom: 2px solid #E5E7EB;
+}
+
+.tableHeader {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 130%;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #374151;
+  text-align: left;
+  padding: 16px 20px;
+}
+
+.tableRow {
+  border-bottom: 1px solid #E5E7EB;
+  transition: background-color 0.2s;
+}
+
+.tableRow:hover {
+  background: #F9FAFB;
+}
+
+.tableCell {
+  padding: 20px;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+  color: #111827;
+}
+
+.tableCellCenter {
+  padding: 20px;
+  text-align: center;
+}
+
+.dateCell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fileIcon {
+  width: 18px;
+  height: 18px;
+  color: var(--primary-color, #0033AA);
+  flex-shrink: 0;
+}
+
+.statementInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.statementNo {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 130%;
+  color: #111827;
+  margin: 0;
+}
+
+.statementDesc {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 130%;
+  color: #6B7280;
+  margin: 0;
+}
+
+.tableIconButton {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.tableIconButton:hover {
+  background: var(--primary-4-color, #F2F6FF);
+}
+
+.tableActionIcon {
+  width: 18px;
+  height: 18px;
+  color: var(--primary-color, #0033AA);
+}
+
+.tableFooter {
+  padding: 20px 32px;
+  border-top: 1px solid #E5E7EB;
+  background: #F9FAFB;
+}
+
+.displayingText {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+  color: #6B7280;
+  margin: 0;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+
+@media (max-width: 1200px) {
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 24px 16px;
+  }
+
+  .pageTitle {
+    font-size: 24px;
+  }
+
+  .pageSubtitle {
+    font-size: 14px;
+  }
+
+  .cardsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .tableSectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 16px;
+  }
+
+  .yearDropdown {
+    width: 100%;
+  }
+
+  .tableCell,
+  .tableCellCenter {
+    padding: 16px 12px;
+    font-size: 13px;
+  }
+
+  .tableFooter {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .tableWrapper {
+    overflow-x: auto;
+  }
+
+  .table {
+    min-width: 600px;
+  }
+}

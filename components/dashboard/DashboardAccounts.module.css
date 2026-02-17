@@ -1,10 +1,12 @@
-/* Dashboard Accounts Styles */
+/* ==================== DASHBOARD ACCOUNTS STYLES ==================== */
+
 .accountsSection {
+  width: 100%;
   background-color: white;
   border: 1px solid hsl(214, 14%, 90%);
-  border-radius: 8px;
-  font-family: var(--font-bspro), sans-serif;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 /* Main Header */
@@ -24,7 +26,7 @@
 }
 
 .mainSectionTitle {
-  font-family: var(--font-bspro), sans-serif;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
   font-weight: 500;
   font-size: 24px;
   line-height: 130%;
@@ -62,7 +64,7 @@
   font-size: 0.875rem;
   color: #222E37;
   background-color: white;
-  font-family: var(--font-bspro), sans-serif;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
 }
 
 .selectWide {
@@ -90,7 +92,7 @@
   padding: 0.5rem 0.75rem 0.5rem 2.25rem;
   font-size: 0.875rem;
   width: 16rem;
-  font-family: var(--font-bspro), sans-serif;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
 }
 
 .viewToggle {
@@ -141,7 +143,7 @@
 }
 
 .sectionTitle {
-  font-family: var(--font-bspro), sans-serif;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
   font-weight: 500;
   font-size: 24px;
   line-height: 130%;
@@ -156,7 +158,7 @@
   height: 1.5rem;
   border-radius: 9999px;
   background-color: hsl(214, 14%, 90%);
-  font-family: var(--font-bspro), sans-serif;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
   font-weight: 500;
   font-size: 14px;
   color: #222E37;
@@ -197,7 +199,7 @@
 }
 
 .accountName {
-  font-family: var(--font-bspro), sans-serif;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
   font-weight: 500;
   font-size: 16px;
   line-height: 130%;
@@ -206,7 +208,7 @@
 }
 
 .accountNumber {
-  font-family: var(--font-bspro), sans-serif;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 130%;
@@ -225,7 +227,7 @@
 }
 
 .accountLabel {
-  font-family: var(--font-bspro), sans-serif;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 130%;
@@ -234,7 +236,7 @@
 }
 
 .accountValue {
-  font-family: var(--font-bspro), sans-serif;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
   font-weight: 500;
   font-size: 16px;
   line-height: 130%;
@@ -251,13 +253,13 @@
 }
 
 .footerText {
-  font-family: var(--font-bspro), sans-serif;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
   font-size: 14px;
   color: hsl(211, 12%, 47%);
 }
 
 .viewAllButton {
-  font-family: var(--font-bspro), sans-serif;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
   font-weight: 500;
   font-size: 14px;
   color: hsl(var(--primary));
@@ -267,4 +269,167 @@
 
 .viewAllButton:hover {
   text-decoration: underline;
+}
+
+/* ==================== GRID VIEW STYLES ==================== */
+
+/* Account Grid Container */
+.accountGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .accountGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .accountGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .accountGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Account Card */
+.accountCard {
+  background-color: white;
+  border: 1px solid #E3E6EA;
+  border-radius: 8px;
+  padding: 1.25rem;
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+}
+
+.accountCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Card Header */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.cardIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F2F6FF;
+  border-radius: 8px;
+}
+
+/* Card Body */
+.cardBody {
+  flex: 1;
+  margin-bottom: 1rem;
+}
+
+.cardName {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 130%;
+  color: #222E37;
+  margin-bottom: 0.5rem;
+}
+
+.cardNumber {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+  color: hsl(211, 12%, 47%);
+  margin-bottom: 0.75rem;
+}
+
+.cardType {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.cardTypeText {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 130%;
+  color: hsl(211, 12%, 47%);
+}
+
+.cardCurrency {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 130%;
+  color: #222E37;
+  padding: 0.125rem 0.5rem;
+  background-color: #F2F6FF;
+  border-radius: 4px;
+}
+
+/* Card Footer */
+.cardFooter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid #E3E6EA;
+}
+
+.cardAmount {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardAmountLabel {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 130%;
+  color: hsl(211, 12%, 47%);
+}
+
+.cardAmountValue {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 130%;
+  color: #222E37;
+  text-align: right;
+}
+
+/* Grid View Section Variants */
+.accountSectionGrid {
+  padding: 1.5rem;
+  border-bottom: 1px solid #E3E6EA;
+}
+
+.accountSectionGridLast {
+  padding: 1.5rem;
+}
+
+/* Responsive Adjustments for Grid */
+@media (max-width: 640px) {
+  .accountGrid {
+    grid-template-columns: 1fr;
+  }
 }

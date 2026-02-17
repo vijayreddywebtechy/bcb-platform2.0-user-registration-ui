@@ -4,21 +4,45 @@ import { Info } from "lucide-react";
 import Image from "next/image";
 import styles from "./DashboardCashFlow.module.css";
 import calendarIcon from "@/assets/images/icons/icn_calendar.svg";
+import icnInfoCircle from "@/assets/images/icons/icn_info_circle_solid-1.svg";
 
+/**
+ * Month labels for the cash flow chart
+ */
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+/**
+ * Dummy data for cash inflows (in currency units)
+ */
 const DUMMY_INFLOWS = [70000, 130000, 170000, 190000, 120000, 130000, 180000, 115000, 140000, 185000, 125000, 70000];
+
+/**
+ * Dummy data for cash outflows (in currency units)
+ */
 const DUMMY_OUTFLOWS = [35000, 20000, 90000, 40000, 60000, 20000, 55000, 25000, 75000, 20000, 80000, 40000];
 
+/**
+ * DashboardCashFlow Component
+ * 
+ * Displays a comprehensive cash flow visualization with:
+ * - Time period and account filters
+ * - Bar chart showing inflows vs outflows
+ * - Summary cards with total calculations
+ * 
+ * @returns {JSX.Element} The Cash Flow section component
+ */
 export default function DashboardCashFlow() {
+  // Calculate maximum value for chart scaling
   const maxVal = Math.max(...DUMMY_INFLOWS, ...DUMMY_OUTFLOWS);
 
   return (
     <section className={styles.cashFlowSection}>
+      {/* Header Section - Title with icon */}
       <div className={styles.headerSection}>
         <div className={styles.titleWrapper}>
           <Image
             src="/assets/images/icons/icn_graph_bar_arrow.svg"
-            alt=""
+            alt="Cash flows icon"
             width={24}
             height={24}
             className={styles.titleIcon}
@@ -27,31 +51,38 @@ export default function DashboardCashFlow() {
         </div>
       </div>
 
-      <div className={styles.filterContainer}>
-        <div className={styles.filterWrapper}>
-          <select className={styles.filterSelect}>
-            <option>Last year</option>
+      {/* Filter Container - Date range and account selection */}
+      <div className={styles.cashFlowOverview}>
+        <div className={styles.overviewDataViz}>
+          <div className={styles.filterWrapper}>
+            <select className={styles.filterSelect}>
+              <option>Last year</option>
+              <option>Last 6 months</option>
+              <option>Last 3 months</option>
+              <option>Last month</option>
+            </select>
+            <button
+              type="button"
+              className={styles.calendarButton}
+              aria-label="Open calendar"
+            >
+              <Image
+                src={calendarIcon}
+                alt="Calendar"
+                className={styles.calendarIcon}
+                width={24}
+                height={24}
+              />
+            </button>
+          </div>
+          <select className={styles.accountsDropdown}>
+            <option>All Accounts</option>
+            <option>Business PureSav... Savings Account **** 4690</option>
           </select>
-          <button
-            type="button"
-            className={styles.calendarButton}
-            aria-label="Calendar"
-          >
-            <Image
-              src={calendarIcon}
-              alt="Calendar"
-              className={styles.calendarIcon}
-              width={24}
-              height={24}
-            />
-          </button>
         </div>
-        <select className={styles.accountsDropdown}>
-          <option>All Accounts</option>
-          <option>Business PureSav... Savings Account **** 4690</option>
-        </select>
       </div>
 
+      {/* Track Text - Description */}
       <p className={styles.trackText}>
         Track your business financial flows
       </p>
@@ -123,9 +154,21 @@ export default function DashboardCashFlow() {
         </div>
       </div>
 
-      <p className={styles.disclaimer}>
-        Details displayed are based on available account data
-      </p>
+      {/* Button Area / Disclaimer Section */}
+      <div className={styles.buttonArea}>
+        <div className={styles.disclaimerContent}>
+          <Image
+            src={icnInfoCircle}
+            alt="Information"
+            width={16}
+            height={16}
+            className={styles.infoIcon}
+          />
+          <p className={styles.disclaimer}>
+            Details displayed are based on available account data
+          </p>
+        </div>
+      </div>
     </section>
   );
 }

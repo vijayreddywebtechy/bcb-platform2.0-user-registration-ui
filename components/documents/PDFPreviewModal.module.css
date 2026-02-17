@@ -1,0 +1,435 @@
+/* ==================== MODAL OVERLAY ==================== */
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.modalContainer {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  background: #3D3D3D;
+  border-radius: 0;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-height: 90vh;
+  overflow-y: auto;
+  margin: auto;
+}
+
+/* ==================== CLOSE BUTTON ==================== */
+
+.closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--secondary-color, #0051FF);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 0;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.2s;
+}
+
+.closeButton:hover {
+  background: var(--primary-color, #0033AA);
+}
+
+.closeIcon {
+  width: 16px;
+  height: 16px;
+}
+
+/* ==================== PDF CONTENT ==================== */
+
+.pdfContent {
+  padding: 60px 40px 40px 40px;
+  background: #FFFFFF;
+  margin: 50px 80px;
+  min-height: calc(100vh - 100px);
+}
+
+/* ==================== STATEMENT HEADER ==================== */
+
+.statementHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  gap: 20px;
+}
+
+.headerLeft {
+  flex: 1;
+}
+
+.headerCenter {
+  flex: 1;
+  text-align: center;
+}
+
+.headerRight {
+  flex: 1;
+  text-align: right;
+}
+
+.bankLogo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.bankName {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--primary-color, #0033AA);
+  margin: 0;
+}
+
+.addressBlock {
+  margin-top: 8px;
+}
+
+.addressTitle {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  color: #000000;
+  margin: 0 0 2px 0;
+  letter-spacing: 0.3px;
+}
+
+.addressLine {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 8px;
+  color: #000000;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.centerTitle {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  color: #000000;
+  margin: 0 0 12px 0;
+  letter-spacing: 0.5px;
+}
+
+.customerCareLabel {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 8px;
+  color: #000000;
+  margin: 0 0 4px 0;
+  line-height: 1.5;
+}
+
+.customerCareValue {
+  font-weight: 600;
+}
+
+.emailText {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 8px;
+  color: #000000;
+  margin: 0;
+}
+
+/* ==================== CUSTOMER INFO ==================== */
+
+.customerInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.customerName {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  color: #000000;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.statementDate {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  color: #000000;
+  margin: 0;
+}
+
+/* ==================== STATEMENT DETAILS ==================== */
+
+.statementDetails {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.statementLeft {
+  flex: 1;
+}
+
+.statementRight {
+  flex: 1;
+  text-align: right;
+}
+
+.statementBranch {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  color: #000000;
+  margin: 0 0 4px 0;
+}
+
+.statementType {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  color: #000000;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.statementNo,
+.pageInfo,
+.frequency {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 9px;
+  color: #000000;
+  margin: 0 0 2px 0;
+  line-height: 1.4;
+}
+
+/* ==================== STATEMENT TABLE ==================== */
+
+.statementTable {
+  margin-top: 20px;
+  border: 1px solid #D1D5DB;
+}
+
+.tableTitle {
+  background: #E8E8E8;
+  padding: 8px 12px;
+  text-align: center;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  color: #000000;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #D1D5DB;
+}
+
+.accountRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: #F5F5F5;
+  border-bottom: 1px solid #D1D5DB;
+  gap: 16px;
+}
+
+.accountLabel {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  color: #000000;
+  letter-spacing: 0.3px;
+}
+
+.accountNumberLabel {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  color: #000000;
+  letter-spacing: 0.3px;
+  margin-left: auto;
+}
+
+.accountNumber {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  color: #000000;
+  letter-spacing: 0.5px;
+}
+
+.balanceRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: #E8E8E8;
+  border-bottom: 1px solid #D1D5DB;
+}
+
+.balanceLabel {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  color: #000000;
+  letter-spacing: 0.3px;
+}
+
+.balanceValue {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  color: #000000;
+  letter-spacing: 0.5px;
+}
+
+.transactionsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableHeaderRow {
+  background: #D1D5DB;
+  border-bottom: 1px solid #9CA3AF;
+}
+
+.tableHeader {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 8px;
+  line-height: 130%;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #000000;
+  text-align: center;
+  padding: 8px 6px;
+  border-right: 1px solid #9CA3AF;
+}
+
+.tableHeader:first-child {
+  text-align: left;
+  padding-left: 12px;
+}
+
+.tableHeader:last-child {
+  border-right: none;
+  text-align: right;
+  padding-right: 12px;
+}
+
+.tableRow {
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.tableCell {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 8px;
+  line-height: 130%;
+  color: #000000;
+  padding: 8px 6px;
+  text-align: center;
+  border-right: 1px solid #E5E7EB;
+}
+
+.tableCell:first-child {
+  text-align: left;
+  padding-left: 12px;
+}
+
+.tableCell:last-child {
+  border-right: none;
+  text-align: right;
+  padding-right: 12px;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+
+@media (max-width: 1024px) {
+  .pdfContent {
+    margin: 50px 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .modalContainer {
+    max-width: 100%;
+    max-height: 95vh;
+  }
+
+  .pdfContent {
+    padding: 50px 20px 20px 20px;
+    margin: 50px 20px;
+  }
+
+  .statementHeader {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .headerCenter,
+  .headerRight {
+    text-align: left;
+  }
+
+  .customerInfo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .statementDetails {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .statementRight {
+    text-align: left;
+  }
+
+  .transactionsTable {
+    font-size: 7px;
+  }
+
+  .tableCell,
+  .tableHeader {
+    padding: 6px 4px;
+    font-size: 7px;
+  }
+
+  .closeButton {
+    padding: 10px 16px;
+    font-size: 11px;
+  }
+
+  .accountRow {
+    flex-wrap: wrap;
+  }
+}
