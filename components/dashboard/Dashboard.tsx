@@ -24,8 +24,11 @@ import DashboardStatements from "./DashboardStatements";
 import DashboardMyLinks from "./DashboardMyLinks";
 import DashboardBottomCards from "./DashboardBottomCards";
 import styles from "./DashboardContent.module.css";
+import { useDashboardCustomization } from "@/contexts/DashboardCustomizationContext";
 
 export default function Dashboard() {
+  const { settings } = useDashboardCustomization();
+
   return (
     <>
       {/* Hero Section - Welcome + Next best actions */}
@@ -35,16 +38,29 @@ export default function Dashboard() {
       <section className={styles.mainSection}>
         <div className={styles.contentContainer}>
           {/* Left: Cash Flow (929px width) */}
-          <div className={styles.cashFlowWrapper}>
-            <DashboardCashFlow />
-          </div>
+          {settings.cashFlows && (
+            <div className={styles.cashFlowWrapper}>
+              <DashboardCashFlow />
+            </div>
+          )}
           
           {/* Right: My Links */}
-          <div className={styles.myLinksWrapper}>
-            <div className={styles.myLinksWithActions}>
-              <DashboardMyLinks />
+          {settings.myLinks.enabled && (
+            <div className={styles.myLinksWrapper}>
+              <div className={styles.myLinksWithActions}>
+                <DashboardMyLinks />
+              </div>
             </div>
-          </div>
+          )}
+
+          {/* If both are hidden, show a message */}
+          {!settings.cashFlows && !settings.myLinks.enabled && (
+            <div className={styles.emptyState}>
+              <p style={{ textAlign: "center", color: "#6B7280", padding: "2rem" }}>
+                Main sections hidden. Use "Edit links" to customize your dashboard.
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
@@ -52,25 +68,31 @@ export default function Dashboard() {
       <div className={styles.additionalSections}>
         
         {/* Business Accounts Section */}
-        <div className={styles.fullWidthSection}>
-          <div className={styles.businessAccountsWrapper}>
-            <div className={styles.businessAccountsContent}>
-              <DashboardAccounts />
+        {settings.businessAccounts && (
+          <div className={styles.fullWidthSection}>
+            <div className={styles.businessAccountsWrapper}>
+              <div className={styles.businessAccountsContent}>
+                <DashboardAccounts />
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Digital Hub Links Section */}
-        <div className={styles.fullWidthSection}>
-          <DashboardDigitalLinks />
-        </div>
+        {settings.digitalHubLinks && (
+          <div className={styles.fullWidthSection}>
+            <DashboardDigitalLinks />
+          </div>
+        )}
 
         {/* Formal Statements Section */}
-        <div className={styles.fullWidthSection}>
-          <DashboardStatements />
-        </div>
+        {settings.formalStatements && (
+          <div className={styles.fullWidthSection}>
+            <DashboardStatements />
+          </div>
+        )}
 
-        {/* Bottom Cards Section */}
+        {/* Bottom Cards Section - Always show */}
         <div className={styles.fullWidthSection}>
           <DashboardBottomCards />
         </div>

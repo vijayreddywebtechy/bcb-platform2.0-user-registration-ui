@@ -138,7 +138,10 @@ export default function DashboardHeader() {
             >
               Dashboard <ChevronDown className={styles.chevronIcon} />
             </Link>
-            <Link href="#" className={styles.navLink}>
+            <Link 
+              href="/accounts" 
+              className={pathname === '/accounts' ? styles.navLinkActive : styles.navLink}
+            >
               Accounts
             </Link>
             <Link 

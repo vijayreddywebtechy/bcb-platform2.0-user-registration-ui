@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useMemo } from "react";
 import Image from "next/image";
 import icnClick from "@/assets/images/icons/icn_click.svg";
 import icnDocumentMoney from "@/assets/images/icons/icn_document_money.svg";
@@ -9,6 +10,8 @@ import icnCallCentre from "@/assets/images/icons/icn_call-centre.svg";
 import icnPaint from "@/assets/images/icons/icn_paint.svg";
 import icnChevronRight from "@/assets/images/icons/icn_chevron_right.svg";
 import styles from "./DashboardMyLinks.module.css";
+import CustomizeAppearanceModal from "./CustomizeAppearanceModal";
+import { useDashboardCustomization } from "@/contexts/DashboardCustomizationContext";
 
 /**
  * Quick action links configuration
@@ -17,30 +20,35 @@ import styles from "./DashboardMyLinks.module.css";
 const QUICK_ACTIONS = [
   {
     id: 1,
+    key: "documents",
     label: "Documents",
     description: "Statements & Bank Letters",
     icon: icnDocumentMoney,
   },
   {
     id: 2,
+    key: "queryTracker",
     label: "Query Tracker",
     description: "Track Queries",
     icon: icnTools,
   },
   {
     id: 3,
+    key: "accounts",
     label: "Roles & Permissions",
     description: "Invite & Set User Access",
     icon: icnPeopleSecure,
   },
   {
     id: 4,
+    key: "helpCenter",
     label: "Help Centre",
     description: "Contacts & Support Services",
     icon: icnCallCentre,
   },
   {
     id: 5,
+    key: "customizeAppearance",
     label: "Customise Appearance",
     description: "Personalise Layout & Look",
     icon: icnPaint,
@@ -57,8 +65,29 @@ const QUICK_ACTIONS = [
  * @returns {JSX.Element} The My Links section component
  */
 export default function DashboardMyLinks() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { settings } = useDashboardCustomization();
+
+  const handleEditLinks = () => {
+    console.log("Edit Links clicked");
+    setIsModalOpen(true);
+  };
+
+  // Filter links based on customization settings
+  const visibleLinks = useMemo(() => {
+    return QUICK_ACTIONS.filter((action) => {
+      // Customize Appearance is always visible
+      if (action.key === "customizeAppearance") return true;
+
+      // Check if the link is enabled in settings
+      const settingsKey = action.key as keyof typeof settings.myLinks.items;
+      return settings.myLinks.items[settingsKey] === true;
+    });
+  }, [settings]);
+
   return (
-    <section className={styles.quickActionsSection}>
+    <>
+      <section className={styles.quickActionsSection}>
       {/* Header Section - Contains title with icon */}
       <div className={styles.header}>
         <div className={styles.headerItems}>
@@ -78,9 +107,20 @@ export default function DashboardMyLinks() {
       {/* Content Area - Contains all quick action links */}
       <div className={styles.contentArea}>
         <ul className={styles.linksList}>
-          {QUICK_ACTIONS.map((action) => (
+          {visibleLinks.map((action) => (
             <li key={action.id}>
-              <a href="#" className={styles.quickAction}>
+              <a 
+                href="#" 
+                className={styles.quickAction}
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (action.key === "customizeAppearance") {
+                    handleEditLinks();
+                  } else {
+                    console.log(`Clicked: ${action.label}`);
+                  }
+                }}
+              >
                 {/* Icon and text content */}
                 <div className={styles.actionContent}>
                   <Image
@@ -110,7 +150,7 @@ export default function DashboardMyLinks() {
 
         {/* Edit Links Button */}
         <div className={styles.editLinksContainer}>
-          <button type="button" className={styles.textLink}>
+          <button type="button" className={styles.textLink} onClick={handleEditLinks}>
             <span className={styles.editLinksText}>EDIT LINKS</span>
             <Image
               src={icnChevronRight}
@@ -123,5 +163,12 @@ export default function DashboardMyLinks() {
         </div>
       </div>
     </section>
+
+    {/* Customize Appearance Modal */}
+    <CustomizeAppearanceModal
+      isOpen={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
+    />
+    </>
   );
 }
