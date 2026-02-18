@@ -6,6 +6,7 @@ import AuthCard from "../shared/AuthCard";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import qrCodeImage from "@/assets/images/general/qr_code_graphic.png";
+import Link from "next/link";
 
 interface QRScannerProps {
   expiryMinutes?: number;
@@ -116,24 +117,28 @@ export default function SignInWithQR({
           </div>
 
           {/* Sign In with Password Button */}
-          <Button
-            variant="outline"
-            onClick={handleSignInWithPassword}
-            className="w-full mb-3"
-          >
-            SIGN IN WITH PASSWORD
-          </Button>
+          <Link href="/business-profiles">
+            <Button
+              variant="outline"
+              onClick={handleSignInWithPassword}
+              className="w-full mb-3"
+            >
+              SIGN IN WITH PASSWORD
+            </Button>
+          </Link>
 
           {/* Cancel Link */}
           <div className="text-center">
-            <Button
-              variant="link"
-              type="button"
-              onClick={handleCancel}
-              className="hover:no-underline"
-            >
-              CANCEL
-            </Button>
+            <Link href="/" className="block">
+              <Button
+                variant="link"
+                type="button"
+                onClick={handleCancel}
+                className="hover:no-underline"
+              >
+                CANCEL
+              </Button>
+            </Link>
           </div>
         </div>
       </AuthCard>

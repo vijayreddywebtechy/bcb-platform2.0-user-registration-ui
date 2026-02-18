@@ -6,7 +6,7 @@ import Toolbar from "./Toolbar";
 import { User, ScanFace, Link2 } from "lucide-react";
 type Props = {};
 
-function ConfirmIdentity({}: Props) {
+function ConfirmIdentity({ }: Props) {
   const [visibleCards, setVisibleCards] = useState([1, 2, 3]);
 
   const steps = [
@@ -53,11 +53,11 @@ function ConfirmIdentity({}: Props) {
     <>
       <div className="bg-primary-dark">
         <div className="page-container">
-        <Toolbar
+          <Toolbar
             userName="Welcome, Kobus"
             organizationName="ABC Architects (Pty) Ltd"
             lastSignedIn="27 Oct 2025, 12:35 PM"
-        />
+          />
           <div className="py-14">
             <h4 className="text-lg text-blue-50 mb-5">Outstanding Actions</h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

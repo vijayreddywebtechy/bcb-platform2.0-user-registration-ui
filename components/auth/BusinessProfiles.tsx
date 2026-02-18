@@ -8,6 +8,7 @@ import SearchBox from "../dynamic/SearchBox";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import companyIcon from "@/assets/images/icons/icn_company.png";
+import Link from "next/link";
 
 interface BusinessProfile {
   id: string;
@@ -65,7 +66,7 @@ function BusinessProfiles() {
 
   return (
     <AuthLayout>
-      <AuthCard className="max-w-lg mx-auto">
+      <AuthCard className="w-full max-w-lg mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl text-secondary mb-2">Business Profiles</h1>
@@ -160,9 +161,11 @@ function BusinessProfiles() {
         </div>
 
         {/* Sign Out Button */}
-        <Button onClick={handleSignOut} variant="outline" className="w-full">
-          SIGN OUT
-        </Button>
+        <Link href="/" className="block">
+          <Button onClick={handleSignOut} variant="outline" className="w-full">
+            SIGN OUT
+          </Button>
+        </Link>
       </AuthCard>
     </AuthLayout>
   );

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import authBg from "@/assets/images/shapes/auth_shape_bg.png";
-import sbBrandIcon from "@/assets/sb_brand_icon.png";
+import sbBrandIcon from "@/assets/sb_brand_icon.svg";
 
 export default function AuthWelcomeLayout({
   children,

@@ -12,6 +12,7 @@ import AuthLayout from "../shared/AuthLayout";
 import AuthCard from "../shared/AuthCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 
 interface OTPInputProps {
   length?: number;
@@ -22,7 +23,7 @@ interface OTPInputProps {
 }
 
 export default function OTPInput({
-  length = 6,
+  length = 5,
   maskedDestination = "******4280",
   resendCooldownSeconds = 30,
   onComplete,
@@ -171,9 +172,11 @@ export default function OTPInput({
             </span>
           </p>
 
-          <Button type="submit" className="w-full md:!mt-12">
-            SUBMIT
-          </Button>
+          <Link href="/scan-qr-code" className="block">
+            <Button type="submit" className="w-full md:!mt-12">
+              SUBMIT
+            </Button>
+          </Link>
 
           <div className="flex items-center justify-between text-sm font-medium uppercase">
             <button

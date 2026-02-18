@@ -7,6 +7,7 @@ import Image from "next/image";
 import icnExistingUser from "@/assets/images/icons/icn_existing_user.png";
 import icnCreateUser from "@/assets/images/icons/icn_create_user.png";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function RegisterForm() {
   const handleExistingClient = () => {
@@ -19,10 +20,6 @@ export default function RegisterForm() {
     // Add your navigation or logic here
   };
 
-  const handleCancel = () => {
-    console.log("Cancel clicked");
-    // Add your navigation or logic here
-  };
 
   return (
     <AuthLayout>
@@ -111,9 +108,11 @@ export default function RegisterForm() {
         </div>
 
         {/* Cancel Button */}
-        <Button variant="outline" onClick={handleCancel} className="w-full">
-          CANCEL
-        </Button>
+        <Link href="/" className="block">
+          <Button variant="outline" className="w-full">
+            CANCEL
+          </Button>
+        </Link>
       </AuthCard>
     </AuthLayout>
   );

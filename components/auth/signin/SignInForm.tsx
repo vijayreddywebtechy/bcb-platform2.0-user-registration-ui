@@ -6,6 +6,7 @@ import AuthCard from "../shared/AuthCard";
 import { Button } from "@/components/ui/button";
 import { FloatingTextField } from "@/components/ui/FloatingTextField";
 import { Eye, EyeOff } from "lucide-react";
+import Link from "next/link";
 
 export default function SignInForm() {
   const [username, setUsername] = useState("");
@@ -78,21 +79,24 @@ export default function SignInForm() {
 
           {/* Buttons */}
           <div className="space-y-3 pt-4">
-            <Button
-              type="submit"
-              className="w-full"
-              disabled={loading}
-            >
-              {loading ? "SIGNING IN..." : "SIGN IN"}
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={handleCancel}
-              className="w-full"
-            >
-              CANCEL
-            </Button>
+            <Link href="/otp" className="block">
+              <Button
+                type="button"
+                className="w-full"
+                disabled={loading}
+              >
+                {loading ? "SIGNING IN..." : "SIGN IN"}
+              </Button>
+            </Link>
+            <Link href="/" className="block">
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full"
+              >
+                CANCEL
+              </Button>
+            </Link>
           </div>
         </form>
       </AuthCard>

@@ -47,9 +47,9 @@ export default function InviteForm() {
   return (
     <AuthLayout>
       <AuthCard>
-        <AuthHeader 
-          title="Invite Users" 
-          subtitle="Invite team members to join BizHub" 
+        <AuthHeader
+          title="Invite Users"
+          subtitle="Invite team members to join BizHub"
         />
 
         <form onSubmit={handleSubmit} className="space-y-4">
