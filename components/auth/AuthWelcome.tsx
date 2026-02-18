@@ -38,12 +38,6 @@ export default function AuthWelcome() {
             are new to the bank or on Business Online, please register first.
           </p>
         </div>
-
-        <FloatingTextField 
-          label="Username" 
-          helperText="Create a username using letters only, or a combination of letters, numbers and these special characters ! $ & - ? . @ ^ _ ~"
-        />
-
         <div className="space-y-4">
           <Button onClick={() => setCurrentView("signin")} className="w-full ">
             SIGN IN

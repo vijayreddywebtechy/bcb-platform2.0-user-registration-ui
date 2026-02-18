@@ -13,5 +13,5 @@ import DeclineReasons from "@/components/auth/DeclineReasons";
 import Declined from "@/components/auth/Declined";
 
 export default function Home() {
-  return <SignInForm />;
+  return <AuthWelcome />;
 }
