@@ -7,6 +7,7 @@ import Image from "next/image";
 import icnExistingUser from "@/assets/images/icons/icn_existing_user.png";
 import icnCreateUser from "@/assets/images/icons/icn_create_user.png";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function RegisterForm() {
   const handleExistingClient = () => {
@@ -38,40 +39,44 @@ export default function RegisterForm() {
         {/* Options */}
         <div className="space-y-4 mb-12">
           {/* Existing Client Option */}
-          <button
-            onClick={handleExistingClient}
-            className="w-full bg-blue-50 hover:bg-blue-100 transition-colors rounded-xl p-4 md:pl-6 flex items-center justify-between group"
-          >
-            <div className="flex items-center gap-4">
-              {/* Icon */}
-              <div className="flex-shrink-0">
-                <Image
-                  src={icnExistingUser}
-                  alt="Existing Client Icon"
-                  width={40}
-                  height={40}
-                />
+
+
+          <Link href="/">
+            <button
+              onClick={handleExistingClient}
+              className="w-full bg-blue-50 hover:bg-blue-100 transition-colors rounded-xl p-4 md:pl-6 flex items-center justify-between group"
+            >
+              <div className="flex items-center gap-4">
+                {/* Icon */}
+                <div className="flex-shrink-0">
+                  <Image
+                    src={icnExistingUser}
+                    alt="Existing Client Icon"
+                    width={40}
+                    height={40}
+                  />
+                </div>
+
+                {/* Text Content */}
+                <div className="text-left flex-1">
+                  <h3 className="text-neutral-900 font-medium text-sm leading-normal mb-2">
+                    I'm an existing client who uses the banking app or internet
+                    banking
+                  </h3>
+                  <p className="text-neutral-900 text-sm leading-normal">
+                    Use your existing Online Banking for Business username and
+                    password details to register
+                  </p>
+                </div>
               </div>
 
-              {/* Text Content */}
-              <div className="text-left flex-1">
-                <h3 className="text-neutral-900 font-medium text-sm leading-normal mb-2">
-                  I'm an existing client who uses the banking app or internet
-                  banking
-                </h3>
-                <p className="text-neutral-900 text-sm leading-normal">
-                  Use your existing Online Banking for Business username and
-                  password details to register
-                </p>
-              </div>
-            </div>
-
-            {/* Chevron */}
-            <ChevronRight
-              className="w-8 h-8 text-primary-dark flex-shrink-0 ml-2"
-              strokeWidth="1.5"
-            />
-          </button>
+              {/* Chevron */}
+              <ChevronRight
+                className="w-8 h-8 text-primary-dark flex-shrink-0 ml-2"
+                strokeWidth="1.5"
+              />
+            </button>
+          </Link>
 
           {/* New Client Option */}
           <button
