@@ -150,7 +150,10 @@ export default function DashboardHeader() {
             >
               Documents
             </Link>
-            <Link href="#" className={styles.navLink}>
+            <Link 
+              href="/query-tracker" 
+              className={pathname === '/query-tracker' ? styles.navLinkActive : styles.navLink}
+            >
               Query Tracker
             </Link>
             <Link 

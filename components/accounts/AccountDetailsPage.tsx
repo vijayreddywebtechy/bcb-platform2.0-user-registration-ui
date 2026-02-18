@@ -3,12 +3,13 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, Search, Calendar, ChevronRight, ChevronLeft, Mail, Download, FileText, Printer, Info } from "lucide-react";
+import { ArrowLeft, Search, Calendar, ChevronRight, ChevronLeft, Mail, Download, Printer, Info } from "lucide-react";
 import icnLinkOut from "@/assets/images/icons/icn_link_out.svg";
 import icnLinkOutWhite from "@/assets/images/icons/icn_link_out_white.svg";
 import icnResponsiveWhite from "@/assets/images/icons/icn_responsive_white.svg";
 import icnTradeFinanceWhite from "@/assets/images/icons/icn_trade_finance_white.svg";
 import icnScreenWhite from "@/assets/images/icons/icn_screen_white.svg";
+import icnDocumentSuccess from "@/assets/images/icons/icn_document_success.svg";
 import styles from "./AccountDetailsPage.module.css";
 
 interface AccountDetailsPageProps {
@@ -313,7 +314,13 @@ export default function AccountDetailsPage({ accountId }: AccountDetailsPageProp
                 {DOCUMENTS.map((doc) => (
                   <div key={doc.id} className={styles.documentRow}>
                     <div className={styles.documentInfo}>
-                      <FileText className={styles.documentIcon} />
+                      <Image
+                        src={icnDocumentSuccess}
+                        alt="Document"
+                        width={20}
+                        height={20}
+                        className={styles.documentIcon}
+                      />
                       <div>
                         <p className={styles.documentName}>{doc.name}</p>
                         <p className={styles.documentDescription}>{doc.description}</p>
