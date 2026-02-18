@@ -3,8 +3,10 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import { ScanFace, Info } from "lucide-react";
-import VerificationLayout from "./shared/VerificationLayout";
 import Toolbar from "./Toolbar";
+import Header from "./shared/Header";
+import MiniNavbar from "./shared/MiniNavbar";
+import Footer from "@/components/layout/Footer";
 import { Button } from "../ui/button";
 
 const FaceVerificationStep: React.FC = () => {
@@ -24,22 +26,30 @@ const FaceVerificationStep: React.FC = () => {
   };
 
   return (
-    <>
-      <div className="bg-primary-dark">
-        <div className="page-container">
-          <Toolbar
-            userName="Identity Verification"
-            action={{
-              type: "button",
-              label: "Exit",
-              onClick: () => console.log("Exit clicked"),
-            }}
-          />
-        </div>
+    <div className="relative min-h-screen flex flex-col bg-background">
+      {/* Sticky Header */}
+      <div className="sticky top-0 z-50">
+        <MiniNavbar />
+        <Header />
       </div>
 
-      <div className="page-container py-10">
-        <div className="w-full md:max-w-[526px]">
+      {/* Main Content */}
+      <main className="flex-1">
+        <div className="bg-primary-dark">
+          <div className="page-container">
+            <Toolbar
+              userName="Identity Verification"
+              action={{
+                type: "button",
+                label: "Exit",
+                onClick: () => console.log("Exit clicked"),
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="page-container py-10">
+          <div className="w-full md:max-w-[526px]">
           {/* Icon */}
             <div className="mb-4">
             <div className="w-14 h-14 bg-blue-600 rounded-xl flex items-center justify-center">
@@ -97,9 +107,13 @@ const FaceVerificationStep: React.FC = () => {
                 CONTINUE
             </Button>
           </div>
+          </div>
         </div>
-      </div>
-    </>
+      </main>
+
+      {/* Footer */}
+      <Footer />
+    </div>
   );
 };
 

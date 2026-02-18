@@ -11,6 +11,10 @@ import {
   AlertTriangle,
 } from "lucide-react";
 import { Button } from "../ui/button";
+import Toolbar from "./Toolbar";
+import Header from "./shared/Header";
+import MiniNavbar from "./shared/MiniNavbar";
+import Footer from "@/components/layout/Footer";
 
 interface VerificationInstructionsProps {
   onStartScan?: () => void;
@@ -58,8 +62,30 @@ function VerificationInstructions({
   ];
 
   return (
-    <div className="page-container py-10">
-      <div className="w-full md:max-w-[526px]">
+    <div className="relative min-h-screen flex flex-col bg-background">
+      {/* Sticky Header */}
+      <div className="sticky top-0 z-50">
+        <MiniNavbar />
+        <Header />
+      </div>
+
+      {/* Main Content */}
+      <main className="flex-1">
+        <div className="bg-primary-dark">
+          <div className="page-container">
+            <Toolbar
+              userName="Identity Verification"
+              action={{
+                type: "button",
+                label: "Exit",
+                onClick: () => router.push("/verification/confirm-identity"),
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="page-container py-10">
+          <div className="w-full md:max-w-[526px]">
         {/* Icon */}
         <div className="mb-4">
           <div className="w-14 h-14 bg-blue-600 rounded-xl flex items-center justify-center">
@@ -122,7 +148,12 @@ function VerificationInstructions({
             START SCAN
           </Button>
         </div>
-      </div>
+          </div>
+        </div>
+      </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

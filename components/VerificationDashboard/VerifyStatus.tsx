@@ -4,6 +4,10 @@ import React, { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { Button } from "../ui/button";
+import Toolbar from "./Toolbar";
+import Header from "./shared/Header";
+import MiniNavbar from "./shared/MiniNavbar";
+import Footer from "@/components/layout/Footer";
 import icnLoadLg from "@/assets/images/icons/icn_load_lg.svg";
 import icnSuccessLg from "@/assets/images/icons/icn_success_lg.svg";
 
@@ -138,10 +142,37 @@ function VerifyStatus({
   };
 
   return (
-    <div className="page-container py-40">
-      <div className="w-full md:max-w-md mx-auto py-10">
-        {renderContent()}
+    <div className="relative min-h-screen flex flex-col bg-background">
+      {/* Sticky Header */}
+      <div className="sticky top-0 z-50">
+        <MiniNavbar />
+        <Header />
       </div>
+
+      {/* Main Content */}
+      <main className="flex-1">
+        <div className="bg-primary-dark">
+          <div className="page-container">
+            <Toolbar
+              userName="Identity Verification"
+              action={{
+                type: "button",
+                label: "Exit",
+                onClick: () => router.push("/verification/confirm-identity"),
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="page-container py-40">
+          <div className="w-full md:max-w-md mx-auto py-10">
+            {renderContent()}
+          </div>
+        </div>
+      </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

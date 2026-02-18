@@ -3,6 +3,9 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import Toolbar from "./Toolbar";
+import Header from "./shared/Header";
+import MiniNavbar from "./shared/MiniNavbar";
+import Footer from "@/components/layout/Footer";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import Qrmobile from "@/assets/images/qr/qr_mobile.png"
@@ -24,22 +27,30 @@ const QRMobileVerification: React.FC = () => {
   };
 
   return (
-    <>
-      <div className="bg-primary-dark">
-        <div className="page-container">
-          <Toolbar
-            userName="Identity Verification"
-            action={{
-              type: "button",
-              label: "Exit",
-              onClick: () => console.log("Exit clicked"),
-            }}
-          />
-        </div>
+    <div className="relative min-h-screen flex flex-col bg-background">
+      {/* Sticky Header */}
+      <div className="sticky top-0 z-50">
+        <MiniNavbar />
+        <Header />
       </div>
 
-      <div className="page-container py-10">
-        <div className="w-full md:max-w-md mx-auto text-center">
+      {/* Main Content */}
+      <main className="flex-1">
+        <div className="bg-primary-dark">
+          <div className="page-container">
+            <Toolbar
+              userName="Identity Verification"
+              action={{
+                type: "button",
+                label: "Exit",
+                onClick: () => router.push("/verification/confirm-identity"),
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="page-container py-10">
+          <div className="w-full md:max-w-md mx-auto text-center">
  
           {/* Heading */}
           <h1 className="text-lg font-medium text-secondary mb-3">
@@ -79,9 +90,13 @@ const QRMobileVerification: React.FC = () => {
               CANCEL
             </Button>
           </div>
+          </div>
         </div>
-      </div>
-    </>
+      </main>
+
+      {/* Footer */}
+      <Footer />
+    </div>
   );
 };
 

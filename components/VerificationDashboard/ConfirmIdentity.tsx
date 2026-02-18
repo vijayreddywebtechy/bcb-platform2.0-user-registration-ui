@@ -4,6 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import ActionCard from "../dynamic/cards/ActionCard";
 import Toolbar from "./Toolbar";
+import Header from "./shared/Header";
+import MiniNavbar from "./shared/MiniNavbar";
+import Footer from "@/components/layout/Footer";
 import { User, ScanFace, Link2 } from "lucide-react";
 type Props = {};
 
@@ -60,51 +63,63 @@ function ConfirmIdentity({}: Props) {
   };
 
   return (
-    <>
-      <div className="bg-primary-dark">
-        <div className="page-container">
-        <Toolbar
-            userName="Welcome, Kobus"
-            organizationName="ABC Architects (Pty) Ltd"
-            lastSignedIn="27 Oct 2025, 12:35 PM"
-        />
-          <div className="py-14">
-            <h4 className="text-lg text-blue-50 mb-5">Outstanding Actions</h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {steps
-                .filter((step) => visibleCards.includes(step.stepNumber))
-                .map((step) => (
-                  <ActionCard
-                    key={step.stepNumber}
-                    {...step}
-                    showClose={false}
-                    onActionClick={() => handleStepClick(step.stepNumber)}
-                    onClose={() => handleClose(step.stepNumber)}
-                  />
-                ))}
+    <div className="relative min-h-screen flex flex-col bg-background">
+      {/* Sticky Header */}
+      <div className="sticky top-0 z-50">
+        <MiniNavbar />
+        <Header />
+      </div>
+
+      {/* Main Content */}
+      <main className="flex-1">
+        <div className="bg-primary-dark">
+          <div className="page-container">
+            <Toolbar
+              userName="Welcome, Kobus"
+              organizationName="ABC Architects (Pty) Ltd"
+              lastSignedIn="27 Oct 2025, 12:35 PM"
+            />
+            <div className="py-14">
+              <h4 className="text-lg text-blue-50 mb-5">Outstanding Actions</h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {steps
+                  .filter((step) => visibleCards.includes(step.stepNumber))
+                  .map((step) => (
+                    <ActionCard
+                      key={step.stepNumber}
+                      {...step}
+                      showClose={false}
+                      onActionClick={() => handleStepClick(step.stepNumber)}
+                      onClose={() => handleClose(step.stepNumber)}
+                    />
+                  ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="page-container py-12">
-        <div className="w-full max-w-md">
-          <h6 className="text-lg text-neutral-900 font-medium py-2">
-            Let's get you set up
-          </h6>
-          <p className="text-neutral-800 mb-3">
-            Great job setting up your sign in details. Since security is our top
-            priority, we need to complete a quick verification process before
-            unlocking your business dashboard.
-          </p>
-          <p className="text-neutral-800 font-medium">
-            Next, you'll complete a quick facial recognition scan. After that,
-            you'll be able to send secure approval invites to your business
-            directors to finalise your access.
-          </p>
+        <div className="page-container py-12">
+          <div className="w-full max-w-md">
+            <h6 className="text-lg text-neutral-900 font-medium py-2">
+              Let's get you set up
+            </h6>
+            <p className="text-neutral-800 mb-3">
+              Great job setting up your sign in details. Since security is our top
+              priority, we need to complete a quick verification process before
+              unlocking your business dashboard.
+            </p>
+            <p className="text-neutral-800 font-medium">
+              Next, you'll complete a quick facial recognition scan. After that,
+              you'll be able to send secure approval invites to your business
+              directors to finalise your access.
+            </p>
+          </div>
         </div>
-      </div>
-    </>
+      </main>
+
+      {/* Footer */}
+      <Footer />
+    </div>
   );
 }
 
