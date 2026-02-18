@@ -54,8 +54,9 @@ export default function SignInWithQR({
   const handleSignInWithPassword = () => {
     console.log("Sign in with password clicked");
     onSignInWithPassword?.();
-    // Navigate back to sign in with password
-    router.push("/auth/signin");
+    // OLD: router.push("/auth/signin");
+    // REASON: Updated per flow requirements - should navigate to BusinessProfiles instead of sign in form
+    router.push("/auth/business-profiles");
   };
 
   const handleCancel = () => {
@@ -109,16 +110,6 @@ export default function SignInWithQR({
               />
             </div>
           </div>
-
-          {/* Demo: Simulate QR Scan Button - Remove in production */}
-          {!scanComplete && (
-            <Button
-              onClick={handleSimulateScan}
-              className="w-full mb-4 bg-green-600 hover:bg-green-700"
-            >
-              ✓ SIMULATE QR SCAN (DEMO)
-            </Button>
-          )}
 
           {/* Success Message */}
           {scanComplete && (

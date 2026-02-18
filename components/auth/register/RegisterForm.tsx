@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import AuthLayout from "../shared/AuthLayout";
 import AuthCard from "../shared/AuthCard";
 import { ChevronRight, FileText, Users } from "lucide-react";
@@ -9,19 +10,26 @@ import icnCreateUser from "@/assets/images/icons/icn_create_user.png";
 import { Button } from "@/components/ui/button";
 
 export default function RegisterForm() {
+  const router = useRouter();
+
   const handleExistingClient = () => {
     console.log("Existing client selected");
-    // Add your navigation or logic here
+    // OLD: No navigation was implemented
+    // REASON: Updated per flow requirements - any option should navigate to SignInForm
+    router.push("/auth/signin");
   };
 
   const handleNewClient = () => {
     console.log("New client selected");
-    // Add your navigation or logic here
+    // OLD: No navigation was implemented
+    // REASON: Updated per flow requirements - any option should navigate to SignInForm
+    router.push("/auth/signin");
   };
 
   const handleCancel = () => {
     console.log("Cancel clicked");
-    // Add your navigation or logic here
+    // Navigate back to welcome page
+    router.push("/");
   };
 
   return (

@@ -1,20 +1,26 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import { ScanFace, Info } from "lucide-react";
 import VerificationLayout from "./shared/VerificationLayout";
 import Toolbar from "./Toolbar";
 import { Button } from "../ui/button";
 
 const FaceVerificationStep: React.FC = () => {
+  const router = useRouter();
+
   const handleContinue = () => {
-    // Redirect to verification partner
-    console.log("Redirecting to verification partner...");
+    console.log("Redirecting to verification instructions...");
+    // OLD: No navigation was implemented
+    // REASON: Updated per flow requirements - should navigate to VerificationInstructions
+    router.push("/verification/instructions");
   };
 
   const handleCancel = () => {
-    // Cancel verification process
     console.log("Verification cancelled");
+    // Navigate back to confirm identity page
+    router.push("/verification/confirm-identity");
   };
 
   return (

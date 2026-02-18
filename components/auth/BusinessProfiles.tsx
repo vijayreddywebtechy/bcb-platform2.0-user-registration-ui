@@ -57,8 +57,9 @@ function BusinessProfiles() {
 
   const handleProfileSelect = (profile: BusinessProfile) => {
     console.log("Profile selected:", profile);
-    // Navigate to business linking flow - role definition
-    router.push("/business/linking/role-definition");
+    // OLD: router.push("/business/linking/role-definition");
+    // REASON: Updated per flow requirements - should navigate to ConfirmIdentity instead of business linking
+    router.push("/verification/confirm-identity");
   };
 
   const handleSignOut = () => {

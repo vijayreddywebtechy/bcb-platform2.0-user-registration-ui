@@ -48,8 +48,10 @@ export default function AuthWelcome() {
         <div className="space-y-4">
           <Button 
             onClick={() => {
-              console.log("Navigating to Sign In");
-              router.push("/auth/signin");
+              console.log("Navigating to Register Form");
+              // OLD: router.push("/auth/signin"); 
+              // REASON: Updated per flow requirements - Sign In button should navigate to RegisterForm
+              router.push("/auth/register");
             }} 
             className="w-full"
           >

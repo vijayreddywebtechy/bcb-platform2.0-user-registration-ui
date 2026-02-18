@@ -1,20 +1,26 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import Toolbar from "./Toolbar";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import Qrmobile from "@/assets/images/qr/qr_mobile.png"
 
 const QRMobileVerification: React.FC = () => {
+  const router = useRouter();
+
   const handleContinueOnDevice = () => {
-    // Continue on current device
     console.log("Continue on current device...");
+    // OLD: No navigation was implemented
+    // REASON: Updated per flow requirements - should navigate to VerifyStatus with pending status
+    router.push("/verification/status?status=pending");
   };
 
   const handleCancel = () => {
-    // Cancel verification process
     console.log("Verification cancelled");
+    // Navigate back to verification instructions
+    router.push("/verification/instructions");
   };
 
   return (

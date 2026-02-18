@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import ActionCard from "../dynamic/cards/ActionCard";
 import Toolbar from "./Toolbar";
 import { User, ScanFace, Link2 } from "lucide-react";
 type Props = {};
 
 function ConfirmIdentity({}: Props) {
+  const router = useRouter();
   const [visibleCards, setVisibleCards] = useState([1, 2, 3]);
 
   const steps = [
@@ -41,7 +43,15 @@ function ConfirmIdentity({}: Props) {
 
   const handleStepClick = (stepNumber: number) => {
     console.log(`Step ${stepNumber} clicked`);
-    // Add your navigation or action logic here
+    // OLD: No navigation was implemented
+    // REASON: Updated per flow requirements - navigate based on which card is clicked
+    if (stepNumber === 2) {
+      // Identity Verification - navigate to FaceVerificationStep
+      router.push("/verification/face-scan");
+    } else if (stepNumber === 3) {
+      // Business Linking - navigate to BusinessLinkingLayout
+      router.push("/business/linking/role-definition");
+    }
   };
 
   const handleClose = (stepNumber: number) => {

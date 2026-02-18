@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import {
   ScanFace,
   Glasses,
@@ -20,14 +21,21 @@ function VerificationInstructions({
   onStartScan,
   onCancel,
 }: VerificationInstructionsProps) {
+  const router = useRouter();
+
   const handleStartScan = () => {
     console.log("Start scan clicked");
     onStartScan?.();
+    // OLD: No navigation was implemented
+    // REASON: Updated per flow requirements - should navigate to QRMobileVerification
+    router.push("/verification/qr-mobile");
   };
 
   const handleCancel = () => {
     console.log("Cancel clicked");
     onCancel?.();
+    // Navigate back to face verification step
+    router.push("/verification/face-scan");
   };
 
   const instructions = [
