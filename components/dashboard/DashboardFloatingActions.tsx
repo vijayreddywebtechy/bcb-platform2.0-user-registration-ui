@@ -13,7 +13,7 @@
 
 import Image from "next/image";
 import icnContactsBook from "@/assets/images/icons/icn_contacts_book.svg";
-import icnChat from "@/assets/images/icons/icn_chat.svg";
+import icnChat from "@/assets/images/icons/icn_chat_white.svg";
 import styles from "./DashboardFloatingActions.module.css";
 
 export default function DashboardFloatingActions() {

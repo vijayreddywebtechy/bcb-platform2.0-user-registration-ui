@@ -3,9 +3,9 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import icnPeopleSecure from "@/assets/images/icons/icn_people_1_secure.svg";
-import icnPaint from "@/assets/images/icons/icn_paint.svg";
-import icnDocumentDown from "@/assets/images/icons/icn_document_down.svg";
+import icnPeopleSecure from "@/assets/images/icons/icn_people_1_secure_white.svg";
+import icnPaint from "@/assets/images/icons/icn_paint_white.svg";
+import icnDocumentDown from "@/assets/images/icons/icn_document_down_white.svg";
 import icnBuilding from "@/assets/images/icons/icn_building.svg";
 import icnChevronLeft from "@/assets/images/icons/icn_chevron_left.svg";
 import icnChevronRight from "@/assets/images/icons/icn_chevron_right.svg";

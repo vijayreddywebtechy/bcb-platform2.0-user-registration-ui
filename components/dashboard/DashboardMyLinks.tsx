@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import icnClick from "@/assets/images/icons/icn_click.svg";
 import icnDocumentMoney from "@/assets/images/icons/icn_document_money.svg";
@@ -11,7 +11,6 @@ import icnPaint from "@/assets/images/icons/icn_paint.svg";
 import icnChevronRight from "@/assets/images/icons/icn_chevron_right.svg";
 import styles from "./DashboardMyLinks.module.css";
 import CustomizeAppearanceModal from "./CustomizeAppearanceModal";
-import { useDashboardCustomization } from "@/contexts/DashboardCustomizationContext";
 
 /**
  * Quick action links configuration
@@ -66,24 +65,11 @@ const QUICK_ACTIONS = [
  */
 export default function DashboardMyLinks() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { settings } = useDashboardCustomization();
 
   const handleEditLinks = () => {
     console.log("Edit Links clicked");
     setIsModalOpen(true);
   };
-
-  // Filter links based on customization settings
-  const visibleLinks = useMemo(() => {
-    return QUICK_ACTIONS.filter((action) => {
-      // Customize Appearance is always visible
-      if (action.key === "customizeAppearance") return true;
-
-      // Check if the link is enabled in settings
-      const settingsKey = action.key as keyof typeof settings.myLinks.items;
-      return settings.myLinks.items[settingsKey] === true;
-    });
-  }, [settings]);
 
   return (
     <>
@@ -107,7 +93,7 @@ export default function DashboardMyLinks() {
       {/* Content Area - Contains all quick action links */}
       <div className={styles.contentArea}>
         <ul className={styles.linksList}>
-          {visibleLinks.map((action) => (
+          {QUICK_ACTIONS.map((action) => (
             <li key={action.id}>
               <a 
                 href="#" 

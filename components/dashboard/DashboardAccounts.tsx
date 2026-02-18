@@ -53,8 +53,8 @@ const SAVINGS_ACCOUNTS: Account[] = [
 ];
 
 /**
- * AccountRow Component - List View
- * Renders a single account in list format
+ * AccountRow Component - Table Row
+ * Renders a single account in table format
  */
 function AccountRow({
   name,
@@ -66,31 +66,37 @@ function AccountRow({
   iconPath,
 }: Account & { iconPath: string }) {
   return (
-    <div className={styles.accountRow}>
-      <div className={styles.accountLeft}>
+    <tr className={styles.tableRow}>
+      <td className={styles.tableCell}>
         <div className={styles.accountIcon}>
           <Image src={iconPath} alt={`${name} icon`} width={24} height={24} />
         </div>
+      </td>
+      <td className={styles.tableCell}>
         <div className={styles.accountInfo}>
           <p className={styles.accountName}>{name}</p>
           <p className={styles.accountNumber}>{number}</p>
         </div>
-      </div>
-      <div className={styles.accountRight}>
-        <div className={styles.accountColumn}>
-          <p className={styles.accountLabel}>{currency}</p>
-          <p className={styles.accountValue}>{type}</p>
+      </td>
+      <td className={styles.tableCell}>
+        <div className={styles.accountTypeInfo}>
+          <p className={styles.accountCurrencyText}>{currency}</p>
+          <p className={styles.accountType}>{type}</p>
         </div>
-        <div className={styles.accountColumn}>
+      </td>
+      <td className={`${styles.tableCell} ${styles.tableCellRight}`}>
+        <div className={styles.accountBalanceInfo}>
           <p className={styles.accountLabel}>Latest</p>
           <p className={styles.accountValue}>{latest}</p>
         </div>
-        <div className={styles.accountColumn}>
+      </td>
+      <td className={`${styles.tableCell} ${styles.tableCellRight}`}>
+        <div className={styles.accountBalanceInfo}>
           <p className={styles.accountLabel}>Available</p>
           <p className={styles.accountValue}>{available}</p>
         </div>
-      </div>
-    </div>
+      </td>
+    </tr>
   );
 }
 
@@ -222,15 +228,19 @@ export default function DashboardAccounts() {
       {/* ==================== CURRENT ACCOUNTS ==================== */}
       <div className={viewMode === 'grid' ? styles.accountSectionGrid : styles.accountSection}>
         <div className={styles.sectionHeader}>
-          <h3 className={styles.sectionTitle}>Current Accounts</h3>
+          <h3 className={styles.sectionTitle}>Current accounts</h3>
           <span className={styles.badge}>{CURRENT_ACCOUNTS.length}</span>
         </div>
         
         {viewMode === 'list' ? (
-          // List View
-          CURRENT_ACCOUNTS.map((acc) => (
-            <AccountRow key={acc.number} {...acc} iconPath="/assets/images/icons/icn_wallet.svg" />
-          ))
+          // Table View
+          <table className={styles.accountTable}>
+            <tbody>
+              {CURRENT_ACCOUNTS.map((acc) => (
+                <AccountRow key={acc.number} {...acc} iconPath="/assets/images/icons/icn_wallet.svg" />
+              ))}
+            </tbody>
+          </table>
         ) : (
           // Grid View
           <div className={styles.accountGrid}>
@@ -244,15 +254,19 @@ export default function DashboardAccounts() {
       {/* ==================== SAVINGS ACCOUNTS ==================== */}
       <div className={viewMode === 'grid' ? styles.accountSectionGridLast : styles.accountSectionLast}>
         <div className={styles.sectionHeader}>
-          <h3 className={styles.sectionTitle}>Savings Accounts</h3>
+          <h3 className={styles.sectionTitle}>Savings accounts</h3>
           <span className={styles.badge}>{SAVINGS_ACCOUNTS.length}</span>
         </div>
         
         {viewMode === 'list' ? (
-          // List View
-          SAVINGS_ACCOUNTS.map((acc) => (
-            <AccountRow key={acc.number} {...acc} iconPath="/assets/images/icons/icn_cash_coins_and_note.svg" />
-          ))
+          // Table View
+          <table className={styles.accountTable}>
+            <tbody>
+              {SAVINGS_ACCOUNTS.map((acc) => (
+                <AccountRow key={acc.number} {...acc} iconPath="/assets/images/icons/icn_cash_coins_and_note.svg" />
+              ))}
+            </tbody>
+          </table>
         ) : (
           // Grid View
           <div className={styles.accountGrid}>

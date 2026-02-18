@@ -37,9 +37,10 @@
   background: #E8F4FF;
 }
 
-/* Chat Button - Purple */
+/* Chat Button - Blue */
 .actionButtonBottom {
-  background: #6200EA;
+  background: var(--secondary-color, #0051FF);
+  border-radius: 60px;
 }
 
 .actionIcon {

@@ -164,24 +164,42 @@
   color: #222E37;
 }
 
-/* Account Row */
-.accountRow {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 1.5rem 0;
-  border-bottom: 1px solid #E3E6EA;
+/* Account Table */
+.accountTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
 }
 
-.accountRow:last-child {
+.tableRow {
+  border-bottom: 1px solid #E3E6EA;
+  transition: background-color 0.2s;
+}
+
+.tableRow:last-child {
   border-bottom: none;
 }
 
-.accountLeft {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  flex: 1;
+.tableRow:hover {
+  background-color: #F9FAFB;
+}
+
+.tableCell {
+  padding: 1.25rem 1rem;
+  vertical-align: middle;
+}
+
+.tableCell:first-child {
+  width: 60px;
+  padding-left: 0;
+}
+
+.tableCell:last-child {
+  padding-right: 0;
+}
+
+.tableCellRight {
+  text-align: right;
 }
 
 .accountIcon {
@@ -191,11 +209,12 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  margin-top: 0.25rem;
 }
 
 .accountInfo {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .accountName {
@@ -204,7 +223,6 @@
   font-size: 16px;
   line-height: 130%;
   color: #222E37;
-  margin-bottom: 0.25rem;
 }
 
 .accountNumber {
@@ -215,15 +233,33 @@
   color: hsl(211, 12%, 47%);
 }
 
-.accountRight {
+.accountTypeInfo {
   display: flex;
-  align-items: flex-start;
-  gap: 3rem;
-  text-align: right;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
-.accountColumn {
-  min-width: 0;
+.accountCurrencyText {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 130%;
+  color: #222E37;
+}
+
+.accountType {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+  color: hsl(211, 12%, 47%);
+}
+
+.accountBalanceInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: flex-end;
 }
 
 .accountLabel {
@@ -232,7 +268,6 @@
   font-size: 14px;
   line-height: 130%;
   color: hsl(211, 12%, 47%);
-  margin-bottom: 0.25rem;
 }
 
 .accountValue {
@@ -431,5 +466,43 @@
 @media (max-width: 640px) {
   .accountGrid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Responsive Adjustments for Table */
+@media (max-width: 1024px) {
+  .tableCell {
+    padding: 1rem 0.5rem;
+    font-size: 14px;
+  }
+
+  .accountName {
+    font-size: 14px;
+  }
+
+  .accountNumber,
+  .accountType,
+  .accountLabel,
+  .accountCurrencyText {
+    font-size: 12px;
+  }
+
+  .accountValue {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tableCell:first-child {
+    width: 40px;
+  }
+
+  .accountIcon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .tableCell {
+    padding: 0.875rem 0.375rem;
   }
 }
