@@ -2,11 +2,10 @@
 
 import React, { useState } from "react";
 import { Link2, Info, ChevronDown, Check } from "lucide-react";
-import { Button } from "../ui/button";
-import { Checkbox } from "../ui/checkbox";
-import { Label } from "../ui/label";
-import { Progress } from "../ui/progress";
-import SearchBox from "../dynamic/SearchBox";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import SearchBox from "@/components/dynamic/SearchBox";
 
 interface Director {
   id: string;

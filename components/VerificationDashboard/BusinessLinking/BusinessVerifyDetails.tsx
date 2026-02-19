@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Link2, Info, Check } from "lucide-react";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 
 interface ApproverDetail {
   id: string;

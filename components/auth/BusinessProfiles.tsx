@@ -9,6 +9,8 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import companyIcon from "@/assets/images/icons/icn_company.png";
 import Link from "next/link";
+import router from "next/router";
+import { useRouter } from "next/navigation";
 
 interface BusinessProfile {
   id: string;
@@ -39,6 +41,7 @@ const mockProfiles: BusinessProfile[] = [
 function BusinessProfiles() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProfiles, setFilteredProfiles] = useState(mockProfiles);
+  const router = useRouter();
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
@@ -57,6 +60,8 @@ function BusinessProfiles() {
   const handleProfileSelect = (profile: BusinessProfile) => {
     console.log("Profile selected:", profile);
     // Add your navigation or logic here
+    // router.push(`/business-profiles/${profile.id}`);
+    router.push(`/identity-verification`);
   };
 
   const handleSignOut = () => {
@@ -125,13 +130,13 @@ function BusinessProfiles() {
                     {profile.needsVerification && (
                       <p className="text-xs leading-normal flex flex-wrap gap-1">
                         <span>Business Profile</span>
-                        <a
+                        <Link
                           href="#"
                           className="text-primary-dark hover:underline"
                           onClick={(e) => e.stopPropagation()}
                         >
                           Needs Verification
-                        </a>
+                        </Link>
                       </p>
                     )}
                     {profile.needsApproval && (

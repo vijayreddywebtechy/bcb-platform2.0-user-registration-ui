@@ -2,9 +2,9 @@
 
 import React, { useState } from "react";
 import { Link2, Info } from "lucide-react";
-import { Button } from "../ui/button";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Label } from "../ui/label";
+import { Button } from "@/components/ui/button";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 
 interface BusinessRoleDefinitionProps {
   onSelectApprovers?: () => void;

@@ -6,40 +6,32 @@ import VerificationLayout from "./shared/VerificationLayout";
 import Toolbar from "./Toolbar";
 import { Button } from "../ui/button";
 
-const FaceVerificationStep: React.FC = () => {
+interface FaceVerificationStepProps {
+  onContinue?: () => void;
+  onCancel?: () => void;
+}
+
+const FaceVerificationStep: React.FC<FaceVerificationStepProps> = ({ onContinue, onCancel }) => {
   const handleContinue = () => {
-    // Redirect to verification partner
     console.log("Redirecting to verification partner...");
+    onContinue?.();
   };
 
   const handleCancel = () => {
-    // Cancel verification process
     console.log("Verification cancelled");
+    onCancel?.();
   };
 
   return (
     <>
-      <div className="bg-primary-dark">
-        <div className="page-container">
-          <Toolbar
-            userName="Identity Verification"
-            action={{
-              type: "button",
-              label: "Exit",
-              onClick: () => console.log("Exit clicked"),
-            }}
-          />
-        </div>
-      </div>
-
       <div className="page-container py-10">
         <div className="w-full md:max-w-[526px]">
           {/* Icon */}
-            <div className="mb-4">
+          <div className="mb-4">
             <div className="w-14 h-14 bg-blue-600 rounded-xl flex items-center justify-center">
-                <ScanFace className="w-8 h-8 text-white" />
+              <ScanFace className="w-8 h-8 text-white" />
             </div>
-            </div>
+          </div>
 
           {/* Heading */}
           <h1 className="text-lg font-medium text-secondary mb-3">
@@ -85,10 +77,10 @@ const FaceVerificationStep: React.FC = () => {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">
             <Button variant="outline" onClick={handleCancel} className="flex-1">
-                CANCEL
+              CANCEL
             </Button>
             <Button onClick={handleContinue} className="flex-1">
-                CONTINUE
+              CONTINUE
             </Button>
           </div>
         </div>

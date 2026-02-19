@@ -6,35 +6,27 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import Qrmobile from "@/assets/images/qr/qr_mobile.png"
 
-const QRMobileVerification: React.FC = () => {
+interface QRMobileVerificationProps {
+  onContinueOnDevice?: () => void;
+  onCancel?: () => void;
+}
+
+const QRMobileVerification: React.FC<QRMobileVerificationProps> = ({ onContinueOnDevice, onCancel }) => {
   const handleContinueOnDevice = () => {
-    // Continue on current device
     console.log("Continue on current device...");
+    onContinueOnDevice?.();
   };
 
   const handleCancel = () => {
-    // Cancel verification process
     console.log("Verification cancelled");
+    onCancel?.();
   };
 
   return (
     <>
-      <div className="bg-primary-dark">
-        <div className="page-container">
-          <Toolbar
-            userName="Identity Verification"
-            action={{
-              type: "button",
-              label: "Exit",
-              onClick: () => console.log("Exit clicked"),
-            }}
-          />
-        </div>
-      </div>
-
       <div className="page-container py-10">
         <div className="w-full md:max-w-md mx-auto text-center">
- 
+
           {/* Heading */}
           <h1 className="text-lg font-medium text-secondary mb-3">
             Continue verification on your phone

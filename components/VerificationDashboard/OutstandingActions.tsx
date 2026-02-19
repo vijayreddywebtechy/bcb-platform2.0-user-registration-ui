@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import ActionCard from "../dynamic/cards/ActionCard";
+import ActionCard from "@/components/dynamic/cards/ActionCard";
 import Toolbar from "./Toolbar";
 import { User, ScanFace, Link2 } from "lucide-react";
-type Props = {};
+type Props = {
+  onIdentityVerificationClick?: () => void;
+};
 
-function ConfirmIdentity({ }: Props) {
+function OutstandingActions({ onIdentityVerificationClick }: Props) {
   const [visibleCards, setVisibleCards] = useState([1, 2, 3]);
 
   const steps = [
@@ -41,7 +43,9 @@ function ConfirmIdentity({ }: Props) {
 
   const handleStepClick = (stepNumber: number) => {
     console.log(`Step ${stepNumber} clicked`);
-    // Add your navigation or action logic here
+    if (stepNumber === 2) {
+      onIdentityVerificationClick?.();
+    }
   };
 
   const handleClose = (stepNumber: number) => {
@@ -98,4 +102,4 @@ function ConfirmIdentity({ }: Props) {
   );
 }
 
-export default ConfirmIdentity;
+export default OutstandingActions;

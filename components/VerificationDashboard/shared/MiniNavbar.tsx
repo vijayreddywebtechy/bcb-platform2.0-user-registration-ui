@@ -1,9 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import { Share2, Phone } from "lucide-react";
 import Image from "next/image";
-import icnTelescope from "@/assets/images/icons/icn_telescope.png";
-import icnPhone from "@/assets/images/icons/icn_phone.png";
+import icnTelescope from "@/assets/images/icons/icn_telescope.svg";
+import icnCallCentre from "@/assets/images/icons/icn_call_centre.svg";
 import icnLanguage from "@/assets/images/icons/icn_sa_lang_icon.png"
 
 const MiniNavbar: React.FC = () => {
@@ -25,7 +24,7 @@ const MiniNavbar: React.FC = () => {
           className="flex items-center gap-2 text-white text-xs hover:text-gray-200 transition-colors"
         >
           <span>Contact Us</span>
-          <Image src={icnPhone} alt="Phone Icon" width={16} height={16} />
+          <Image src={icnCallCentre} alt="Phone Icon" width={16} height={16} />
         </Link>
 
         {/* Country Flag */}

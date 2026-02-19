@@ -1,8 +1,9 @@
 "use client";
 
-import React from "react";
-import { Link2, Info, CheckCircle, Clock, Check } from "lucide-react";
-import { Button } from "../ui/button";
+import { Link2, Info, Clock, Check } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import router from "next/router";
+import { useRouter } from "next/navigation";
 
 interface ApproverStatus {
   id: string;
@@ -43,11 +44,14 @@ function BusinessApprovalStatus({ onDone }: BusinessApprovalStatusProps) {
       approvalStatus: "pending",
     },
   ];
+  const router = useRouter();
 
   const handleDone = () => {
     console.log("Done clicked");
     onDone?.();
+    router.push("/dashboard");
   };
+
 
   return (
     <>
@@ -73,7 +77,7 @@ function BusinessApprovalStatus({ onDone }: BusinessApprovalStatusProps) {
         {approvers.map((approver) => (
           <div key={approver.id} className="flex items-center gap-4 border-b border-dashed border-gray-200 pb-6">
             {/* Avatar */}
-            <div className="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center flex-shrink-0">
+            <div className={`w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center flex-shrink-0 ${approver.approvalStatus === "approved" ? "bg-green-600/30" : "bg-blue-200"}`}>
               <span className="text-secondary font-medium text-lg">
                 {approver.initials}
               </span>
@@ -83,31 +87,30 @@ function BusinessApprovalStatus({ onDone }: BusinessApprovalStatusProps) {
             <div className="flex-1 space-y-2">
               {/* Name and Role */}
               <div>
-                <p className="text-secondary font-medium text-base">
+                <p className="text-secondary font-medium text-base md:text-lg mb-2">
                   {approver.name}
                 </p>
-                <p className="text-sm text-secondary">Role - {approver.role}</p>
+                <p className="text-xs text-secondary">Role - {approver.role}</p>
               </div>
 
               {/* Contact Details */}
-              <div className="space-y-1">
-                <p className="text-sm text-secondary">
+              <div className="space-y-2">
+                <p className="text-xs text-secondary">
                   Mobile Number - <span className="font-medium">{approver.mobileNumber}</span>
                 </p>
-                <p className="text-sm text-secondary">
+                <p className="text-xs text-secondary">
                   Email Address - <span className="font-medium">{approver.email}</span>
                 </p>
-                <p className="text-sm text-secondary">
+                <p className="text-xs text-secondary">
                   Role/Permissions - <span className="font-medium">{approver.permissions}</span>
                 </p>
-                <p className="text-sm text-secondary">
+                <p className="text-xs text-secondary">
                   Approval Status -{" "}
                   <span
-                    className={`font-medium ${
-                      approver.approvalStatus === "approved"
-                        ? "text-green-600"
-                        : "text-blue-600"
-                    }`}
+                    className={`font-medium ${approver.approvalStatus === "approved"
+                      ? "text-green-600"
+                      : "text-blue-600"
+                      }`}
                   >
                     {approver.approvalStatus === "approved" ? "Approved" : "Pending"}
                   </span>
@@ -119,7 +122,7 @@ function BusinessApprovalStatus({ onDone }: BusinessApprovalStatusProps) {
             <div className="flex-shrink-0">
               {approver.approvalStatus === "approved" ? (
                 <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center">
-                    <Check className="text-white w-4 h-4" />
+                  <Check className="text-white w-4 h-4" />
                 </div>
               ) : (
                 <Clock className="w-6 h-6 text-blue-600" strokeWidth={1.5} />
@@ -143,8 +146,11 @@ function BusinessApprovalStatus({ onDone }: BusinessApprovalStatusProps) {
 
       {/* Action Button */}
       <div className="flex flex-col sm:flex-row gap-4">
-        <Button variant="outline" onClick={handleDone}>
+        <Button variant="outline" onClick={handleDone} className="min-w-64">
           DONE FOR NOW
+        </Button>
+        <Button onClick={handleDone} className="min-w-64">
+          LOAD MY DASHBOARD
         </Button>
       </div>
     </>
