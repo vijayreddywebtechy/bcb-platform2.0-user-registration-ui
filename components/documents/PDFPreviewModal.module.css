@@ -19,12 +19,120 @@
   position: relative;
   width: 100%;
   max-width: 900px;
-  background: #3D3D3D;
+  background: transparent;
   border-radius: 0;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   max-height: 90vh;
-  overflow-y: auto;
+  overflow: hidden;
   margin: auto;
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==================== PDF VIEWER HEADER ==================== */
+
+.pdfHeader {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #4A4A4A;
+  padding: 10px 16px;
+  height: 48px;
+  border-bottom: 1px solid #333333;
+  margin-top: 8px;
+  flex-shrink: 0;
+}
+
+.pdfHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.pdfHeaderCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.pdfHeaderRight {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+}
+
+.headerIconButton {
+  background: transparent;
+  border: none;
+  color: #E5E5E5;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  transition: all 0.15s;
+  min-width: 34px;
+  height: 34px;
+}
+
+.headerIconButton:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+}
+
+.headerIconButton:active {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.headerIcon {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.5;
+}
+
+.documentId {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  color: #FFFFFF;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px;
+}
+
+.pageNavigation {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  color: #FFFFFF;
+  padding: 0 16px;
+  white-space: nowrap;
+}
+
+.zoomPercentage {
+  font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  color: #FFFFFF;
+  min-width: 48px;
+  text-align: center;
+}
+
+.headerDivider {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 0 4px;
 }
 
 /* ==================== CLOSE BUTTON ==================== */
@@ -35,19 +143,20 @@
   right: 0;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   padding: 12px 24px;
   background: var(--secondary-color, #0051FF);
   color: #FFFFFF;
   border: none;
-  border-radius: 0;
+  border-radius: 6px;
   font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
   font-weight: 700;
   font-size: 12px;
   letter-spacing: 0.5px;
   cursor: pointer;
-  z-index: 10;
+  z-index: 30;
   transition: background-color 0.2s;
+  height: 42px;
 }
 
 .closeButton:hover {
@@ -55,8 +164,8 @@
 }
 
 .closeIcon {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
 }
 
 /* ==================== PDF CONTENT ==================== */
@@ -64,8 +173,11 @@
 .pdfContent {
   padding: 60px 40px 40px 40px;
   background: #FFFFFF;
-  margin: 50px 80px;
-  min-height: calc(100vh - 100px);
+  margin: 0 0 0 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+  flex: 1;
+  height: 0;
 }
 
 /* ==================== STATEMENT HEADER ==================== */
@@ -74,18 +186,24 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 40px;
-  padding-bottom: 20px;
-  gap: 20px;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  gap: 24px;
+  border-bottom: 1px solid #E5E7EB;
 }
 
 .headerLeft {
   flex: 1;
+  min-width: 0;
 }
 
 .headerCenter {
   flex: 1;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 4px;
 }
 
 .headerRight {
@@ -96,20 +214,21 @@
 .bankLogo {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
 .bankName {
   font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
   color: var(--primary-color, #0033AA);
   margin: 0;
+  line-height: 1.2;
 }
 
 .addressBlock {
-  margin-top: 8px;
+  margin-top: 6px;
 }
 
 .addressTitle {
@@ -118,7 +237,8 @@
   font-size: 9px;
   color: #000000;
   margin: 0 0 2px 0;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
 }
 
 .addressLine {
@@ -127,16 +247,17 @@
   font-size: 8px;
   color: #000000;
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .centerTitle {
   font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
   font-weight: 700;
-  font-size: 10px;
+  font-size: 11px;
   color: #000000;
-  margin: 0 0 12px 0;
+  margin: 0;
   letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .customerCareLabel {
@@ -144,8 +265,8 @@
   font-weight: 400;
   font-size: 8px;
   color: #000000;
-  margin: 0 0 4px 0;
-  line-height: 1.5;
+  margin: 0;
+  line-height: 1.6;
 }
 
 .customerCareValue {
@@ -158,6 +279,7 @@
   font-size: 8px;
   color: #000000;
   margin: 0;
+  line-height: 1.6;
 }
 
 /* ==================== CUSTOMER INFO ==================== */
@@ -166,22 +288,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
+  padding: 8px 0;
 }
 
 .customerName {
   font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
   font-weight: 700;
-  font-size: 11px;
+  font-size: 10px;
   color: #000000;
   margin: 0;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
 }
 
 .statementDate {
   font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
   font-weight: 400;
-  font-size: 10px;
+  font-size: 9px;
   color: #000000;
   margin: 0;
 }
@@ -191,30 +315,40 @@
 .statementDetails {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
+  padding: 8px 0;
+  border-bottom: 1px solid #E5E7EB;
+  padding-bottom: 16px;
 }
 
 .statementLeft {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .statementRight {
   flex: 1;
   text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .statementBranch {
   font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
   font-weight: 700;
-  font-size: 10px;
+  font-size: 9px;
   color: #000000;
-  margin: 0 0 4px 0;
+  margin: 0;
+  text-transform: uppercase;
 }
 
 .statementType {
   font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
   font-weight: 700;
-  font-size: 10px;
+  font-size: 9px;
   color: #000000;
   margin: 0;
   text-transform: uppercase;
@@ -225,10 +359,10 @@
 .frequency {
   font-family: var(--font-bspro), 'Benton Sans Pro', sans-serif;
   font-weight: 400;
-  font-size: 9px;
+  font-size: 8px;
   color: #000000;
-  margin: 0 0 2px 0;
-  line-height: 1.4;
+  margin: 0;
+  line-height: 1.6;
 }
 
 /* ==================== STATEMENT TABLE ==================== */
@@ -374,7 +508,23 @@
 
 @media (max-width: 1024px) {
   .pdfContent {
-    margin: 50px 40px;
+    margin: 0;
+  }
+  
+  .documentId {
+    max-width: 180px;
+    font-size: 12px;
+  }
+  
+  .headerIconButton {
+    padding: 7px;
+    min-width: 32px;
+    height: 32px;
+  }
+  
+  .headerIcon {
+    width: 18px;
+    height: 18px;
   }
 }
 
@@ -384,9 +534,59 @@
     max-height: 95vh;
   }
 
+  .pdfHeader {
+    padding: 8px 12px;
+    height: 44px;
+    flex-wrap: nowrap;
+  }
+
+  .pdfHeaderLeft {
+    gap: 8px;
+    min-width: 120px;
+  }
+
+  .documentId {
+    font-size: 11px;
+    max-width: 120px;
+  }
+
+  .pageNavigation {
+    font-size: 12px;
+    padding: 0 8px;
+  }
+
+  .zoomPercentage {
+    font-size: 12px;
+    min-width: 42px;
+  }
+
+  .pdfHeaderRight {
+    gap: 2px;
+  }
+
+  .headerIconButton {
+    padding: 6px;
+    min-width: 30px;
+    height: 30px;
+  }
+
+  .headerIcon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .headerDivider {
+    height: 20px;
+    margin: 0 2px;
+  }
+
   .pdfContent {
     padding: 50px 20px 20px 20px;
-    margin: 50px 20px;
+    margin: 0;
+  }
+  
+  .pdfHeader {
+    margin-top: 6px;
   }
 
   .statementHeader {
@@ -424,9 +624,19 @@
     font-size: 7px;
   }
 
+  .modalContainer {
+    padding-top: 44px;
+  }
+
   .closeButton {
-    padding: 10px 16px;
+    padding: 8px 14px;
     font-size: 11px;
+    height: 44px;
+  }
+  
+  .closeIcon {
+    width: 16px;
+    height: 16px;
   }
 
   .accountRow {
