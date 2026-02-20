@@ -94,6 +94,14 @@
 .pageHeader {
   color: white;
   margin-bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.headerLeft {
+  flex: 1;
 }
 
 .pageTitle {
@@ -114,6 +122,33 @@
   font-weight: 400;
   line-height: 1.5;
   opacity: 0.95;
+}
+
+/* Transact Button */
+.transactButton {
+  background: #0062E1;
+  color: #FFFFFF;
+  border: none;
+  padding: 12px 32px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Benton Sans Pro', sans-serif;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.transactButton:hover {
+  background: #0051CC;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.transactButton:active {
+  transform: translateY(0);
 }
 
 /* Controls - Filter Section */
@@ -676,12 +711,23 @@
     height: 14px;
   }
 
+  .pageHeader {
+    flex-direction: column;
+    gap: 16px;
+  }
+
   .pageTitle {
     font-size: 28px;
   }
 
   .pageSubtitle {
     font-size: 14px;
+  }
+
+  .transactButton {
+    align-self: flex-start;
+    padding: 10px 24px;
+    font-size: 13px;
   }
 
   .controls {

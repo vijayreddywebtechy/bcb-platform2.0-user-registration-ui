@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Search, ChevronRight, LayoutGrid, List } from "lucide-react";
 import icnHomeWhite from "@/assets/images/icons/icn_home_white.svg";
+import ExitBusinessHubModal from "@/components/modals/ExitBusinessHubModal";
 import styles from "./AccountsPage.module.css";
 
 // Mock account data
@@ -81,8 +82,19 @@ export default function AccountsPage() {
   const [accountType, setAccountType] = useState("All Accounts");
   const [searchQuery, setSearchQuery] = useState("");
   const [viewMode, setViewMode] = useState<ViewMode>("list");
+  const [isExitModalOpen, setIsExitModalOpen] = useState(false);
 
   const totalAccounts = CURRENT_ACCOUNTS.length + SAVINGS_ACCOUNTS.length;
+
+  const handleTransactClick = () => {
+    setIsExitModalOpen(true);
+  };
+
+  const handleLeave = () => {
+    setIsExitModalOpen(false);
+    // Redirect to Online Banking for Business
+    window.location.href = "https://onlinebanking.standardbank.co.za";
+  };
 
   return (
     <div className={styles.pageWrapper}>
@@ -106,8 +118,17 @@ export default function AccountsPage() {
 
           {/* Page Header */}
           <div className={styles.pageHeader}>
-            <h1 className={styles.pageTitle}>Accounts</h1>
-            <p className={styles.pageSubtitle}>Get your accounts and balances</p>
+            <div className={styles.headerLeft}>
+              <h1 className={styles.pageTitle}>Accounts</h1>
+              <p className={styles.pageSubtitle}>Get your accounts and balances</p>
+            </div>
+            <button
+              type="button"
+              onClick={handleTransactClick}
+              className={styles.transactButton}
+            >
+              TRANSACT
+            </button>
           </div>
         </div>
       </div>
@@ -334,6 +355,13 @@ export default function AccountsPage() {
         </div>
         </div>
       </div>
+
+      {/* Exit Business Hub Modal */}
+      <ExitBusinessHubModal
+        isOpen={isExitModalOpen}
+        onClose={() => setIsExitModalOpen(false)}
+        onLeave={handleLeave}
+      />
     </div>
   );
 }

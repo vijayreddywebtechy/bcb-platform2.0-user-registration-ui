@@ -69,6 +69,10 @@ export default function DashboardHeader() {
     router.push("/auth/signin");
   };
 
+  const handleProfileClick = () => {
+    router.push("/manage-profile");
+  };
+
   return (
     <>
       {/* Top bar - dark blue */}
@@ -167,6 +171,7 @@ export default function DashboardHeader() {
             <IconButtonWithTooltip
               icon="/assets/images/icons/icn_people_profile.svg"
               tooltip="Profile"
+              onClick={handleProfileClick}
             />
             <IconButtonWithTooltip
               icon="/assets/images/icons/icn_building.svg"

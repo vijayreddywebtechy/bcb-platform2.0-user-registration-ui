@@ -1,0 +1,168 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal {
+  background: white;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 560px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 24px 16px 24px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.closeButton:hover {
+  opacity: 0.7;
+}
+
+.content {
+  padding: 48px 32px;
+  text-align: center;
+}
+
+.iconWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.heading {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 16px 0;
+}
+
+.description {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+  padding: 0 24px 24px 24px;
+}
+
+.stayButton,
+.leaveButton {
+  flex: 1;
+  padding: 14px 24px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.stayButton {
+  background: white;
+  color: #0062E1;
+  border: 2px solid #0062E1;
+}
+
+.stayButton:hover {
+  background: #f0f5ff;
+}
+
+.leaveButton {
+  background: #0062E1;
+  color: white;
+  border: 2px solid #0062E1;
+}
+
+.leaveButton:hover {
+  background: #0051CC;
+  border-color: #0051CC;
+}
+
+@media (max-width: 640px) {
+  .modal {
+    max-width: 100%;
+    margin: 20px;
+  }
+
+  .header {
+    padding: 20px 20px 12px 20px;
+  }
+
+  .content {
+    padding: 32px 20px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .heading {
+    font-size: 20px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .actions {
+    flex-direction: column;
+    padding: 0 20px 20px 20px;
+  }
+
+  .stayButton,
+  .leaveButton {
+    width: 100%;
+  }
+}
