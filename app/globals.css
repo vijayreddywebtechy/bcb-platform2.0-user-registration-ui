@@ -1,7 +1,10 @@
+/* Swiper CSS */
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 html,
 body {

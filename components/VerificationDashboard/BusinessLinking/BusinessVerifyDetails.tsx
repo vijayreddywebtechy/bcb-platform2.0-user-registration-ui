@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Link2, Info, Check } from "lucide-react";
+import { Link2, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface ApproverDetail {
@@ -9,8 +9,9 @@ interface ApproverDetail {
   name: string;
   role: string;
   initials: string;
-  mobileNumber: string;
+  mobile: string;
   email: string;
+  profile: string;
   permissions: string;
 }
 
@@ -23,30 +24,31 @@ function BusinessVerifyDetails({
   onRequestApproval,
   onBack,
 }: BusinessVerifyDetailsProps) {
-  // Mock data for approvers - in real app, this would come from props or state
   const approvers: ApproverDetail[] = [
     {
       id: "1",
       name: "Jonathan Khumalo",
       role: "Director, Member",
       initials: "JK",
-      mobileNumber: "079 123 4567",
-      email: "jonathan.khumalo@company.com",
-      permissions: "Administrator (Full Access)",
+      mobile: "*** *** 4567",
+      email: "jo*****.kh*****@abc******tects.co.za",
+      profile: "Digital ID, Active",
+      permissions: "Admin/Owner (Full Access)",
     },
     {
       id: "2",
       name: "Seth Naidoo",
       role: "Director, Member",
       initials: "SN",
-      mobileNumber: "079 123 4567",
-      email: "seth.naidoo@company.com",
+      mobile: "*** *** 4567",
+      email: "se*****.na*****@abc******tects.co.za",
+      profile: "Digital ID, Active",
       permissions: "Approver",
     },
   ];
 
   const handleRequestApproval = () => {
-    console.log("Request approval clicked", { approvers });
+    console.log("Send request clicked", { approvers });
     onRequestApproval?.();
   };
 
@@ -56,7 +58,7 @@ function BusinessVerifyDetails({
   };
 
   return (
-    <>
+    <div className="w-full lg:max-w-[640px]">
       {/* Icon */}
       <div className="mb-4">
         <div className="w-14 h-14 bg-blue-600 rounded-xl flex items-center justify-center">
@@ -65,53 +67,70 @@ function BusinessVerifyDetails({
       </div>
 
       {/* Heading */}
-      <h1 className="text-xl font-medium text-secondary mb-2">
-        Verify Details & Send Invite
+      <h1 className="text-xl md:text-2xl font-bold text-secondary mb-2">
+        Confirm Details &amp; Send Request
       </h1>
 
       {/* Subtitle */}
-      <p className="text-secondary mb-8 leading-relaxed">
-        Details will be validated against our records and CIPC.
+      <p className="text-sm text-secondary mb-6 leading-relaxed">
+        Request will be sent to the following approvers
       </p>
 
       {/* Approvers List */}
-      <div className="space-y-6 mb-6">
+      <div className="divide-y divide-neutral-200 mb-6">
         {approvers.map((approver) => (
-          <div key={approver.id} className="flex items-center gap-4 border-b border-dashed border-gray-200 pb-6">
+          <div key={approver.id} className="flex items-start gap-4 py-5">
             {/* Avatar */}
-            <div className="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center flex-shrink-0">
+            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
               <span className="text-secondary font-medium text-lg">
                 {approver.initials}
               </span>
             </div>
 
             {/* Details */}
-            <div className="flex-1 space-y-1">
-              {/* Name and Role */}
-              <div>
-                <p className="text-secondary font-medium text-base mb-1">
-                  {approver.name}
-                </p>
-                <p className="text-sm text-secondary">Role - {approver.role}</p>
-              </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-secondary font-medium text-lg leading-tight">
+                {approver.name}
+              </p>
+              <p className="text-xs font-medium text-secondary mt-2 mb-3">
+                {approver.role}
+              </p>
 
-              {/* Contact Details */}
-              <div className="space-y-1">
-                <p className="text-sm text-secondary">
-                  Mobile Number - <span className="font-medium">{approver.mobileNumber}</span>
-                </p>
-                <p className="text-sm text-secondary">
-                  Email Address - <span className="font-medium">{approver.email}</span>
-                </p>
-                <p className="text-sm text-secondary">
-                  Role/Permissions - <span className="font-medium">{approver.permissions}</span>
-                </p>
+              {/* Info Grid */}
+              <div className="space-y-2">
+                <div className="flex gap-6">
+                  <span className="text-xs text-secondary w-32 shrink-0">
+                    Mobile Number
+                  </span>
+                  <span className="text-xs font-medium text-secondary">
+                    {approver.mobile}
+                  </span>
+                </div>
+                <div className="flex gap-6">
+                  <span className="text-xs text-secondary w-32 shrink-0">
+                    Email Address
+                  </span>
+                  <span className="text-xs font-medium text-secondary">
+                    {approver.email}
+                  </span>
+                </div>
+                <div className="flex gap-6">
+                  <span className="text-xs text-secondary w-32 shrink-0">
+                    Profile
+                  </span>
+                  <span className="text-xs font-medium text-green-600">
+                    {approver.profile}
+                  </span>
+                </div>
+                <div className="flex gap-6">
+                  <span className="text-xs text-secondary w-32 shrink-0">
+                    Role &amp; Permissions
+                  </span>
+                  <span className="text-xs font-medium text-secondary">
+                    {approver.permissions}
+                  </span>
+                </div>
               </div>
-            </div>
-
-            {/* Status Icon */}
-            <div className="flex-shrink-0">
-              <Check className="w-6 h-6 text-green-600" strokeWidth={1.5} />
             </div>
           </div>
         ))}
@@ -123,9 +142,9 @@ function BusinessVerifyDetails({
           <div className="flex-shrink-0 mt-0.5">
             <Info className="w-5 h-5 text-white fill-primary-dark" />
           </div>
-          <div className="text-sm text-secondary leading-relaxed">
+          <p className="text-sm text-secondary leading-relaxed">
             Please ensure all information is correct before continuing.
-          </div>
+          </p>
         </div>
       </div>
 
@@ -135,10 +154,10 @@ function BusinessVerifyDetails({
           BACK
         </Button>
         <Button onClick={handleRequestApproval} className="sm:flex-1">
-          REQUEST APPROVAL
+          SEND REQUEST
         </Button>
       </div>
-    </>
+    </div>
   );
 }
 

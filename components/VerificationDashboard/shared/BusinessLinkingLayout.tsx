@@ -42,7 +42,7 @@ export default function BusinessLinkingLayout({
       </div>
       <main className="flex-1">
         <div className="bg-primary-dark">
-          <div className="page-container">  
+          <div className="page-container">
             {/* Toolbar */}
             <Toolbar
               userName="Business Linking"
@@ -60,7 +60,7 @@ export default function BusinessLinkingLayout({
           <div className="py-10">
             <div className="flex flex-col lg:flex-row justify-between gap-8">
               {/* Main Content */}
-              <div className="flex-1 w-full lg:max-w-[600px]">
+              <div className="flex-1 w-full">
                 {children}
               </div>
 

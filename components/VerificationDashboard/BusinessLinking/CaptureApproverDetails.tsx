@@ -1,18 +1,21 @@
 "use client";
 
 import React, { useState } from "react";
-import { Link2, Info, ChevronDown, ChevronUp } from "lucide-react";
+import { Link2, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { FloatingSelect, SelectOption } from "@/components/ui/FloatingReactSelect";
-import { FloatingTextField } from "@/components/ui/FloatingTextField";
+import {
+  FloatingSelect,
+  SelectOption,
+} from "@/components/ui/FloatingReactSelect";
 
 interface Approver {
   id: string;
   name: string;
   role: string;
   initials: string;
-  mobileNumber: string;
+  mobile: string;
   email: string;
+  profile: string;
   permissions: SelectOption | null;
 }
 
@@ -21,11 +24,12 @@ interface CaptureApproverDetailsProps {
   onBack?: () => void;
 }
 
-const roleOptions = [
-  { value: "admin-full", label: "Administrator (Full Access)" },
-  { value: "admin-limited", label: "Administrator (Limited Access)" },
-  { value: "viewer", label: "Viewer (Read Only)" },
+const roleOptions: SelectOption[] = [
+  { value: "admin-owner", label: "Admin/Owner (Full Access)" },
+  { value: "initiator", label: "Initiator/Capturer" },
   { value: "approver", label: "Approver" },
+  { value: "releaser", label: "Releaser" },
+  { value: "viewer", label: "Viewer" },
 ];
 
 function CaptureApproverDetails({
@@ -38,43 +42,33 @@ function CaptureApproverDetails({
       name: "Jonathan Khumalo",
       role: "Director, Member",
       initials: "JK",
-      mobileNumber: "079 123 4567",
-      email: "jonathan.khumalo@company.com",
-      permissions: { value: "admin-full", label: "Administrator (Full Access)" },
+      mobile: "*** *** 4567",
+      email: "jo*****.kh*****@abc******tects.co.za",
+      profile: "Digital ID, Active",
+      permissions: { value: "admin-owner", label: "Admin/Owner (Full Access)" },
     },
     {
       id: "2",
       name: "Seth Naidoo",
       role: "Director, Member",
       initials: "SN",
-      mobileNumber: "",
-      email: "",
-      permissions: null,
+      mobile: "*** *** 4567",
+      email: "se**.na*****@abc******tects.co.za",
+      profile: "Digital ID, Active",
+      permissions: { value: "approver", label: "Approver" },
     },
   ]);
 
-  const [expandedApprovers, setExpandedApprovers] = useState<string[]>(["1"]);
-
-  const toggleApprover = (id: string) => {
-    setExpandedApprovers((prev) =>
-      prev.includes(id) ? prev.filter((appId) => appId !== id) : [...prev, id]
-    );
-  };
-
-  const updateApprover = (
-    id: string,
-    field: keyof Approver,
-    value: string | { value: string; label: string } | null
-  ) => {
+  const updatePermissions = (id: string, value: SelectOption | null) => {
     setApprovers((prev) =>
       prev.map((approver) =>
-        approver.id === id ? { ...approver, [field]: value } : approver
+        approver.id === id ? { ...approver, permissions: value } : approver
       )
     );
   };
 
   const handleVerifyDetails = () => {
-    console.log("Verify details clicked", { approvers });
+    console.log("Confirm details clicked", { approvers });
     onVerifyDetails?.();
   };
 
@@ -83,10 +77,8 @@ function CaptureApproverDetails({
     onBack?.();
   };
 
-
-
   return (
-    <>
+    <div className="w-full lg:max-w-[640px]">
       {/* Icon */}
       <div className="mb-4">
         <div className="w-14 h-14 bg-blue-600 rounded-xl flex items-center justify-center">
@@ -95,98 +87,80 @@ function CaptureApproverDetails({
       </div>
 
       {/* Heading */}
-      <h1 className="text-xl font-medium text-secondary mb-2">
-        Capture Approver Details
+      <h1 className="text-xl md:text-2xl font-bold text-secondary mb-2">
+        Capture Approver Roles
       </h1>
 
       {/* Subtitle */}
-      <p className="text-secondary mb-8 leading-relaxed">
+      <p className="text-sm text-secondary mb-6 leading-relaxed">
         Details will be validated against our records and CIPC.
       </p>
 
       {/* Approvers List */}
-      <div className="space-y-4 mb-6">
-        {approvers.map((approver) => {
-          const isExpanded = expandedApprovers.includes(approver.id);
+      <div className="divide-y divide-neutral-200 mb-6">
+        {approvers.map((approver) => (
+          <div key={approver.id} className="py-6">
+            {/* Avatar + Name */}
+            <div className="flex items-start gap-4 mb-4">
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="text-secondary font-medium text-lg">
+                  {approver.initials}
+                </span>
+              </div>
+              <div>
+                <p className="text-secondary font-medium text-lg leading-tight">
+                  {approver.name}
+                </p>
+                <p className="text-xs font-medium text-secondary mt-2">
+                  {approver.role}
+                </p>
 
-          return (
-            <div
-              key={approver.id}
-              className="border-b border-neutral-200"
-            >
-              {/* Approver Header */}
-              <button
-                onClick={() => toggleApprover(approver.id)}
-                className="w-full flex items-center justify-between gap-4 py-4 mb-3 bg-white hover:bg-gray-50 transition-colors"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-secondary font-medium text-lg">
-                      {approver.initials}
+                {/* Info Grid */}
+                <div className="space-y-2 mt-3">
+                  <div className="flex gap-6">
+                    <span className="text-xs text-secondary w-32 shrink-0">
+                      Mobile Number
+                    </span>
+                    <span className="text-xs font-medium text-secondary">
+                      {approver.mobile}
                     </span>
                   </div>
-
-
-                  <div className="text-left">
-                    <p className="text-secondary font-medium text-base">
-                      {approver.name}
-                    </p>
-                    <p className="text-sm text-secondary">Role - {approver.role}</p>
+                  <div className="flex gap-6">
+                    <span className="text-xs text-secondary w-32 shrink-0">
+                      Email Address
+                    </span>
+                    <span className="text-xs font-medium text-secondary">
+                      {approver.email}
+                    </span>
                   </div>
-                </div>
-                {isExpanded ? (
-                  <ChevronUp className="w-6 h-6 text-secondary flex-shrink-0" strokeWidth={1.5} />
-                ) : (
-                  <ChevronDown className="w-6 h-6 text-secondary flex-shrink-0" strokeWidth={1.5} />
-                )}
-              </button>
-
-              {/* Approver Details Form */}
-              {isExpanded && (
-                <div className="py-4 pt-0 space-y-6 bg-white mb-5">
-                  {/* Mobile Number */}
-                  <FloatingTextField
-                    label="Mobile Number"
-                    type="tel"
-                    placeholder="079 123 4567"
-                    value={approver.mobileNumber}
-                    onChange={(e) =>
-                      updateApprover(approver.id, "mobileNumber", e.target.value)
-                    }
-                    helperText="*Required"
-                  />
-
-                  {/* Email Address */}
-                  <FloatingTextField
-                    label="Email Address"
-                    type="email"
-                    placeholder="jonathan.khumalo@company.com"
-                    value={approver.email}
-                    onChange={(e) =>
-                      updateApprover(approver.id, "email", e.target.value)
-                    }
-                    helperText="*Required"
-                  />
-
-                  {/* Role/Permissions */}
-                  <div>
+                  <div className="flex gap-6">
+                    <span className="text-xs text-secondary w-32 shrink-0">
+                      Profile
+                    </span>
+                    <span className="text-xs font-medium text-green-600">
+                      {approver.profile}
+                    </span>
+                  </div>
+                  {/* Role/Permissions Dropdown */}
+                  <div className="!mt-5 w-full md:w-[300px]">
                     <FloatingSelect
-                      label="Role/Permissions"
+                      label="Role/Permissions*"
                       options={roleOptions}
                       value={approver.permissions}
                       onChange={(selectedOption) =>
-                        updateApprover(approver.id, "permissions", selectedOption)
+                        updatePermissions(approver.id, selectedOption)
                       }
                       placeholder="Select role/permissions"
                     />
                     <p className="text-xs text-secondary mt-1">*Required</p>
                   </div>
-
                 </div>
-              )}
+              </div>
             </div>
-          );
-        })}
+
+
+          </div>
+        ))}
       </div>
 
       {/* Info Box */}
@@ -195,9 +169,9 @@ function CaptureApproverDetails({
           <div className="flex-shrink-0 mt-0.5">
             <Info className="w-5 h-5 text-white fill-primary-dark" />
           </div>
-          <div className="text-sm text-secondary leading-relaxed">
+          <p className="text-sm text-secondary leading-relaxed">
             Please ensure all information is correct before continuing.
-          </div>
+          </p>
         </div>
       </div>
 
@@ -207,10 +181,10 @@ function CaptureApproverDetails({
           BACK
         </Button>
         <Button onClick={handleVerifyDetails} className="sm:flex-1">
-          VERIFY DETAILS
+          CONFIRM DETAILS
         </Button>
       </div>
-    </>
+    </div>
   );
 }
 
