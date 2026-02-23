@@ -67,20 +67,20 @@ function MyLinks({}: Props) {
               key={link.id}
               className="w-full flex items-center justify-between p-4 bg-white rounded-lg hover:bg-blue-50 transition-colors group"
             >
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center">
-                  <Icon className="w-5 h-5 text-primary" strokeWidth={1.5} />
+              <div className="flex items-center gap-2">
+                <div className="w-10 h-10 rounded-full group-hover:bg-blue-200 flex items-center justify-center">
+                  <Icon className="w-6 h-6 text-primary" strokeWidth={1.5} />
                 </div>
                 <div className="text-left">
-                  <h3 className="text-sm font-semibold text-primary">
+                  <h3 className="text-sm font-medium text-primary-dark">
                     {link.title}
                   </h3>
-                  <p className="text-xs text-gray-600">{link.subtitle}</p>
+                  <p className="text-xs text-primary-dark">{link.subtitle}</p>
                 </div>
               </div>
               <ChevronRight
-                className="w-5 h-5 text-gray-400 group-hover:text-primary transition-colors"
-                strokeWidth={2}
+                className="w-8 h-8 text-primary-dark group-hover:text-primary transition-colors"
+                strokeWidth={1.2}
               />
             </button>
           );
@@ -88,9 +88,9 @@ function MyLinks({}: Props) {
       </CardBody>
 
       <CardFooter>
-        <button className="w-full text-center text-sm font-semibold text-primary hover:text-primary-dark transition-colors flex items-center justify-center gap-1">
+        <button className="w-full text-center text-sm font-bold text-primary-dark transition-colors flex items-center justify-center gap-1">
           EDIT LINKS
-          <ChevronRight className="w-4 h-4" strokeWidth={2} />
+          <ChevronRight className="w-6 h-6 -mt-1" strokeWidth={1.2} />
         </button>
       </CardFooter>
     </Card>

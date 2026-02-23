@@ -24,7 +24,7 @@
   color: hsl(213, 50%, 20%); /* secondary - #1A314D */
   background-color: transparent;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   outline: none;
   box-sizing: border-box;
   position: relative;
@@ -63,7 +63,7 @@
   margin: 0;
   padding: 0 8px;
   border: 1px solid hsl(213, 16%, 43%); /* neutral-700 - #5C6C80 */
-  border-radius: 4px;
+  border-radius: 8px;
   pointer-events: none;
   transition: border-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
               border-width 200ms cubic-bezier(0.4, 0, 0.2, 1);

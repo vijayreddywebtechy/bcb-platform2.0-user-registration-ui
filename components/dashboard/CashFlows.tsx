@@ -147,22 +147,22 @@ function CashFlows({}: Props) {
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-7">
           <div className="bg-blue-800 rounded-lg px-4 py-6">
-            <div className="flex items-baseline justify-between mb-2">
-              <span className="text-base text-white/90">Net Cash Flow</span>
+            <div className="flex justify-between mb-2">
+              <span className="text-sm text-white/90">Net Cash Flow</span>
               <Info className="w-4 h-4 text-white/70" strokeWidth={2} />
             </div>
             <p className="text-2xl font-medium text-white">R234,400,698.00</p>
           </div>
 
           <div className="bg-blue-600 rounded-lg p-4">
-            <span className="text-base text-white/90 mb-2 block">
+            <span className="text-sm text-white/90 mb-2 block">
               Total Money In
             </span>
             <p className="text-2xl font-medium text-white">R512,105,821.00</p>
           </div>
 
           <div className="bg-primary-deep rounded-lg p-4">
-            <span className="text-base text-white/90 block mb-2">
+            <span className="text-sm text-white/90 block mb-2">
               Total Money Out
             </span>
             <p className="text-2xl font-medium text-white">R182,821.00</p>

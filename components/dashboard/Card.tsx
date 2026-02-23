@@ -31,8 +31,8 @@ export const CardHeader = ({
       <div
         className={`flex items-center gap-2 border-b border-neutral-200 px-6 py-4 h-[72px] ${className}`}
       >
-        {icon}
-        <h2 className="text-xl font-medium text-primary">{title}</h2>
+        <span className="text-primary-dark">{icon}</span>
+        <h2 className="text-xl font-medium text-primary-dark">{title}</h2>
       </div>
     );
   }

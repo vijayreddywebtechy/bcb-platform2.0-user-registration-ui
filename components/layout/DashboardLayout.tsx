@@ -1,6 +1,7 @@
 import Footer from "./Footer"
 import Header from "./Header"
 import MiniNavbar from "./MiniNavbar";
+import ContactBankerWidget from "@/components/shared/ContactBankerWidget";
 
 type Props = {}
 
@@ -17,6 +18,7 @@ export default function DashboardLayout({
             </div>
             <main className="flex-1">{children}</main>
             <Footer />
+            <ContactBankerWidget />
         </div>
     )
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight, House } from "lucide-react";
@@ -33,6 +34,7 @@ type PageHeaderProps =
         breadcrumbs?: BreadcrumbItem[];
         pageTitle: string;
         pageDescription?: string;
+        pageDescriptionIcon?: React.ReactNode;
         userName?: never;
         organizationName?: never;
         role?: never;
@@ -166,9 +168,16 @@ function PageHeader(props: PageHeaderProps) {
                             {props.pageTitle}
                         </h1>
                         {props.pageDescription && (
-                            <p className="mt-1 text-sm text-blue-50 font-normal">
-                                {props.pageDescription}
-                            </p>
+                            <div className="flex items-center gap-1.5 mt-1">
+                                {props.pageDescriptionIcon && (
+                                    <span className="shrink-0 flex items-center">
+                                        {props.pageDescriptionIcon}
+                                    </span>
+                                )}
+                                <p className="text-sm text-blue-50 font-normal">
+                                    {props.pageDescription}
+                                </p>
+                            </div>
                         )}
                     </div>
                 )}

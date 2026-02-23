@@ -1,23 +1,24 @@
-/* FloatingTextField.module.css - Material Design Outlined TextField Component */
+/* FloatingTextArea.module.css - Material Design Outlined TextArea Component */
 /* Follows Material Design 3 (Material You) specifications */
 
-.textfieldWrapper {
+.textareaWrapper {
   width: 100%;
 }
 
-.textfieldContainer {
+.textareaContainer {
   position: relative;
   width: 100%;
-  height: 48px;
+  min-height: 100px;
 }
 
 /* ============================================
-   INPUT FIELD
+   TEXTAREA FIELD
    ============================================ */
-.input {
+.textarea {
   width: 100%;
   height: 100%;
-  padding: 12px 16px;
+  min-height: 100px;
+  padding: 16px 16px 12px;
   font-size: 16px;
   font-family: inherit;
   line-height: 1.5;
@@ -29,25 +30,26 @@
   box-sizing: border-box;
   position: relative;
   z-index: 1;
+  resize: vertical;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
 
 /* Hide placeholder text - we use floating label instead */
-.input::placeholder {
+.textarea::placeholder {
   color: transparent;
 }
 
-.input::-webkit-input-placeholder {
+.textarea::-webkit-input-placeholder {
   color: transparent;
 }
 
-.input::-moz-placeholder {
+.textarea::-moz-placeholder {
   color: transparent;
 }
 
-.input:-ms-input-placeholder {
+.textarea:-ms-input-placeholder {
   color: transparent;
 }
 
@@ -72,7 +74,7 @@
 }
 
 /* Hover state - darker border */
-.textfieldContainer:hover .fieldset {
+.textareaContainer:hover .fieldset {
   border-color: hsl(213, 16%, 38%); /* Slightly darker neutral */
 }
 
@@ -87,7 +89,7 @@
   border-color: #d32f2f !important;
 }
 
-.textfieldContainer:hover .fieldsetError {
+.textareaContainer:hover .fieldsetError {
   border-color: #d32f2f !important;
 }
 
@@ -131,8 +133,8 @@
 .label {
   position: absolute;
   left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 16px;
+  transform: translateY(0);
   color: hsl(213, 16%, 43%); /* neutral-700 - #5C6C80 */
   font-size: 16px;
   font-weight: 400;
@@ -185,7 +187,6 @@
   margin: 4px 16px 0 0;
   font-size: 12px;
   line-height: 16px;
-  /* color: hsl(213, 16%, 43%); neutral-700 - #5C6C80 */
   letter-spacing: 0.4px;
   min-height: 16px;
   display: block;
@@ -198,88 +199,11 @@
 /* ============================================
    ACCESSIBILITY & STATES
    ============================================ */
-.input:focus {
+.textarea:focus {
   outline: none;
 }
 
-.inputDisabled {
+.textareaDisabled {
   color: rgba(0, 0, 0, 0.38);
   cursor: not-allowed;
 }
-
-/* ============================================
-   DARK MODE SUPPORT
-   ============================================ */
-/* @media (prefers-color-scheme: dark) {
-  .input {
-    color: #e8eaed;
-  }
-  
-  .fieldset {
-    border-color: rgba(255, 255, 255, 0.23);
-  }
-  
-  .container:hover .fieldset {
-    border-color: rgba(255, 255, 255, 0.87);
-  }
-  
-  .fieldsetFocused {
-    border-color: #8ab4f8 !important;
-  }
-  
-  .fieldsetDisabled {
-    border-color: rgba(255, 255, 255, 0.26) !important;
-  }
-  
-  .label {
-    color: rgba(255, 255, 255, 0.6);
-  }
-  
-  .labelActive {
-    background-color: transparent;
-    color: rgba(255, 255, 255, 0.6);
-  }
-  
-  .labelFocused {
-    color: #8ab4f8 !important;
-  }
-  
-  .labelDisabled {
-    color: rgba(255, 255, 255, 0.38);
-  }
-  
-  .helperText {
-    color: rgba(255, 255, 255, 0.6);
-  }
-  
-  .inputDisabled {
-    color: rgba(255, 255, 255, 0.38);
-  }
-} */
-
-/* ============================================
-   AUTOFILL DETECTION
-   ============================================ */
-.input:-webkit-autofill ~ .label,
-.input:-webkit-autofill:hover ~ .label,
-.input:-webkit-autofill:focus ~ .label {
-  top: 0;
-  transform: translateY(-50%);
-  font-size: 12px;
-  padding: 0 4px;
-  background-color: transparent;
-}
-
-.input:-webkit-autofill ~ .legend,
-.input:-webkit-autofill:hover ~ .legend,
-.input:-webkit-autofill:focus ~ .legend {
-  max-width: 1000px;
-}
-
-/* @media (prefers-color-scheme: dark) {
-  .input:-webkit-autofill ~ .label,
-  .input:-webkit-autofill:hover ~ .label,
-  .input:-webkit-autofill:focus ~ .label {
-    background-color: transparent;
-  }
-} */
