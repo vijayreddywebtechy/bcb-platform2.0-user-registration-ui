@@ -208,7 +208,7 @@ function BusinessRoleDefinition({
       </div>
 
       {/* Action Buttons */}
-      <div className="flex flex-col sm:flex-row gap-4">
+      <div className="flex flex-col sm:flex-row gap-4 w-full lg:max-w-[482px]">
         <Button variant="outline" onClick={handleCancel} className="sm:flex-1">
           CANCEL
         </Button>

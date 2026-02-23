@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import ActionCard from "@/components/dynamic/cards/ActionCard";
 import Toolbar from "./Toolbar";
 import { User, ScanFace, Link2 } from "lucide-react";
@@ -9,6 +10,7 @@ type Props = {
 };
 
 function OutstandingActions({ onIdentityVerificationClick }: Props) {
+  const router = useRouter();
   const [visibleCards, setVisibleCards] = useState([1, 2, 3]);
 
   const steps = [
@@ -42,9 +44,11 @@ function OutstandingActions({ onIdentityVerificationClick }: Props) {
   ];
 
   const handleStepClick = (stepNumber: number) => {
-    console.log(`Step ${stepNumber} clicked`);
     if (stepNumber === 2) {
       onIdentityVerificationClick?.();
+    }
+    if (stepNumber === 3) {
+      router.push("/business-linking");
     }
   };
 
