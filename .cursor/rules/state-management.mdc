@@ -1,0 +1,152 @@
+---
+description: BCB BizHub state management — Zustand store conventions, async state patterns, store slices
+globs: stores/**/*.ts,**/*.tsx
+alwaysApply: false
+---
+
+# State Management — BCB BizHub
+
+## State Architecture
+
+```
+Global UI State   →  Zustand stores (stores/)
+Server Data       →  Next.js Server Components (fetch at route level, pass as props)
+Form State        →  React Hook Form (local, schema-validated)
+URL State         →  Next.js searchParams (filters, tabs, pagination)
+```
+
+**Do not** put server-fetched data in Zustand — use it only for client-owned state: auth session, multi-step form progress, UI preferences.
+
+## Zustand Store Convention
+
+Zustand must be installed: `npm install zustand`
+
+Each store lives in `stores/use<Domain>Store.ts`.
+
+```typescript
+// stores/useAuthStore.ts
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  roles: string[];
+}
+
+interface AuthState {
+  user: User | null;
+  accessToken: string | null;
+  isAuthenticated: boolean;
+  setUser: (user: User) => void;
+  setAccessToken: (token: string) => void;
+  clearSession: () => void;
+}
+
+export const useAuthStore = create<AuthState>()(
+  persist(
+    (set) => ({
+      user: null,
+      accessToken: null,
+      isAuthenticated: false,
+      setUser: (user) => set({ user, isAuthenticated: true }),
+      setAccessToken: (accessToken) => set({ accessToken }),
+      clearSession: () => set({ user: null, accessToken: null, isAuthenticated: false }),
+    }),
+    { name: 'bcb-auth' }   // sessionStorage key — NOT localStorage for banking
+  )
+);
+```
+
+## Multi-Step Registration Store
+
+```typescript
+// stores/useRegistrationStore.ts
+import { create } from 'zustand';
+import type { DeepPartial } from '@/lib/types/utils.types';
+import type { MerchantApplicationPayload } from '@/lib/types/merchant.types';
+
+interface RegistrationState {
+  currentStep: number;
+  totalSteps: number;
+  formData: DeepPartial<MerchantApplicationPayload>;
+  setStep: (step: number) => void;
+  updateFormData: (partial: DeepPartial<MerchantApplicationPayload>) => void;
+  resetForm: () => void;
+}
+
+const INITIAL_STATE: DeepPartial<MerchantApplicationPayload> = {};
+
+export const useRegistrationStore = create<RegistrationState>()((set) => ({
+  currentStep: 1,
+  totalSteps: 7,
+  formData: INITIAL_STATE,
+  setStep: (currentStep) => set({ currentStep }),
+  updateFormData: (partial) =>
+    set((state) => ({ formData: { ...state.formData, ...partial } })),
+  resetForm: () => set({ currentStep: 1, formData: INITIAL_STATE }),
+}));
+```
+
+## Async State Pattern in Components
+
+Use a local `AsyncState<T>` discriminated union — do not scatter `isLoading`/`isError` booleans.
+
+```typescript
+// ✅ GOOD
+type AsyncState<T> =
+  | { status: 'idle' }
+  | { status: 'loading' }
+  | { status: 'success'; data: T }
+  | { status: 'error'; error: string };
+
+function useSubmitApplication() {
+  const [state, setState] = useState<AsyncState<{ referenceNumber: string }>>({ status: 'idle' });
+
+  async function submit(payload: MerchantApplicationPayload) {
+    setState({ status: 'loading' });
+    try {
+      const res = await fetch('/api/merchant-application', {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (!res.ok) {
+        const err = await res.json();
+        setState({ status: 'error', error: err.httpMessage ?? 'Submission failed' });
+        return;
+      }
+      const data = await res.json();
+      setState({ status: 'success', data });
+    } catch {
+      setState({ status: 'error', error: 'Network error. Please try again.' });
+    }
+  }
+
+  return { state, submit };
+}
+
+// ❌ BAD — scattered state variables
+const [loading, setLoading] = useState(false);
+const [error, setError] = useState(null);
+const [data, setData] = useState(null);
+```
+
+## Store Rules
+
+- One store per feature domain: `useAuthStore`, `useRegistrationStore`, `useApplicationStore`
+- Actions (mutations) are methods inside the store — never mutate state directly from components
+- Use `persist` middleware **only** when state must survive page refresh (auth session only)
+- For banking: use `sessionStorage` as the persistence storage, not `localStorage`
+- Stores are `'use client'` territory — never import them in Server Components
+- Derived values are computed inline or via `useShallow` selector — no redundant state
+
+```typescript
+// ✅ Selecting with shallow comparison to avoid re-renders
+import { useShallow } from 'zustand/react/shallow';
+
+const { user, isAuthenticated } = useAuthStore(
+  useShallow((s) => ({ user: s.user, isAuthenticated: s.isAuthenticated }))
+);
+```

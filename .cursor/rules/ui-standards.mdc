@@ -1,0 +1,136 @@
+---
+description: BCB BizHub UI standards — component patterns, design tokens, accessibility, Tailwind usage
+globs: **/*.tsx,**/*.module.css
+alwaysApply: false
+---
+
+# UI Standards — BCB BizHub
+
+## Design System Primitives
+
+Always use the project's design-system components. **Never** build raw HTML inputs or custom buttons from scratch.
+
+| Need | Use |
+|---|---|
+| Text input | `<FloatingTextField />` from `@/components/ui/FloatingTextField` |
+| Select / dropdown | `<FloatingReactSelect />` from `@/components/ui/FloatingReactSelect` |
+| Date picker | `<FloatingDatePicker />` from `@/components/ui/FloatingDatePicker` |
+| Textarea | `<FloatingTextArea />` from `@/components/ui/FloatingTextArea` |
+| Button | `<Button />` from `@/components/ui/button` (shadcn variant) |
+| Dialog / modal | `<Dialog />` from `@/components/ui/dialog` (Radix) |
+| Checkbox | `@radix-ui/react-checkbox` via `@/components/ui/checkbox` |
+| Radio | `@radix-ui/react-radio-group` via `@/components/ui/radio-group` |
+| Progress | `@/components/ui/progress` |
+
+## Brand Colour Tokens (Tailwind)
+
+Only use CSS custom property tokens — never hardcode hex values.
+
+```tsx
+// ✅ GOOD — uses design tokens
+<div className="bg-primary text-primary-foreground">
+<div className="text-neutral-700 border-neutral-300">
+<div className="bg-neutral-100 text-neutral-900">
+
+// ❌ BAD — hardcoded colours
+<div style={{ backgroundColor: '#002060' }}>
+<div className="text-[#697786]">
+```
+
+Standard Bank brand scale:
+- `primary` / `primary-light` / `primary-medium` / `primary-dark` / `primary-deep`
+- `neutral-100` through `neutral-950` (see tailwind.config.js)
+- `destructive` for errors · `muted` for secondary text
+
+## Typography
+
+Font family is `BentonSansPro` — available via Tailwind as `font-bspro` or via `var(--font-bspro)`.
+
+```tsx
+// ✅ Headings
+<h1 className="text-2xl font-semibold text-neutral-900 font-bspro">
+// ✅ Body
+<p className="text-sm text-neutral-700">
+// ✅ Labels / captions
+<span className="text-xs text-neutral-500">
+```
+
+## Component Patterns
+
+### Functional components with explicit prop interfaces
+```tsx
+// ✅ GOOD
+interface BusinessCardProps {
+  tradingName: string;
+  registrationNumber: string;
+  isActive?: boolean;
+}
+
+export function BusinessCard({ tradingName, registrationNumber, isActive = false }: BusinessCardProps) {
+  return (...)
+}
+
+// ❌ BAD — implicit props, default export only file
+export default function ({ data }: any) { ... }
+```
+
+### Client vs Server Components
+- Default to **Server Components** (no `'use client'`)
+- Add `'use client'` **only** when using: `useState`, `useEffect`, event handlers, browser APIs, Zustand stores
+- Data-fetching components are Server Components — pass data down as props
+
+### CSS Modules for component-scoped styles
+- Component-specific animation or complex selectors → use `.module.css` co-located with the component
+- Utility/layout classes → Tailwind directly in JSX
+- **Never** use inline `style={{}}` except for dynamic computed values (e.g., chart percentages)
+
+## Accessibility Requirements (banking-grade)
+
+Every interactive element must meet WCAG 2.1 AA:
+
+```tsx
+// ✅ Form fields
+<FloatingTextField
+  label="ID Number"
+  aria-required="true"
+  aria-describedby="id-helper"
+  errorText="Please enter a valid 13-digit SA ID number"
+/>
+
+// ✅ Icon buttons must have visible label or aria-label
+<button aria-label="Close dialog" onClick={onClose}>
+  <X className="h-4 w-4" />
+</button>
+
+// ✅ Alerts / status messages
+<div role="alert" aria-live="assertive" className="text-destructive text-sm">
+  {error}
+</div>
+
+// ❌ BAD — missing label
+<input type="text" placeholder="Enter ID" />
+```
+
+## Loading & Error States
+
+Every async-backed component must render all three states:
+
+```tsx
+if (isLoading) return <LoadingSkeleton />   // use Tailwind animate-pulse skeleton
+if (error) return <ErrorBanner message={error} />
+return <ActualContent data={data} />
+```
+
+## Responsive Layout
+
+- Mobile-first: start with base styles, add `md:` / `lg:` breakpoints
+- Banking forms: single column on mobile (`flex flex-col gap-4`), two-column on desktop (`md:grid md:grid-cols-2 md:gap-6`)
+- Touch targets: minimum `h-11` (44px) for all interactive elements
+
+## Prohibited Patterns
+
+- No `any` type in component props
+- No `console.log` left in production code
+- No hardcoded strings for user-facing copy — use a constants file or i18n key
+- No business logic (API calls, calculations) inside JSX return statements
+- No direct `fetch()` calls inside React components — use stores or Server Components

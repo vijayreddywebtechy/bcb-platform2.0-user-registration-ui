@@ -1,0 +1,142 @@
+---
+description: BCB Platform BizHub - canonical folder structure, naming conventions, and clean architecture layers
+alwaysApply: true
+---
+
+# BCB Platform BizHub — Project Architecture
+
+## Tech Stack
+Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS · Radix UI / shadcn-ui · Standard Bank BCB Gateway APIs
+
+## Canonical Folder Structure
+
+```
+app/
+  (user-registration)/       # Route group — all authenticated pages
+    dashboard/page.tsx
+    accounts/page.tsx
+    business-profiles/page.tsx
+    business-linking/page.tsx
+    documents/page.tsx
+    identity-verification/page.tsx
+    manage-profile/page.tsx
+    roles-and-permissions/page.tsx
+    otp/page.tsx
+    register/page.tsx
+    signin/page.tsx
+  api/                       # Next.js Route Handlers (server-only) — one folder per module
+    auth/signin/ · callback/ · signout/
+    otp/send/ · verify/
+    customer/[id]/ · cipc/
+    application/pre-screen/ · digital-offer/ · process/ · complete/
+    entitlements/roles/ · account-roles/
+    personal-details/update/
+    company/details/ · related-parties/
+    banking/account-validation/ · nominated-account/
+    contracts/create/ · set-digital-offer/
+    documents/[id]/
+    identity/initiate/ · complete/
+    merchant/application/
+  layout.tsx
+  page.tsx
+
+components/                  # Feature-scoped presentational components
+  auth/
+  accounts/
+  business-details/
+  business-linking/
+  dashboard/
+  documents/
+  layout/                    # DashboardLayout, Header, Footer, MiniNavbar
+  manage-profile/
+  roles-permissions/
+  shared/                    # Cross-feature: ActionCard, ContactBankerWidget
+  ui/                        # Design system primitives: FloatingTextField, etc.
+  VerificationDashboard/
+
+lib/                         # Pure utilities — no React, no side-effects
+  api/                       # Server-side BCB Gateway clients — one folder per module
+    shared/                  # Shared: bcbHttpClient.ts, errors.ts, headers.ts
+    auth/                    # authClient.ts, tokenCache.ts, pingClient.ts
+    otp/                     # otpClient.ts
+    customer/                # customerClient.ts
+    application/             # applicationClient.ts
+    entitlements/            # entitlementsClient.ts
+    personal-details/        # personalDetailsClient.ts
+    company/                 # companyClient.ts
+    banking/                 # bankingClient.ts
+    contracts/               # contractsClient.ts
+    documents/               # documentsClient.ts
+    identity/                # identityClient.ts
+    merchant/                # merchantClient.ts
+  types/                     # Shared TypeScript types — one subfolder per module
+    auth/
+    otp/
+    customer/
+    application/
+    merchant/
+    shared/                  # address.types.ts, bcbResponse.types.ts
+  schemas/                   # Zod validation schemas — mirrors lib/types/ structure
+    auth/
+    otp/
+    merchant/
+  utils/                     # Pure helper functions (formatCurrency, formatDate, etc.)
+  constants/                 # App-wide constants (routes.ts, non-enum values)
+  enums/                     # All domain enums (province.enum.ts, entityType.enum.ts, etc.)
+
+stores/                      # Zustand global state slices
+  useAuthStore.ts
+  useRegistrationStore.ts
+  useApplicationStore.ts
+
+public/                      # Static assets
+assets/                      # Fonts, images, icons (imported in code)
+docs/                        # API docs, Postman summaries (not shipped)
+```
+
+## Naming Conventions
+
+| Artifact | Convention | Example |
+|---|---|---|
+| Route folders | `kebab-case` | `roles-and-permissions/` |
+| Component files | `PascalCase.tsx` | `FloatingTextField.tsx` |
+| Hook files | `camelCase.ts` with `use` prefix | `useAuthStore.ts` |
+| Utility files | `camelCase.ts` | `formatCurrency.ts` |
+| Enum files | `camelCase.ts` | `province.enum.ts` |
+| Type files | `camelCase.ts` | `merchant.types.ts` |
+| CSS Modules | `PascalCase.module.css` | `FloatingTextField.module.css` |
+| API route dirs | `kebab-case` | `merchant-application/` |
+
+## Clean Architecture Layers
+
+```
+┌─────────────────────────────────────────┐
+│  Presentation (app/ + components/)       │  React Server/Client Components, layouts
+├─────────────────────────────────────────┤
+│  State (stores/)                         │  Zustand slices — no direct API calls
+├─────────────────────────────────────────┤
+│  Application (app/api/)                  │  Next.js Route Handlers — orchestration only
+├─────────────────────────────────────────┤
+│  Domain Services (lib/api/clients/)      │  Typed BCB Gateway callers, token mgmt
+├─────────────────────────────────────────┤
+│  Infrastructure (lib/api/auth.ts)        │  OAuth2 client_credentials token fetch
+└─────────────────────────────────────────┘
+```
+
+## Import Alias Rules
+- Always use `@/` alias (resolves to project root). Never use relative `../../`.
+- `@/components/ui/*` — design system primitives
+- `@/components/<feature>/*` — feature-scoped components
+- `@/lib/api/<module>/<module>Client` — domain API client
+- `@/lib/api/shared/*` — shared HTTP utilities
+- `@/lib/types/<module>/*` — module-scoped types
+- `@/lib/enums/*` — domain enums
+- `@/lib/schemas/<module>/*` — Zod schemas
+- `@/stores/*` — Zustand stores
+
+## File Colocation Rules
+- A page-specific helper used only in one screen → co-locate next to the page
+- A helper used in 2+ features → move to `lib/utils/`
+- A component used in 2+ features → move to `components/shared/`
+- API call logic belongs **only** in `lib/api/<module>/` or `app/api/<module>/` — never in components
+- `lib/api/` and `app/api/` always mirror the same module folder names

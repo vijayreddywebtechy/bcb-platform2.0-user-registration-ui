@@ -1,0 +1,176 @@
+---
+description: BCB BizHub routing conventions (Next.js App Router) and Zod schema validation patterns
+globs: app/**/*.tsx,app/**/*.ts,lib/schemas/**/*.ts
+alwaysApply: false
+---
+
+# Routing & Schema Validation — BCB BizHub
+
+## Next.js App Router Conventions
+
+### Route Map
+
+```
+/                           → app/page.tsx (redirect to /signin or /dashboard)
+/(user-registration)/       → Route group — shared layout, auth-guarded
+  /dashboard
+  /accounts
+  /business-profiles
+  /business-linking
+  /business-linking/business-details
+  /documents
+  /identity-verification
+  /manage-profile
+  /roles-and-permissions
+  /roles-and-permissions/invite-team-member
+  /otp
+  /register
+  /signin
+  /scan-qr-code
+  /query-tracker
+/api/                       → Server-only Route Handlers
+  /api/auth/signin
+  /api/auth/callback
+  /api/auth/signout
+  /api/otp/send
+  /api/otp/verify
+  /api/merchant-application
+```
+
+### Layout Nesting
+
+```
+app/layout.tsx                          ← Root: font, global CSS
+  app/(user-registration)/layout.tsx    ← Auth guard + DashboardLayout
+    app/(user-registration)/dashboard/page.tsx
+```
+
+### Route Handler file naming
+- Always export named HTTP method functions: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`
+- File must be named `route.ts` — never `index.ts` inside `app/api/`
+
+```typescript
+// ✅ app/api/otp/send/route.ts
+export async function POST(request: NextRequest) { ... }
+
+// ❌ app/api/otp/send/index.ts — not recognised by App Router
+```
+
+### Navigation
+
+```typescript
+// ✅ Programmatic navigation in Client Components
+import { useRouter } from 'next/navigation';
+const router = useRouter();
+router.push('/dashboard');
+
+// ✅ Declarative links
+import Link from 'next/link';
+<Link href="/accounts">Accounts</Link>
+
+// ❌ Never use window.location.href for internal routes
+```
+
+### Auth Guard Pattern
+
+```typescript
+// app/(user-registration)/layout.tsx
+import { redirect } from 'next/navigation';
+
+export default async function ProtectedLayout({ children }: { children: React.ReactNode }) {
+  const session = await getServerSession();   // read from HTTP-only cookie / server store
+  if (!session) redirect('/signin');
+  return <DashboardLayout>{children}</DashboardLayout>;
+}
+```
+
+## Zod Schema Validation
+
+All API inputs and form submissions must be validated with Zod. Schemas live in `lib/schemas/`.
+
+### Schema Pattern
+
+```typescript
+// lib/schemas/merchantApplication.schema.ts
+import { z } from 'zod';
+import { Province } from '@/lib/enums/province.enum';
+import { EntityType } from '@/lib/enums/entityType.enum';
+
+const addressSchema = z.object({
+  buildingName: z.string().optional(),
+  streetNumber: z.string().min(1, 'Street number is required'),
+  streetName: z.string().min(1, 'Street name is required'),
+  suburb: z.string().min(1),
+  city: z.string().min(1),
+  province: z.nativeEnum(Province),
+  postalCode: z.string().regex(/^\d{4}$/, 'Postal code must be 4 digits'),
+  country: z.string().default('ZA'),
+});
+
+const businessInformationSchema = z.object({
+  registeredName: z.string().min(1),
+  tradingName: z.string().min(1),
+  registrationNumber: z.string().min(1),
+  entityType: z.nativeEnum(EntityType),
+  annualTurnover: z.string().optional(),
+  natureOfBusiness: z.string().optional(),
+  businessEmailAddress: z.string().email(),
+  businessMobileNumber: z.string().regex(/^(\+27|0)[6-8][0-9]{8}$/, 'Invalid SA mobile number'),
+});
+
+export const merchantApplicationSchema = z.object({
+  applicationNumber: z.string().uuid(),
+  customerGUID: z.string().uuid(),
+  address: addressSchema,
+  businessInformation: businessInformationSchema,
+});
+
+export type MerchantApplicationInput = z.infer<typeof merchantApplicationSchema>;
+```
+
+### Form Schema with react-hook-form
+
+```typescript
+// In a 'use client' component
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+const form = useForm<MerchantApplicationInput>({
+  resolver: zodResolver(merchantApplicationSchema),
+  defaultValues: { address: { country: 'ZA' } },
+});
+```
+
+## Schema Co-location Rule
+
+| Schema | Location |
+|---|---|
+| API request validation | `lib/schemas/<domain>.schema.ts` |
+| Form validation (same as API schema) | Reuse `lib/schemas/<domain>.schema.ts` |
+| Form-specific schema (UI-only fields) | `lib/schemas/<domain>.form.schema.ts` |
+| Env variable validation | `lib/schemas/env.schema.ts` |
+
+## Route Constants
+
+Define all routes as constants — never scatter string literals.
+
+```typescript
+// lib/constants/routes.ts
+export const ROUTES = {
+  HOME: '/',
+  SIGNIN: '/signin',
+  DASHBOARD: '/dashboard',
+  ACCOUNTS: '/accounts',
+  BUSINESS_PROFILES: '/business-profiles',
+  BUSINESS_LINKING: '/business-linking',
+  DOCUMENTS: '/documents',
+  IDENTITY_VERIFICATION: '/identity-verification',
+  MANAGE_PROFILE: '/manage-profile',
+  ROLES_AND_PERMISSIONS: '/roles-and-permissions',
+  INVITE_TEAM_MEMBER: '/roles-and-permissions/invite-team-member',
+  OTP: '/otp',
+  REGISTER: '/register',
+  SCAN_QR: '/scan-qr-code',
+  QUERY_TRACKER: '/query-tracker',
+} as const;
+```

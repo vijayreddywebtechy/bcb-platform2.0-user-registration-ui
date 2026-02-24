@@ -1,0 +1,137 @@
+---
+description: BCB BizHub domain enums and TypeScript conventions — all BCB Gateway enum values, type definitions
+globs: lib/enums/**/*.ts,lib/types/**/*.ts,**/*.ts,**/*.tsx
+alwaysApply: false
+---
+
+# Enums & Types — BCB BizHub
+
+## Enum Convention
+
+Use `as const` objects (not TypeScript `enum`) for tree-shakeable, serialisable enums.
+
+```typescript
+// ✅ GOOD — in lib/enums/<domain>.enum.ts
+export const Province = {
+  NORTH_WEST: 'NORTH_WEST',
+  GAUTENG: 'GAUTENG',
+  LIMPOPO: 'LIMPOPO',
+  MPUMALANGA: 'MPUMALANGA',
+  FREE_STATE: 'FREE_STATE',
+  KWAZULU_NATAL: 'KWAZULU_NATAL',
+  EASTERN_CAPE: 'EASTERN_CAPE',
+  WESTERN_CAPE: 'WESTERN_CAPE',
+  NORTHERN_CAPE: 'NORTHERN_CAPE',
+} as const;
+export type Province = typeof Province[keyof typeof Province];
+
+// ❌ BAD — TypeScript enum (not serialisable, larger bundle)
+enum Province { GAUTENG = 'GAUTENG' }
+```
+
+## All BCB Domain Enums (`lib/enums/`)
+
+### `province.enum.ts`
+Values: `NORTH_WEST | GAUTENG | LIMPOPO | MPUMALANGA | FREE_STATE | KWAZULU_NATAL | EASTERN_CAPE | WESTERN_CAPE | NORTHERN_CAPE`
+
+### `entityType.enum.ts`
+Values: `SOLE_PROPRIETOR | SECONDARY_CO_OPERATIVE | PRIMARY_CO_OPERATIVE | CLOSE_CORPORATION | PARTNERSHIP | PRIVATE_COMPANY | PUBLIC_COMPANY | PERSONAL_LIABILITY_COMPANY | TRUST | NON_PROFIT_COMPANY | NON_PROFIT_ORGANISATION`
+
+### `identificationDocument.enum.ts`
+Values: `NONE | CLOSE_CORPORATION | ENTERPRISE_IDENTITY_NUMBER | SOUTH_AFRICAN_ID | PASSPORT | FOREIGN_NATIONAL_ID`
+
+### `productName.enum.ts`
+Values: `VAS | MASTER_PASS | VISA_MASTERCARD | DINERSCLUB | AMERICANEXPRESS | UNIONPAY | RCS | INSTANTMONEY | ELECTRICITY | AIRTIME`
+
+### `whenDeviceRequired.enum.ts`
+Values: `TWO_DAYS | SEVEN_TWO_TEN_DAYS | ONE_TO_TWO_WEEKS | TWO_TO_FOUR_WEEKS`
+
+### `yesNo.enum.ts`
+Values: `YES | NO`
+
+### `pipRelationType.enum.ts`
+Values: `NONE | SPOUSE_OR_PARTNER | PARENT | SIBLING | CHILD | OTHER`
+
+### `grantType.enum.ts`
+Values: `CLIENT_CREDENTIALS | AUTHORIZATION_CODE`
+
+## TypeScript Type Conventions
+
+### Shared types live in `lib/types/`
+
+```typescript
+// lib/types/address.types.ts
+export interface Address {
+  buildingName?: string;
+  streetNumber: string;
+  streetName: string;
+  suburb: string;
+  city: string;
+  province: Province;
+  postalCode: string;
+  country: string;
+}
+```
+
+### API request/response types
+
+```typescript
+// lib/types/merchant.types.ts
+import { Province } from '@/lib/enums/province.enum';
+import { EntityType } from '@/lib/enums/entityType.enum';
+
+export interface MerchantApplicationPayload {
+  applicationNumber: string;
+  customerGUID: string;
+  accountHolderName?: string;
+  accountNumber?: string;
+  bankName?: string;
+  branchCode?: string | number;
+  branchProvince?: Province;
+  address: Address;
+  businessInformation: BusinessInformation;
+  businessOwners: BusinessOwner[];
+  product: Product;
+}
+```
+
+## Strict TypeScript Rules
+
+```typescript
+// ✅ GOOD
+const result: unknown = await response.json();
+const typed = result as BcbSuccessResponse;
+
+// ❌ BAD — never use `any`
+const result: any = await response.json();
+function process(data: any) { ... }
+
+// ✅ GOOD — discriminated union for async state
+type AsyncState<T> =
+  | { status: 'idle' }
+  | { status: 'loading' }
+  | { status: 'success'; data: T }
+  | { status: 'error'; error: string };
+
+// ✅ GOOD — optional chaining, not manual null guards
+const name = application?.businessInformation?.tradingName ?? 'Unknown';
+```
+
+## Utility Type Helpers
+
+```typescript
+// lib/types/utils.types.ts — reusable helpers
+
+/** Makes all nested properties optional */
+export type DeepPartial<T> = { [K in keyof T]?: T[K] extends object ? DeepPartial<T[K]> : T[K] };
+
+/** Extract the value type from an as-const enum object */
+export type EnumValue<T extends Record<string, string>> = T[keyof T];
+```
+
+## File Location Rules
+
+- One enum per file: `lib/enums/<name>.enum.ts`
+- Group related types: `lib/types/<domain>.types.ts`
+- Import enums from `@/lib/enums/<name>.enum` — never re-declare locally
+- Schemas: `lib/schemas/<domain>.schema.ts` (Zod — separate from types)

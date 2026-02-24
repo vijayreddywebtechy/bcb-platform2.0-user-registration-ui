@@ -1,0 +1,285 @@
+---
+description: BCB BizHub API clean architecture — module-based folder structure, Route Handlers, BCB Gateway client layer, token management, error handling
+globs: app/api/**/*.ts,lib/api/**/*.ts
+alwaysApply: false
+---
+
+# API Clean Architecture — BCB BizHub
+
+## Two-Layer API Design
+
+```
+Browser ──► app/api/<module>/<action>/route.ts   (Route Handler — thin orchestration)
+                  │
+                  ▼
+         lib/api/<module>/<module>Client.ts       (BCB Gateway caller — all headers/auth)
+                  │
+                  ▼
+         BCB API Gateway (api-gatewaynp.standardbank.co.za)
+```
+
+**Rule:** Route Handlers orchestrate. Domain clients make HTTP calls. Never mix them.
+
+## Module Folder Structure
+
+Both `app/api/` and `lib/api/` mirror the **same module names**. Never put routes at the flat `app/api/` level.
+
+```
+app/api/                              lib/api/
+  auth/                                 auth/
+    signin/route.ts                       authClient.ts         # OIDC / PKCE flows
+    callback/route.ts                     tokenCache.ts         # server token caching
+    signout/route.ts                      pingClient.ts         # Ping Federate OIDC
+  otp/                                  otp/
+    send/route.ts                         otpClient.ts          # send + validate OTP
+    verify/route.ts
+  customer/                             customer/
+    [id]/route.ts                         customerClient.ts     # GET customer by GUID
+    cipc/route.ts                                               # getCIPCregs by id/biz no.
+  application/                          application/
+    pre-screen/route.ts                   applicationClient.ts  # pre-application, digital offer
+    digital-offer/route.ts                                      # process, complete application
+    process/route.ts
+    complete/route.ts
+  entitlements/                         entitlements/
+    roles/route.ts                        entitlementsClient.ts # account roles check
+    account-roles/route.ts                                      # roles and permissions
+  personal-details/                     personal-details/
+    update/route.ts                       personalDetailsClient.ts  # update personal details
+  company/                              company/
+    details/route.ts                      companyClient.ts      # update company details
+    related-parties/route.ts                                    # get/update related parties
+  banking/                              banking/
+    account-validation/route.ts           bankingClient.ts      # account validation
+    nominated-account/route.ts                                  # nominated account API
+  contracts/                            contracts/
+    create/route.ts                       contractsClient.ts    # create contracts
+    set-digital-offer/route.ts                                  # set digital offer
+  documents/                            documents/
+    [id]/route.ts                         documentsClient.ts    # get document
+  identity/                             identity/
+    initiate/route.ts                     identityClient.ts     # initiate IDV
+    complete/route.ts                                           # complete AO IDV
+  merchant/                             merchant/
+    application/route.ts                  merchantClient.ts     # MerchantLead API
+                                        shared/
+                                          bcbHttpClient.ts      # shared fetch wrapper
+                                          errors.ts             # ApiError class
+                                          headers.ts            # buildBcbHeaders()
+```
+
+## Module Client Naming Convention
+
+| Module folder | Client file | Export name |
+|---|---|---|
+| `auth/` | `authClient.ts` | `authClient` |
+| `otp/` | `otpClient.ts` | `otpClient` |
+| `customer/` | `customerClient.ts` | `customerClient` |
+| `application/` | `applicationClient.ts` | `applicationClient` |
+| `entitlements/` | `entitlementsClient.ts` | `entitlementsClient` |
+| `personal-details/` | `personalDetailsClient.ts` | `personalDetailsClient` |
+| `company/` | `companyClient.ts` | `companyClient` |
+| `banking/` | `bankingClient.ts` | `bankingClient` |
+| `contracts/` | `contractsClient.ts` | `contractsClient` |
+| `documents/` | `documentsClient.ts` | `documentsClient` |
+| `identity/` | `identityClient.ts` | `identityClient` |
+| `merchant/` | `merchantClient.ts` | `merchantClient` |
+
+## Shared BCB HTTP Client (`lib/api/shared/bcbHttpClient.ts`)
+
+All module clients use this — never duplicate header logic.
+
+```typescript
+import { getSystemToken } from '@/lib/api/auth/tokenCache';
+import { ApiError } from '@/lib/api/shared/errors';
+import { buildBcbHeaders } from '@/lib/api/shared/headers';
+
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL!;
+
+export async function bcbFetch<T>(
+  path: string,
+  options: RequestInit & { skipAuth?: boolean } = {}
+): Promise<T> {
+  const { skipAuth = false, ...fetchOptions } = options;
+  const token = skipAuth ? null : await getSystemToken();
+
+  const response = await fetch(`${BASE_URL}${path}`, {
+    ...fetchOptions,
+    headers: {
+      ...buildBcbHeaders(token),
+      ...fetchOptions.headers,
+    },
+  });
+
+  if (!response.ok) {
+    const err = await response.json();
+    throw new ApiError(err.httpCode, err.httpMessage, err.moreInformation, response.status);
+  }
+
+  return response.json();
+}
+```
+
+```typescript
+// lib/api/shared/headers.ts
+import { randomUUID } from 'crypto';
+
+export function buildBcbHeaders(token: string | null): Record<string, string> {
+  return {
+    'x-fapi-interaction-id': randomUUID(),
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+    'X-IBM-Client-Id': process.env.NEXT_PUBLIC_IBM_CLIENT_ID!,
+    'X-IBM-Client-Secret': process.env.NEXT_PUBLIC_IBM_CLIENT_SECRET!,
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+  };
+}
+```
+
+## Route Handler Pattern (`app/api/<module>/<action>/route.ts`)
+
+```typescript
+import { NextRequest, NextResponse } from 'next/server';
+import { merchantClient } from '@/lib/api/merchant/merchantClient';
+import { merchantApplicationSchema } from '@/lib/schemas/merchant/merchantApplication.schema';
+import { ApiError } from '@/lib/api/shared/errors';
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+
+    // 1. Validate input with Zod
+    const parsed = merchantApplicationSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json(
+        { httpCode: '400', httpMessage: 'Validation failed', moreInformation: parsed.error.flatten() },
+        { status: 400 }
+      );
+    }
+
+    // 2. Delegate to domain client
+    const result = await merchantClient.submitApplication(parsed.data);
+
+    return NextResponse.json(result, { status: 200 });
+  } catch (error) {
+    if (error instanceof ApiError) {
+      return NextResponse.json(
+        { httpCode: error.code, httpMessage: error.message, moreInformation: error.detail },
+        { status: error.httpStatus }
+      );
+    }
+    return NextResponse.json(
+      { httpCode: '500', httpMessage: 'Internal server error', moreInformation: null },
+      { status: 500 }
+    );
+  }
+}
+```
+
+## Domain Client Pattern (`lib/api/<module>/<module>Client.ts`)
+
+Each module client uses `bcbFetch` — no manual header construction.
+
+```typescript
+// lib/api/merchant/merchantClient.ts
+import { bcbFetch } from '@/lib/api/shared/bcbHttpClient';
+import type { MerchantApplicationPayload, MerchantApplicationResponse } from '@/lib/types/merchant/merchant.types';
+
+export const merchantClient = {
+  async submitApplication(payload: MerchantApplicationPayload): Promise<MerchantApplicationResponse> {
+    return bcbFetch<MerchantApplicationResponse>('/merchant/application', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+  },
+};
+```
+
+```typescript
+// lib/api/otp/otpClient.ts
+import { bcbFetch } from '@/lib/api/shared/bcbHttpClient';
+import type { SendOtpPayload, ValidateOtpPayload, OtpResponse } from '@/lib/types/otp/otp.types';
+
+export const otpClient = {
+  async send(payload: SendOtpPayload): Promise<OtpResponse> {
+    return bcbFetch<OtpResponse>('/unsecured-lending/otp', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+  },
+  async validate(payload: ValidateOtpPayload): Promise<OtpResponse> {
+    return bcbFetch<OtpResponse>('/unsecured-lending/otp', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+  },
+};
+```
+
+## Token Management (`lib/api/auth/tokenCache.ts`)
+
+```typescript
+// ✅ Cache token in module scope — re-fetch only when expired
+let cachedToken: { value: string; expiresAt: number } | null = null;
+
+export async function getSystemToken(): Promise<string> {
+  if (cachedToken && Date.now() < cachedToken.expiresAt - 30_000) {
+    return cachedToken.value;
+  }
+
+  const response = await fetch(process.env.NEXT_PUBLIC_ACCESS_TOKEN_URL!, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'x-ibm-client-id': process.env.NEXT_PUBLIC_IBM_CLIENT_ID!,
+    },
+    body: new URLSearchParams({
+      grant_type: 'client_credentials',
+      scope: 'prod write customer',
+    }),
+  });
+
+  const data = await response.json();
+  cachedToken = { value: data.access_token, expiresAt: Date.now() + data.expires_in * 1000 };
+  return cachedToken.value;
+}
+```
+
+## Typed API Error (`lib/api/shared/errors.ts`)
+
+```typescript
+export class ApiError extends Error {
+  constructor(
+    public readonly code: string,
+    message: string,
+    public readonly detail: unknown,
+    public readonly httpStatus: number
+  ) {
+    super(message);
+    this.name = 'ApiError';
+  }
+}
+```
+
+## Standard BCB Gateway Response Shape
+
+All BCB APIs return this shape on error — always match it:
+```typescript
+interface BcbErrorResponse {
+  httpCode: string;       // e.g. "400"
+  httpMessage: string;    // e.g. "Bad Request"
+  moreInformation: string | null;
+}
+
+interface BcbSuccessResponse {
+  referenceNumber: string;
+}
+```
+
+## Security Rules
+
+- **Never** call BCB Gateway directly from browser/client components
+- All BCB Gateway calls must go through `app/api/` Route Handlers (server-side only)
+- `NEXT_PUBLIC_CLIENT_SECRET`, `NEXT_PUBLIC_IBM_CLIENT_SECRET` — despite the prefix, must only be read in Route Handlers / `lib/api/` — never in `'use client'` components
+- Always generate a new `x-fapi-interaction-id` UUID per upstream request
+- Client certificates stay server-side only
