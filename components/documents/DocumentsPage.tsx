@@ -92,13 +92,13 @@ function StampedCard({
       <p className="text-sm text-gray-500 group-hover:text-white flex-1 transition-colors">{description}</p>
       <div className="flex items-center gap-3 mt-4">
         <button
-          className="p-2 bg-white hover:bg-white/10 rounded-md transition-colors"
+          className="p-2 bg-white rounded-md transition-colors"
           aria-label="Email"
         >
           <Mail className="w-5 h-5 text-primary transition-colors" strokeWidth={1.5} />
         </button>
         <button
-          className="p-2 bg-white hover:bg-white/10 rounded-md transition-colors"
+          className="p-2 bg-white rounded-md transition-colors"
           aria-label="Download"
         >
           <Download className="w-5 h-5 text-primary transition-colors" strokeWidth={1.5} />

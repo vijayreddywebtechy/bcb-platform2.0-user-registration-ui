@@ -8,6 +8,7 @@ import sbOneLogo from "@/assets/images/logos/sb_one_logo.svg";
 import icnSignout from "@/assets/images/icons/icn_lock_closed_w.svg";
 import icnProfile from "@/assets/images/icons/icn_people_profile-w.svg";
 import icnBuilding from "@/assets/images/icons/icn_building.svg";
+import CustomiseAppearanceModal from "./CustomiseAppearanceModal";
 
 interface DropdownItem {
     label: string;
@@ -49,7 +50,7 @@ const navItems: NavItem[] = [
         label: "Business Profile",
         dropdown: [
             { label: "Business Details", href: "/business-profiles/business-details" },
-            { label: "Roles & Permissions", href: "/business-profile/roles" },
+            { label: "Roles & Permissions", href: "/business-profiles/roles-and-permissions" },
         ],
     },
 ];
@@ -59,6 +60,7 @@ function Header() {
     const [mobileOpen, setMobileOpen] = useState(false);
     const [mobileDropdown, setMobileDropdown] = useState<string | null>(null);
     const [iconDropdown, setIconDropdown] = useState<IconDropdown>(null);
+    const [customiseOpen, setCustomiseOpen] = useState(false);
     const headerRef = useRef<HTMLDivElement>(null);
 
     // Close dropdown on outside click
@@ -184,17 +186,19 @@ function Header() {
                                     </div>
                                     <ChevronRight className="w-6 h-6 text-primary-dark" strokeWidth={1.5} />
                                 </Link>
-                                <Link
-                                    href="/customise-appearance"
-                                    onClick={() => setIconDropdown(null)}
-                                    className="flex items-center justify-between px-3 py-3 rounded-lg text-sm text-primary-dark hover:bg-blue-50 transition-colors"
+                                <button
+                                    onClick={() => {
+                                        setIconDropdown(null);
+                                        setCustomiseOpen(true);
+                                    }}
+                                    className="w-full flex items-center justify-between px-3 py-3 rounded-lg text-sm text-primary-dark hover:bg-blue-50 transition-colors"
                                 >
                                     <div className="flex items-center gap-3">
                                         <PaintRoller className="w-5 h-5 text-primary-dark" strokeWidth={1.5} />
                                         Customise Appearance
                                     </div>
                                     <ChevronRight className="w-6 h-6 text-primary-dark" strokeWidth={1.5} />
-                                </Link>
+                                </button>
                             </div>
                         )}
                     </div>
@@ -327,6 +331,12 @@ function Header() {
                     </nav>
                 </div>
             )}
+
+            {/* Customise Appearance Modal */}
+            <CustomiseAppearanceModal
+                open={customiseOpen}
+                onOpenChange={setCustomiseOpen}
+            />
         </div>
     );
 }

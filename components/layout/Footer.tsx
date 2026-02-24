@@ -20,7 +20,7 @@ const Footer: React.FC<FooterProps> = ({
     { label: "PRIVACY STATEMENT", href: "/privacy-statement" },
   ],
   disclaimerText = "Standard Bank is a licensed financial services provider in terms of the Financial Advisory and Intermediary Services Act and a registered credit provider in terms of the National Credit Act, registration number NCRCP15.",
-  backgroundColor = "bg-primary-dark",
+  backgroundColor = "bg-[#003FCA]",
   textColor = "text-white",
 }) => {
   return (

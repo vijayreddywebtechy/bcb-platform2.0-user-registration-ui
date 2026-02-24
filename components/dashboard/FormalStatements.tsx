@@ -19,6 +19,14 @@ function FormalStatements({}: Props) {
     accountOptions.find((opt) => opt.value === "4690") || null
   );
 
+  const documentTypeOptions: SelectOption[] = [
+    { value: "all", label: "All statements" },
+  { value: "bank letter", label: "Official Bank Letter" },
+  { value: "stamped", label: "Stamped statements" },
+  { value: "unstamped", label: "Un-stamped statements" },
+];
+  const [selectedDocType, setSelectedDocType] = useState<SelectOption | null>(null);
+
   return (
     <Card>
       <CardHeader
@@ -36,6 +44,14 @@ function FormalStatements({}: Props) {
               value={selectedAccount}
               onChange={(option) => setSelectedAccount(option)}
             />
+          </div>
+                    <div className="md:col-span-4">
+              <FloatingSelect
+                label="Select document type"
+                options={documentTypeOptions}
+                value={selectedDocType}
+                onChange={(opt) => setSelectedDocType(opt)}
+              />
           </div>
         </div>
 

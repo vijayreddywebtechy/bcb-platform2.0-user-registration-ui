@@ -43,12 +43,12 @@ export const defaultStatements: Statement[] = [
   },
 ];
 
-const documentTypeOptions: SelectOption[] = [
-    { value: "all", label: "All statements" },
-  { value: "bank letter", label: "Official Bank Letter" },
-  { value: "stamped", label: "Stamped statements" },
-  { value: "unstamped", label: "Un-stamped statements" },
-];
+// const documentTypeOptions: SelectOption[] = [
+//     { value: "all", label: "All statements" },
+//   { value: "bank letter", label: "Official Bank Letter" },
+//   { value: "stamped", label: "Stamped statements" },
+//   { value: "unstamped", label: "Un-stamped statements" },
+// ];
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
@@ -67,22 +67,12 @@ export function StatementsTable({
   onDownload,
   onViewAll,
 }: Props) {
-  const [selectedDocType, setSelectedDocType] = useState<SelectOption | null>(null);
+  // const [selectedDocType, setSelectedDocType] = useState<SelectOption | null>(null);
 
   const total = totalCount ?? statements.length;
 
   return (
     <>
-      {/* Document type filter */}
-      <div className="mb-6 md:max-w-xs">
-        <FloatingSelect
-          label="Select document type"
-          options={documentTypeOptions}
-          value={selectedDocType}
-          onChange={(opt) => setSelectedDocType(opt)}
-        />
-      </div>
-
       {/* Table */}
       <div className="overflow-x-auto">
         {/* Header */}

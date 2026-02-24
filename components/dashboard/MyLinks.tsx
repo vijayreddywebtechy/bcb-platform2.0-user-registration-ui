@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import Link from "next/link";
 import {
   Link as LinkIcon,
   FileText,
@@ -10,6 +12,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { Card, CardHeader, CardBody, CardFooter } from "./Card";
+import CustomiseAppearanceModal from "@/components/layout/CustomiseAppearanceModal";
 
 type Props = {};
 
@@ -33,7 +36,7 @@ const links = [
     title: "Roles & Permissions",
     subtitle: "Invite & Set User Access",
     icon: Users,
-    href: "/roles-permissions",
+    href: "/business-profiles/roles-and-permissions",
   },
   {
     id: 4,
@@ -47,12 +50,15 @@ const links = [
     title: "Customise Appearance",
     subtitle: "Personalise Layout & Look",
     icon: PaintRoller,
-    href: "/customise-appearance",
+    action: "customise-appearance",
   },
 ];
 
 function MyLinks({}: Props) {
+  const [customiseOpen, setCustomiseOpen] = useState(false);
+
   return (
+    <>
     <Card className="bg-gray-50">
     <CardHeader
         icon={<LinkIcon className="w-5 h-5 text-primary" strokeWidth={2} />}
@@ -62,9 +68,38 @@ function MyLinks({}: Props) {
       <CardBody>
         {links.map((link) => {
           const Icon = link.icon;
+          const isCustomise = "action" in link;
+
+          if (isCustomise) {
+            return (
+              <button
+                key={link.id}
+                onClick={() => setCustomiseOpen(true)}
+                className="w-full flex items-center justify-between p-4 bg-white rounded-lg hover:bg-blue-50 transition-colors group"
+              >
+                <div className="flex items-center gap-2">
+                  <div className="w-10 h-10 rounded-full group-hover:bg-blue-200 flex items-center justify-center">
+                    <Icon className="w-6 h-6 text-primary" strokeWidth={1.5} />
+                  </div>
+                  <div className="text-left">
+                    <h3 className="text-sm font-medium text-primary-dark">
+                      {link.title}
+                    </h3>
+                    <p className="text-xs text-primary-dark">{link.subtitle}</p>
+                  </div>
+                </div>
+                <ChevronRight
+                  className="w-8 h-8 text-primary-dark group-hover:text-primary transition-colors"
+                  strokeWidth={1.2}
+                />
+              </button>
+            );
+          }
+
           return (
-            <button
+            <Link
               key={link.id}
+              href={(link as { href: string }).href}
               className="w-full flex items-center justify-between p-4 bg-white rounded-lg hover:bg-blue-50 transition-colors group"
             >
               <div className="flex items-center gap-2">
@@ -82,7 +117,7 @@ function MyLinks({}: Props) {
                 className="w-8 h-8 text-primary-dark group-hover:text-primary transition-colors"
                 strokeWidth={1.2}
               />
-            </button>
+            </Link>
           );
         })}
       </CardBody>
@@ -94,6 +129,12 @@ function MyLinks({}: Props) {
         </button>
       </CardFooter>
     </Card>
+
+    <CustomiseAppearanceModal
+      open={customiseOpen}
+      onOpenChange={setCustomiseOpen}
+    />
+    </>
   );
 }
 
