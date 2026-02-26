@@ -8,7 +8,7 @@ import AuthWelcomeLayout from "./shared/AuthWelcomeLayout";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import SignInForm from "./signin/SignInForm";
-import { fetchPingToken } from "@/services/auth/pingAuthService";
+import { fetchPingToken, fetchPingUserInfo } from "@/services/auth/pingAuthService";
 
 type ViewType = "welcome" | "signin" | "register" | "invite";
 
@@ -37,14 +37,30 @@ export default function AuthWelcome() {
       console.log("  code  :", code);
       console.log("  state :", state);
 
-      // Exchange the authorization code for an access token
+      // STEP 2: Exchange the authorization code for an access token
       fetchPingToken(code)
-        .then((tokenData) => {
+        .then(async (tokenData) => {
           console.log("[PingAuth] Token exchange successful:");
           console.log("  access_token :", tokenData.access_token);
           console.log("  token_type   :", tokenData.token_type);
           console.log("  expires_in   :", tokenData.expires_in);
           console.log("  scope        :", tokenData.scope);
+
+          // STEP 3: Fetch user info using the obtained access token
+          try {
+            const userInfo = await fetchPingUserInfo(tokenData.access_token);
+            console.log("[PingAuth] UserInfo received:");
+            console.log("  sub              :", userInfo.sub);
+            console.log("  name             :", userInfo.name);
+            console.log("  email            :", userInfo.email);
+            console.log("  preferred_username:", userInfo.preferred_username);
+            console.log("  full payload      :", JSON.stringify(userInfo, null, 2));
+          } catch (userInfoErr: unknown) {
+            const message =
+              userInfoErr instanceof Error ? userInfoErr.message : String(userInfoErr);
+            console.error("[PingAuth] UserInfo request failed:", message);
+            // Not a fatal error — token was obtained successfully; log and continue
+          }
         })
         .catch((err: unknown) => {
           const message = err instanceof Error ? err.message : String(err);

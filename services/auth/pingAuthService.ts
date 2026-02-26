@@ -1,5 +1,5 @@
 /**
- * Ping Identity OAuth 2.0 – Authorization & Token Service
+ * Ping Identity OAuth 2.0 – Authorization, Token & UserInfo Service
  *
  * STEP 1 – Authorization redirect (on Sign In click)
  *   → buildPingAuthUrl(username, password)  — builds the URL
@@ -7,6 +7,9 @@
  *
  * STEP 2 – Token exchange (on callback with ?code=)
  *   → fetchPingToken(code) — POSTs to token endpoint, returns access_token
+ *
+ * STEP 3 – UserInfo (after receiving access_token)
+ *   → fetchPingUserInfo(access_token) — GETs user profile from Ping UserInfo endpoint
  */
 
 // ─── STEP 1: Authorization Redirect ──────────────────────────────────────────
@@ -50,10 +53,12 @@ export function buildPingAuthUrl(username: string, password: string): string {
 export function redirectToPingAuth(username: string, password: string): void {
     const url = buildPingAuthUrl(username, password);
 
-    // Log for dev/SIT verification
+    // Log for dev/SIT verification — never log the raw password
     console.log("[PingAuth] STEP 1 – Redirecting to authorization endpoint");
-    console.log("  URL    :", url);
-    console.log("  Params :", Object.fromEntries(new URL(url).searchParams.entries()));
+    console.log("  URL    :", url.replace(/pf\.pass=[^&]+/, "pf.pass=***"));
+    console.log("  client_id   :", new URL(url).searchParams.get("client_id"));
+    console.log("  redirect_uri:", new URL(url).searchParams.get("redirect_uri"));
+    console.log("  scope       :", new URL(url).searchParams.get("scope"));
 
     window.location.href = url;
 }
@@ -108,4 +113,52 @@ export async function fetchPingToken(code: string): Promise<PingTokenResponse> {
     document.cookie = "isAuthenticated=true; path=/; max-age=1800; secure; samesite=lax;";
 
     return data as PingTokenResponse;
+}
+
+// ─── STEP 3: UserInfo ────────────────────────────────────────────────────────
+
+export interface PingUserInfoResponse {
+    sub?: string;
+    name?: string;
+    given_name?: string;
+    family_name?: string;
+    email?: string;
+    email_verified?: boolean;
+    preferred_username?: string;
+    /** Any additional claims Ping returns */
+    [key: string]: unknown;
+}
+
+/**
+ * Retrieves the authenticated user's profile from the Ping UserInfo endpoint.
+ * Calls the internal Next.js API route (/api/auth/ping-userinfo) which runs
+ * server-side — logs appear in the terminal and CORS is bypassed.
+ *
+ * @param accessToken - The access_token received from STEP 2
+ */
+export async function fetchPingUserInfo(
+    accessToken: string
+): Promise<PingUserInfoResponse> {
+    console.log("[PingAuth] STEP 3 — Requesting UserInfo");
+
+    const response = await fetch("/api/auth/ping-userinfo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ access_token: accessToken }),
+    });
+
+    const data = await response.json();
+
+    console.log("[PingAuth] STEP 3 — UserInfo response:", data);
+
+    if (!response.ok) {
+        throw new Error(
+            `[PingAuth] UserInfo request failed (${response.status}): ${JSON.stringify(data)}`
+        );
+    }
+
+    // Persist user profile for the session
+    sessionStorage.setItem("ping_user_info", JSON.stringify(data));
+
+    return data as PingUserInfoResponse;
 }
