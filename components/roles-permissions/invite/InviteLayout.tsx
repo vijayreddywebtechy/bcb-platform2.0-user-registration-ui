@@ -33,9 +33,7 @@ export default function InviteLayout({
   hideProgress = false,
 }: InviteLayoutProps) {
   const totalSteps = steps.length;
-  const progressPercentage = Math.round(
-    ((currentStep - 1) / (totalSteps - 1)) * 100
-  );
+  const progressPercentage = Math.round(((currentStep - 1) / (totalSteps - 1)) * 100);
 
   return (
     <>

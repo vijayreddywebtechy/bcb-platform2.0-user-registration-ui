@@ -30,20 +30,9 @@ function DemoVideo({}: Props) {
           variant="transparent"
           className="p-0 rounded-full h-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hover:shadow-xl"
         >
-          <Image
-            src={playBtn}
-            alt="play button"
-            width={98}
-            height={98}
-            className="w-full h-auto"
-          />
+          <Image src={playBtn} alt="play button" width={98} height={98} className="w-full h-auto" />
         </Button>
-        <Image
-          src={dashboardviewLaptop}
-          alt="laptop"
-          width={1190}
-          height={700}
-        />
+        <Image src={dashboardviewLaptop} alt="laptop" width={1190} height={700} />
       </div>
     </section>
   );

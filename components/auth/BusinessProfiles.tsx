@@ -34,8 +34,7 @@ const mockProfiles: BusinessProfile[] = [
     regNo: "2003/1145/123",
     needsVerification: true,
     needsApproval: true,
-  }
-
+  },
 ];
 
 function BusinessProfiles() {
@@ -50,22 +49,19 @@ function BusinessProfiles() {
     } else {
       const filtered = mockProfiles.filter(
         (profile) =>
-          profile.name.toLowerCase().includes(query.toLowerCase()) ||
-          profile.regNo.includes(query),
+          profile.name.toLowerCase().includes(query.toLowerCase()) || profile.regNo.includes(query)
       );
       setFilteredProfiles(filtered);
     }
   };
 
   const handleProfileSelect = (profile: BusinessProfile) => {
-    console.log("Profile selected:", profile);
     // Add your navigation or logic here
     // router.push(`/business-profiles/${profile.id}`);
     router.push(`/identity-verification`);
   };
 
   const handleSignOut = () => {
-    console.log("Sign out clicked");
     // Add your sign out logic here
   };
 
@@ -82,20 +78,18 @@ function BusinessProfiles() {
 
         {/* Search Box */}
         <div className="mb-6">
-          <SearchBox
-            placeholder="Search businesses"
-            value={searchQuery}
-            onChange={handleSearch}
-          />
+          <SearchBox placeholder="Search businesses" value={searchQuery} onChange={handleSearch} />
         </div>
 
         {/* Search Results Info */}
         <div className="flex justify-between items-center mb-4 text-sm">
           <span className="text-secondary text-xs">
-            Search results <span className="font-medium text-primary-dark">{filteredProfiles.length}</span>
+            Search results{" "}
+            <span className="font-medium text-primary-dark">{filteredProfiles.length}</span>
           </span>
           <span className="text-secondary text-xs">
-            Companies found <span className="font-medium text-primary-dark">{mockProfiles.length}</span>
+            Companies found{" "}
+            <span className="font-medium text-primary-dark">{mockProfiles.length}</span>
           </span>
         </div>
 
@@ -110,12 +104,7 @@ function BusinessProfiles() {
               <div className="flex items-center gap-4 flex-1">
                 {/* Icon */}
                 <div className="flex-shrink-0">
-                  <Image
-                    src={companyIcon}
-                    alt="Company Icon"
-                    width={40}
-                    height={40}
-                  />
+                  <Image src={companyIcon} alt="Company Icon" width={40} height={40} />
                 </div>
 
                 {/* Text Content */}

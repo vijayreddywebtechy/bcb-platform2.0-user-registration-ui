@@ -24,13 +24,10 @@ export default function CaptureInvitationDetails() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    console.log("Form submitted:", { invitationType, idPassport, referenceCode });
     setTimeout(() => setLoading(false), 2000);
   };
 
-  const handleCancel = () => {
-    console.log("Cancel clicked");
-  };
+  const handleCancel = () => {};
 
   return (
     <AuthLayout>
@@ -56,8 +53,7 @@ export default function CaptureInvitationDetails() {
                 I received an invitation to approve or get access to the Business Hub
               </h3>
               <p className="text-sm text-secondary leading-relaxed">
-                You will use the credentials you received to approve, decline or complete a
-                request.
+                You will use the credentials you received to approve, decline or complete a request.
               </p>
             </div>
           </div>
@@ -111,12 +107,7 @@ export default function CaptureInvitationDetails() {
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? "PROCESSING..." : "NEXT"}
             </Button>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={handleCancel}
-              className="w-full"
-            >
+            <Button type="button" variant="outline" onClick={handleCancel} className="w-full">
               CANCEL
             </Button>
           </div>

@@ -4,21 +4,22 @@ import React from "react";
 import Toolbar from "./Toolbar";
 import { Button } from "../ui/button";
 import Image from "next/image";
-import Qrmobile from "@/assets/images/qr/qr_mobile.png"
+import Qrmobile from "@/assets/images/qr/qr_mobile.png";
 
 interface QRMobileVerificationProps {
   onContinueOnDevice?: () => void;
   onCancel?: () => void;
 }
 
-const QRMobileVerification: React.FC<QRMobileVerificationProps> = ({ onContinueOnDevice, onCancel }) => {
+const QRMobileVerification: React.FC<QRMobileVerificationProps> = ({
+  onContinueOnDevice,
+  onCancel,
+}) => {
   const handleContinueOnDevice = () => {
-    console.log("Continue on current device...");
     onContinueOnDevice?.();
   };
 
   const handleCancel = () => {
-    console.log("Verification cancelled");
     onCancel?.();
   };
 
@@ -26,7 +27,6 @@ const QRMobileVerification: React.FC<QRMobileVerificationProps> = ({ onContinueO
     <>
       <div className="page-container py-10">
         <div className="w-full md:max-w-md mx-auto text-center">
-
           {/* Heading */}
           <h1 className="text-lg font-medium text-secondary mb-3">
             Continue verification on your phone
@@ -61,7 +61,11 @@ const QRMobileVerification: React.FC<QRMobileVerificationProps> = ({ onContinueO
             <Button onClick={handleContinueOnDevice} className="w-full">
               CONTINUE ON CURRENT DEVICE
             </Button>
-            <Button variant="outline" onClick={handleCancel} className="w-full max-w-80 mx-auto mt-10">
+            <Button
+              variant="outline"
+              onClick={handleCancel}
+              className="w-full max-w-80 mx-auto mt-10"
+            >
               CANCEL
             </Button>
           </div>

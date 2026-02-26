@@ -19,9 +19,7 @@ function SecurityStatus({}: Props) {
           height={40}
           className="w-10 h-10"
         />
-        <h2 className="text-base md:text-lg font-medium text-secondary">
-          Security Status
-        </h2>
+        <h2 className="text-base md:text-lg font-medium text-secondary">Security Status</h2>
       </div>
       <div className="p-4 md:p-6 flex-1">
         <div className="p-4 bg-blue-50 rounded-2xl">
@@ -38,17 +36,14 @@ function SecurityStatus({}: Props) {
 
           {/* Content */}
           <div className="text-center py-6">
-            <p className="text-sm md:text-base text-secondary mb-1">
-              Manage your trusted devices
-            </p>
+            <p className="text-sm md:text-base text-secondary mb-1">Manage your trusted devices</p>
             <h3 className="text-xl md:text-2xl font-medium text-secondary">
               Add or remove devices
             </h3>
           </div>
 
           {/* Button */}
-          <Button
-            variant="outline" className="w-full">
+          <Button variant="outline" className="w-full">
             CHECK MY DEVICES
           </Button>
         </div>

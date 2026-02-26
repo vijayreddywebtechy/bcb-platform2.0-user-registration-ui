@@ -128,10 +128,7 @@ const accountSections: AccountSection[] = [
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export default function ConfigurePermissions({
-  onNext,
-  onBack,
-}: ConfigurePermissionsProps) {
+export default function ConfigurePermissions({ onNext, onBack }: ConfigurePermissionsProps) {
   // Permissions state – some pre-selected as in design
   const [selectedPermissions, setSelectedPermissions] = useState<string[]>([
     "ops-queries",
@@ -143,11 +140,8 @@ export default function ConfigurePermissions({
   ]);
 
   // Account selection state – all pre-selected
-  const allAccountIds = accountSections.flatMap((s) =>
-    s.accounts.map((a) => a.id)
-  );
-  const [selectedAccounts, setSelectedAccounts] =
-    useState<string[]>(allAccountIds);
+  const allAccountIds = accountSections.flatMap((s) => s.accounts.map((a) => a.id));
+  const [selectedAccounts, setSelectedAccounts] = useState<string[]>(allAccountIds);
 
   // Account limits state
   const [accountLimits, setAccountLimits] = useState<
@@ -155,10 +149,7 @@ export default function ConfigurePermissions({
   >(
     Object.fromEntries(
       accountSections.flatMap((s) =>
-        s.accounts.map((a) => [
-          a.id,
-          { dailyLimit: a.dailyLimit, monthlyLimit: a.monthlyLimit },
-        ])
+        s.accounts.map((a) => [a.id, { dailyLimit: a.dailyLimit, monthlyLimit: a.monthlyLimit }])
       )
     )
   );
@@ -171,18 +162,11 @@ export default function ConfigurePermissions({
 
   const toggleGroup = (group: PermissionGroup) => {
     const allIds = group.items.map((i) => i.id);
-    const allSelected = allIds.every((id) =>
-      selectedPermissions.includes(id)
-    );
+    const allSelected = allIds.every((id) => selectedPermissions.includes(id));
     if (allSelected) {
-      setSelectedPermissions((prev) =>
-        prev.filter((p) => !allIds.includes(p))
-      );
+      setSelectedPermissions((prev) => prev.filter((p) => !allIds.includes(p)));
     } else {
-      setSelectedPermissions((prev) => [
-        ...prev,
-        ...allIds.filter((id) => !prev.includes(id)),
-      ]);
+      setSelectedPermissions((prev) => [...prev, ...allIds.filter((id) => !prev.includes(id))]);
     }
   };
 
@@ -192,11 +176,7 @@ export default function ConfigurePermissions({
     );
   };
 
-  const updateLimit = (
-    accountId: string,
-    field: "dailyLimit" | "monthlyLimit",
-    value: string
-  ) => {
+  const updateLimit = (accountId: string, field: "dailyLimit" | "monthlyLimit", value: string) => {
     setAccountLimits((prev) => ({
       ...prev,
       [accountId]: { ...prev[accountId], [field]: value },
@@ -213,9 +193,7 @@ export default function ConfigurePermissions({
       </div>
 
       {/* Heading */}
-      <h1 className="text-xl md:text-2xl font-bold text-secondary mb-2">
-        Configure permissions
-      </h1>
+      <h1 className="text-xl md:text-2xl font-bold text-secondary mb-2">Configure permissions</h1>
 
       {/* Subtitle */}
       <p className="text-sm text-secondary mb-8 leading-relaxed">
@@ -226,9 +204,7 @@ export default function ConfigurePermissions({
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
         {permissionGroups.map((group) => {
           const allIds = group.items.map((i) => i.id);
-          const allSelected = allIds.every((id) =>
-            selectedPermissions.includes(id)
-          );
+          const allSelected = allIds.every((id) => selectedPermissions.includes(id));
 
           return (
             <div key={group.id}>
@@ -257,10 +233,7 @@ export default function ConfigurePermissions({
                       checked={selectedPermissions.includes(item.id)}
                       onCheckedChange={() => togglePermission(item.id)}
                     />
-                    <Label
-                      htmlFor={item.id}
-                      className="text-sm text-secondary cursor-pointer"
-                    >
+                    <Label htmlFor={item.id} className="text-sm text-secondary cursor-pointer">
                       {item.label}
                     </Label>
                   </div>
@@ -285,14 +258,10 @@ export default function ConfigurePermissions({
             {section.accounts.map((account) => {
               const isSelected = selectedAccounts.includes(account.id);
               const limits = accountLimits[account.id];
-              const iconSrc =
-                account.icon === "wallet" ? icnWallet : icnCash;
+              const iconSrc = account.icon === "wallet" ? icnWallet : icnCash;
 
               return (
-                <div
-                  key={account.id}
-                  className="grid sm:grid-cols-2 gap-4 gap-y-10 py-5"
-                >
+                <div key={account.id} className="grid sm:grid-cols-2 gap-4 gap-y-10 py-5">
                   {/* Checkbox + icon + name */}
                   <div className="flex items-center gap-3 sm:min-w-[260px]">
                     <Checkbox
@@ -302,12 +271,7 @@ export default function ConfigurePermissions({
                       className="shrink-0"
                     />
                     <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Image
-                        src={iconSrc}
-                        alt=""
-                        width={24}
-                        height={24}
-                      />
+                      <Image src={iconSrc} alt="" width={24} height={24} />
                     </div>
                     <div className="min-w-0">
                       <Label
@@ -316,9 +280,7 @@ export default function ConfigurePermissions({
                       >
                         {account.name}
                       </Label>
-                      <p className="text-xs text-gray-500">
-                        {account.number}
-                      </p>
+                      <p className="text-xs text-gray-500">{account.number}</p>
                     </div>
                   </div>
 
@@ -328,9 +290,7 @@ export default function ConfigurePermissions({
                       <FloatingTextField
                         label="Daily Limit*"
                         value={limits?.dailyLimit ?? ""}
-                        onChange={(e) =>
-                          updateLimit(account.id, "dailyLimit", e.target.value)
-                        }
+                        onChange={(e) => updateLimit(account.id, "dailyLimit", e.target.value)}
                       />
                       <p className="text-xs text-secondary mt-1">*Required</p>
                     </div>
@@ -338,13 +298,7 @@ export default function ConfigurePermissions({
                       <FloatingTextField
                         label="Monthly Limit*"
                         value={limits?.monthlyLimit ?? ""}
-                        onChange={(e) =>
-                          updateLimit(
-                            account.id,
-                            "monthlyLimit",
-                            e.target.value
-                          )
-                        }
+                        onChange={(e) => updateLimit(account.id, "monthlyLimit", e.target.value)}
                       />
                       <p className="text-xs text-secondary mt-1">*Required</p>
                     </div>

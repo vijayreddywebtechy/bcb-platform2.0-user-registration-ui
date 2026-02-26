@@ -58,37 +58,19 @@ export default function InviteTeamMemberPage() {
         isSuccess
           ? undefined
           : step === 1
-          ? handleCancel
-          : () => goTo((step as number - 1) as Step)
+            ? handleCancel
+            : () => goTo(((step as number) - 1) as Step)
       }
       onExit={handleExit}
       hideBack={isSuccess}
       hideProgress={isSuccess}
     >
-      {step === 1 && (
-        <InviteType onNext={() => goTo(2)} />
-      )}
-      {step === 2 && (
-        <SelectUsers onNext={() => goTo(3)} onBack={() => goTo(1)} />
-      )}
-      {step === 3 && (
-        <CaptureDetails onNext={() => goTo(4)} onBack={() => goTo(2)} />
-      )}
-      {step === 4 && (
-        <ConfigurePermissions onNext={() => goTo(5)} onBack={() => goTo(3)} />
-      )}
-      {step === 5 && (
-        <ReviewAndSend
-          onNext={() => goTo("success")}
-          onBack={() => goTo(4)}
-        />
-      )}
-      {isSuccess && (
-        <InviteSuccess
-          onAddAnother={() => goTo(1)}
-          onDone={handleExit}
-        />
-      )}
+      {step === 1 && <InviteType onNext={() => goTo(2)} />}
+      {step === 2 && <SelectUsers onNext={() => goTo(3)} onBack={() => goTo(1)} />}
+      {step === 3 && <CaptureDetails onNext={() => goTo(4)} onBack={() => goTo(2)} />}
+      {step === 4 && <ConfigurePermissions onNext={() => goTo(5)} onBack={() => goTo(3)} />}
+      {step === 5 && <ReviewAndSend onNext={() => goTo("success")} onBack={() => goTo(4)} />}
+      {isSuccess && <InviteSuccess onAddAnother={() => goTo(1)} onDone={handleExit} />}
     </InviteLayout>
   );
 }

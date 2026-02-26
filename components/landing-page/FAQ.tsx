@@ -16,8 +16,7 @@ const faqs: FAQItem[] = [
       "The Business Hub is a single home for all of your Standard Bank accounts and solutions. It connects you to a variety of products and services, as well as experts to take your business further.\n\nAccess tools to better manage your business\u2019s finances. You will also have access to industry experts and resources to help your business grow.",
   },
   {
-    question:
-      "How do I sign in or register for the Standard Bank Business Hub?",
+    question: "How do I sign in or register for the Standard Bank Business Hub?",
     answer:
       "You can sign in or register through the Online Banking for Business App. Download the app from the App Store or Google Play, then follow the registration steps to create your account and access the Business Hub.",
   },
@@ -93,9 +92,7 @@ function FAQ() {
               <div
                 className={cn(
                   "grid transition-all duration-300",
-                  openIndex === index
-                    ? "grid-rows-[1fr] opacity-100"
-                    : "grid-rows-[0fr] opacity-0"
+                  openIndex === index ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
                 )}
               >
                 <div className="overflow-hidden">

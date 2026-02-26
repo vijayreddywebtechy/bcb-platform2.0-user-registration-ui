@@ -1,6 +1,15 @@
 "use client";
 
-import { User, ScanFace, Link2, FileText, Building, PaintRoller, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  User,
+  ScanFace,
+  Link2,
+  FileText,
+  Building,
+  PaintRoller,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import ActionCard from "@/components/dynamic/cards/ActionCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
@@ -38,17 +47,15 @@ const actions = [
   {
     stepNumber: 4,
     title: "Confirm Business Details",
-    description:
-      "Confirm your business details, notification preferences and trust devices.",
+    description: "Confirm your business details, notification preferences and trust devices.",
     icon: Building,
     status: "active" as const,
     bgColor: "bg-blue-700",
   },
- {
+  {
     stepNumber: 5,
     title: "Confirm Business Details",
-    description:
-      "Confirm your business details, notification preferences and trust devices.",
+    description: "Confirm your business details, notification preferences and trust devices.",
     icon: Building,
     status: "active" as const,
     bgColor: "bg-blue-700",
@@ -62,7 +69,9 @@ function NextActions() {
     <div className="bg-primary-dark py-12">
       <div className="page-container">
         <div className="flex items-center justify-between mb-5">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-medium text-blue-50">Next best actions</h2>
+          <h2 className="text-lg sm:text-xl md:text-2xl font-medium text-blue-50">
+            Next best actions
+          </h2>
           <div className="flex gap-2">
             <button
               onClick={() => swiperRef.current?.slidePrev()}
@@ -102,4 +111,4 @@ function NextActions() {
   );
 }
 
-export default NextActions
+export default NextActions;

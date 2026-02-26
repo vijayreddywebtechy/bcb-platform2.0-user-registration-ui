@@ -4,10 +4,7 @@ import { useState } from "react";
 import { Info } from "lucide-react";
 import Image from "next/image";
 import { FloatingTextField } from "@/components/ui/FloatingTextField";
-import {
-  FloatingSelect,
-  SelectOption,
-} from "@/components/ui/FloatingReactSelect";
+import { FloatingSelect, SelectOption } from "@/components/ui/FloatingReactSelect";
 import StepActions from "./StepActions";
 import icnPeopleSecure from "@/assets/images/icons/icn_people_1_secure.svg";
 
@@ -34,10 +31,7 @@ const roleOptions: SelectOption[] = [
   { value: "viewer", label: "Viewer" },
 ];
 
-export default function CaptureDetails({
-  onNext,
-  onBack,
-}: CaptureDetailsProps) {
+export default function CaptureDetails({ onNext, onBack }: CaptureDetailsProps) {
   const [users, setUsers] = useState<UserDetail[]>([
     {
       id: "1",
@@ -50,14 +44,8 @@ export default function CaptureDetails({
     },
   ]);
 
-  const updateUser = (
-    id: string,
-    field: keyof UserDetail,
-    value: string | SelectOption | null
-  ) => {
-    setUsers((prev) =>
-      prev.map((u) => (u.id === id ? { ...u, [field]: value } : u))
-    );
+  const updateUser = (id: string, field: keyof UserDetail, value: string | SelectOption | null) => {
+    setUsers((prev) => prev.map((u) => (u.id === id ? { ...u, [field]: value } : u)));
   };
 
   return (
@@ -70,9 +58,7 @@ export default function CaptureDetails({
       </div>
 
       {/* Heading */}
-      <h1 className="text-xl md:text-2xl font-bold text-secondary mb-2">
-        Add a team member
-      </h1>
+      <h1 className="text-xl md:text-2xl font-bold text-secondary mb-2">Add a team member</h1>
 
       {/* Subtitle */}
       <p className="text-sm text-secondary mb-8 leading-relaxed">
@@ -89,9 +75,7 @@ export default function CaptureDetails({
                 <FloatingTextField
                   label="First Name*"
                   value={user.firstName}
-                  onChange={(e) =>
-                    updateUser(user.id, "firstName", e.target.value)
-                  }
+                  onChange={(e) => updateUser(user.id, "firstName", e.target.value)}
                 />
                 <p className="text-xs text-secondary mt-1">*Required</p>
               </div>
@@ -99,9 +83,7 @@ export default function CaptureDetails({
                 <FloatingTextField
                   label="Last Name*"
                   value={user.lastName}
-                  onChange={(e) =>
-                    updateUser(user.id, "lastName", e.target.value)
-                  }
+                  onChange={(e) => updateUser(user.id, "lastName", e.target.value)}
                 />
                 <p className="text-xs text-secondary mt-1">*Required</p>
               </div>
@@ -110,9 +92,7 @@ export default function CaptureDetails({
                   label="Business Email ID*"
                   type="email"
                   value={user.email}
-                  onChange={(e) =>
-                    updateUser(user.id, "email", e.target.value)
-                  }
+                  onChange={(e) => updateUser(user.id, "email", e.target.value)}
                 />
                 <p className="text-xs text-secondary mt-1">*Required</p>
               </div>
@@ -121,9 +101,7 @@ export default function CaptureDetails({
                   label="Phone Number*"
                   type="tel"
                   value={user.phone}
-                  onChange={(e) =>
-                    updateUser(user.id, "phone", e.target.value)
-                  }
+                  onChange={(e) => updateUser(user.id, "phone", e.target.value)}
                 />
                 <p className="text-xs text-secondary mt-1">*Required</p>
               </div>
@@ -131,9 +109,7 @@ export default function CaptureDetails({
                 <FloatingTextField
                   label="Job Tittle*"
                   value={user.jobTitle}
-                  onChange={(e) =>
-                    updateUser(user.id, "jobTitle", e.target.value)
-                  }
+                  onChange={(e) => updateUser(user.id, "jobTitle", e.target.value)}
                 />
                 <p className="text-xs text-secondary mt-1">*Required</p>
               </div>

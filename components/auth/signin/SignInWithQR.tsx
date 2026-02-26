@@ -30,10 +30,7 @@ export default function SignInWithQR({
   useEffect(() => {
     if (secondsLeft <= 0) return;
 
-    const timer = window.setInterval(
-      () => setSecondsLeft((prev) => Math.max(prev - 1, 0)),
-      1000
-    );
+    const timer = window.setInterval(() => setSecondsLeft((prev) => Math.max(prev - 1, 0)), 1000);
 
     return () => window.clearInterval(timer);
   }, [secondsLeft]);
@@ -45,17 +42,14 @@ export default function SignInWithQR({
   };
 
   const handleExpandQR = () => {
-    console.log("Expand QR code clicked");
     onExpandQR?.();
   };
 
   const handleSignInWithPassword = () => {
-    console.log("Sign in with password clicked");
     onSignInWithPassword?.();
   };
 
   const handleCancel = () => {
-    console.log("Cancel clicked");
     onCancel?.();
   };
 
@@ -83,21 +77,12 @@ export default function SignInWithQR({
           {/* QR Code */}
           <div className="flex justify-center mb-6">
             <div className="relative w-52 h-52">
-              <Image
-                src={qrCodeImage}
-                alt="QR Code"
-                fill
-                className="object-contain"
-                priority
-              />
+              <Image src={qrCodeImage} alt="QR Code" fill className="object-contain" priority />
             </div>
           </div>
 
           {/* Expand QR Button */}
-          <Button
-            onClick={handleExpandQR}
-            className="w-full mb-4"
-          >
+          <Button onClick={handleExpandQR} className="w-full mb-4">
             EXPAND QR CODE
           </Button>
 
@@ -108,21 +93,14 @@ export default function SignInWithQR({
 
           {/* Info Link */}
           <div className="text-center mb-6">
-            <a
-              href="#"
-              className="text-primary text-sm hover:text-primary-dark transition-colors"
-            >
+            <a href="#" className="text-primary text-sm hover:text-primary-dark transition-colors">
               Information about this security upgrade
             </a>
           </div>
 
           {/* Sign In with Password Button */}
           <Link href="/business-profiles">
-            <Button
-              variant="outline"
-              onClick={handleSignInWithPassword}
-              className="w-full mb-3"
-            >
+            <Button variant="outline" onClick={handleSignInWithPassword} className="w-full mb-3">
               SIGN IN WITH PASSWORD
             </Button>
           </Link>

@@ -1,0 +1,26 @@
+# Stage 1: Base image
+FROM node:20-alpine
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+
+# Expose the dev port explicitly
+EXPOSE 8080
+
+# Environment settings for Next.js dev server
+ENV NODE_ENV=development
+ENV NEXT_TELEMETRY_DISABLED=1
+# Force polling because Docker on macOS/Windows often struggles with file-watching events across volume limits
+ENV CHOKIDAR_USEPOLLING=true
+ENV PORT=8080
+
+# Note: In development mode (docker-compose), we volume mount the entire directory
+# so we don't need to copy `package.json` and run `npm install` during the build itself.
+# npm install dependencies will just persist in the volume, or can be run as entrypoint hook.
+# However, usually docker-compose defines `command: npm run dev`, meaning we expect dependencies to already be installed.
+
+# If we wanted to ensure dependencies exist internally for dev:
+# COPY package.json package-lock.json ./
+# RUN npm install --legacy-peer-deps
+# COPY . .
+
+CMD ["npm", "run", "dev"]

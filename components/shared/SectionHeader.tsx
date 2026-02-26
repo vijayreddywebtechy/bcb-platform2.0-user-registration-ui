@@ -18,12 +18,7 @@ function SectionHeader({
   className,
 }: SectionHeaderProps) {
   return (
-    <div
-      className={cn(
-        align === "center" && "text-center",
-        className
-      )}
-    >
+    <div className={cn(align === "center" && "text-center", className)}>
       <h2
         className={cn(
           "text-2xl md:text-3xl lg:text-[42px] tracking-tight text-primary-dark",

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 type Props = {};
 
-function Header({ }: Props) {
+function Header({}: Props) {
   return (
     <div className="bg-primary-dark border-b border-blue-800">
       <div className="page-container flex items-center justify-between py-3">

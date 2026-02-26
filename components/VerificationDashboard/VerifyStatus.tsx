@@ -14,13 +14,8 @@ interface VerifyStatusProps {
   onDone?: () => void;
 }
 
-function VerifyStatus({
-  status = "pending",
-  estimatedHours = 12,
-  onDone,
-}: VerifyStatusProps) {
+function VerifyStatus({ status = "pending", estimatedHours = 12, onDone }: VerifyStatusProps) {
   const handleDone = () => {
-    console.log("Done clicked");
     onDone?.();
   };
 
@@ -31,13 +26,7 @@ function VerifyStatus({
           {/* Success Icon */}
           <div className="flex justify-center mb-6">
             <div className="relative w-24 h-24">
-              <Image
-                src={icnSuccessLg}
-                alt="Success"
-                fill
-                className="object-contain"
-                priority
-              />
+              <Image src={icnSuccessLg} alt="Success" fill className="object-contain" priority />
             </div>
           </div>
 
@@ -48,16 +37,11 @@ function VerifyStatus({
 
           {/* Description */}
           <p className="text-neutral-950 text-center mb-8 leading-relaxed">
-            Your identity has been verified successfully. Proceed with the
-            registration
+            Your identity has been verified successfully. Proceed with the registration
           </p>
 
           {/* Done Button */}
-          <Button
-            variant="outline"
-            onClick={handleDone}
-            className="w-full max-w-xs mx-auto block"
-          >
+          <Button variant="outline" onClick={handleDone} className="w-full max-w-xs mx-auto block">
             DONE
           </Button>
         </>
@@ -100,9 +84,7 @@ function VerifyStatus({
 
   return (
     <div className="page-container py-40">
-      <div className="w-full md:max-w-md mx-auto py-10">
-        {renderContent()}
-      </div>
+      <div className="w-full md:max-w-md mx-auto py-10">{renderContent()}</div>
     </div>
   );
 }

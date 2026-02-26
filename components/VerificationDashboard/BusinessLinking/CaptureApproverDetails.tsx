@@ -3,10 +3,7 @@
 import React, { useState } from "react";
 import { Link2, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  FloatingSelect,
-  SelectOption,
-} from "@/components/ui/FloatingReactSelect";
+import { FloatingSelect, SelectOption } from "@/components/ui/FloatingReactSelect";
 
 interface Approver {
   id: string;
@@ -32,10 +29,7 @@ const roleOptions: SelectOption[] = [
   { value: "viewer", label: "Viewer" },
 ];
 
-function CaptureApproverDetails({
-  onVerifyDetails,
-  onBack,
-}: CaptureApproverDetailsProps) {
+function CaptureApproverDetails({ onVerifyDetails, onBack }: CaptureApproverDetailsProps) {
   const [approvers, setApprovers] = useState<Approver[]>([
     {
       id: "1",
@@ -61,19 +55,15 @@ function CaptureApproverDetails({
 
   const updatePermissions = (id: string, value: SelectOption | null) => {
     setApprovers((prev) =>
-      prev.map((approver) =>
-        approver.id === id ? { ...approver, permissions: value } : approver
-      )
+      prev.map((approver) => (approver.id === id ? { ...approver, permissions: value } : approver))
     );
   };
 
   const handleVerifyDetails = () => {
-    console.log("Confirm details clicked", { approvers });
     onVerifyDetails?.();
   };
 
   const handleBack = () => {
-    console.log("Back clicked");
     onBack?.();
   };
 
@@ -87,9 +77,7 @@ function CaptureApproverDetails({
       </div>
 
       {/* Heading */}
-      <h1 className="text-xl md:text-2xl font-bold text-secondary mb-2">
-        Capture Approver Roles
-      </h1>
+      <h1 className="text-xl md:text-2xl font-bold text-secondary mb-2">Capture Approver Roles</h1>
 
       {/* Subtitle */}
       <p className="text-sm text-secondary mb-6 leading-relaxed">
@@ -103,43 +91,25 @@ function CaptureApproverDetails({
             {/* Avatar + Name */}
             <div className="flex items-start gap-4 mb-4">
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <span className="text-secondary font-medium text-lg">
-                  {approver.initials}
-                </span>
+                <span className="text-secondary font-medium text-lg">{approver.initials}</span>
               </div>
               <div>
-                <p className="text-secondary font-medium text-lg leading-tight">
-                  {approver.name}
-                </p>
-                <p className="text-xs font-medium text-secondary mt-2">
-                  {approver.role}
-                </p>
+                <p className="text-secondary font-medium text-lg leading-tight">{approver.name}</p>
+                <p className="text-xs font-medium text-secondary mt-2">{approver.role}</p>
 
                 {/* Info Grid */}
                 <div className="space-y-2 mt-3">
                   <div className="flex gap-6">
-                    <span className="text-xs text-secondary w-32 shrink-0">
-                      Mobile Number
-                    </span>
-                    <span className="text-xs font-medium text-secondary">
-                      {approver.mobile}
-                    </span>
+                    <span className="text-xs text-secondary w-32 shrink-0">Mobile Number</span>
+                    <span className="text-xs font-medium text-secondary">{approver.mobile}</span>
                   </div>
                   <div className="flex gap-6">
-                    <span className="text-xs text-secondary w-32 shrink-0">
-                      Email Address
-                    </span>
-                    <span className="text-xs font-medium text-secondary">
-                      {approver.email}
-                    </span>
+                    <span className="text-xs text-secondary w-32 shrink-0">Email Address</span>
+                    <span className="text-xs font-medium text-secondary">{approver.email}</span>
                   </div>
                   <div className="flex gap-6">
-                    <span className="text-xs text-secondary w-32 shrink-0">
-                      Profile
-                    </span>
-                    <span className="text-xs font-medium text-green-600">
-                      {approver.profile}
-                    </span>
+                    <span className="text-xs text-secondary w-32 shrink-0">Profile</span>
+                    <span className="text-xs font-medium text-green-600">{approver.profile}</span>
                   </div>
                   {/* Role/Permissions Dropdown */}
                   <div className="!mt-5 w-full md:w-[300px]">
@@ -147,9 +117,7 @@ function CaptureApproverDetails({
                       label="Role/Permissions*"
                       options={roleOptions}
                       value={approver.permissions}
-                      onChange={(selectedOption) =>
-                        updatePermissions(approver.id, selectedOption)
-                      }
+                      onChange={(selectedOption) => updatePermissions(approver.id, selectedOption)}
                       placeholder="Select role/permissions"
                     />
                     <p className="text-xs text-secondary mt-1">*Required</p>
@@ -157,8 +125,6 @@ function CaptureApproverDetails({
                 </div>
               </div>
             </div>
-
-
           </div>
         ))}
       </div>

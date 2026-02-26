@@ -85,10 +85,9 @@ function GeneralDetailsTab() {
       <div className="mt-8 pt-6 border-t border-gray-200 flex items-center gap-2 text-sm text-gray-500">
         <Info className="w-4 h-4 text-primary flex-shrink-0" />
         <span>
-          Details displayed are based on available client information. If this is
-          incorrect, please call{" "}
-          <span className="font-semibold text-secondary">0860 109 075</span> and
-          speak to a consultant.
+          Details displayed are based on available client information. If this is incorrect, please
+          call <span className="font-semibold text-secondary">0860 109 075</span> and speak to a
+          consultant.
         </span>
       </div>
     </div>
@@ -102,9 +101,7 @@ type Tab = "general";
 export function BusinessDetailsPage() {
   const [activeTab, setActiveTab] = useState<Tab>("general");
 
-  const tabs: { id: Tab; label: string }[] = [
-    { id: "general", label: "General Details" },
-  ];
+  const tabs: { id: Tab; label: string }[] = [{ id: "general", label: "General Details" }];
 
   return (
     <div className="page-container py-8">
@@ -127,9 +124,7 @@ export function BusinessDetailsPage() {
         </div>
 
         {/* Tab content */}
-        <div className="p-6">
-          {activeTab === "general" && <GeneralDetailsTab />}
-        </div>
+        <div className="p-6">{activeTab === "general" && <GeneralDetailsTab />}</div>
       </div>
     </div>
   );

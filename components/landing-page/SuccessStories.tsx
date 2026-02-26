@@ -42,8 +42,7 @@ const stories: Story[] = [
     image: agriculture,
     category: "Agriculture",
     date: "23 Sep 2024",
-    title:
-      "Standard Bank's first hydro plant financing to power up Lowmar Farm.",
+    title: "Standard Bank's first hydro plant financing to power up Lowmar Farm.",
     description:
       "We partnered with Lowmar Farm by providing a financial solution comprising a multi-product structure to finance the new hydro project.",
     cta: {
@@ -73,12 +72,7 @@ function StoryCard({ image, category, date, title, description, cta }: Story) {
     <div className="flex flex-col">
       {/* Image with icon overlay */}
       <div className="relative rounded-xl overflow-hidden aspect-[4/3]">
-        <Image
-          src={image}
-          alt={title}
-          fill
-          className="object-cover"
-        />
+        <Image src={image} alt={title} fill className="object-cover" />
         <div className="absolute bottom-0 left-0 w-16 h-16 rounded-tr-md bg-primary flex items-center justify-center">
           <Image src={cta.icon} alt="" width={33} height={33} />
         </div>
@@ -96,9 +90,7 @@ function StoryCard({ image, category, date, title, description, cta }: Story) {
           {title}
         </h3>
 
-        <p className="mt-3 text-sm md:text-base text-white leading-relaxed flex-1">
-          {description}
-        </p>
+        <p className="mt-3 text-sm md:text-base text-white leading-relaxed flex-1">{description}</p>
 
         <Link
           href={cta.href}
@@ -145,17 +137,9 @@ function SuccessStories() {
 
         <div className="mt-10 md:mt-12 flex justify-center">
           <Link href="/" target="_blank">
-            <Button
-              className="px-6"
-            >
+            <Button className="px-6">
               View More Stories
-              <Image
-                src={icnLinkOut}
-                alt=""
-                width={14}
-                height={14}
-                className="ml-2"
-              />
+              <Image src={icnLinkOut} alt="" width={14} height={14} className="ml-2" />
             </Button>
           </Link>
         </div>

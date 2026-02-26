@@ -24,17 +24,8 @@ const partyOptions: {
   {
     value: "related",
     label: "Related party",
-    description:
-      "Someone with an existing business relationship with your company.",
-    icon: (
-      <Image
-        src={icnPeopleSecure}
-        alt=""
-        width={28}
-        height={28}
-        className="text-primary"
-      />
-    ),
+    description: "Someone with an existing business relationship with your company.",
+    icon: <Image src={icnPeopleSecure} alt="" width={28} height={28} className="text-primary" />,
   },
 ];
 
@@ -51,9 +42,7 @@ export default function InviteType({ onNext, onBack }: InviteTypeProps) {
       </div>
 
       {/* Heading */}
-      <h1 className="text-xl md:text-2xl font-bold text-secondary mb-2">
-        Add team member(s)
-      </h1>
+      <h1 className="text-xl md:text-2xl font-bold text-secondary mb-2">Add team member(s)</h1>
 
       {/* Subtitle */}
       <p className="text-sm text-secondary mb-8 leading-relaxed">
@@ -67,14 +56,8 @@ export default function InviteType({ onNext, onBack }: InviteTypeProps) {
         className="space-y-3 mb-10"
       >
         {partyOptions.map((option) => (
-          <label
-            key={option.value}
-            className="flex items-center gap-4 cursor-pointer"
-          >
-            <RadioGroupItem
-              value={option.value}
-              id={option.value}
-            />
+          <label key={option.value} className="flex items-center gap-4 cursor-pointer">
+            <RadioGroupItem value={option.value} id={option.value} />
             <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
               {option.icon}
             </div>
@@ -85,9 +68,7 @@ export default function InviteType({ onNext, onBack }: InviteTypeProps) {
               >
                 {option.label}
               </Label>
-              <p className="text-sm text-gray-500 mt-0.5">
-                {option.description}
-              </p>
+              <p className="text-sm text-gray-500 mt-0.5">{option.description}</p>
             </div>
           </label>
         ))}

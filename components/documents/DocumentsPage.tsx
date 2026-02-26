@@ -4,16 +4,12 @@ import { useState } from "react";
 import Image from "next/image";
 import { format } from "date-fns";
 import { FileText, Mail, Download, Eye, ChevronDown } from "lucide-react";
-import {
-  FloatingSelect,
-  SelectOption,
-} from "@/components/ui/FloatingReactSelect";
+import { FloatingSelect, SelectOption } from "@/components/ui/FloatingReactSelect";
 import { Button } from "@/components/ui/button";
 import { FloatingDatePicker } from "@/components/ui/FloatingDatePicker";
 import icnDocCertificate from "@/assets/images/icons/icn_doc_certificate.svg";
 import icnDocumentSuccess from "@/assets/images/icons/icn_document_success.svg";
 import icnAlertCircleSolid from "@/assets/images/icons/icn_alert_circle_solid.svg";
-
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -23,10 +19,7 @@ const accountOptions: SelectOption[] = [
   { value: "7685", label: "Business MarketLink •••• 7685" },
 ];
 
-const MONTHS = [
-  "Dec", "Nov", "Oct", "Sep", "Aug", "Jul",
-  "Jun", "May", "Apr", "Mar", "Feb", "Jan",
-];
+const MONTHS = ["Dec", "Nov", "Oct", "Sep", "Aug", "Jul", "Jun", "May", "Apr", "Mar", "Feb", "Jan"];
 
 const monthlyStatements = MONTHS.map((month, i) => ({
   id: String(12 - i),
@@ -36,35 +29,34 @@ const monthlyStatements = MONTHS.map((month, i) => ({
 
 // ─── Document cards ───────────────────────────────────────────────────────────
 
-function FeaturedCard({
-  title,
-  description,
-}: {
-  title: string;
-  description: string;
-}) {
+function FeaturedCard({ title, description }: { title: string; description: string }) {
   return (
     <div className="bg-primary rounded-2xl p-6 flex flex-col min-h-[420px]">
       <div className="w-28 h-28 bg-white rounded-full flex items-center justify-center mb-5 flex-shrink-0">
-        <Image src={icnDocCertificate} alt="Bank account confirmation letter" width={112} height={112} />
+        <Image
+          src={icnDocCertificate}
+          alt="Bank account confirmation letter"
+          width={112}
+          height={112}
+        />
       </div>
       <div className="mt-auto">
-              <h3 className="text-2xl text-white mb-3 leading-snug transition-colors">{title}</h3>
-      <p className="text-sm text-blue-100 flex-1">{description}</p>
-      <div className="flex items-center gap-3 mt-5">
-        <button
-          className="p-2 bg-white rounded-md flex items-center justify-center  transition-colors"
-          aria-label="Email"
-        >
-          <Mail className="w-5 h-5 text-primary" strokeWidth={1.5} />
-        </button>
-        <button
-          className="p-2 bg-white rounded-md flex items-center justify-center transition-colors"
-          aria-label="Download"
-        >
-          <Download className="w-5 h-5 text-primary" strokeWidth={1.5} />
-        </button>
-      </div>
+        <h3 className="text-2xl text-white mb-3 leading-snug transition-colors">{title}</h3>
+        <p className="text-sm text-blue-100 flex-1">{description}</p>
+        <div className="flex items-center gap-3 mt-5">
+          <button
+            className="p-2 bg-white rounded-md flex items-center justify-center  transition-colors"
+            aria-label="Email"
+          >
+            <Mail className="w-5 h-5 text-primary" strokeWidth={1.5} />
+          </button>
+          <button
+            className="p-2 bg-white rounded-md flex items-center justify-center transition-colors"
+            aria-label="Download"
+          >
+            <Download className="w-5 h-5 text-primary" strokeWidth={1.5} />
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -85,25 +77,23 @@ function StampedCard({
         <Image src={icnDocumentSuccess} alt="Stamped bank statement" width={112} height={112} />
       </div>
       <div className="mt-auto">
-      <h3 className="text-2xl text-secondary group-hover:text-white mb-3 leading-snug transition-colors">
-        {title}
-      </h3>
-      <p className="text-sm font-medium text-primary-dark group-hover:text-white transition-colors mb-3">{dateRange}</p>
-      <p className="text-sm text-gray-500 group-hover:text-white flex-1 transition-colors">{description}</p>
-      <div className="flex items-center gap-3 mt-4">
-        <button
-          className="p-2 bg-white rounded-md transition-colors"
-          aria-label="Email"
-        >
-          <Mail className="w-5 h-5 text-primary transition-colors" strokeWidth={1.5} />
-        </button>
-        <button
-          className="p-2 bg-white rounded-md transition-colors"
-          aria-label="Download"
-        >
-          <Download className="w-5 h-5 text-primary transition-colors" strokeWidth={1.5} />
-        </button>
-      </div>
+        <h3 className="text-2xl text-secondary group-hover:text-white mb-3 leading-snug transition-colors">
+          {title}
+        </h3>
+        <p className="text-sm font-medium text-primary-dark group-hover:text-white transition-colors mb-3">
+          {dateRange}
+        </p>
+        <p className="text-sm text-gray-500 group-hover:text-white flex-1 transition-colors">
+          {description}
+        </p>
+        <div className="flex items-center gap-3 mt-4">
+          <button className="p-2 bg-white rounded-md transition-colors" aria-label="Email">
+            <Mail className="w-5 h-5 text-primary transition-colors" strokeWidth={1.5} />
+          </button>
+          <button className="p-2 bg-white rounded-md transition-colors" aria-label="Download">
+            <Download className="w-5 h-5 text-primary transition-colors" strokeWidth={1.5} />
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -116,10 +106,12 @@ function DisclaimerCard({ description }: { description: string }) {
         <Image src={icnAlertCircleSolid} alt="Statements disclaimer" width={112} height={112} />
       </div>
       <div className="mt-auto">
-              <h3 className="text-base font-medium text-secondary group-hover:text-white mb-3 transition-colors">
-        Statements Disclaimer
-      </h3>
-      <p className="text-xs text-gray-500 group-hover:text-blue-100 leading-relaxed transition-colors whitespace-pre-line">{description}</p>
+        <h3 className="text-base font-medium text-secondary group-hover:text-white mb-3 transition-colors">
+          Statements Disclaimer
+        </h3>
+        <p className="text-xs text-gray-500 group-hover:text-blue-100 leading-relaxed transition-colors whitespace-pre-line">
+          {description}
+        </p>
       </div>
     </div>
   );
@@ -128,18 +120,17 @@ function DisclaimerCard({ description }: { description: string }) {
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export function DocumentsPage() {
-  const [selectedAccount, setSelectedAccount] = useState<SelectOption | null>(
-    accountOptions[0]
-  );
+  const [selectedAccount, setSelectedAccount] = useState<SelectOption | null>(accountOptions[0]);
   const [fromDate, setFromDate] = useState<Date | undefined>(new Date(2020, 11, 26));
   const [toDate, setToDate] = useState<Date | undefined>(new Date(2025, 11, 26));
   const [selectedYear, setSelectedYear] = useState("2025");
   const generatedStatements = [
     {
       id: "1",
-      dateRange: fromDate && toDate
-        ? `${format(fromDate, "dd/MM/yyyy")}-${format(toDate, "dd/MM/yyyy")}`
-        : "",
+      dateRange:
+        fromDate && toDate
+          ? `${format(fromDate, "dd/MM/yyyy")}-${format(toDate, "dd/MM/yyyy")}`
+          : "",
       type: "Provisional Statement",
     },
   ];
@@ -147,7 +138,6 @@ export function DocumentsPage() {
   return (
     <div>
       <div className="page-container py-8 space-y-12">
-
         {/* ── Account selector ── */}
         <section>
           <h2 className="text-xl md:text-2xl font-medium text-secondary mb-4">
@@ -180,7 +170,11 @@ export function DocumentsPage() {
               dateRange="9 Aug 2025 - 7 Feb 2026"
               description="Download or email your official stamped bank statement in PDF"
             />
-            <DisclaimerCard description={"Statements are not password protected. Standard Bank is not responsible for any loss or damage you may suffer if any information is accessed or used by any unauthorised party.\n\nA service fee of R10 will be charged for each retrieval, email and download of statements older than 2 years or stamped statements older than 6 months."} />
+            <DisclaimerCard
+              description={
+                "Statements are not password protected. Standard Bank is not responsible for any loss or damage you may suffer if any information is accessed or used by any unauthorised party.\n\nA service fee of R10 will be charged for each retrieval, email and download of statements older than 2 years or stamped statements older than 6 months."
+              }
+            />
           </div>
         </section>
 
@@ -229,16 +223,15 @@ export function DocumentsPage() {
                       />
                       {stmt.dateRange}
                     </div>
-                    <div className="flex items-center py-4 border-l border-gray-200 pl-6 text-sm text-secondary">{stmt.type}</div>
+                    <div className="flex items-center py-4 border-l border-gray-200 pl-6 text-sm text-secondary">
+                      {stmt.type}
+                    </div>
                     <div className="flex items-center justify-center border-l border-gray-200">
                       <button
                         className="p-2 hover:bg-blue-50 rounded-md transition-colors"
                         aria-label="Download statement"
                       >
-                        <Download
-                          className="w-5 h-5 text-primary"
-                          strokeWidth={1.5}
-                        />
+                        <Download className="w-5 h-5 text-primary" strokeWidth={1.5} />
                       </button>
                     </div>
                   </div>
@@ -251,9 +244,7 @@ export function DocumentsPage() {
         {/* ── Un-stamped monthly statements ── */}
         <section>
           <div className="flex items-center justify-between mb-5">
-            <h2 className="text-lg font-semibold text-secondary">
-              Un-stamped monthly statements
-            </h2>
+            <h2 className="text-lg font-semibold text-secondary">Un-stamped monthly statements</h2>
             {/* Year selector */}
             <div className="relative">
               <select
@@ -300,9 +291,7 @@ export function DocumentsPage() {
                       <p className="text-sm font-medium text-secondary">
                         Statement No. {stmt.statementNo}
                       </p>
-                      <p className="text-sm text-secondary">
-                        Official monthly bank statement PDF
-                      </p>
+                      <p className="text-sm text-secondary">Official monthly bank statement PDF</p>
                     </div>
                     <div className="flex items-center justify-center border-l border-gray-200">
                       <button
@@ -325,10 +314,7 @@ export function DocumentsPage() {
                         className="p-2 hover:bg-blue-50 rounded-md transition-colors"
                         aria-label="Download statement"
                       >
-                        <Download
-                          className="w-5 h-5 text-primary"
-                          strokeWidth={1.5}
-                        />
+                        <Download className="w-5 h-5 text-primary" strokeWidth={1.5} />
                       </button>
                     </div>
                   </div>
@@ -338,13 +324,11 @@ export function DocumentsPage() {
           </div>
 
           <p className="mt-4 text-sm text-secondary">
-            Displaying{" "}
-            <span className="font-medium">{monthlyStatements.length}</span> of{" "}
+            Displaying <span className="font-medium">{monthlyStatements.length}</span> of{" "}
             <span className="font-medium">{monthlyStatements.length}</span>
           </p>
         </section>
       </div>
-
     </div>
   );
 }

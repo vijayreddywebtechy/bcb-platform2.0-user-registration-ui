@@ -56,11 +56,7 @@ const allUsers: User[] = [
 
 export default function SelectUsers({ onNext, onBack }: SelectUsersProps) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedUsers, setSelectedUsers] = useState<string[]>([
-    "1",
-    "2",
-    "3",
-  ]);
+  const [selectedUsers, setSelectedUsers] = useState<string[]>(["1", "2", "3"]);
 
   const filteredUsers = allUsers.filter((user) =>
     user.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -82,9 +78,7 @@ export default function SelectUsers({ onNext, onBack }: SelectUsersProps) {
       </div>
 
       {/* Heading */}
-      <h1 className="text-xl md:text-2xl font-bold text-secondary mb-2">
-        Related Parties
-      </h1>
+      <h1 className="text-xl md:text-2xl font-bold text-secondary mb-2">Related Parties</h1>
 
       {/* Subtitle */}
       <p className="text-sm text-secondary mb-6 leading-relaxed">
@@ -103,16 +97,11 @@ export default function SelectUsers({ onNext, onBack }: SelectUsersProps) {
       {/* Search Results Header */}
       <div className="flex justify-between items-center mb-2">
         <p className="text-xs text-secondary">
-          Search results{" "}
-          <span className="font-semibold text-primary">
-            {filteredUsers.length}
-          </span>
+          Search results <span className="font-semibold text-primary">{filteredUsers.length}</span>
         </p>
         <p className="text-xs text-secondary">
           Directors/Related Parties Found{" "}
-          <span className="font-semibold text-primary">
-            {allUsers.length}
-          </span>
+          <span className="font-semibold text-primary">{allUsers.length}</span>
         </p>
       </div>
 
@@ -130,9 +119,7 @@ export default function SelectUsers({ onNext, onBack }: SelectUsersProps) {
               />
 
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <span className="text-primary font-semibold text-sm">
-                  {user.initials}
-                </span>
+                <span className="text-primary font-semibold text-sm">{user.initials}</span>
               </div>
 
               <div className="flex-1 min-w-0">
@@ -142,34 +129,20 @@ export default function SelectUsers({ onNext, onBack }: SelectUsersProps) {
                 >
                   {user.name}
                 </Label>
-                <p className="text-xs font-bold text-secondary mb-3">
-                  {user.role}
-                </p>
+                <p className="text-xs font-bold text-secondary mb-3">{user.role}</p>
 
                 <div className="space-y-2">
                   <div className="flex gap-6">
-                    <span className="text-xs text-gray-500 w-32 shrink-0">
-                      Mobile Number
-                    </span>
-                    <span className="text-xs font-medium text-secondary">
-                      {user.mobile}
-                    </span>
+                    <span className="text-xs text-gray-500 w-32 shrink-0">Mobile Number</span>
+                    <span className="text-xs font-medium text-secondary">{user.mobile}</span>
                   </div>
                   <div className="flex gap-6">
-                    <span className="text-xs text-gray-500 w-32 shrink-0">
-                      Email Address
-                    </span>
-                    <span className="text-xs font-medium text-secondary">
-                      {user.email}
-                    </span>
+                    <span className="text-xs text-gray-500 w-32 shrink-0">Email Address</span>
+                    <span className="text-xs font-medium text-secondary">{user.email}</span>
                   </div>
                   <div className="flex gap-6">
-                    <span className="text-xs text-gray-500 w-32 shrink-0">
-                      Profile
-                    </span>
-                    <span className="text-xs font-medium text-green-600">
-                      {user.profile}
-                    </span>
+                    <span className="text-xs text-gray-500 w-32 shrink-0">Profile</span>
+                    <span className="text-xs font-medium text-green-600">{user.profile}</span>
                   </div>
                 </div>
               </div>
@@ -186,25 +159,21 @@ export default function SelectUsers({ onNext, onBack }: SelectUsersProps) {
           </div>
           <div className="text-sm text-secondary leading-relaxed">
             <p>
-              <span className="font-bold">Active Banking Digital Profile:</span>{" "}
-              If you already have an active Banking Digital Profile, you can sign
-              in using your existing username and password.
+              <span className="font-bold">Active Banking Digital Profile:</span> If you already have
+              an active Banking Digital Profile, you can sign in using your existing username and
+              password.
             </p>
             <p className="mt-2 text-gray-500 italic">
-              No Active Banking Digital Profile: If you don&apos;t have an active
-              Banking Digital Profile, you&apos;ll need to complete a quick
-              registration to create one before you can continue.
+              No Active Banking Digital Profile: If you don&apos;t have an active Banking Digital
+              Profile, you&apos;ll need to complete a quick registration to create one before you
+              can continue.
             </p>
           </div>
         </div>
       </div>
 
       {/* Actions */}
-      <StepActions
-        onBack={onBack}
-        onNext={onNext}
-        nextDisabled={selectedUsers.length === 0}
-      />
+      <StepActions onBack={onBack} onNext={onNext} nextDisabled={selectedUsers.length === 0} />
     </div>
   );
 }

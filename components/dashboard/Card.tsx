@@ -6,11 +6,7 @@ type CardProps = {
 };
 
 export const Card = ({ children, className = "" }: CardProps) => {
-  return (
-    <div className={`bg-white rounded-2xl shadow-sm ${className}`}>
-      {children}
-    </div>
-  );
+  return <div className={`bg-white rounded-2xl shadow-sm ${className}`}>{children}</div>;
 };
 
 type CardHeaderProps = {
@@ -20,12 +16,7 @@ type CardHeaderProps = {
   title?: string;
 };
 
-export const CardHeader = ({
-  children,
-  className = "",
-  icon,
-  title,
-}: CardHeaderProps) => {
+export const CardHeader = ({ children, className = "", icon, title }: CardHeaderProps) => {
   if (icon && title) {
     return (
       <div
@@ -38,11 +29,7 @@ export const CardHeader = ({
   }
 
   return (
-    <div
-      className={`border-b border-neutral-200 px-6 py-4 h-[72px] ${className}`}
-    >
-      {children}
-    </div>
+    <div className={`border-b border-neutral-200 px-6 py-4 h-[72px] ${className}`}>{children}</div>
   );
 };
 

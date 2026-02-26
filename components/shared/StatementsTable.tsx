@@ -114,7 +114,6 @@ export function StatementsTable({
               {/* Email */}
               <div className="flex items-center justify-center md:min-w-24">
                 <button
-                  onClick={() => onEmail ? onEmail(statement) : console.log(`Email: ${statement.id}`)}
                   className="p-2 hover:bg-blue-50 rounded-md transition-colors group"
                   aria-label="Email statement"
                 >
@@ -128,7 +127,6 @@ export function StatementsTable({
               {/* Download */}
               <div className="flex items-center justify-center md:min-w-24">
                 <button
-                  onClick={() => onDownload ? onDownload(statement) : console.log(`Download: ${statement.id}`)}
                   className="p-2 hover:bg-blue-50 rounded-md transition-colors group"
                   aria-label="Download statement"
                 >

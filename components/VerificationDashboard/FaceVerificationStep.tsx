@@ -13,12 +13,10 @@ interface FaceVerificationStepProps {
 
 const FaceVerificationStep: React.FC<FaceVerificationStepProps> = ({ onContinue, onCancel }) => {
   const handleContinue = () => {
-    console.log("Redirecting to verification partner...");
     onContinue?.();
   };
 
   const handleCancel = () => {
-    console.log("Verification cancelled");
     onCancel?.();
   };
 
@@ -40,15 +38,14 @@ const FaceVerificationStep: React.FC<FaceVerificationStepProps> = ({ onContinue,
 
           {/* Recommended Text */}
           <p className="text-secondary mb-6 leading-relaxed">
-            <span className="font-medium">Recommended:</span> You will have
-            the option to continue on web or scan a QR code to continue on your
-            mobile phone.
+            <span className="font-medium">Recommended:</span> You will have the option to continue
+            on web or scan a QR code to continue on your mobile phone.
           </p>
 
           {/* Continue Info */}
           <p className="text-secondary mb-8 leading-relaxed">
-            By selecting "<span className="font-medium">Continue</span>",
-            you'll be redirected to our trusted partner to verify your identity.
+            By selecting "<span className="font-medium">Continue</span>", you'll be redirected to
+            our trusted partner to verify your identity.
           </p>
 
           {/* Info Box */}
@@ -58,10 +55,9 @@ const FaceVerificationStep: React.FC<FaceVerificationStepProps> = ({ onContinue,
                 <Info className="w-5 h-5 text-white fill-primary-dark" />
               </div>
               <div className="text-sm text-secondary leading-relaxed">
-                <span className="font-medium">By continuing,</span> you give
-                us permission to collect and share your personal details with
-                the Department of Home Affairs and a third party to confirm your
-                identity. This is something we need to do for compliance
+                <span className="font-medium">By continuing,</span> you give us permission to
+                collect and share your personal details with the Department of Home Affairs and a
+                third party to confirm your identity. This is something we need to do for compliance
                 purposes. Call{" "}
                 <a
                   href="tel:0860123000"

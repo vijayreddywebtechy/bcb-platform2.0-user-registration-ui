@@ -156,22 +156,12 @@ export default function ReviewAndSend({ onNext, onBack }: ReviewAndSendProps) {
           </p>
           <div className="space-y-2">
             <p className="text-xs text-gray-500">
-              Role -{" "}
-              <span className="font-medium text-secondary">
-                {invitee.role}
-              </span>
+              Role - <span className="font-medium text-secondary">{invitee.role}</span>
             </p>
+            <p className="text-xs text-gray-500">Mobile Number - {invitee.mobile}</p>
+            <p className="text-xs text-gray-500">Email Address - {invitee.email}</p>
             <p className="text-xs text-gray-500">
-              Mobile Number - {invitee.mobile}
-            </p>
-            <p className="text-xs text-gray-500">
-              Email Address - {invitee.email}
-            </p>
-            <p className="text-xs text-gray-500">
-              Status -{" "}
-              <span className="text-green-600 font-medium">
-                {invitee.status}
-              </span>
+              Status - <span className="text-green-600 font-medium">{invitee.status}</span>
             </p>
           </div>
         </div>
@@ -180,7 +170,8 @@ export default function ReviewAndSend({ onNext, onBack }: ReviewAndSendProps) {
           className="p-2 hover:bg-gray-100 rounded-md transition-colors flex-shrink-0 self-start"
           aria-label={expanded ? "Collapse details" : "Expand details"}
         >
-          <ChevronUp strokeWidth={1.5}
+          <ChevronUp
+            strokeWidth={1.5}
             className={`w-7 h-7 text-secondary transition-transform ${
               expanded ? "" : "rotate-180"
             }`}
@@ -198,9 +189,7 @@ export default function ReviewAndSend({ onNext, onBack }: ReviewAndSendProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-8 mb-10">
             {permissionGroups.map((group) => (
               <div key={group.label}>
-                <h2 className="text-lg md:text-xl font-bold text-secondary mb-5">
-                  {group.label}
-                </h2>
+                <h2 className="text-lg md:text-xl font-bold text-secondary mb-5">{group.label}</h2>
                 <div className="space-y-5">
                   {group.items.map((item) => (
                     <div key={item.label} className="flex items-center gap-3">
@@ -210,9 +199,7 @@ export default function ReviewAndSend({ onNext, onBack }: ReviewAndSendProps) {
                         <XCircle className="w-6 h-6 text-gray-400 flex-shrink-0" />
                       )}
                       <span
-                        className={`text-sm ${
-                          item.granted ? "text-secondary" : "text-gray-400"
-                        }`}
+                        className={`text-sm ${item.granted ? "text-secondary" : "text-gray-400"}`}
                       >
                         {item.label}
                       </span>
@@ -235,25 +222,18 @@ export default function ReviewAndSend({ onNext, onBack }: ReviewAndSendProps) {
                 </h2>
                 <div className="space-y-6">
                   {section.accounts.map((account) => (
-                    <div
-                      key={account.number}
-                      className="flex items-start gap-3"
-                    >
+                    <div key={account.number} className="flex items-start gap-3">
                       <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
                       <div>
-                        <p className="text-sm font-medium text-secondary">
-                          {account.name}
-                        </p>
-                        <p className="text-xs text-gray-500">
-                          {account.number}
-                        </p>
+                        <p className="text-sm font-medium text-secondary">{account.name}</p>
+                        <p className="text-xs text-gray-500">{account.number}</p>
                         <p className="text-xs text-secondary mt-1">
-                          <span className="font-medium">Daily Limit</span>{" "}
-                          R {account.dailyLimit.replace("R ", "")}
+                          <span className="font-medium">Daily Limit</span> R{" "}
+                          {account.dailyLimit.replace("R ", "")}
                         </p>
                         <p className="text-xs text-secondary">
-                          <span className="font-medium">Monthly Limit</span>{" "}
-                          R {account.monthlyLimit.replace("R ", "")}
+                          <span className="font-medium">Monthly Limit</span> R{" "}
+                          {account.monthlyLimit.replace("R ", "")}
                         </p>
                       </div>
                     </div>
@@ -268,19 +248,16 @@ export default function ReviewAndSend({ onNext, onBack }: ReviewAndSendProps) {
             <Checkbox
               id="acknowledge"
               checked={acknowledged}
-              onCheckedChange={(checked) =>
-                setAcknowledged(checked as boolean)
-              }
+              onCheckedChange={(checked) => setAcknowledged(checked as boolean)}
               className="mt-0.5"
             />
             <Label
               htmlFor="acknowledge"
               className="text-sm text-secondary leading-relaxed cursor-pointer"
             >
-              <span className="font-bold">I acknowledge that:</span> Standard
-              Bank does not accept liability for any financial loss to the
-              complainant as a result of any and all misuse of the platform by
-              approved team members.
+              <span className="font-bold">I acknowledge that:</span> Standard Bank does not accept
+              liability for any financial loss to the complainant as a result of any and all misuse
+              of the platform by approved team members.
             </Label>
           </div>
         </>

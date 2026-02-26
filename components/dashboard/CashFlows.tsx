@@ -69,21 +69,20 @@ function CashFlows({}: Props) {
         <div className="w-full flex flex-col md:flex-row gap-x-4 gap-y-6 mb-6 bg-neutral-50 p-4 md:p-6 rounded-lg">
           <div className="w-full md:w-4/12">
             <FloatingSelect
-                label="Period"
-                options={periodOptions}
-                value={selectedPeriod}
-                onChange={(option) => setSelectedPeriod(option)}
+              label="Period"
+              options={periodOptions}
+              value={selectedPeriod}
+              onChange={(option) => setSelectedPeriod(option)}
             />
           </div>
-            <div className="w-full md:w-5/12">    
-            
-          <FloatingSelect
-            label="Account"
-            options={accountOptions}
-            value={selectedAccount}
-            onChange={(option) => setSelectedAccount(option)}
-          />
-            </div>
+          <div className="w-full md:w-5/12">
+            <FloatingSelect
+              label="Account"
+              options={accountOptions}
+              value={selectedAccount}
+              onChange={(option) => setSelectedAccount(option)}
+            />
+          </div>
         </div>
 
         {/* Chart Title */}
@@ -94,10 +93,7 @@ function CashFlows({}: Props) {
         {/* Chart */}
         <div className="mb-6 bg-blue-50 p-4 rounded-lg">
           <ResponsiveContainer width="100%" height={340}>
-            <BarChart
-              data={monthlyData}
-              margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
-            >
+            <BarChart data={monthlyData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
               <XAxis
                 dataKey="month"
@@ -105,11 +101,7 @@ function CashFlows({}: Props) {
                 tickLine={false}
                 tick={{ fill: "#6b7280", fontSize: 12 }}
               />
-              <YAxis
-                axisLine={false}
-                tickLine={false}
-                tick={{ fill: "#6b7280", fontSize: 12 }}
-              />
+              <YAxis axisLine={false} tickLine={false} tick={{ fill: "#6b7280", fontSize: 12 }} />
               <Tooltip
                 cursor={{ fill: "rgba(0, 0, 0, 0.05)" }}
                 contentStyle={{
@@ -128,18 +120,8 @@ function CashFlows({}: Props) {
                   </span>
                 )}
               />
-              <Bar
-                dataKey="inflows"
-                fill="#2563eb"
-                radius={[4, 4, 0, 0]}
-                barSize={13}
-              />
-              <Bar
-                dataKey="outflows"
-                fill="#1f2937"
-                radius={[4, 4, 0, 0]}
-                barSize={13}
-              />
+              <Bar dataKey="inflows" fill="#2563eb" radius={[4, 4, 0, 0]} barSize={13} />
+              <Bar dataKey="outflows" fill="#1f2937" radius={[4, 4, 0, 0]} barSize={13} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -155,16 +137,12 @@ function CashFlows({}: Props) {
           </div>
 
           <div className="bg-blue-600 rounded-lg p-4">
-            <span className="text-sm text-white/90 mb-2 block">
-              Total Money In
-            </span>
+            <span className="text-sm text-white/90 mb-2 block">Total Money In</span>
             <p className="text-2xl font-medium text-white">R512,105,821.00</p>
           </div>
 
           <div className="bg-primary-deep rounded-lg p-4">
-            <span className="text-sm text-white/90 block mb-2">
-              Total Money Out
-            </span>
+            <span className="text-sm text-white/90 block mb-2">Total Money Out</span>
             <p className="text-2xl font-medium text-white">R182,821.00</p>
           </div>
         </div>

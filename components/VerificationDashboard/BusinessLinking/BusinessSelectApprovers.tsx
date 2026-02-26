@@ -22,15 +22,9 @@ interface BusinessSelectApprovalProps {
   onBack?: () => void;
 }
 
-function BusinessSelectApprovers({
-  onCaptureDetails,
-  onBack,
-}: BusinessSelectApprovalProps) {
+function BusinessSelectApprovers({ onCaptureDetails, onBack }: BusinessSelectApprovalProps) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedDirectors, setSelectedDirectors] = useState<string[]>([
-    "1",
-    "2",
-  ]);
+  const [selectedDirectors, setSelectedDirectors] = useState<string[]>(["1", "2"]);
 
   // Mock data for directors
   const allDirectors: Director[] = [
@@ -70,19 +64,15 @@ function BusinessSelectApprovers({
 
   const handleCheckboxChange = (directorId: string) => {
     setSelectedDirectors((prev) =>
-      prev.includes(directorId)
-        ? prev.filter((id) => id !== directorId)
-        : [...prev, directorId]
+      prev.includes(directorId) ? prev.filter((id) => id !== directorId) : [...prev, directorId]
     );
   };
 
   const handleCaptureDetails = () => {
-    console.log("Capture roles clicked", { selectedDirectors });
     onCaptureDetails?.();
   };
 
   const handleBack = () => {
-    console.log("Back clicked");
     onBack?.();
   };
 
@@ -96,14 +86,12 @@ function BusinessSelectApprovers({
       </div>
 
       {/* Heading */}
-      <h1 className="text-xl md:text-2xl font-bold text-secondary mb-2">
-        Select Approvers
-      </h1>
+      <h1 className="text-xl md:text-2xl font-bold text-secondary mb-2">Select Approvers</h1>
 
       {/* Subtitle */}
       <p className="text-sm text-secondary mb-6 leading-relaxed">
-        Details will be validated against our latest client records. A minimum
-        of [2] directors/owners with active digital IDs are required to approve.
+        Details will be validated against our latest client records. A minimum of [2]
+        directors/owners with active digital IDs are required to approve.
       </p>
 
       {/* Search Box */}
@@ -119,15 +107,11 @@ function BusinessSelectApprovers({
       <div className="flex justify-between items-center mb-2">
         <p className="text-xs text-secondary">
           Search results{" "}
-          <span className="font-semibold text-primary">
-            {filteredDirectors.length}
-          </span>
+          <span className="font-semibold text-primary">{filteredDirectors.length}</span>
         </p>
         <p className="text-xs text-secondary">
           Directors/Related Parties Found{" "}
-          <span className="font-semibold text-primary">
-            {allDirectors.length}
-          </span>
+          <span className="font-semibold text-primary">{allDirectors.length}</span>
         </p>
       </div>
 
@@ -147,9 +131,7 @@ function BusinessSelectApprovers({
 
               {/* Avatar */}
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <span className="text-secondary font-medium text-lg">
-                  {director.initials}
-                </span>
+                <span className="text-secondary font-medium text-lg">{director.initials}</span>
               </div>
 
               {/* Details */}
@@ -160,35 +142,21 @@ function BusinessSelectApprovers({
                 >
                   {director.name}
                 </Label>
-                <p className="text-xs font-medium text-secondary mb-3">
-                  {director.role}
-                </p>
+                <p className="text-xs font-medium text-secondary mb-3">{director.role}</p>
 
                 {/* Info grid */}
                 <div className="space-y-2">
                   <div className="flex gap-6">
-                    <span className="text-xs text-secondary w-32 shrink-0">
-                      Mobile Number
-                    </span>
-                    <span className="text-xs font-medium text-secondary">
-                      {director.mobile}
-                    </span>
+                    <span className="text-xs text-secondary w-32 shrink-0">Mobile Number</span>
+                    <span className="text-xs font-medium text-secondary">{director.mobile}</span>
                   </div>
                   <div className="flex gap-6">
-                    <span className="text-xs text-secondary w-32 shrink-0">
-                      Email Address
-                    </span>
-                    <span className="text-xs font-medium text-secondary">
-                      {director.email}
-                    </span>
+                    <span className="text-xs text-secondary w-32 shrink-0">Email Address</span>
+                    <span className="text-xs font-medium text-secondary">{director.email}</span>
                   </div>
                   <div className="flex gap-6">
-                    <span className="text-xs text-secondary w-32 shrink-0">
-                      Profile
-                    </span>
-                    <span className="text-xs font-medium text-green-600">
-                      {director.profile}
-                    </span>
+                    <span className="text-xs text-secondary w-32 shrink-0">Profile</span>
+                    <span className="text-xs font-medium text-green-600">{director.profile}</span>
                   </div>
                 </div>
               </div>
@@ -204,9 +172,8 @@ function BusinessSelectApprovers({
             <Info className="w-5 h-5 text-white fill-primary-dark" />
           </div>
           <p className="text-sm text-secondary leading-relaxed">
-            If director details have changed, please ask them to reach out to
-            their relationship manager/or call centre to update them accordingly
-            before proceeding.
+            If director details have changed, please ask them to reach out to their relationship
+            manager/or call centre to update them accordingly before proceeding.
           </p>
         </div>
       </div>

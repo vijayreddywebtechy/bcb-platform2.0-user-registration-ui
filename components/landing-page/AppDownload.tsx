@@ -52,13 +52,14 @@ function AppDownload() {
                     className="w-full h-full object-contain"
                   />
                 </div>
-                <Link href="/" className="w-full h-auto"><Image
-                  src={playStore}
-                  alt="Get it on Google Play"
-                  width={138}
-                  height={44}
-                  className="h-auto w-full"
-                />
+                <Link href="/" className="w-full h-auto">
+                  <Image
+                    src={playStore}
+                    alt="Get it on Google Play"
+                    width={138}
+                    height={44}
+                    className="h-auto w-full"
+                  />
                 </Link>
               </div>
 
@@ -75,12 +76,13 @@ function AppDownload() {
                 </div>
                 <Link href="/" className="w-full h-auto">
                   <Image
-                  src={appStore}
-                  alt="Download on the App Store"
-                  width={138}
-                  height={44}
-                  className="h-auto w-full"
-                /></Link>
+                    src={appStore}
+                    alt="Download on the App Store"
+                    width={138}
+                    height={44}
+                    className="h-auto w-full"
+                  />
+                </Link>
               </div>
             </div>
           </div>

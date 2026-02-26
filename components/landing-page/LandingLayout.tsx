@@ -2,11 +2,7 @@ import Footer from "@/components/layout/Footer";
 import MiniNavbar from "@/components/layout/MiniNavbar";
 import Header from "./Header";
 
-export default function LandingLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function LandingLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative min-h-screen flex flex-col bg-background">
       <div className="sticky top-0 z-50">

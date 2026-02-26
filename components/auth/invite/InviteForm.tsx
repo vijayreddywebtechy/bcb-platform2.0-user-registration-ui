@@ -30,14 +30,13 @@ export default function InviteForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const validEmails = emails.filter(email => email.trim() !== "");
+    const validEmails = emails.filter((email) => email.trim() !== "");
     if (validEmails.length === 0) {
       alert("Please enter at least one email address");
       return;
     }
     setLoading(true);
     // Add your invite logic here
-    console.log("Inviting:", validEmails, "Message:", message);
     setTimeout(() => {
       setLoading(false);
       alert(`Invitations sent to ${validEmails.length} user(s)`);
@@ -47,16 +46,11 @@ export default function InviteForm() {
   return (
     <AuthLayout>
       <AuthCard>
-        <AuthHeader
-          title="Invite Users"
-          subtitle="Invite team members to join BizHub"
-        />
+        <AuthHeader title="Invite Users" subtitle="Invite team members to join BizHub" />
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-3">
-            <label className="block text-sm font-medium text-gray-700">
-              Email Addresses
-            </label>
+            <label className="block text-sm font-medium text-gray-700">Email Addresses</label>
             {emails.map((email, index) => (
               <div key={index} className="flex gap-2">
                 <input
@@ -74,7 +68,12 @@ export default function InviteForm() {
                     className="px-3 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-all"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                      />
                     </svg>
                   </button>
                 )}
@@ -105,18 +104,31 @@ export default function InviteForm() {
 
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
             <div className="flex items-start gap-3">
-              <svg className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <svg
+                className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
               </svg>
               <div className="text-sm text-blue-800">
                 <p className="font-medium mb-1">Invitation Details</p>
-                <p>Recipients will receive an email with a secure link to create their account and join your organization.</p>
+                <p>
+                  Recipients will receive an email with a secure link to create their account and
+                  join your organization.
+                </p>
               </div>
             </div>
           </div>
 
           <AuthActions
-            primaryText={`Send ${emails.filter(e => e.trim()).length} Invitation${emails.filter(e => e.trim()).length !== 1 ? 's' : ''}`}
+            primaryText={`Send ${emails.filter((e) => e.trim()).length} Invitation${emails.filter((e) => e.trim()).length !== 1 ? "s" : ""}`}
             loading={loading}
           />
 

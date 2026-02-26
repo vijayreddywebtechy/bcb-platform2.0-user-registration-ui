@@ -1,13 +1,13 @@
-import SignInForm from "@/components/auth/signin/SignInForm"
+import SignInForm from "@/components/auth/signin/SignInForm";
 
-type Props = {}
+type Props = {};
 
-function page({ }: Props) {
-    return (
-        <>
-            <SignInForm />
-        </>
-    )
+function page({}: Props) {
+  return (
+    <>
+      <SignInForm />
+    </>
+  );
 }
 
-export default page
+export default page;

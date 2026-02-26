@@ -1,15 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  Mail,
-  MessageSquareText,
-  Monitor,
-  Smartphone,
-  Trash2,
-  Star,
-  Pencil,
-} from "lucide-react";
+import { Mail, MessageSquareText, Monitor, Smartphone, Trash2, Star, Pencil } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
@@ -93,9 +85,7 @@ function NotificationsTab() {
             </div>
             <div>
               <p className="text-sm font-medium text-secondary">Email</p>
-              <p className="text-sm text-gray-500">
-                kobas.marais@abcarchitects.co.za
-              </p>
+              <p className="text-sm text-gray-500">kobas.marais@abcarchitects.co.za</p>
             </div>
           </label>
 
@@ -107,10 +97,7 @@ function NotificationsTab() {
           >
             <RadioGroupItem value="sms" id="sms" />
             <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
-              <MessageSquareText
-                className="w-5 h-5 text-primary"
-                strokeWidth={1.5}
-              />
+              <MessageSquareText className="w-5 h-5 text-primary" strokeWidth={1.5} />
             </div>
             <div>
               <p className="text-sm font-medium text-secondary">SMS</p>
@@ -144,15 +131,9 @@ function NotificationsTab() {
 
 function DeviceIcon({ type }: { type: "desktop" | "mobile" }) {
   return type === "mobile" ? (
-    <Smartphone
-      className="w-5 h-5 text-blue-400"
-      strokeWidth={1.5}
-    />
+    <Smartphone className="w-5 h-5 text-blue-400" strokeWidth={1.5} />
   ) : (
-    <Monitor
-      className="w-5 h-5 text-blue-400"
-      strokeWidth={1.5}
-    />
+    <Monitor className="w-5 h-5 text-blue-400" strokeWidth={1.5} />
   );
 }
 
@@ -177,9 +158,7 @@ function DeviceRow({
       <div>{icon}</div>
       <p className="text-sm font-medium text-secondary">{name}</p>
       <p className="text-sm text-gray-500">Last used on: {lastUsed}</p>
-      <div className="min-w-[180px] flex justify-end">
-        {preferredAction}
-      </div>
+      <div className="min-w-[180px] flex justify-end">{preferredAction}</div>
       <div className="flex justify-center">
         <button
           className="p-2 hover:bg-red-50 rounded-md transition-colors"
@@ -279,10 +258,7 @@ function LinkedDevicesTab() {
         <p className="text-sm text-secondary">
           Don&apos;t recognise any of them? Remove them to secure your profile
         </p>
-        <Button
-          variant="outline"
-          disabled={selectedDevices.length === 0}
-        >
+        <Button variant="outline" disabled={selectedDevices.length === 0}>
           REMOVE SELECTED DEVICES
         </Button>
       </div>

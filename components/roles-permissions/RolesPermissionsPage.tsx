@@ -3,10 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Eye, Check, X, Pencil, AlertCircle } from "lucide-react";
-import {
-  FloatingSelect,
-  SelectOption,
-} from "@/components/ui/FloatingReactSelect";
+import { FloatingSelect, SelectOption } from "@/components/ui/FloatingReactSelect";
 import { Button } from "@/components/ui/button";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -96,13 +93,7 @@ const invites: Invite[] = [
 
 // ─── Shared sub-components ────────────────────────────────────────────────────
 
-function Avatar({
-  initials,
-  color = "bg-primary",
-}: {
-  initials: string;
-  color?: string;
-}) {
+function Avatar({ initials, color = "bg-primary" }: { initials: string; color?: string }) {
   return (
     <div
       className={`w-10 h-10 rounded-full ${color} flex items-center justify-center flex-shrink-0`}
@@ -113,10 +104,7 @@ function Avatar({
 }
 
 function StatusBadge({ status }: { status: UserStatus }) {
-  const config: Record<
-    UserStatus,
-    { dotColor: string; bgColor: string; borderColor: string }
-  > = {
+  const config: Record<UserStatus, { dotColor: string; bgColor: string; borderColor: string }> = {
     Active: {
       dotColor: "bg-green-500",
       bgColor: "bg-green-50",
@@ -170,10 +158,7 @@ function TableHeader({
         style={{ gridTemplateColumns: gridCols }}
       >
         {columns.map((col) => (
-          <span
-            key={col.label}
-            className={col.align === "center" ? "text-center" : ""}
-          >
+          <span key={col.label} className={col.align === "center" ? "text-center" : ""}>
             {col.label}
           </span>
         ))}
@@ -186,9 +171,7 @@ function TableHeader({
 
 export function RolesPermissionsPage() {
   const router = useRouter();
-  const [selectedRole, setSelectedRole] = useState<SelectOption | null>(
-    roleOptions[0]
-  );
+  const [selectedRole, setSelectedRole] = useState<SelectOption | null>(roleOptions[0]);
 
   return (
     <div className="page-container py-8 space-y-10">
@@ -196,12 +179,11 @@ export function RolesPermissionsPage() {
       <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 flex gap-3">
         <AlertCircle className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
         <p className="text-sm text-secondary leading-relaxed">
-          Roles &amp; Permissions are only for the Business Hub platform and do
-          not translate to other banking platforms like Online Banking for
-          Business, Trade Suite, Business Online etc. The Business Hub team is
-          working on improving your experience with a universal roles &amp;
-          permissions service. You will be notified when it becomes available and
-          prompted on how to merge and consolidate roles and permissions.
+          Roles &amp; Permissions are only for the Business Hub platform and do not translate to
+          other banking platforms like Online Banking for Business, Trade Suite, Business Online
+          etc. The Business Hub team is working on improving your experience with a universal roles
+          &amp; permissions service. You will be notified when it becomes available and prompted on
+          how to merge and consolidate roles and permissions.
         </p>
       </div>
 
@@ -222,7 +204,9 @@ export function RolesPermissionsPage() {
               onChange={(opt) => setSelectedRole(opt)}
             />
           </div>
-          <Button onClick={() => router.push("/roles-and-permissions/invite-team-member")}>INVITE A TEAM MEMBER</Button>
+          <Button onClick={() => router.push("/roles-and-permissions/invite-team-member")}>
+            INVITE A TEAM MEMBER
+          </Button>
         </div>
 
         {/* Table */}
@@ -244,25 +228,18 @@ export function RolesPermissionsPage() {
                   key={user.id}
                   className="grid px-4 md:px-6 py-4 items-center"
                   style={{
-                    gridTemplateColumns:
-                      "minmax(200px, 1.5fr) 1fr 1fr 200px 100px",
+                    gridTemplateColumns: "minmax(200px, 1.5fr) 1fr 1fr 200px 100px",
                   }}
                 >
                   <div className="flex items-center gap-3">
                     <Avatar initials={user.initials} />
                     <div className="min-w-0">
-                      <p className="text-sm font-medium text-secondary">
-                        {user.name}
-                      </p>
-                      <p className="text-xs text-gray-500 truncate">
-                        {user.email}
-                      </p>
+                      <p className="text-sm font-medium text-secondary">{user.name}</p>
+                      <p className="text-xs text-gray-500 truncate">{user.email}</p>
                     </div>
                   </div>
                   <p className="text-sm text-secondary">{user.role}</p>
-                  <p className="text-sm text-secondary">
-                    {user.accountsAssigned} accounts
-                  </p>
+                  <p className="text-sm text-secondary">{user.accountsAssigned} accounts</p>
                   <div>
                     <StatusBadge status={user.status} />
                   </div>
@@ -271,10 +248,7 @@ export function RolesPermissionsPage() {
                       className="p-2 hover:bg-gray-100 rounded-md transition-colors"
                       aria-label={`Edit ${user.name}`}
                     >
-                      <Pencil
-                        className="w-5 h-5 text-secondary"
-                        strokeWidth={1.5}
-                      />
+                      <Pencil className="w-5 h-5 text-secondary" strokeWidth={1.5} />
                     </button>
                   </div>
                 </div>
@@ -310,34 +284,24 @@ export function RolesPermissionsPage() {
                   key={user.id}
                   className="grid px-4 md:px-6 py-4 items-center"
                   style={{
-                    gridTemplateColumns:
-                      "minmax(200px, 1.5fr) 1fr 1fr 100px 100px 100px",
+                    gridTemplateColumns: "minmax(200px, 1.5fr) 1fr 1fr 100px 100px 100px",
                   }}
                 >
                   <div className="flex items-center gap-3">
                     <Avatar initials={user.initials} color="bg-blue-400" />
                     <div className="min-w-0">
-                      <p className="text-sm font-medium text-secondary">
-                        {user.name}
-                      </p>
-                      <p className="text-xs text-gray-500 truncate">
-                        {user.email}
-                      </p>
+                      <p className="text-sm font-medium text-secondary">{user.name}</p>
+                      <p className="text-xs text-gray-500 truncate">{user.email}</p>
                     </div>
                   </div>
                   <p className="text-sm text-secondary">{user.role}</p>
-                  <p className="text-sm text-secondary">
-                    {user.accountsAssigned} accounts
-                  </p>
+                  <p className="text-sm text-secondary">{user.accountsAssigned} accounts</p>
                   <div className="flex justify-center">
                     <button
                       className="p-2 hover:bg-blue-50 rounded-md transition-colors"
                       aria-label={`View ${user.name}`}
                     >
-                      <Eye
-                        className="w-5 h-5 text-blue-400"
-                        strokeWidth={1.5}
-                      />
+                      <Eye className="w-5 h-5 text-blue-400" strokeWidth={1.5} />
                     </button>
                   </div>
                   <div className="flex justify-center">
@@ -345,10 +309,7 @@ export function RolesPermissionsPage() {
                       className="w-9 h-9 rounded-md bg-green-500 hover:bg-green-600 flex items-center justify-center transition-colors"
                       aria-label={`Approve ${user.name}`}
                     >
-                      <Check
-                        className="w-5 h-5 text-white"
-                        strokeWidth={2}
-                      />
+                      <Check className="w-5 h-5 text-white" strokeWidth={2} />
                     </button>
                   </div>
                   <div className="flex justify-center">
@@ -373,7 +334,12 @@ export function RolesPermissionsPage() {
             Invites
             <SectionCount count={invites.length} />
           </h2>
-          <Button variant="outline" onClick={() => router.push("/roles-and-permissions/invite-team-member")}>INVITE ANOTHER USER</Button>
+          <Button
+            variant="outline"
+            onClick={() => router.push("/roles-and-permissions/invite-team-member")}
+          >
+            INVITE ANOTHER USER
+          </Button>
         </div>
 
         <div className="overflow-x-auto">
@@ -393,25 +359,18 @@ export function RolesPermissionsPage() {
                   key={user.id}
                   className="grid px-4 md:px-6 py-4 items-center"
                   style={{
-                    gridTemplateColumns:
-                      "minmax(200px, 1.5fr) 1fr 1fr 1fr",
+                    gridTemplateColumns: "minmax(200px, 1.5fr) 1fr 1fr 1fr",
                   }}
                 >
                   <div className="flex items-center gap-3">
                     <Avatar initials={user.initials} color="bg-blue-400" />
                     <div className="min-w-0">
-                      <p className="text-sm font-medium text-secondary">
-                        {user.name}
-                      </p>
-                      <p className="text-xs text-gray-500 truncate">
-                        {user.email}
-                      </p>
+                      <p className="text-sm font-medium text-secondary">{user.name}</p>
+                      <p className="text-xs text-gray-500 truncate">{user.email}</p>
                     </div>
                   </div>
                   <p className="text-sm text-secondary">{user.role}</p>
-                  <p className="text-sm text-secondary">
-                    {user.accountsAssigned} accounts
-                  </p>
+                  <p className="text-sm text-secondary">{user.accountsAssigned} accounts</p>
                   <div>
                     <StatusBadge status={user.status} />
                   </div>

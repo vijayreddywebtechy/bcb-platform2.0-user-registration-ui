@@ -27,10 +27,7 @@ const Footer: React.FC<FooterProps> = ({
     <footer className={`w-full ${backgroundColor} py-9`}>
       <div className="page-container">
         {/* Legal Links */}
-        <nav
-          className="flex flex-wrap items-center gap-12 mb-3"
-          aria-label="Legal links"
-        >
+        <nav className="flex flex-wrap items-center gap-12 mb-3" aria-label="Legal links">
           {links.map((link, index) => (
             <Link
               key={index}

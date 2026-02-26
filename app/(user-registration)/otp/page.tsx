@@ -1,11 +1,11 @@
-import OTPInput from "@/components/auth/signin/OTPInput"
+import OTPInput from "@/components/auth/signin/OTPInput";
 
-type Props = {}
+type Props = {};
 
-export default function page({ }: Props) {
-    return (
-        <>
-            <OTPInput />
-        </>
-    )
+export default function page({}: Props) {
+  return (
+    <>
+      <OTPInput />
+    </>
+  );
 }

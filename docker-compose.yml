@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  bizhub-user-registration:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bizhub-user-registration-app
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+      - PORT=8080
+    env_file:
+      - .env.production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:8080', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 40s
+
+  # Development service (optional)
+  bizhub-user-registration-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: bizhub-user-registration-dev
+    ports:
+      # Exposing port 8080 since your dev script runs `next dev -p 8080`
+      - "8080:8080"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+    env_file:
+      - .env.dev
+    command: npm run dev
+    profiles:
+      - dev
+    restart: unless-stopped

@@ -2,15 +2,11 @@
 
 import { useState, useMemo } from "react";
 import { ChevronUp, ChevronDown, ChevronLeft, ChevronRight, Info } from "lucide-react";
-import {
-  FloatingSelect,
-  SelectOption,
-} from "@/components/ui/FloatingReactSelect";
+import { FloatingSelect, SelectOption } from "@/components/ui/FloatingReactSelect";
 import SearchBox from "@/components/dynamic/SearchBox";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import avatarAlert from "@/assets/images/icons/avatar_alert.svg"
-
+import avatarAlert from "@/assets/images/icons/avatar_alert.svg";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -78,8 +74,7 @@ const queries: Query[] = [
     id: "3",
     date: "08/02/2026, 12:00PM",
     timestamp: new Date(2026, 1, 8, 12, 0).getTime(),
-    description:
-      "I'm unable to view some balances on my business banking current accounts",
+    description: "I'm unable to view some balances on my business banking current accounts",
     status: "In Progress",
     comments: [
       {
@@ -158,9 +153,7 @@ function Pagination({
           onClick={() => onPageChange(page)}
           aria-current={page === currentPage ? "page" : undefined}
           className={`w-9 h-9 flex items-center justify-center rounded-md text-sm font-medium transition-colors ${
-            page === currentPage
-              ? "bg-primary text-white"
-              : "text-secondary hover:bg-gray-100"
+            page === currentPage ? "bg-primary text-white" : "text-secondary hover:bg-gray-100"
           }`}
         >
           {page}
@@ -201,9 +194,7 @@ function QueryRow({
         className="w-full grid grid-cols-[180px_1fr_140px_48px] md:grid-cols-[200px_1fr_160px_48px] items-center px-4 md:px-6 py-5 text-left hover:bg-gray-50 transition-colors"
       >
         <span className="text-sm text-secondary">{query.date}</span>
-        <span className="text-sm font-medium text-secondary pr-4">
-          {query.description}
-        </span>
+        <span className="text-sm font-medium text-secondary pr-4">{query.description}</span>
         <span className="flex justify-start">
           <StatusBadge status={query.status} />
         </span>
@@ -222,15 +213,9 @@ function QueryRow({
           <div className="ml-0 md:ml-[200px] space-y-4">
             {query.comments.map((comment, idx) => (
               <div key={idx}>
-                <p className="text-xs font-medium text-secondary mb-1">
-                  Comments/Responses
-                </p>
-                <p className="text-xs text-neutral-500 mt-4">
-                  {comment.date}
-                </p>
-                <p className="text-sm text-gray-600 leading-relaxed mt-2">
-                  {comment.message}
-                </p>
+                <p className="text-xs font-medium text-secondary mb-1">Comments/Responses</p>
+                <p className="text-xs text-neutral-500 mt-4">{comment.date}</p>
+                <p className="text-sm text-gray-600 leading-relaxed mt-2">{comment.message}</p>
               </div>
             ))}
           </div>
@@ -270,9 +255,7 @@ export function QueryTrackerPage() {
     if (search.trim()) {
       const term = search.toLowerCase();
       result = result.filter(
-        (q) =>
-          q.description.toLowerCase().includes(term) ||
-          q.date.toLowerCase().includes(term)
+        (q) => q.description.toLowerCase().includes(term) || q.date.toLowerCase().includes(term)
       );
     }
 
@@ -312,119 +295,111 @@ export function QueryTrackerPage() {
   const hasResults = paginatedQueries.length > 0;
 
   return (
-      <div className="page-container py-8 space-y-8">
-        {hasResults ? (
-          <>
-            {/* ── Section heading ── */}
-            <section>
-              <h2 className="text-xl md:text-2xl font-medium text-secondary">
-                View all your queries in one place
-              </h2>
-              <p className="text-sm text-gray-500 mt-1">
-                Track their status and stay updated on progress
-              </p>
-            </section>
+    <div className="page-container py-8 space-y-8">
+      {hasResults ? (
+        <>
+          {/* ── Section heading ── */}
+          <section>
+            <h2 className="text-xl md:text-2xl font-medium text-secondary">
+              View all your queries in one place
+            </h2>
+            <p className="text-sm text-gray-500 mt-1">
+              Track their status and stay updated on progress
+            </p>
+          </section>
 
-            {/* ── Filters ── */}
-            <section className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-6 bg-gray-50 rounded-lg">
-              <div className="w-full sm:w-48">
-                <FloatingSelect
-                  label="Sort By"
-                  options={sortOptions}
-                  value={sortBy}
-                  onChange={handleSortChange}
-                />
-              </div>
-              <div className="w-full sm:w-48">
-                <FloatingSelect
-                  label="Filter"
-                  options={filterOptions}
-                  value={filterBy}
-                  onChange={handleFilterChange}
-                />
-              </div>
-              <div className="w-full md:max-w-sm sm:ml-auto">
-                <SearchBox
-                  placeholder="Search queries"
-                  value={search}
-                  onChange={handleSearch}
-                />
-              </div>
-            </section>
+          {/* ── Filters ── */}
+          <section className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-6 bg-gray-50 rounded-lg">
+            <div className="w-full sm:w-48">
+              <FloatingSelect
+                label="Sort By"
+                options={sortOptions}
+                value={sortBy}
+                onChange={handleSortChange}
+              />
+            </div>
+            <div className="w-full sm:w-48">
+              <FloatingSelect
+                label="Filter"
+                options={filterOptions}
+                value={filterBy}
+                onChange={handleFilterChange}
+              />
+            </div>
+            <div className="w-full md:max-w-sm sm:ml-auto">
+              <SearchBox placeholder="Search queries" value={search} onChange={handleSearch} />
+            </div>
+          </section>
 
-            {/* ── Table ── */}
-            <section>
-              <div className="overflow-x-auto">
-                <div className="min-w-[640px]">
-                  {/* Header */}
-                  <div className="bg-[#3D5068] text-white rounded-t-lg">
-                    <div className="grid grid-cols-[180px_1fr_140px_48px] md:grid-cols-[200px_1fr_160px_48px] px-4 md:px-6 py-4 h-16 items-center text-sm font-medium uppercase tracking-wider">
-                      <span>Date</span>
-                      <span>Description</span>
-                      <span className="text-start">Status</span>
-                      <span />
-                    </div>
-                  </div>
-
-                  {/* Body */}
-                  <div className="bg-white border-x border-b border-gray-200 rounded-b-lg">
-                    {paginatedQueries.map((query) => (
-                      <QueryRow
-                        key={query.id}
-                        query={query}
-                        isExpanded={expandedId === query.id}
-                        onToggle={() =>
-                          setExpandedId(expandedId === query.id ? null : query.id)
-                        }
-                      />
-                    ))}
+          {/* ── Table ── */}
+          <section>
+            <div className="overflow-x-auto">
+              <div className="min-w-[640px]">
+                {/* Header */}
+                <div className="bg-[#3D5068] text-white rounded-t-lg">
+                  <div className="grid grid-cols-[180px_1fr_140px_48px] md:grid-cols-[200px_1fr_160px_48px] px-4 md:px-6 py-4 h-16 items-center text-sm font-medium uppercase tracking-wider">
+                    <span>Date</span>
+                    <span>Description</span>
+                    <span className="text-start">Status</span>
+                    <span />
                   </div>
                 </div>
-              </div>
 
-              {/* Footer: results count + pagination */}
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-6">
-                <p className="text-sm text-secondary">
-                  <span className="font-medium">{filtered.length} Results Found</span>
-                  {" · "}Displaying{" "}
-                  <span className="font-medium">{paginatedQueries.length}</span> of{" "}
-                  <span className="font-medium">{filtered.length}</span>
-                </p>
-                <Pagination
-                  currentPage={safePage}
-                  totalPages={totalPages}
-                  onPageChange={setCurrentPage}
-                />
+                {/* Body */}
+                <div className="bg-white border-x border-b border-gray-200 rounded-b-lg">
+                  {paginatedQueries.map((query) => (
+                    <QueryRow
+                      key={query.id}
+                      query={query}
+                      isExpanded={expandedId === query.id}
+                      onToggle={() => setExpandedId(expandedId === query.id ? null : query.id)}
+                    />
+                  ))}
+                </div>
               </div>
-
-              {/* Info note */}
-              <div className="flex items-start gap-2 mt-12">
-                <Info className="w-5 h-5 text-primary flex-shrink-0" />
-                <p className="text-sm text-gray-500">
-                  Your requests help us serve you better and improve your overall
-                  experience. If your query is not reflected please contact your
-                  relationship manager to follow up.
-                </p>
-              </div>
-            </section>
-          </>
-        ) : (
-            <div className="flex-1 flex flex-col gap-4 justify-center items-center text-center w-full max-w-md m-auto p-4">
-              <Image
-                src={avatarAlert}
-                alt="alert"
-                width={80}
-                height={80}
-                className="max-w-full h-auto mx-auto"
-              />
-              <h2>No queries available</h2>
-              <p>
-                You currently don't have any active or resolved query requests.{" "}
-                Contact your relationship manager to raise a query.
-              </p>
-              <Button variant="outline">Back to Dashboard</Button>
             </div>
-        )}
-      </div>
+
+            {/* Footer: results count + pagination */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-6">
+              <p className="text-sm text-secondary">
+                <span className="font-medium">{filtered.length} Results Found</span>
+                {" · "}Displaying <span className="font-medium">{paginatedQueries.length}</span> of{" "}
+                <span className="font-medium">{filtered.length}</span>
+              </p>
+              <Pagination
+                currentPage={safePage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+              />
+            </div>
+
+            {/* Info note */}
+            <div className="flex items-start gap-2 mt-12">
+              <Info className="w-5 h-5 text-primary flex-shrink-0" />
+              <p className="text-sm text-gray-500">
+                Your requests help us serve you better and improve your overall experience. If your
+                query is not reflected please contact your relationship manager to follow up.
+              </p>
+            </div>
+          </section>
+        </>
+      ) : (
+        <div className="flex-1 flex flex-col gap-4 justify-center items-center text-center w-full max-w-md m-auto p-4">
+          <Image
+            src={avatarAlert}
+            alt="alert"
+            width={80}
+            height={80}
+            className="max-w-full h-auto mx-auto"
+          />
+          <h2>No queries available</h2>
+          <p>
+            You currently don't have any active or resolved query requests. Contact your
+            relationship manager to raise a query.
+          </p>
+          <Button variant="outline">Back to Dashboard</Button>
+        </div>
+      )}
+    </div>
   );
 }

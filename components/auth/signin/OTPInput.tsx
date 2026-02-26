@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  useState,
-  useRef,
-  useEffect,
-  ClipboardEvent,
-  KeyboardEvent,
-  FormEvent,
-} from "react";
+import { useState, useRef, useEffect, ClipboardEvent, KeyboardEvent, FormEvent } from "react";
 import AuthLayout from "../shared/AuthLayout";
 import AuthCard from "../shared/AuthCard";
 import { Button } from "@/components/ui/button";
@@ -44,10 +37,7 @@ export default function OTPInput({
   useEffect(() => {
     if (secondsLeft <= 0) return;
 
-    const timer = window.setInterval(
-      () => setSecondsLeft((prev) => Math.max(prev - 1, 0)),
-      1000
-    );
+    const timer = window.setInterval(() => setSecondsLeft((prev) => Math.max(prev - 1, 0)), 1000);
 
     return () => window.clearInterval(timer);
   }, [secondsLeft]);
@@ -139,7 +129,7 @@ export default function OTPInput({
         <div className="text-center mb-8">
           <h1 className="text-3xl text-secondary mb-2">Enter one-time PIN</h1>
           <p className="text-neutral-900 text-base leading-relaxed">
-            A one-time PIN has been sent to{" "}<br />
+            A one-time PIN has been sent to <br />
             <span>{maskedDestination}</span>
           </p>
         </div>
@@ -183,10 +173,11 @@ export default function OTPInput({
               type="button"
               onClick={handleResend}
               disabled={secondsLeft > 0}
-              className={`transition-colors ${secondsLeft > 0
-                ? "text-gray-400 cursor-not-allowed"
-                : "text-primary hover:text-primary-dark"
-                }`}
+              className={`transition-colors ${
+                secondsLeft > 0
+                  ? "text-gray-400 cursor-not-allowed"
+                  : "text-primary hover:text-primary-dark"
+              }`}
             >
               RESEND
             </button>

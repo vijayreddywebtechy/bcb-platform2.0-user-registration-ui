@@ -10,16 +10,9 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function RegisterForm() {
-  const handleExistingClient = () => {
-    console.log("Existing client selected");
-    // Add your navigation or logic here
-  };
-
   const handleNewClient = () => {
-    console.log("New client selected");
     // Add your navigation or logic here
   };
-
 
   return (
     <AuthLayout>
@@ -35,40 +28,33 @@ export default function RegisterForm() {
         {/* Options */}
         <div className="space-y-4 mb-12">
           {/* Existing Client Option */}
-          <button
-            onClick={handleExistingClient}
-            className="w-full bg-blue-50 hover:bg-blue-100 transition-colors rounded-xl p-4 md:pl-6 flex items-center justify-between group"
-          >
-            <div className="flex items-center gap-4">
-              {/* Icon */}
-              <div className="flex-shrink-0">
-                <Image
-                  src={icnExistingUser}
-                  alt="Existing Client Icon"
-                  width={40}
-                  height={40}
-                />
+          <Link href="/signin" className="block w-full">
+            <button className="w-full bg-blue-50 hover:bg-blue-100 transition-colors rounded-xl p-4 md:pl-6 flex items-center justify-between group">
+              <div className="flex items-center gap-4">
+                {/* Icon */}
+                <div className="flex-shrink-0">
+                  <Image src={icnExistingUser} alt="Existing Client Icon" width={40} height={40} />
+                </div>
+
+                {/* Text Content */}
+                <div className="text-left flex-1">
+                  <h3 className="text-neutral-900 font-medium text-sm leading-normal mb-2">
+                    I'm an existing client who uses the banking app or internet banking
+                  </h3>
+                  <p className="text-neutral-900 text-sm leading-normal">
+                    Use your existing Online Banking for Business username and password details to
+                    register
+                  </p>
+                </div>
               </div>
 
-              {/* Text Content */}
-              <div className="text-left flex-1">
-                <h3 className="text-neutral-900 font-medium text-sm leading-normal mb-2">
-                  I'm an existing client who uses the banking app or internet
-                  banking
-                </h3>
-                <p className="text-neutral-900 text-sm leading-normal">
-                  Use your existing Online Banking for Business username and
-                  password details to register
-                </p>
-              </div>
-            </div>
-
-            {/* Chevron */}
-            <ChevronRight
-              className="w-8 h-8 text-primary-dark flex-shrink-0 ml-2"
-              strokeWidth="1.5"
-            />
-          </button>
+              {/* Chevron */}
+              <ChevronRight
+                className="w-8 h-8 text-primary-dark flex-shrink-0 ml-2"
+                strokeWidth="1.5"
+              />
+            </button>
+          </Link>
 
           {/* New Client Option */}
           <button
@@ -78,23 +64,16 @@ export default function RegisterForm() {
             <div className="flex items-center gap-4">
               {/* Icon */}
               <div className="flex-shrink-0">
-                <Image
-                  src={icnCreateUser}
-                  alt="New Client Icon"
-                  width={40}
-                  height={40}
-                />
+                <Image src={icnCreateUser} alt="New Client Icon" width={40} height={40} />
               </div>
 
               {/* Text Content */}
               <div className="text-left flex-1">
                 <h3 className="text-neutral-900 font-medium text-sm leading-normal mb-2">
-                  I'm a new client who does not use any banking apps or internet
-                  banking
+                  I'm a new client who does not use any banking apps or internet banking
                 </h3>
                 <p className="text-neutral-900 text-sm leading-normal">
-                  You will need to create a new digital profile to register for
-                  the Business Hub.
+                  You will need to create a new digital profile to register for the Business Hub.
                 </p>
               </div>
             </div>

@@ -96,7 +96,12 @@ function Header() {
           href="/"
           className="hidden lg:inline-flex items-center justify-center whitespace-nowrap"
         >
-          <Button variant="transparent" className="bg-white text-primary hover:bg-primary hover:text-white">SIGN IN/REGISTER</Button>
+          <Button
+            variant="transparent"
+            className="bg-white text-primary hover:bg-primary hover:text-white"
+          >
+            SIGN IN/REGISTER
+          </Button>
         </Link>
 
         {/* Mobile Hamburger */}

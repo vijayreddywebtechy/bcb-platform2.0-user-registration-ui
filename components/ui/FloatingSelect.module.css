@@ -65,8 +65,9 @@
   border: 1px solid hsl(213, 16%, 43%); /* neutral-700 - #5C6C80 */
   border-radius: 8px;
   pointer-events: none;
-  transition: border-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
-              border-width 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    border-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-width 200ms cubic-bezier(0.4, 0, 0.2, 1);
   min-width: 0;
   overflow: hidden;
 }
@@ -108,7 +109,7 @@
   line-height: 11px;
   visibility: hidden;
   max-width: 0.01px;
-  transition: max-width 50ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+  transition: max-width 50ms cubic-bezier(0, 0, 0.2, 1) 0ms;
   white-space: nowrap;
 }
 
@@ -122,7 +123,7 @@
 /* When active, expand the legend to create space for floating label */
 .legendActive {
   max-width: 1000px;
-  transition: max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
+  transition: max-width 100ms cubic-bezier(0, 0, 0.2, 1) 50ms;
 }
 
 /* ============================================
@@ -139,10 +140,11 @@
   background-color: transparent;
   padding: 0;
   pointer-events: none;
-  transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1),
-              font-size 200ms cubic-bezier(0.4, 0, 0.2, 1),
-              color 200ms cubic-bezier(0.4, 0, 0.2, 1),
-              top 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    transform 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    font-size 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    top 200ms cubic-bezier(0.4, 0, 0.2, 1);
   transform-origin: left center;
   white-space: nowrap;
   z-index: 2;

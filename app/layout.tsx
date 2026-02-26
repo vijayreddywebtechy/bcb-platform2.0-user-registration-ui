@@ -15,9 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={bentonSansPro.variable}>
-      <body className={`${bentonSansPro.className} antialiased`}>
-        {children}
-      </body>
+      <body className={`${bentonSansPro.className} antialiased`}>{children}</body>
     </html>
   );
 }

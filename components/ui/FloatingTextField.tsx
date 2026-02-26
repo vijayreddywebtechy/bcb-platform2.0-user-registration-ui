@@ -1,7 +1,10 @@
-import React, { useState, InputHTMLAttributes } from 'react';
-import styles from './FloatingTextField.module.css';
+import React, { useState, InputHTMLAttributes } from "react";
+import styles from "./FloatingTextField.module.css";
 
-export interface FloatingTextFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'className'> {
+export interface FloatingTextFieldProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "className"
+> {
   /** Label text that floats above the input */
   label: string;
   /** Optional helper text displayed below the input */
@@ -16,14 +19,14 @@ export interface FloatingTextFieldProps extends Omit<InputHTMLAttributes<HTMLInp
 
 /**
  * Material Design Outlined TextField with Floating Label
- * 
+ *
  * This component replicates the exact behavior of Material UI's TextField with outlined variant.
- * 
+ *
  * States:
  * 1. Default - Label inside input, default border
  * 2. Active/Typing - Label floats to top, border highlighted, cursor visible
  * 3. Populated - Label remains floating, value visible, default border
- * 
+ *
  * Features:
  * - Smooth floating label animation
  * - Native fieldset/legend for border cut effect
@@ -33,15 +36,15 @@ export interface FloatingTextFieldProps extends Omit<InputHTMLAttributes<HTMLInp
  * - Dark mode support
  * - Autofill detection
  * - Disabled state
- * 
+ *
  * @example
  * ```tsx
- * <FloatingTextField 
+ * <FloatingTextField
  *   label="Username"
  *   helperText="Create a username using letters only, or a combination of letters, numbers and these special characters ! $ & - ? . @ ^ _ ~"
  * />
- * 
- * <FloatingTextField 
+ *
+ * <FloatingTextField
  *   label="Email Address"
  *   type="email"
  *   error={true}
@@ -50,47 +53,51 @@ export interface FloatingTextFieldProps extends Omit<InputHTMLAttributes<HTMLInp
  * ```
  */
 export const FloatingTextField = React.forwardRef<HTMLInputElement, FloatingTextFieldProps>(
-  ({ 
-    label, 
-    helperText, 
-    error = false, 
-    errorText, 
-    value, 
-    defaultValue, 
-    wrapperClassName,
-    id,
-    disabled,
-    ...props 
-  }, ref) => {
+  (
+    {
+      label,
+      helperText,
+      error = false,
+      errorText,
+      value,
+      defaultValue,
+      wrapperClassName,
+      id,
+      disabled,
+      ...props
+    },
+    ref
+  ) => {
     const [isFocused, setIsFocused] = useState(false);
-    const [internalValue, setInternalValue] = useState(defaultValue || '');
-    
+    const [internalValue, setInternalValue] = useState(defaultValue || "");
+
     // Determine if we should show the label in active (floated) state
     const currentValue = value !== undefined ? value : internalValue;
-    const hasValue = currentValue !== undefined && currentValue !== null && String(currentValue).length > 0;
+    const hasValue =
+      currentValue !== undefined && currentValue !== null && String(currentValue).length > 0;
     const isActive = isFocused || hasValue;
 
     // Generate unique ID if not provided
-    const inputId = id || `floating-textfield-${label.toLowerCase().replace(/\s+/g, '-')}`;
+    const inputId = id || `floating-textfield-${label.toLowerCase().replace(/\s+/g, "-")}`;
 
     return (
-      <div className={`${styles.textfieldWrapper} ${wrapperClassName || ''}`}>
+      <div className={`${styles.textfieldWrapper} ${wrapperClassName || ""}`}>
         <div className={styles.textfieldContainer}>
           {/* Fieldset creates the border with native cut effect */}
-          <fieldset 
-            className={`${styles.fieldset} ${error ? styles.fieldsetError : ''} ${isFocused ? styles.fieldsetFocused : ''} ${disabled ? styles.fieldsetDisabled : ''}`}
+          <fieldset
+            className={`${styles.fieldset} ${error ? styles.fieldsetError : ""} ${isFocused ? styles.fieldsetFocused : ""} ${disabled ? styles.fieldsetDisabled : ""}`}
             aria-hidden="true"
           >
-            <legend className={`${styles.legend} ${isActive ? styles.legendActive : ''}`}>
+            <legend className={`${styles.legend} ${isActive ? styles.legendActive : ""}`}>
               <span>{label}</span>
             </legend>
           </fieldset>
-          
+
           {/* Input field */}
           <input
             ref={ref}
             id={inputId}
-            className={`${styles.input} ${disabled ? styles.inputDisabled : ''}`}
+            className={`${styles.input} ${disabled ? styles.inputDisabled : ""}`}
             value={value !== undefined ? value : internalValue}
             disabled={disabled}
             aria-invalid={error}
@@ -111,22 +118,22 @@ export const FloatingTextField = React.forwardRef<HTMLInputElement, FloatingText
             }}
             {...props}
           />
-          
+
           {/* Floating label */}
-          <label 
+          <label
             htmlFor={inputId}
-            className={`${styles.label} ${isActive ? styles.labelActive : ''} ${error ? styles.labelError : ''} ${isFocused ? styles.labelFocused : ''} ${disabled ? styles.labelDisabled : ''}`}
+            className={`${styles.label} ${isActive ? styles.labelActive : ""} ${error ? styles.labelError : ""} ${isFocused ? styles.labelFocused : ""} ${disabled ? styles.labelDisabled : ""}`}
           >
             {label}
           </label>
         </div>
-        
+
         {/* Helper text or error message */}
         {(helperText || errorText) && (
-          <span 
+          <span
             id={`${inputId}-helper-text`}
-            className={`text-neutral-700 ${styles.helperText} ${error ? styles.helperTextError : ''}`}
-            role={error ? 'alert' : undefined}
+            className={`text-neutral-700 ${styles.helperText} ${error ? styles.helperTextError : ""}`}
+            role={error ? "alert" : undefined}
           >
             {error ? errorText : helperText}
           </span>
@@ -136,4 +143,4 @@ export const FloatingTextField = React.forwardRef<HTMLInputElement, FloatingText
   }
 );
 
-FloatingTextField.displayName = 'FloatingTextField';
+FloatingTextField.displayName = "FloatingTextField";

@@ -2,15 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import {
-  Moon,
-  Landmark,
-  Sparkles,
-  Briefcase,
-  SquareArrowOutUpRight,
-  Files,
-  X,
-} from "lucide-react";
+import { Moon, Landmark, Sparkles, Briefcase, SquareArrowOutUpRight, Files, X } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -98,9 +90,7 @@ export default function CustomiseAppearanceModal({
           <div className="flex items-center justify-between py-5 border-t border-gray-100">
             <div className="flex items-center gap-3">
               <Moon className="w-5 h-5 text-primary-dark" strokeWidth={1.5} />
-              <span className="text-sm sm:text-base font-medium text-primary-dark">
-                Dark mode
-              </span>
+              <span className="text-sm sm:text-base font-medium text-primary-dark">Dark mode</span>
             </div>
             <Switch checked={darkMode} onCheckedChange={setDarkMode} />
           </div>
@@ -109,9 +99,7 @@ export default function CustomiseAppearanceModal({
           <div className="flex items-center justify-between py-5 border-t border-gray-100">
             <div className="flex items-center gap-3">
               <Landmark className="w-5 h-5 text-primary-dark" strokeWidth={1.5} />
-              <span className="text-sm sm:text-base font-medium text-primary-dark">
-                Cash flows
-              </span>
+              <span className="text-sm sm:text-base font-medium text-primary-dark">Cash flows</span>
             </div>
             <Switch checked={cashFlows} onCheckedChange={setCashFlows} />
           </div>
@@ -120,13 +108,8 @@ export default function CustomiseAppearanceModal({
           <div className="py-5 border-t border-gray-100">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <Sparkles
-                  className="w-5 h-5 text-primary-dark"
-                  strokeWidth={1.5}
-                />
-                <span className="text-sm sm:text-base font-medium text-primary-dark">
-                  My links
-                </span>
+                <Sparkles className="w-5 h-5 text-primary-dark" strokeWidth={1.5} />
+                <span className="text-sm sm:text-base font-medium text-primary-dark">My links</span>
               </div>
               <Switch checked={myLinks} onCheckedChange={setMyLinks} />
             </div>
@@ -136,9 +119,7 @@ export default function CustomiseAppearanceModal({
                 <label className="flex items-center gap-3 cursor-pointer">
                   <Checkbox
                     checked={myLinksItems.documents}
-                    onCheckedChange={(checked) =>
-                      updateMyLinksItem("documents", !!checked)
-                    }
+                    onCheckedChange={(checked) => updateMyLinksItem("documents", !!checked)}
                   />
                   <span className="text-sm text-secondary">Documents</span>
                 </label>
@@ -146,9 +127,7 @@ export default function CustomiseAppearanceModal({
                 <label className="flex items-center gap-3 cursor-pointer">
                   <Checkbox
                     checked={myLinksItems.queryTracker}
-                    onCheckedChange={(checked) =>
-                      updateMyLinksItem("queryTracker", !!checked)
-                    }
+                    onCheckedChange={(checked) => updateMyLinksItem("queryTracker", !!checked)}
                   />
                   <span className="text-sm text-secondary">Query tracker</span>
                 </label>
@@ -156,9 +135,7 @@ export default function CustomiseAppearanceModal({
                 <label className="flex items-center gap-3 cursor-pointer">
                   <Checkbox
                     checked={myLinksItems.helpCenter}
-                    onCheckedChange={(checked) =>
-                      updateMyLinksItem("helpCenter", !!checked)
-                    }
+                    onCheckedChange={(checked) => updateMyLinksItem("helpCenter", !!checked)}
                   />
                   <span className="text-sm text-secondary">help center</span>
                 </label>
@@ -166,9 +143,7 @@ export default function CustomiseAppearanceModal({
                 <label className="flex items-center gap-3 cursor-pointer">
                   <Checkbox
                     checked={myLinksItems.accounts}
-                    onCheckedChange={(checked) =>
-                      updateMyLinksItem("accounts", !!checked)
-                    }
+                    onCheckedChange={(checked) => updateMyLinksItem("accounts", !!checked)}
                   />
                   <span className="text-sm text-secondary">Accounts</span>
                 </label>
@@ -179,35 +154,23 @@ export default function CustomiseAppearanceModal({
           {/* Business accounts */}
           <div className="flex items-center justify-between py-5 border-t border-gray-100">
             <div className="flex items-center gap-3">
-              <Briefcase
-                className="w-5 h-5 text-primary-dark"
-                strokeWidth={1.5}
-              />
+              <Briefcase className="w-5 h-5 text-primary-dark" strokeWidth={1.5} />
               <span className="text-sm sm:text-base font-medium text-primary-dark">
                 Business accounts
               </span>
             </div>
-            <Switch
-              checked={businessAccounts}
-              onCheckedChange={setBusinessAccounts}
-            />
+            <Switch checked={businessAccounts} onCheckedChange={setBusinessAccounts} />
           </div>
 
           {/* Digital hub links */}
           <div className="flex items-center justify-between py-5 border-t border-gray-100">
             <div className="flex items-center gap-3">
-              <SquareArrowOutUpRight
-                className="w-5 h-5 text-primary-dark"
-                strokeWidth={1.5}
-              />
+              <SquareArrowOutUpRight className="w-5 h-5 text-primary-dark" strokeWidth={1.5} />
               <span className="text-sm sm:text-base font-medium text-primary-dark">
                 Digital hub links
               </span>
             </div>
-            <Switch
-              checked={digitalHubLinks}
-              onCheckedChange={setDigitalHubLinks}
-            />
+            <Switch checked={digitalHubLinks} onCheckedChange={setDigitalHubLinks} />
           </div>
 
           {/* Formal statements */}
@@ -218,26 +181,16 @@ export default function CustomiseAppearanceModal({
                 Formal statements
               </span>
             </div>
-            <Switch
-              checked={formalStatements}
-              onCheckedChange={setFormalStatements}
-            />
+            <Switch checked={formalStatements} onCheckedChange={setFormalStatements} />
           </div>
         </div>
 
         {/* Footer buttons */}
         <div className="flex gap-4 px-6 py-6">
-          <Button
-            variant="outline"
-            className="flex-1 h-12 text-base"
-            onClick={handleCancel}
-          >
+          <Button variant="outline" className="flex-1 h-12 text-base" onClick={handleCancel}>
             CANCEL
           </Button>
-          <Button
-            className="flex-1 h-12 text-base"
-            onClick={handleApply}
-          >
+          <Button className="flex-1 h-12 text-base" onClick={handleApply}>
             APPLY
           </Button>
         </div>

@@ -1,14 +1,7 @@
 "use client";
 
 import React from "react";
-import {
-  ScanFace,
-  Glasses,
-  Smile,
-  User,
-  Smartphone,
-  AlertTriangle,
-} from "lucide-react";
+import { ScanFace, Glasses, Smile, User, Smartphone, AlertTriangle } from "lucide-react";
 import { Button } from "../ui/button";
 
 interface VerificationInstructionsProps {
@@ -16,17 +9,12 @@ interface VerificationInstructionsProps {
   onCancel?: () => void;
 }
 
-function VerificationInstructions({
-  onStartScan,
-  onCancel,
-}: VerificationInstructionsProps) {
+function VerificationInstructions({ onStartScan, onCancel }: VerificationInstructionsProps) {
   const handleStartScan = () => {
-    console.log("Start scan clicked");
     onStartScan?.();
   };
 
   const handleCancel = () => {
-    console.log("Cancel clicked");
     onCancel?.();
   };
 
@@ -60,9 +48,7 @@ function VerificationInstructions({
         </div>
 
         {/* Heading */}
-        <h1 className="text-xl font-medium text-secondary mb-2">
-          How to scan your face
-        </h1>
+        <h1 className="text-xl font-medium text-secondary mb-2">How to scan your face</h1>
 
         {/* Subtitle */}
         <p className="text-secondary mb-6 leading-relaxed">
@@ -77,15 +63,10 @@ function VerificationInstructions({
               <div key={index} className="flex gap-3">
                 <div className="flex-shrink-0">
                   <div className="w-10 h-10 border-2 border-gray-300 rounded-lg flex items-center justify-center">
-                    <Icon
-                      className="w-5 h-5 text-secondary"
-                      strokeWidth={1.5}
-                    />
+                    <Icon className="w-5 h-5 text-secondary" strokeWidth={1.5} />
                   </div>
                 </div>
-                <p className="text-secondary text-sm leading-relaxed pt-2">
-                  {instruction.text}
-                </p>
+                <p className="text-secondary text-sm leading-relaxed pt-2">{instruction.text}</p>
               </div>
             );
           })}
@@ -98,9 +79,8 @@ function VerificationInstructions({
               <AlertTriangle className="w-5 h-5 text-red-600" />
             </div>
             <div className="text-sm text-secondary leading-relaxed">
-              <span className="font-medium">WARNING:</span> Flashing screens
-              may potentially trigger seizures for people with photosensitive
-              epilepsy.
+              <span className="font-medium">WARNING:</span> Flashing screens may potentially trigger
+              seizures for people with photosensitive epilepsy.
             </div>
           </div>
         </div>

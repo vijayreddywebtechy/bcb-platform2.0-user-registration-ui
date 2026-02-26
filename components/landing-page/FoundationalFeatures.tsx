@@ -64,9 +64,7 @@ function FeatureCard({ icon, title, description }: Feature) {
       <h3 className="text-lg md:text-xl lg:text-2xl text-primary-dark mb-4 group-hover:text-white">
         {title}
       </h3>
-      <p className="text-sm leading-relaxed text-secondary group-hover:text-white">
-        {description}
-      </p>
+      <p className="text-sm leading-relaxed text-secondary group-hover:text-white">{description}</p>
     </div>
   );
 }
@@ -91,7 +89,10 @@ function FoundationalFeatures() {
             Are you an existing Standard Bank business client?
           </span>
           <Link href="/">
-            <Button variant="outline" className="uppercase font-medium tracking-wide border-primary text-primary hover:bg-primary hover:text-white">
+            <Button
+              variant="outline"
+              className="uppercase font-medium tracking-wide border-primary text-primary hover:bg-primary hover:text-white"
+            >
               Get Early Access
             </Button>
           </Link>

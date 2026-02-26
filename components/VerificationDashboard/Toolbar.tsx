@@ -16,31 +16,18 @@ type ToolbarProps = {
   rightSlot?: ReactNode; // fully custom override (optional)
 };
 
-function Toolbar({
-  userName,
-  organizationName,
-  lastSignedIn,
-  action,
-  rightSlot,
-}: ToolbarProps) {
+function Toolbar({ userName, organizationName, lastSignedIn, action, rightSlot }: ToolbarProps) {
   return (
     <div className="flex justify-between py-6 items-start">
       {/* Left Section */}
       <div className="text-white">
         {userName && (
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-medium md:font-bold">
-            {userName}
-          </h1>
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-medium md:font-bold">{userName}</h1>
         )}
 
         {organizationName && (
           <div className="flex items-center gap-1 mt-2 text-xs font-normal">
-            <Image
-              src={icnBuilding}
-              alt="Organization"
-              width={16}
-              height={16}
-            />
+            <Image src={icnBuilding} alt="Organization" width={16} height={16} />
             <span>{organizationName}</span>
           </div>
         )}
@@ -50,17 +37,9 @@ function Toolbar({
       <div className="flex items-center gap-6 mt-auto">
         {lastSignedIn && (
           <div className="flex items-center gap-1 text-xs font-normal text-blue-50">
-            <Image
-              src={icnClockPast}
-              alt="Last signed in"
-              width={16}
-              height={16}
-            />
+            <Image src={icnClockPast} alt="Last signed in" width={16} height={16} />
             <p>
-              Last Signed In -{" "}
-              <span className="font-medium">
-                {lastSignedIn}
-              </span>
+              Last Signed In - <span className="font-medium">{lastSignedIn}</span>
             </p>
           </div>
         )}

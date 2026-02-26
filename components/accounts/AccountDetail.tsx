@@ -4,23 +4,14 @@ import { useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, Info } from "lucide-react";
 import { Account } from "@/components/dashboard/BusinessAccounts";
-import {
-  StatementsTable,
-  defaultStatements,
-} from "@/components/shared/StatementsTable";
+import { StatementsTable, defaultStatements } from "@/components/shared/StatementsTable";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogDescription,
-  DialogClose,
-} from "../ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogClose } from "../ui/dialog";
 import icnMail from "@/assets/images/icons/icn_mail.svg";
 import icnPrinter from "@/assets/images/icons/icn_printer.svg";
 import DigitalHubLinks from "@/components/dashboard/DigitalHubLinks";
-import icnCashandNotes from "@/assets/images/icons/icn_cash_and_notes.svg"
-import icnCloseBtn from "@/assets/images/icons/icn_close_blue.svg"
+import icnCashandNotes from "@/assets/images/icons/icn_cash_and_notes.svg";
+import icnCloseBtn from "@/assets/images/icons/icn_close_blue.svg";
 
 // ─── Tab content ──────────────────────────────────────────────────────────────
 
@@ -80,9 +71,7 @@ function AccountDetailsTab({ account }: { account: Account }) {
       {/* Footer disclaimer */}
       <div className="mt-8 pt-6 border-t border-gray-200 flex items-center justify-center gap-2 text-sm text-gray-500">
         <Info className="w-4 h-4 text-primary flex-shrink-0" />
-        <span>
-          Details displayed are based on available account data at the moment.
-        </span>
+        <span>Details displayed are based on available account data at the moment.</span>
       </div>
     </div>
   );
@@ -124,9 +113,7 @@ function AccountDetail({ account, onBack }: Props) {
           {/* Account info row */}
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
             <div className="text-white">
-              <h1 className="text-2xl md:text-3xl font-bold leading-tight mb-2">
-                {account.name}
-              </h1>
+              <h1 className="text-2xl md:text-3xl font-bold leading-tight mb-2">{account.name}</h1>
               <p className="text-sm text-blue-100 font-normal">
                 {account.type}&nbsp;&nbsp;{account.number}
               </p>
@@ -135,15 +122,11 @@ function AccountDetail({ account, onBack }: Props) {
               <div className="flex items-end gap-10 mt-6">
                 <div>
                   <p className="text-xs text-blue-200 mb-1">Latest</p>
-                  <p className="text-xl md:text-2xl font-medium">
-                    R {account.latest}
-                  </p>
+                  <p className="text-xl md:text-2xl font-medium">R {account.latest}</p>
                 </div>
                 <div>
                   <p className="text-xs text-blue-200 mb-1">Available</p>
-                  <p className="text-xl md:text-2xl font-medium">
-                    R {account.available}
-                  </p>
+                  <p className="text-xl md:text-2xl font-medium">R {account.available}</p>
                 </div>
               </div>
             </div>
@@ -185,7 +168,7 @@ function AccountDetail({ account, onBack }: Props) {
         </div>
       </div>
       <div className="mt-8 bg-blue-50 py-20">
-                <div className="page-container">
+        <div className="page-container">
           <DigitalHubLinks />
         </div>
       </div>
@@ -199,21 +182,16 @@ function AccountDetail({ account, onBack }: Props) {
               Exit Business Hub
             </DialogTitle>
             <DialogClose asChild>
-            <button type="button">
-              <Image src={icnCloseBtn} alt="modal close" className="w-6 h-6" />
-            </button>
+              <button type="button">
+                <Image src={icnCloseBtn} alt="modal close" className="w-6 h-6" />
+              </button>
             </DialogClose>
           </div>
 
           {/* Body */}
           <div className="flex flex-col items-center text-center px-8 py-6">
             <div className="w-24 h-24 rounded-full bg-blue-50 flex items-center justify-center mb-6">
-              <Image
-                src={icnCashandNotes}
-                alt="Transact"
-                width={96}
-                height={96}
-              />
+              <Image src={icnCashandNotes} alt="Transact" width={96} height={96} />
             </div>
 
             <h3 className="text-base md:text-lg font-medium text-primary-dark mb-3">
@@ -221,8 +199,8 @@ function AccountDetail({ account, onBack }: Props) {
             </h3>
 
             <DialogDescription className="text-sm text-gray-500 leading-relaxed">
-              Please note: You&apos;ll be redirected to Online Banking for
-              Business and automatically logged out of the Business Hub
+              Please note: You&apos;ll be redirected to Online Banking for Business and
+              automatically logged out of the Business Hub
             </DialogDescription>
           </div>
 

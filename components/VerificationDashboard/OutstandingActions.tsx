@@ -17,8 +17,7 @@ function OutstandingActions({ onIdentityVerificationClick }: Props) {
     {
       stepNumber: 1,
       title: "Profile Registration",
-      description:
-        "Create or confirm a new digital profile to access the Business Hub.",
+      description: "Create or confirm a new digital profile to access the Business Hub.",
       icon: User,
       status: "completed" as const,
       bgColor: "bg-green-700",
@@ -53,7 +52,6 @@ function OutstandingActions({ onIdentityVerificationClick }: Props) {
   };
 
   const handleClose = (stepNumber: number) => {
-    console.log(`Step ${stepNumber} dismissed`);
     setVisibleCards(visibleCards.filter((id) => id !== stepNumber));
   };
 
@@ -87,18 +85,14 @@ function OutstandingActions({ onIdentityVerificationClick }: Props) {
 
       <div className="page-container py-12">
         <div className="w-full max-w-md">
-          <h6 className="text-lg text-neutral-900 font-medium py-2">
-            Let's get you set up
-          </h6>
+          <h6 className="text-lg text-neutral-900 font-medium py-2">Let's get you set up</h6>
           <p className="text-neutral-800 mb-3">
-            Great job setting up your sign in details. Since security is our top
-            priority, we need to complete a quick verification process before
-            unlocking your business dashboard.
+            Great job setting up your sign in details. Since security is our top priority, we need
+            to complete a quick verification process before unlocking your business dashboard.
           </p>
           <p className="text-neutral-800 font-medium">
-            Next, you'll complete a quick facial recognition scan. After that,
-            you'll be able to send secure approval invites to your business
-            directors to finalise your access.
+            Next, you'll complete a quick facial recognition scan. After that, you'll be able to
+            send secure approval invites to your business directors to finalise your access.
           </p>
         </div>
       </div>

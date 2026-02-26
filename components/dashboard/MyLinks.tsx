@@ -59,22 +59,45 @@ function MyLinks({}: Props) {
 
   return (
     <>
-    <Card className="bg-gray-50">
-    <CardHeader
-        icon={<LinkIcon className="w-5 h-5 text-primary" strokeWidth={2} />}
-        title="My links"
-      />
+      <Card className="bg-gray-50">
+        <CardHeader
+          icon={<LinkIcon className="w-5 h-5 text-primary" strokeWidth={2} />}
+          title="My links"
+        />
 
-      <CardBody>
-        {links.map((link) => {
-          const Icon = link.icon;
-          const isCustomise = "action" in link;
+        <CardBody>
+          {links.map((link) => {
+            const Icon = link.icon;
+            const isCustomise = "action" in link;
 
-          if (isCustomise) {
+            if (isCustomise) {
+              return (
+                <button
+                  key={link.id}
+                  onClick={() => setCustomiseOpen(true)}
+                  className="w-full flex items-center justify-between p-4 bg-white rounded-lg hover:bg-blue-50 transition-colors group"
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="w-10 h-10 rounded-full group-hover:bg-blue-200 flex items-center justify-center">
+                      <Icon className="w-6 h-6 text-primary" strokeWidth={1.5} />
+                    </div>
+                    <div className="text-left">
+                      <h3 className="text-sm font-medium text-primary-dark">{link.title}</h3>
+                      <p className="text-xs text-primary-dark">{link.subtitle}</p>
+                    </div>
+                  </div>
+                  <ChevronRight
+                    className="w-8 h-8 text-primary-dark group-hover:text-primary transition-colors"
+                    strokeWidth={1.2}
+                  />
+                </button>
+              );
+            }
+
             return (
-              <button
+              <Link
                 key={link.id}
-                onClick={() => setCustomiseOpen(true)}
+                href={(link as { href: string }).href}
                 className="w-full flex items-center justify-between p-4 bg-white rounded-lg hover:bg-blue-50 transition-colors group"
               >
                 <div className="flex items-center gap-2">
@@ -82,9 +105,7 @@ function MyLinks({}: Props) {
                     <Icon className="w-6 h-6 text-primary" strokeWidth={1.5} />
                   </div>
                   <div className="text-left">
-                    <h3 className="text-sm font-medium text-primary-dark">
-                      {link.title}
-                    </h3>
+                    <h3 className="text-sm font-medium text-primary-dark">{link.title}</h3>
                     <p className="text-xs text-primary-dark">{link.subtitle}</p>
                   </div>
                 </div>
@@ -92,48 +113,20 @@ function MyLinks({}: Props) {
                   className="w-8 h-8 text-primary-dark group-hover:text-primary transition-colors"
                   strokeWidth={1.2}
                 />
-              </button>
+              </Link>
             );
-          }
+          })}
+        </CardBody>
 
-          return (
-            <Link
-              key={link.id}
-              href={(link as { href: string }).href}
-              className="w-full flex items-center justify-between p-4 bg-white rounded-lg hover:bg-blue-50 transition-colors group"
-            >
-              <div className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-full group-hover:bg-blue-200 flex items-center justify-center">
-                  <Icon className="w-6 h-6 text-primary" strokeWidth={1.5} />
-                </div>
-                <div className="text-left">
-                  <h3 className="text-sm font-medium text-primary-dark">
-                    {link.title}
-                  </h3>
-                  <p className="text-xs text-primary-dark">{link.subtitle}</p>
-                </div>
-              </div>
-              <ChevronRight
-                className="w-8 h-8 text-primary-dark group-hover:text-primary transition-colors"
-                strokeWidth={1.2}
-              />
-            </Link>
-          );
-        })}
-      </CardBody>
+        <CardFooter>
+          <button className="w-full text-center text-sm font-bold text-primary-dark transition-colors flex items-center justify-center gap-1">
+            EDIT LINKS
+            <ChevronRight className="w-6 h-6 -mt-1" strokeWidth={1.2} />
+          </button>
+        </CardFooter>
+      </Card>
 
-      <CardFooter>
-        <button className="w-full text-center text-sm font-bold text-primary-dark transition-colors flex items-center justify-center gap-1">
-          EDIT LINKS
-          <ChevronRight className="w-6 h-6 -mt-1" strokeWidth={1.2} />
-        </button>
-      </CardFooter>
-    </Card>
-
-    <CustomiseAppearanceModal
-      open={customiseOpen}
-      onOpenChange={setCustomiseOpen}
-    />
+      <CustomiseAppearanceModal open={customiseOpen} onOpenChange={setCustomiseOpen} />
     </>
   );
 }

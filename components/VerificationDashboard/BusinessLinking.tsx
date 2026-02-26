@@ -31,42 +31,24 @@ function getSteps(current: Step) {
 
 type Props = {};
 
-function BusinessLinking({ }: Props) {
+function BusinessLinking({}: Props) {
   const [step, setStep] = useState<Step>(1);
 
   const goTo = (s: Step) => setStep(s);
 
   return (
     <BusinessLinkingLayout currentStep={step} steps={getSteps(step)}>
-      {step === 1 && (
-        <BusinessRoleDefinition
-          onSelectApprovers={() => goTo(2)}
-          onCancel={() => console.log("Cancel business linking")}
-        />
-      )}
+      {step === 1 && <BusinessRoleDefinition onSelectApprovers={() => goTo(2)} />}
       {step === 2 && (
-        <BusinessSelectApprovers
-          onCaptureDetails={() => goTo(3)}
-          onBack={() => goTo(1)}
-        />
+        <BusinessSelectApprovers onCaptureDetails={() => goTo(3)} onBack={() => goTo(1)} />
       )}
       {step === 3 && (
-        <CaptureApproverDetails
-          onVerifyDetails={() => goTo(4)}
-          onBack={() => goTo(2)}
-        />
+        <CaptureApproverDetails onVerifyDetails={() => goTo(4)} onBack={() => goTo(2)} />
       )}
       {step === 4 && (
-        <BusinessVerifyDetails
-          onRequestApproval={() => goTo(5)}
-          onBack={() => goTo(3)}
-        />
+        <BusinessVerifyDetails onRequestApproval={() => goTo(5)} onBack={() => goTo(3)} />
       )}
-      {step === 5 && (
-        <BusinessApprovalStatus
-          onDone={() => console.log("Business linking complete")}
-        />
-      )}
+      {step === 5 && <BusinessApprovalStatus />}
     </BusinessLinkingLayout>
   );
 }

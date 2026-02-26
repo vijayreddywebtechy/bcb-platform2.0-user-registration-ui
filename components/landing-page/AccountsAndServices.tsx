@@ -33,21 +33,15 @@ function AccountsAndServices() {
           </h2>
 
           <p className="mt-8 text-sm md:text-base lg:text-lg text-neutral-300 leading-relaxed max-w-md">
-            Explore our wide range of financial offerings and solutions tailored
-            to meet your unique needs
+            Explore our wide range of financial offerings and solutions tailored to meet your unique
+            needs
           </p>
 
           <div className="mt-8">
             <Link href="/" target="_blank">
               <Button className="px-6">
                 Explore Solutions
-                <Image
-                  src={icnLinkOut}
-                  alt=""
-                  width={16}
-                  height={16}
-                  className="ml-2"
-                />
+                <Image src={icnLinkOut} alt="" width={16} height={16} className="ml-2" />
               </Button>
             </Link>
           </div>

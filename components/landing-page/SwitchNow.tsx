@@ -18,22 +18,15 @@ function SwitchNow() {
               </h2>
 
               <p className="mt-4 md:mt-6 text-sm md:text-base text-white/80 leading-relaxed">
-                We&rsquo;re serious about where your business is going. Discover
-                why we&rsquo;re the trusted choice when it comes to business
-                banking.
+                We&rsquo;re serious about where your business is going. Discover why we&rsquo;re the
+                trusted choice when it comes to business banking.
               </p>
 
               <div className="mt-6 md:mt-8">
                 <Link href="/" target="_blank">
                   <Button className="px-6">
                     Switch Now
-                    <Image
-                      src={icnLinkOut}
-                      alt=""
-                      width={14}
-                      height={14}
-                      className="ml-1.5"
-                    />
+                    <Image src={icnLinkOut} alt="" width={14} height={14} className="ml-1.5" />
                   </Button>
                 </Link>
               </div>

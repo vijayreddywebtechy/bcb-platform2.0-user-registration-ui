@@ -49,7 +49,6 @@ export default function BusinessLinkingLayout({
               action={{
                 type: "button",
                 label: "Exit",
-                onClick: () => console.log("Exit clicked"),
               }}
             />
           </div>
@@ -60,9 +59,7 @@ export default function BusinessLinkingLayout({
           <div className="py-10">
             <div className="flex flex-col lg:flex-row justify-between gap-8">
               {/* Main Content */}
-              <div className="flex-1 w-full">
-                {children}
-              </div>
+              <div className="flex-1 w-full">{children}</div>
 
               {/* Progress Sidebar */}
               <ProgressCard

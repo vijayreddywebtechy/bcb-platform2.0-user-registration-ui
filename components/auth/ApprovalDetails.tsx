@@ -41,17 +41,12 @@ export default function ApprovalDetails() {
 
   const handleApprove = () => {
     setLoading(true);
-    console.log("Approved");
     setTimeout(() => setLoading(false), 2000);
   };
 
-  const handleDecline = () => {
-    console.log("Declined");
-  };
+  const handleDecline = () => {};
 
-  const handleCancel = () => {
-    console.log("Cancelled");
-  };
+  const handleCancel = () => {};
 
   return (
     <AuthLayout>
@@ -70,16 +65,13 @@ export default function ApprovalDetails() {
           <div className="border-b border-neutral-300 pb-4">
             <h3 className="text-base font-medium text-secondary mb-2">{requester.name}</h3>
             <p className="text-sm text-secondary mb-2">
-              Mobile Number -
-              <span className="font-medium">{requester.mobileNumber}</span>
+              Mobile Number -<span className="font-medium">{requester.mobileNumber}</span>
             </p>
             <p className="text-sm text-secondary mb-2">
-              Email Address -
-              <span className="font-medium">{requester.email}</span>
+              Email Address -<span className="font-medium">{requester.email}</span>
             </p>
             <p className="text-sm text-primary-dark">
-              Requested Role/Permissions -
-              <span className="font-medium">{requester.role}</span>
+              Requested Role/Permissions -<span className="font-medium">{requester.role}</span>
             </p>
           </div>
         </div>
@@ -90,21 +82,19 @@ export default function ApprovalDetails() {
           {approvers.map((approver, index) => (
             <div
               key={index}
-              className={`${index < approvers.length - 1 ? "border-b border-neutral-300" : ""
-                } pb-4 mb-4`}
+              className={`${
+                index < approvers.length - 1 ? "border-b border-neutral-300" : ""
+              } pb-4 mb-4`}
             >
               <h3 className="text-base font-medium text-secondary mb-2">{approver.name}</h3>
               <p className="text-sm text-secondary mb-2">
-                Mobile Number -
-                <span className="font-medium">{approver.mobileNumber}</span>
+                Mobile Number -<span className="font-medium">{approver.mobileNumber}</span>
               </p>
               <p className="text-sm text-secondary mb-2">
-                Email Address -
-                <span className="font-medium">{approver.email}</span>
+                Email Address -<span className="font-medium">{approver.email}</span>
               </p>
               <p className="text-sm text-secondary">
-                Requested Role/Permissions -
-                <span className="font-medium">{approver.role}</span>
+                Requested Role/Permissions -<span className="font-medium">{approver.role}</span>
               </p>
             </div>
           ))}
@@ -117,22 +107,17 @@ export default function ApprovalDetails() {
               <Info className="w-5 h-5 text-white fill-primary-dark" />
             </div>
             <div className="text-sm text-secondary leading-relaxed">
-              Admins have full account access to move money, accept offers, statements,
-              balances, transactions, security settings, manage team access and permissions.
-              Please note that roles and permissions can be customised or revoked by your
-              admin after profile is fully setup. You can also add more team members who need
-              to access later.
+              Admins have full account access to move money, accept offers, statements, balances,
+              transactions, security settings, manage team access and permissions. Please note that
+              roles and permissions can be customised or revoked by your admin after profile is
+              fully setup. You can also add more team members who need to access later.
             </div>
           </div>
         </div>
 
         {/* Action Buttons */}
         <div className="space-y-3">
-          <Button
-            onClick={handleApprove}
-            className="w-full"
-            disabled={loading}
-          >
+          <Button onClick={handleApprove} className="w-full" disabled={loading}>
             {loading ? "APPROVING..." : "APPROVE"}
           </Button>
           <Button
@@ -142,11 +127,7 @@ export default function ApprovalDetails() {
           >
             DECLINE REQUEST
           </Button>
-          <Button
-            variant="outline"
-            onClick={handleCancel}
-            className="w-full"
-          >
+          <Button variant="outline" onClick={handleCancel} className="w-full">
             CANCEL
           </Button>
         </div>

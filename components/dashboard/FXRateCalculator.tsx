@@ -62,57 +62,60 @@ function FXRateCalculator({}: Props) {
           height={40}
           className="w-10 h-10"
         />
-        <h2 className="text-base md:text-lg font-medium text-secondary">
-          FX Rate Calculator
-        </h2>
+        <h2 className="text-base md:text-lg font-medium text-secondary">FX Rate Calculator</h2>
       </div>
-    <div className="p-4">
-      {/* Description */}
-      <p className="text-sm text-secondary font-medium text-center mb-12">
-        Need forex? Get an idea of how much it could cost.
-      </p>
-
-      {/* Current Time */}
-      <div className="text-center mb-8">
-        <p className="text-sm md:text-base text-gray-600">{getCurrentDateTime()}</p>
-      </div>
-
-      {/* Buy Section */}
-      <CurrencyAmountInput
-        label="Buy"
-        amount={buyAmount}
-        onAmountChange={setBuyAmount}
-        currency={buyCurrency}
-        onCurrencyChange={setBuyCurrency}
-        options={currencyOptions}
-      />
-
-      {/* Sell Section */}
-      <CurrencyAmountInput
-        label="Sell"
-        amount={sellAmount}
-        onAmountChange={setSellAmount}
-        currency={sellCurrency}
-        onCurrencyChange={setSellCurrency}
-        options={currencyOptions}
-      />
-
-      {/* Exchange Rate Result */}
-      <div className="flex-1 text-center mt-8 mb-6">
-        <p className="text-xs text-gray-500 mb-2">Applicable Rate</p>
-        <p className="text-base font-medium text-secondary mb-1">
-          {buyAmount} {buyCurrency.label}
+      <div className="p-4">
+        {/* Description */}
+        <p className="text-sm text-secondary font-medium text-center mb-12">
+          Need forex? Get an idea of how much it could cost.
         </p>
-        <p className="text-lg sm:text-xl md:text-2xl font-medium text-secondary">
-          {sellAmount} {sellCurrency.label}
-        </p>
-      </div>
+
+        {/* Current Time */}
+        <div className="text-center mb-8">
+          <p className="text-sm md:text-base text-gray-600">{getCurrentDateTime()}</p>
+        </div>
+
+        {/* Buy Section */}
+        <CurrencyAmountInput
+          label="Buy"
+          amount={buyAmount}
+          onAmountChange={setBuyAmount}
+          currency={buyCurrency}
+          onCurrencyChange={setBuyCurrency}
+          options={currencyOptions}
+        />
+
+        {/* Sell Section */}
+        <CurrencyAmountInput
+          label="Sell"
+          amount={sellAmount}
+          onAmountChange={setSellAmount}
+          currency={sellCurrency}
+          onCurrencyChange={setSellCurrency}
+          options={currencyOptions}
+        />
+
+        {/* Exchange Rate Result */}
+        <div className="flex-1 text-center mt-8 mb-6">
+          <p className="text-xs text-gray-500 mb-2">Applicable Rate</p>
+          <p className="text-base font-medium text-secondary mb-1">
+            {buyAmount} {buyCurrency.label}
+          </p>
+          <p className="text-lg sm:text-xl md:text-2xl font-medium text-secondary">
+            {sellAmount} {sellCurrency.label}
+          </p>
+        </div>
       </div>
 
       {/* Legal Disclaimer Link */}
       <div className="flex items-center justify-center gap-2 text-sm md:text-base cursor-pointer transition-colors">
         <Info className="w-5 h-5 text-primary-dark" strokeWidth={2} />
-        <span className="text-gray-500">View <Link href="/legal-disclaimer" className="font-medium text-primary-dark">Legal Disclaimer</Link></span>
+        <span className="text-gray-500">
+          View{" "}
+          <Link href="/legal-disclaimer" className="font-medium text-primary-dark">
+            Legal Disclaimer
+          </Link>
+        </span>
       </div>
     </div>
   );

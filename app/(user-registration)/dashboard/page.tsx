@@ -36,7 +36,7 @@ function page({}: Props) {
               <MyLinks />
             </div>
           </div>
-          
+
           {/* Business Accounts */}
           <div className="mb-6">
             <BusinessAccounts />

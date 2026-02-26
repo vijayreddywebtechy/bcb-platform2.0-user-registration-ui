@@ -67,18 +67,15 @@ function StepCard({ icon, image, step, title, description }: Step) {
           src={image}
           alt={`Step ${step} - ${title}`}
           className="object-cover object-top m-auto w-full"
-          width={368} height={240}
+          width={368}
+          height={240}
         />
       </div>
 
       {/* Step Label & Title */}
       <div className="mb-3">
-        <p className="text-lg md:text-xl lg:text-2xl font-medium text-secondary">
-          Step {step}
-        </p>
-        <h3 className="text-lg md:text-xl lg:text-2xl text-secondary">
-          {title}
-        </h3>
+        <p className="text-lg md:text-xl lg:text-2xl font-medium text-secondary">Step {step}</p>
+        <h3 className="text-lg md:text-xl lg:text-2xl text-secondary">{title}</h3>
       </div>
 
       {/* Description */}

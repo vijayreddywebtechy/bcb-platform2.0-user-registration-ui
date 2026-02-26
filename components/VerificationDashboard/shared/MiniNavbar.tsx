@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import icnTelescope from "@/assets/images/icons/icn_telescope.svg";
 import icnCallCentre from "@/assets/images/icons/icn_call_centre.svg";
-import icnLanguage from "@/assets/images/icons/icn_sa_lang_icon.png"
+import icnLanguage from "@/assets/images/icons/icn_sa_lang_icon.png";
 
 const MiniNavbar: React.FC = () => {
   return (
@@ -31,7 +31,6 @@ const MiniNavbar: React.FC = () => {
         <button type="button">
           <Image src={icnLanguage} alt="Language Icon" width={16} height={16} />
         </button>
-
       </div>
     </nav>
   );

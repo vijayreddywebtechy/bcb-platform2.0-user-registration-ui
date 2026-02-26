@@ -1,7 +1,12 @@
 "use client";
 
 import React from "react";
-import Select, { Props as SelectProps, StylesConfig, components, DropdownIndicatorProps } from "react-select";
+import Select, {
+  Props as SelectProps,
+  StylesConfig,
+  components,
+  DropdownIndicatorProps,
+} from "react-select";
 import Image from "next/image";
 import ArrowDownIcon from "@/assets/images/icons/icn_arrow_solid_down.svg";
 
@@ -115,16 +120,16 @@ const CustomDropdownIndicator = (props: DropdownIndicatorProps<SelectOption, fal
         width={24}
         height={24}
         className="transition-transform duration-200"
-      // style={{
-      //   transform: props.selectProps.menuIsOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-      // }}
+        // style={{
+        //   transform: props.selectProps.menuIsOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+        // }}
       />
     </components.DropdownIndicator>
   );
 };
 
 // Extend the react-select props
-interface ReactSelectProps extends Omit<SelectProps<SelectOption, false>, 'styles'> {
+interface ReactSelectProps extends Omit<SelectProps<SelectOption, false>, "styles"> {
   // You can add custom props here if needed
   customStyles?: StylesConfig<SelectOption, false>;
 }
@@ -132,9 +137,7 @@ interface ReactSelectProps extends Omit<SelectProps<SelectOption, false>, 'style
 const ReactSelect = React.forwardRef<any, ReactSelectProps>(
   ({ customStyles: userCustomStyles, className, id, ...props }, ref) => {
     // Merge user custom styles with default styles if provided
-    const finalStyles = userCustomStyles
-      ? { ...customStyles, ...userCustomStyles }
-      : customStyles;
+    const finalStyles = userCustomStyles ? { ...customStyles, ...userCustomStyles } : customStyles;
 
     return (
       <Select

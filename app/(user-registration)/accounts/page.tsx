@@ -12,10 +12,7 @@ function AccountsPage() {
   return (
     <DashboardLayout>
       {selectedAccount ? (
-        <AccountDetail
-          account={selectedAccount}
-          onBack={() => setSelectedAccount(null)}
-        />
+        <AccountDetail account={selectedAccount} onBack={() => setSelectedAccount(null)} />
       ) : (
         <>
           <PageHeader

@@ -1,13 +1,13 @@
-import RegisterForm from "@/components/auth/register/RegisterForm"
+import RegisterForm from "@/components/auth/register/RegisterForm";
 
-type Props = {}
+type Props = {};
 
 const page = (props: Props) => {
-    return (
-        <>
-            <RegisterForm />
-        </>
-    )
-}
+  return (
+    <>
+      <RegisterForm />
+    </>
+  );
+};
 
-export default page
+export default page;

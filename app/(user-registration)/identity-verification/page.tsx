@@ -1,12 +1,14 @@
-import VerificationLayout from "@/components/VerificationDashboard/shared/VerificationLayout"
-import IdentityVerification from "@/components/VerificationDashboard/IdentityVerification"
+import VerificationLayout from "@/components/VerificationDashboard/shared/VerificationLayout";
+import IdentityVerification from "@/components/VerificationDashboard/IdentityVerification";
 
-type Props = {}
+type Props = {};
 
-function page({ }: Props) {
-    return (
-        <VerificationLayout><IdentityVerification /></VerificationLayout>
-    )
+function page({}: Props) {
+  return (
+    <VerificationLayout>
+      <IdentityVerification />
+    </VerificationLayout>
+  );
 }
 
-export default page
+export default page;

@@ -4,11 +4,7 @@ import React, { useState } from "react";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import styles from "./FloatingTextField.module.css";
 
 export interface FloatingDatePickerProps {
@@ -34,10 +30,7 @@ export interface FloatingDatePickerProps {
   wrapperClassName?: string;
 }
 
-export const FloatingDatePicker = React.forwardRef<
-  HTMLButtonElement,
-  FloatingDatePickerProps
->(
+export const FloatingDatePicker = React.forwardRef<HTMLButtonElement, FloatingDatePickerProps>(
   (
     {
       label,
@@ -58,9 +51,7 @@ export const FloatingDatePicker = React.forwardRef<
     const hasValue = !!value;
     const isActive = isFocused || hasValue;
 
-    const inputId = `floating-datepicker-${label
-      .toLowerCase()
-      .replace(/\s+/g, "-")}`;
+    const inputId = `floating-datepicker-${label.toLowerCase().replace(/\s+/g, "-")}`;
 
     return (
       <div className={`${styles.textfieldWrapper} ${wrapperClassName || ""}`}>
@@ -79,11 +70,7 @@ export const FloatingDatePicker = React.forwardRef<
               }`}
               aria-hidden="true"
             >
-              <legend
-                className={`${styles.legend} ${
-                  isActive ? styles.legendActive : ""
-                }`}
-              >
+              <legend className={`${styles.legend} ${isActive ? styles.legendActive : ""}`}>
                 <span>{label}</span>
               </legend>
             </fieldset>
@@ -97,14 +84,8 @@ export const FloatingDatePicker = React.forwardRef<
                 role="combobox"
                 aria-expanded={isFocused}
                 aria-invalid={error}
-                aria-describedby={
-                  helperText || errorText
-                    ? `${inputId}-helper-text`
-                    : undefined
-                }
-                className={`${styles.input} ${
-                  disabled ? styles.inputDisabled : ""
-                }`}
+                aria-describedby={helperText || errorText ? `${inputId}-helper-text` : undefined}
+                className={`${styles.input} ${disabled ? styles.inputDisabled : ""}`}
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -138,12 +119,7 @@ export const FloatingDatePicker = React.forwardRef<
           </div>
 
           <PopoverContent className="w-auto p-0" align="start">
-            <Calendar
-              mode="single"
-              selected={value}
-              onSelect={onChange}
-              autoFocus
-            />
+            <Calendar mode="single" selected={value} onSelect={onChange} autoFocus />
           </PopoverContent>
         </Popover>
 

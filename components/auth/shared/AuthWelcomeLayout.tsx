@@ -2,11 +2,7 @@ import Image from "next/image";
 import authBg from "@/assets/images/shapes/auth_shape_bg.png";
 import sbBrandIcon from "@/assets/sb_brand_icon.svg";
 
-export default function AuthWelcomeLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AuthWelcomeLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative z-10 min-h-screen bg-primary-deep flex flex-col items-center py-6 px-4">
       <Image

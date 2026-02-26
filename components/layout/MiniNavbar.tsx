@@ -15,7 +15,6 @@ const MiniNavbar: React.FC = () => {
   return (
     <nav className="w-full bg-primary-deep h-10 flex items-stretch">
       <div className="page-container flex items-stretch justify-between gap-6">
-
         <div className="flex items-stretch gap-4">
           {/* Personal */}
           <Link href="/solutions" className={navLinkClass}>
@@ -48,7 +47,6 @@ const MiniNavbar: React.FC = () => {
             <Image src={icnLanguage} alt="Language Icon" width={16} height={16} />
           </button>
         </div>
-
       </div>
     </nav>
   );

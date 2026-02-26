@@ -20,10 +20,7 @@ interface BusinessVerifyDetailsProps {
   onBack?: () => void;
 }
 
-function BusinessVerifyDetails({
-  onRequestApproval,
-  onBack,
-}: BusinessVerifyDetailsProps) {
+function BusinessVerifyDetails({ onRequestApproval, onBack }: BusinessVerifyDetailsProps) {
   const approvers: ApproverDetail[] = [
     {
       id: "1",
@@ -48,12 +45,10 @@ function BusinessVerifyDetails({
   ];
 
   const handleRequestApproval = () => {
-    console.log("Send request clicked", { approvers });
     onRequestApproval?.();
   };
 
   const handleBack = () => {
-    console.log("Back clicked");
     onBack?.();
   };
 
@@ -82,53 +77,33 @@ function BusinessVerifyDetails({
           <div key={approver.id} className="flex items-start gap-4 py-5">
             {/* Avatar */}
             <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-              <span className="text-secondary font-medium text-lg">
-                {approver.initials}
-              </span>
+              <span className="text-secondary font-medium text-lg">{approver.initials}</span>
             </div>
 
             {/* Details */}
             <div className="flex-1 min-w-0">
-              <p className="text-secondary font-medium text-lg leading-tight">
-                {approver.name}
-              </p>
-              <p className="text-xs font-medium text-secondary mt-2 mb-3">
-                {approver.role}
-              </p>
+              <p className="text-secondary font-medium text-lg leading-tight">{approver.name}</p>
+              <p className="text-xs font-medium text-secondary mt-2 mb-3">{approver.role}</p>
 
               {/* Info Grid */}
               <div className="space-y-2">
                 <div className="flex gap-6">
-                  <span className="text-xs text-secondary w-32 shrink-0">
-                    Mobile Number
-                  </span>
-                  <span className="text-xs font-medium text-secondary">
-                    {approver.mobile}
-                  </span>
+                  <span className="text-xs text-secondary w-32 shrink-0">Mobile Number</span>
+                  <span className="text-xs font-medium text-secondary">{approver.mobile}</span>
                 </div>
                 <div className="flex gap-6">
-                  <span className="text-xs text-secondary w-32 shrink-0">
-                    Email Address
-                  </span>
-                  <span className="text-xs font-medium text-secondary">
-                    {approver.email}
-                  </span>
+                  <span className="text-xs text-secondary w-32 shrink-0">Email Address</span>
+                  <span className="text-xs font-medium text-secondary">{approver.email}</span>
                 </div>
                 <div className="flex gap-6">
-                  <span className="text-xs text-secondary w-32 shrink-0">
-                    Profile
-                  </span>
-                  <span className="text-xs font-medium text-green-600">
-                    {approver.profile}
-                  </span>
+                  <span className="text-xs text-secondary w-32 shrink-0">Profile</span>
+                  <span className="text-xs font-medium text-green-600">{approver.profile}</span>
                 </div>
                 <div className="flex gap-6">
                   <span className="text-xs text-secondary w-32 shrink-0">
                     Role &amp; Permissions
                   </span>
-                  <span className="text-xs font-medium text-secondary">
-                    {approver.permissions}
-                  </span>
+                  <span className="text-xs font-medium text-secondary">{approver.permissions}</span>
                 </div>
               </div>
             </div>

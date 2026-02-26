@@ -9,11 +9,7 @@ interface SearchBoxProps {
   onChange: (value: string) => void;
 }
 
-export default function SearchBox({
-  placeholder = "Search...",
-  value,
-  onChange,
-}: SearchBoxProps) {
+export default function SearchBox({ placeholder = "Search...", value, onChange }: SearchBoxProps) {
   const [isFocused, setIsFocused] = useState(false);
 
   return (

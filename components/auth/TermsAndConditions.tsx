@@ -19,13 +19,10 @@ export default function TermsAndConditions() {
       return;
     }
     setLoading(true);
-    console.log("Terms accepted");
     setTimeout(() => setLoading(false), 2000);
   };
 
-  const handleBack = () => {
-    console.log("Back clicked");
-  };
+  const handleBack = () => {};
 
   const allAccepted = agreePersonalInfo && consentProcessing && acknowledgeLiability;
 
@@ -34,7 +31,9 @@ export default function TermsAndConditions() {
       <AuthCard className="w-full max-w-lg mx-auto mb-4">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-xl sm:text-2xl md:text-3xl text-secondary mb-2">Terms & Conditions</h1>
+          <h1 className="text-xl sm:text-2xl md:text-3xl text-secondary mb-2">
+            Terms & Conditions
+          </h1>
           <p className="text-neutral-900 text-sm sm:text-base leading-relaxed">
             Review the details below to approve or decline
           </p>
@@ -49,13 +48,15 @@ export default function TermsAndConditions() {
               checked={agreePersonalInfo}
               onCheckedChange={(checked) => setAgreePersonalInfo(checked === true)}
             />
-            <label htmlFor="agree-personal-info" className="text-sm text-secondary leading-relaxed cursor-pointer">
-              <span className="font-medium">I agree and confirm that:</span> If I give Standard
-              Bank personal information about or on behalf of another person (including, but not
-              limited to, account signatories and shareholders), I confirm that I am authorised
-              to: (a) give their personal information; (b) consent on their behalf to the
-              processing of their personal information; and (c) receive any privacy notices on
-              their behalf.
+            <label
+              htmlFor="agree-personal-info"
+              className="text-sm text-secondary leading-relaxed cursor-pointer"
+            >
+              <span className="font-medium">I agree and confirm that:</span> If I give Standard Bank
+              personal information about or on behalf of another person (including, but not limited
+              to, account signatories and shareholders), I confirm that I am authorised to: (a) give
+              their personal information; (b) consent on their behalf to the processing of their
+              personal information; and (c) receive any privacy notices on their behalf.
             </label>
           </div>
 
@@ -66,10 +67,15 @@ export default function TermsAndConditions() {
               checked={consentProcessing}
               onCheckedChange={(checked) => setConsentProcessing(checked === true)}
             />
-            <label htmlFor="consent-processing" className="text-sm text-secondary leading-relaxed cursor-pointer">
-              <span className="font-medium">I consent to Standard Bank collecting and processing
-                my personal information:</span> From external and public sources, where lawful and
-              reasonable, for identity, address, and compliance purposes.
+            <label
+              htmlFor="consent-processing"
+              className="text-sm text-secondary leading-relaxed cursor-pointer"
+            >
+              <span className="font-medium">
+                I consent to Standard Bank collecting and processing my personal information:
+              </span>{" "}
+              From external and public sources, where lawful and reasonable, for identity, address,
+              and compliance purposes.
               <br />
               <br />
               To analyse my interactions and create personalised client communications based on my
@@ -77,8 +83,8 @@ export default function TermsAndConditions() {
               <br />
               <br />
               To share my personal information within the Group and/or with third-party service
-              providers, including third parties who are not within the jurisdiction of the
-              provided services.
+              providers, including third parties who are not within the jurisdiction of the provided
+              services.
             </label>
           </div>
 
@@ -89,9 +95,12 @@ export default function TermsAndConditions() {
               checked={acknowledgeLiability}
               onCheckedChange={(checked) => setAcknowledgeLiability(checked === true)}
             />
-            <label htmlFor="acknowledge-liability" className="text-sm text-secondary leading-relaxed cursor-pointer">
-              <span className="font-medium">Acknowledgment of Liability:</span> By authorising
-              this applicant, I confirm that I am duly authorised to grant access to the business's
+            <label
+              htmlFor="acknowledge-liability"
+              className="text-sm text-secondary leading-relaxed cursor-pointer"
+            >
+              <span className="font-medium">Acknowledgment of Liability:</span> By authorising this
+              applicant, I confirm that I am duly authorised to grant access to the business's
               banking profile. I acknowledge that Standard Bank shall not be held liable for any
               loss, damage, or fraudulent activity resulting from the applicant's access or
               transactions. The business assumes full responsibility for all actions performed by
@@ -101,19 +110,10 @@ export default function TermsAndConditions() {
 
           {/* Action Buttons */}
           <div className="space-y-3 pt-4">
-            <Button
-              type="submit"
-              className="w-full"
-              disabled={!allAccepted || loading}
-            >
+            <Button type="submit" className="w-full" disabled={!allAccepted || loading}>
               {loading ? "APPROVING..." : "APPROVE"}
             </Button>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={handleBack}
-              className="w-full"
-            >
+            <Button type="button" variant="outline" onClick={handleBack} className="w-full">
               BACK
             </Button>
           </div>

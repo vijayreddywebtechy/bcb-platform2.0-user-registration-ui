@@ -8,7 +8,10 @@ import { Button } from "@/components/ui/button";
 
 function Banner() {
   return (
-    <section id="banner" className="relative w-full min-h-[500px] md:min-h-[600px] lg:min-h-[700px] xl:min-h-[940px] overflow-hidden">
+    <section
+      id="banner"
+      className="relative w-full min-h-[500px] md:min-h-[600px] lg:min-h-[700px] xl:min-h-[940px] overflow-hidden"
+    >
       {/* Background Image */}
       <Image
         src={bannerBg}
@@ -28,14 +31,14 @@ function Banner() {
         <div className="max-w-xl lg:max-w-2xl py-12 md:py-16 lg:py-20">
           {/* Heading */}
           <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-tight xl:leading-[1.15] text-primary-dark tracking-tight">
-            We&rsquo;re on a journey to bring our most popular business banking
-            services onto one convenient business hub.
+            We&rsquo;re on a journey to bring our most popular business banking services onto one
+            convenient business hub.
           </h1>
 
           {/* Subtitle */}
           <p className="mt-5 md:mt-6 text-sm sm:text-base md:text-lg text-secondary leading-relaxed max-w-md lg:max-w-lg">
-            We will be releasing key functionality periodically until we&rsquo;re
-            ready to launch officially, try out our limited version now.
+            We will be releasing key functionality periodically until we&rsquo;re ready to launch
+            officially, try out our limited version now.
           </p>
 
           {/* CTA Buttons */}
@@ -60,10 +63,7 @@ function Banner() {
             </Link>
 
             {/* Try It Now */}
-            <Link
-              href="/"
-              className=""
-            >
+            <Link href="/" className="">
               <Button className="md:min-w-48">TRY NOW</Button>
             </Link>
           </div>

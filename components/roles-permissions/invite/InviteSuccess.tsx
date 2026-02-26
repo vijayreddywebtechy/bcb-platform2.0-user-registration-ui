@@ -8,10 +8,7 @@ interface InviteSuccessProps {
   onDone?: () => void;
 }
 
-export default function InviteSuccess({
-  onAddAnother,
-  onDone,
-}: InviteSuccessProps) {
+export default function InviteSuccess({ onAddAnother, onDone }: InviteSuccessProps) {
   return (
     <div className="w-full lg:max-w-[640px] m-auto flex flex-col items-center text-center py-10">
       {/* Success icon */}
@@ -26,18 +23,14 @@ export default function InviteSuccess({
 
       {/* Description */}
       <p className="text-sm text-secondary leading-relaxed max-w-md mb-10">
-        Your invite(s) have been sent. The invited user(s) will receive an email
-        with instructions on how to access the Business Hub. You can track the
-        status of your invites from the Roles &amp; Permissions page.
+        Your invite(s) have been sent. The invited user(s) will receive an email with instructions
+        on how to access the Business Hub. You can track the status of your invites from the Roles
+        &amp; Permissions page.
       </p>
 
       {/* Actions */}
       <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-        <Button
-          variant="outline"
-          onClick={onAddAnother}
-          className="sm:w-56"
-        >
+        <Button variant="outline" onClick={onAddAnother} className="sm:w-56">
           ADD ANOTHER USER
         </Button>
         <Button onClick={onDone} className="sm:w-56">

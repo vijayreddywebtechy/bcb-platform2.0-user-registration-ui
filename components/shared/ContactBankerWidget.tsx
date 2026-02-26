@@ -43,13 +43,8 @@ export default function ContactBankerWidget() {
         <div className="w-[300px] bg-white rounded-xl shadow-xl border border-blue-50 overflow-hidden animate-in slide-in-from-bottom-4 fade-in duration-200">
           {/* Header */}
           <div className="bg-primary-dark px-5 py-4 flex items-center justify-between">
-            <span className="text-white text-sm sm:text-base">
-              Contact your banker
-            </span>
-            <button
-              onClick={handleClose}
-              className="text-white/80 hover:text-white"
-            >
+            <span className="text-white text-sm sm:text-base">Contact your banker</span>
+            <button onClick={handleClose} className="text-white/80 hover:text-white">
               <X className="w-5 h-5" />
             </button>
           </div>
@@ -62,9 +57,7 @@ export default function ContactBankerWidget() {
                 {banker.initials}
               </div>
               <div>
-                <p className="text-sm md:text-base font-medium text-secondary">
-                  {banker.name}
-                </p>
+                <p className="text-sm md:text-base font-medium text-secondary">{banker.name}</p>
                 <p className="text-xs text-gray-500">{banker.role}</p>
               </div>
             </div>
@@ -78,7 +71,9 @@ export default function ContactBankerWidget() {
                 <Image src={icnMail} alt="Email" width={20} height={20} />
                 <span className="text-sm text-primary-dark">{banker.email}</span>
               </div>
-              <div className="bg-blue-50 p-2 rounded-sm"><ChevronRight className="w-6 h-6 text-primary transition-transform" /></div>
+              <div className="bg-blue-50 p-2 rounded-sm">
+                <ChevronRight className="w-6 h-6 text-primary transition-transform" />
+              </div>
             </button>
 
             {/* Phone row */}
@@ -94,14 +89,9 @@ export default function ContactBankerWidget() {
       {view === "message" && (
         <div className="w-[300px] bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden animate-in slide-in-from-bottom-4 fade-in duration-200">
           {/* Header */}
-         <div className="bg-primary-dark px-5 py-4 flex items-center justify-between">
-            <span className="text-white text-sm sm:text-base">
-              Contact your banker
-            </span>
-            <button
-              onClick={handleClose}
-              className="text-white/80 hover:text-white"
-            >
+          <div className="bg-primary-dark px-5 py-4 flex items-center justify-between">
+            <span className="text-white text-sm sm:text-base">Contact your banker</span>
+            <button onClick={handleClose} className="text-white/80 hover:text-white">
               <X className="w-5 h-5" />
             </button>
           </div>
@@ -111,14 +101,17 @@ export default function ContactBankerWidget() {
             {/* Icon + heading */}
             <div className="mb-4">
               <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center mb-3">
-                <Image src={icnMail} alt="Email" width={24} height={24} className="brightness-0 invert" />
+                <Image
+                  src={icnMail}
+                  alt="Email"
+                  width={24}
+                  height={24}
+                  className="brightness-0 invert"
+                />
               </div>
-              <h4 className="text-base font-medium text-secondary mb-1">
-                Get in touch
-              </h4>
+              <h4 className="text-base font-medium text-secondary mb-1">Get in touch</h4>
               <p className="text-xs text-gray-500 leading-relaxed">
-                Provide details about what you need and a banker will get in
-                touch with you shortly.
+                Provide details about what you need and a banker will get in touch with you shortly.
               </p>
             </div>
 
@@ -128,9 +121,7 @@ export default function ContactBankerWidget() {
                 {banker.initials}
               </div>
               <div>
-                <p className="text-sm md:text-base font-medium text-secondary">
-                  {banker.name}
-                </p>
+                <p className="text-sm md:text-base font-medium text-secondary">{banker.name}</p>
                 <p className="text-xs text-gray-500">{banker.role}</p>
               </div>
             </div>
@@ -165,13 +156,7 @@ export default function ContactBankerWidget() {
       >
         {view === "closed" ? (
           <div className="flex flex-col items-center gap-0.5">
-            <Image
-              src={icnContactBook}
-              alt="Contact"
-              width={48}
-              height={48}
-              className=""
-            />
+            <Image src={icnContactBook} alt="Contact" width={48} height={48} className="" />
           </div>
         ) : (
           <ChevronDown className="w-6 h-6 text-white" />

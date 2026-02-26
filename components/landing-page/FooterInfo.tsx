@@ -89,9 +89,7 @@ const extraLinks = [
 ];
 
 function Chevron() {
-  return (
-    <span className="inline-block ml-1 text-[10px] leading-none">&rsaquo;</span>
-  );
+  return <span className="inline-block ml-1 text-[10px] leading-none">&rsaquo;</span>;
 }
 
 function ContactTable({ contacts }: { contacts: ContactRow[] }) {
@@ -101,10 +99,7 @@ function ContactTable({ contacts }: { contacts: ContactRow[] }) {
         <div key={i} className="flex gap-3 text-sm text-white/80">
           <span className="w-24 flex-shrink-0">{row.label}</span>
           {row.href ? (
-            <Link
-              href={row.href}
-              className="hover:text-white transition-colors break-all"
-            >
+            <Link href={row.href} className="hover:text-white transition-colors break-all">
               {row.value}
             </Link>
           ) : (
@@ -124,9 +119,7 @@ function FooterInfo() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
           {contactBlocks.map((block) => (
             <div key={block.title}>
-              <h3 className="text-lg md:text-xl font-medium text-white">
-                {block.title}
-              </h3>
+              <h3 className="text-lg md:text-xl font-medium text-white">{block.title}</h3>
               <ContactTable contacts={block.contacts} />
             </div>
           ))}
@@ -136,9 +129,7 @@ function FooterInfo() {
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
           {/* Get to know us */}
           <div>
-            <h3 className="text-lg md:text-xl font-medium text-white">
-              {getToKnowUs.title}
-            </h3>
+            <h3 className="text-lg md:text-xl font-medium text-white">{getToKnowUs.title}</h3>
             <div className="mt-3 space-y-1.5">
               {getToKnowUs.links.map((link) => (
                 <div key={link.label}>
@@ -156,9 +147,7 @@ function FooterInfo() {
 
           {/* Report a fraud incident */}
           <div>
-            <h3 className="text-lg md:text-xl font-medium text-white">
-              {fraudBlock.title}
-            </h3>
+            <h3 className="text-lg md:text-xl font-medium text-white">{fraudBlock.title}</h3>
             <ContactTable contacts={fraudBlock.contacts} />
           </div>
 

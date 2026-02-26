@@ -1,13 +1,13 @@
-import BusinessProfiles from "@/components/auth/BusinessProfiles"
+import BusinessProfiles from "@/components/auth/BusinessProfiles";
 
-type Props = {}
+type Props = {};
 
-function page({ }: Props) {
-    return (
-        <>
-            <BusinessProfiles />
-        </>
-    )
+function page({}: Props) {
+  return (
+    <>
+      <BusinessProfiles />
+    </>
+  );
 }
 
-export default page
+export default page;

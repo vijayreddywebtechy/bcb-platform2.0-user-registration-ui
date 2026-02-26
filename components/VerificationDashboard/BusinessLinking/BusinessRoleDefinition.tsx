@@ -43,25 +43,16 @@ const roles = [
   },
 ];
 
-function BusinessRoleDefinition({
-  onSelectApprovers,
-  onCancel,
-}: BusinessRoleDefinitionProps) {
+function BusinessRoleDefinition({ onSelectApprovers, onCancel }: BusinessRoleDefinitionProps) {
   const [selectedRole, setSelectedRole] = useState<string>("admin");
   const [isAuthorised, setIsAuthorised] = useState<string>("yes");
   const [isDirector, setIsDirector] = useState<string>("yes");
 
   const handleSelectApprovers = () => {
-    console.log("Select approvers clicked", {
-      selectedRole,
-      isAuthorised,
-      isDirector,
-    });
     onSelectApprovers?.();
   };
 
   const handleCancel = () => {
-    console.log("Cancel clicked");
     onCancel?.();
   };
 
@@ -81,10 +72,9 @@ function BusinessRoleDefinition({
 
       {/* Subtitle */}
       <p className="text-sm text-secondary mb-8 leading-relaxed">
-        To secure your business profile and allow your business greater control
-        we need to establish an administrator/owner for the Business Hub. Not an
-        administrator, no worries, your designated admin/owner will approve your
-        access once their admin access is approved.
+        To secure your business profile and allow your business greater control we need to establish
+        an administrator/owner for the Business Hub. Not an administrator, no worries, your
+        designated admin/owner will approve your access once their admin access is approved.
       </p>
 
       {/* Two-column layout */}
@@ -102,10 +92,11 @@ function BusinessRoleDefinition({
                 <label
                   key={role.value}
                   htmlFor={`role-${role.value}`}
-                  className={`flex items-start gap-4 p-4 rounded-xl border cursor-pointer transition-all ${isSelected
-                    ? "border-primary bg-blue-50"
-                    : "border-neutral-300 bg-white hover:border-gray-300"
-                    }`}
+                  className={`flex items-start gap-4 p-4 rounded-xl border cursor-pointer transition-all ${
+                    isSelected
+                      ? "border-primary bg-blue-50"
+                      : "border-neutral-300 bg-white hover:border-gray-300"
+                  }`}
                 >
                   <RadioGroupItem
                     value={role.value}
@@ -113,9 +104,7 @@ function BusinessRoleDefinition({
                     className="mt-1 shrink-0"
                   />
                   <div>
-                    <p className="font-medium text-secondary text-lg md:text-xl">
-                      {role.label}
-                    </p>
+                    <p className="font-medium text-secondary text-lg md:text-xl">{role.label}</p>
                     <p className="text-xs text-neutral-800 leading-relaxed mt-2">
                       {role.description}
                     </p>
@@ -131,8 +120,8 @@ function BusinessRoleDefinition({
           {/* Question 1 */}
           <div>
             <h2 className="text-secondary font-medium mb-4 leading-snug text-sm">
-              I have you been authorised to act on the behalf of the business to
-              set up and administer it's Business Hub Profile?
+              I have you been authorised to act on the behalf of the business to set up and
+              administer it's Business Hub Profile?
             </h2>
             <RadioGroup
               value={isAuthorised}
@@ -163,8 +152,8 @@ function BusinessRoleDefinition({
           {/* Question 2 */}
           <div>
             <h2 className="text-secondary font-medium mb-4 leading-snug text-sm">
-              Are you a director/member and appear on the company registration
-              document and as a related party on our records?
+              Are you a director/member and appear on the company registration document and as a
+              related party on our records?
             </h2>
             <RadioGroup
               value={isDirector}
@@ -199,8 +188,7 @@ function BusinessRoleDefinition({
                 <Info className="w-5 h-5 text-white fill-primary-dark" />
               </div>
               <p className="text-sm text-secondary leading-relaxed font-medium">
-                A request will be sent for approval to business
-                director/members.
+                A request will be sent for approval to business director/members.
               </p>
             </div>
           </div>
