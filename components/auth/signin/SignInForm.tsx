@@ -29,7 +29,13 @@ export default function SignInForm() {
 
     // STEP 1 – Redirect to Ping Federate authorization endpoint.
     // Ping will authenticate and redirect back to redirect_uri?code=...
-    redirectToPingAuth(username.trim(), password.trim());
+    try {
+      await redirectToPingAuth(username.trim(), password.trim());
+    } catch (err: unknown) {
+      setLoading(false);
+      const message = err instanceof Error ? err.message : String(err);
+      setError(`Failed to initiate login: ${message}`);
+    }
   };
 
   return (

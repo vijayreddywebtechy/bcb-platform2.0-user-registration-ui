@@ -1,0 +1,292 @@
+{
+    "customer": {
+        "partyId": "0536358235",
+        "uuid": "02002100-00a4-1eef-bcd0-1c9f8bb93848",
+        "customer_type": "2",
+        "customer_typeX": "ENTERPRISE",
+        "orgDetails": {
+            "legalName": "LAVENDER HILL TRADING 532",
+            "companyName": "Lavender Hill Trading 532",
+            "legalForm": "004",
+            "legalFormX": "CLOSE CORPORATION",
+            "orgEstablishDt": "2010-10-21",
+            "numEmployees": "0000000",
+            "fiscalYearEnd": "2026-02-28",
+            "ownership": "002",
+            "ownershipX": "BLACK-OWNED ENTITY > 50% OWNED"
+        },
+        "tax": [
+            {
+                "taxType": "AL1",
+                "taxTypeX": "Albania : Income Tax Number",
+                "taxNumber": "2010/144143/23"
+            }
+        ],
+        "identifications": [
+            {
+                "type": "10",
+                "typeX": "ENTERPRISE REGISTRATION NUMBER",
+                "number": "2010/144143/23",
+                "issuingCountry": "ZA",
+                "issuedDate": "2010-10-21",
+                "expirationDate": "9999-12-31"
+            }
+        ],
+        "contacts": [
+            {
+                "type": "PHONE",
+                "value": "0845484511",
+                "countryCode": "ZA",
+                "preferredInd": "false",
+                "contactPeriod": "02",
+                "contactPeriodX": "DAYTIME",
+                "obsoleteInd": "false",
+                "phoneType": "2",
+                "startDate": "2026-02-27",
+                "endDate": "9999-12-31"
+            },
+            {
+                "type": "PHONE",
+                "value": "0844662927",
+                "countryCode": "ZA",
+                "preferredInd": "true",
+                "contactPeriod": "02",
+                "contactPeriodX": "DAYTIME",
+                "obsoleteInd": "false",
+                "phoneType": "2",
+                "startDate": "2025-08-20",
+                "endDate": "9999-12-31"
+            },
+            {
+                "type": "EMAIL",
+                "value": "test@test.com",
+                "preferredInd": "false",
+                "obsoleteInd": "false",
+                "startDate": "2026-02-27",
+                "endDate": "9999-12-31"
+            },
+            {
+                "type": "EMAIL",
+                "value": "navya.gogineni@standardbank.co.za",
+                "preferredInd": "false",
+                "obsoleteInd": "false",
+                "startDate": "2025-10-09",
+                "endDate": "9999-12-31"
+            },
+            {
+                "type": "EMAIL",
+                "value": "mahaeshbhupathi89@gmail.com",
+                "preferredInd": "true",
+                "obsoleteInd": "false",
+                "startDate": "2025-08-20",
+                "endDate": "9999-12-31"
+            }
+        ],
+        "addresses": [
+            {
+                "uuid": "02002000-000c-1fd1-84fb-898556422000",
+                "type": [
+                    {
+                        "addressType": "05",
+                        "addressTypeX": "KYC",
+                        "startDate": "2026-02-27",
+                        "endDate": "9999-12-31"
+                    }
+                ],
+                "line3": "36 COMMITTEE STREET",
+                "district": "ZASTRON",
+                "city": "ZASTRON",
+                "postalCode": "9950",
+                "countryCode": "ZA",
+                "startDate": "2026-02-27",
+                "endDate": "9999-12-31"
+            },
+            {
+                "uuid": "02002000-000c-1fd1-84fb-898556426000",
+                "type": [
+                    {
+                        "addressType": "03",
+                        "addressTypeX": "LEGAL",
+                        "startDate": "2026-02-27",
+                        "endDate": "9999-12-31"
+                    }
+                ],
+                "line3": "36 COMMITTEE STREET",
+                "district": "ZASTRON",
+                "city": "ZASTRON",
+                "postalCode": "9950",
+                "countryCode": "ZA",
+                "startDate": "2026-02-27",
+                "endDate": "9999-12-31"
+            },
+            {
+                "uuid": "02002100-0042-1fd0-a9a1-db81329d662b",
+                "type": [
+                    {
+                        "addressType": "02",
+                        "addressTypeX": "GENERAL COMMUNICATIONS",
+                        "startDate": "2025-10-09",
+                        "endDate": "9999-12-31"
+                    }
+                ],
+                "line3": "38 COMMITTEE STREET",
+                "district": "ZASTRON",
+                "province": "ZAF.FS",
+                "provinceX": "FREE STATE",
+                "postalCode": "9950",
+                "countryCode": "ZA",
+                "startDate": "2025-10-09",
+                "endDate": "9999-12-31"
+            }
+        ],
+        "sourceOfFunds": [
+            {
+                "sourceFundType": "0024",
+                "sourceFundTypeX": "Dividend pay-out",
+                "sourceFundAmount": "9989.0",
+                "currency": "ZAR"
+            },
+            {
+                "sourceFundType": "0026",
+                "sourceFundTypeX": "Board fees",
+                "sourceFundAmount": "5000.0",
+                "currency": "ZAR"
+            },
+            {
+                "sourceFundType": "0010",
+                "sourceFundTypeX": "Profit from business activity",
+                "sourceFundAmount": "675.0",
+                "currency": "ZAR"
+            },
+            {
+                "sourceFundType": "0028",
+                "sourceFundTypeX": "Maintenance",
+                "sourceFundAmount": "5000.0",
+                "currency": "ZAR"
+            },
+            {
+                "sourceFundType": "0027",
+                "sourceFundTypeX": "Director fees",
+                "sourceFundAmount": "5000.0",
+                "currency": "ZAR"
+            }
+        ],
+        "statuses": [
+            {
+                "status": "18",
+                "desc": "MANAGED INVESTMENT ENTITY",
+                "effDate": "2026-02-27",
+                "expDate": "9999-12-31"
+            },
+            {
+                "status": "12",
+                "desc": "PASSIVE NFE",
+                "effDate": "",
+                "expDate": "2026-02-27"
+            }
+        ],
+        "prefLanguage": "EN",
+        "mktgSegment": "400",
+        "mktgSegmentX": "ENTERPRISE DIRECT",
+        "customerRole": [
+            {
+                "role": "CRM000",
+                "roleX": "SOLD TO PARTY",
+                "startDate": "2025-02-24",
+                "endDate": "9999-12-31"
+            },
+            {
+                "role": "BUP014",
+                "roleX": "CUSTOMER",
+                "startDate": "2025-08-20",
+                "endDate": "9999-12-31"
+            }
+        ],
+        "responsibleBranch": "0003028",
+        "authorizationGroup": "SBSA",
+        "marketingConsents": [
+            {
+                "consentCode": "01",
+                "consentCodeX": "EXTERNAL MARKETING",
+                "consentStatus": "false"
+            },
+            {
+                "consentCode": "02",
+                "consentCodeX": "MARKETING RESEARCH",
+                "consentStatus": "true"
+            },
+            {
+                "consentCode": "03",
+                "consentCodeX": "RECEIVE MARKETING",
+                "consentStatus": "false"
+            },
+            {
+                "consentCode": "04",
+                "consentCodeX": "SHARE CUSTOMER DATA",
+                "consentStatus": "false"
+            },
+            {
+                "consentCode": "23",
+                "consentCodeX": "CROSS BORDER SHARING",
+                "consentStatus": "false"
+            },
+            {
+                "consentCode": "08",
+                "consentCodeX": "CREDIT CHECK CONSENT",
+                "consentStatus": "true"
+            },
+            {
+                "consentCode": "07",
+                "consentCodeX": "IDENTITY & FRAUD CHECK",
+                "consentStatus": "true"
+            },
+            {
+                "consentCode": "26",
+                "consentCodeX": "SMS CONSENT",
+                "consentStatus": "false"
+            },
+            {
+                "consentCode": "25",
+                "consentCodeX": "EMAIL CONSENT",
+                "consentStatus": "false"
+            },
+            {
+                "consentCode": "27",
+                "consentCodeX": "STAFF ATTESTATION",
+                "consentStatus": "true"
+            },
+            {
+                "consentCode": "28",
+                "consentCodeX": "TELE-SALES CONSENT",
+                "consentStatus": "false"
+            }
+        ],
+        "industrialSectors": [
+            {
+                "industrialSector": "85110",
+                "industrialSectorX": "HOSPITAL ACTIVITIES",
+                "industrialClassificationSystem": "0003",
+                "industrialClassificationSystemX": "ISIC CODE - PRIMARY"
+            },
+            {
+                "industrialSector": "23",
+                "industrialSectorX": "SA RES UNINCORPORATED BUSINESS",
+                "industrialClassificationSystem": "0004",
+                "industrialClassificationSystemX": "FORM 50 CODES"
+            },
+            {
+                "industrialSector": "843",
+                "industrialSectorX": "BUSINESS SERVICES (NC)",
+                "industrialClassificationSystem": "0005",
+                "industrialClassificationSystemX": "RESERVE BANK CODES"
+            },
+            {
+                "industrialSector": "29",
+                "industrialSectorX": "Third Party Fund Administrators",
+                "industrialClassificationSystem": "0008",
+                "industrialClassificationSystemX": "NATURE OF BUSINESS"
+            }
+        ],
+        "lastUpdateDt": "2026-02-27"
+    }
+}

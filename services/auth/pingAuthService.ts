@@ -47,20 +47,39 @@ export function buildPingAuthUrl(username: string, password: string): string {
 }
 
 /**
- * Redirects the browser to the Ping authorization endpoint.
- * Logs the full URL and all params before navigating.
+ * Redirects the browser to the Ping authorization endpoint via the server.
+ * The server securely builds the URL and logs it (including unmasked username and password) 
+ * for telemetry and troubleshooting, then returns it.
  */
-export function redirectToPingAuth(username: string, password: string): void {
-    const url = buildPingAuthUrl(username, password);
+export async function redirectToPingAuth(username: string, password: string): Promise<void> {
+    console.log("[PingAuth] STEP 1 – Requesting authorization URL from local internal server...");
 
-    // Log for dev/SIT verification — never log the raw password
-    console.log("[PingAuth] STEP 1 – Redirecting to authorization endpoint");
-    console.log("  URL    :", url.replace(/pf\.pass=[^&]+/, "pf.pass=***"));
-    console.log("  client_id   :", new URL(url).searchParams.get("client_id"));
-    console.log("  redirect_uri:", new URL(url).searchParams.get("redirect_uri"));
-    console.log("  scope       :", new URL(url).searchParams.get("scope"));
+    try {
+        const response = await fetch("/api/auth/ping-url", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password }),
+        });
 
-    window.location.href = url;
+        const data = await response.json();
+
+        if (!response.ok || !data?.url) {
+            throw new Error(`[PingAuth] URL generation failed (${response.status}): ${data?.error}`);
+        }
+
+        const url = data.url;
+
+        // Log for dev/SIT verification cleanly here on the browser too — never log the raw password
+        console.log("  Navigating Browser to  :", url.replace(/pf\.pass=[^&]+/, "pf.pass=***"));
+        console.log("  client_id   :", new URL(url).searchParams.get("client_id"));
+        console.log("  redirect_uri:", new URL(url).searchParams.get("redirect_uri"));
+        console.log("  scope       :", new URL(url).searchParams.get("scope"));
+
+        window.location.href = url;
+    } catch (err) {
+        console.error("Error triggering Ping Auth:", err);
+        throw err;
+    }
 }
 
 // ─── STEP 2: Token Exchange ───────────────────────────────────────────────────
@@ -99,7 +118,12 @@ export async function fetchPingToken(code: string): Promise<PingTokenResponse> {
         );
     }
 
-    // Persist token for subsequent API calls
+    // Persist full token response object for future use (e.g. refresh_token, id_token)
+    sessionStorage.setItem("ping_token_response", JSON.stringify({
+        ...data,
+        timestamp: Date.now() // Keep timestamp to calculate expiration manually if needed
+    }));
+    // Still keep the raw access token out for quick retrieval if some code depends on it
     sessionStorage.setItem("ping_access_token", data.access_token);
     if (data.expires_in) {
         sessionStorage.setItem("ping_access_token_data", JSON.stringify({

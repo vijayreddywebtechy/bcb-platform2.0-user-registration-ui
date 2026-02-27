@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { API_CONFIG } from "@/config";
 
 /**
  * POST /api/auth/ping-token
@@ -26,7 +27,7 @@ export async function POST(req: NextRequest) {
 
         // ── Server-only env vars (NOT prefixed with NEXT_PUBLIC_) ───────────────
         // These are never shipped to the browser bundle.
-        const tokenUrl = process.env.PING_TOKEN_URL;
+        const tokenUrl = API_CONFIG.ping.tokenUrl;
         const clientId = process.env.PING_CLIENT_ID;
         const clientSecret = process.env.PING_CLIENT_SECRET;
         const redirectUri = process.env.PING_REDIRECT_URI;

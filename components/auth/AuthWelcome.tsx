@@ -9,12 +9,21 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import SignInForm from "./signin/SignInForm";
 import { fetchPingToken, fetchPingUserInfo } from "@/services/auth/pingAuthService";
+import { STORAGE_KEYS } from "@/config";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "../ui/dialog";
 
 type ViewType = "welcome" | "signin" | "register" | "invite";
 
 export default function AuthWelcome() {
   const [currentView, setCurrentView] = useState<ViewType>("welcome");
   const [tokenError, setTokenError] = useState<string | null>(null);
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
   const searchParams = useSearchParams();
 
   // Handle Ping authorization callback: exchange ?code= for an access token.
@@ -55,6 +64,30 @@ export default function AuthWelcome() {
             console.log("  email            :", userInfo.email);
             console.log("  preferred_username:", userInfo.preferred_username);
             console.log("  full payload      :", JSON.stringify(userInfo, null, 2));
+
+            // Store the UserInfo mapping
+            sessionStorage.setItem(STORAGE_KEYS.USER_INFO, JSON.stringify(userInfo));
+
+            // STEP 4: Fetch standard bank customer profile
+            // We expect the customer UUID to be stored in `userInfo.id`.
+            const customerUuid = userInfo.id as string;
+            if (customerUuid && typeof customerUuid === "string") {
+              try {
+                // Dynamically import to keep it client safe since it's a client component
+                const { getCustomerByUuid } = await import("@/services/customers/customerService");
+                const customerProfile = await getCustomerByUuid(customerUuid, tokenData.access_token);
+                console.log("[CustomerAPI] Customer Profile received:", JSON.stringify(customerProfile, null, 2));
+                // Store in session storage using centralized keys array
+                sessionStorage.setItem(STORAGE_KEYS.CUSTOMER_PROFILE, JSON.stringify(customerProfile));
+              } catch (customerErr: unknown) {
+                const message = customerErr instanceof Error ? customerErr.message : String(customerErr);
+                console.error("[CustomerAPI] Setup failed to fetch customer profile:", message);
+                setShowErrorPopup(true);
+              }
+            } else {
+              console.warn("[CustomerAPI] No valid id found on user profile to fetch customer details.");
+            }
+
           } catch (userInfoErr: unknown) {
             const message =
               userInfoErr instanceof Error ? userInfoErr.message : String(userInfoErr);
@@ -84,6 +117,22 @@ export default function AuthWelcome() {
 
   return (
     <AuthWelcomeLayout>
+      <Dialog open={showErrorPopup} onOpenChange={setShowErrorPopup}>
+        <DialogContent className="sm:max-w-md bg-white">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-semibold text-center mt-4">Oops! something went wrong.</DialogTitle>
+            <DialogDescription className="text-center pt-2 pb-6">
+              Try Again
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex justify-center w-full">
+            <Button onClick={() => window.location.href = "/"} className="w-1/2 py-6 font-medium text-lg">
+              ok
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
       <div className="flex-1 flex flex-col justify-center w-full max-w-md mx-auto px-2">
         <div className="text-center">
           <p className="text-white text-xl mb-0.5">Welcome to the</p>

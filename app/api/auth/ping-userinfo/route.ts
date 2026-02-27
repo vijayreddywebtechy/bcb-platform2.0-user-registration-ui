@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { API_CONFIG } from "@/config";
 
 /**
  * POST /api/auth/ping-userinfo
@@ -28,9 +29,7 @@ export async function POST(req: NextRequest) {
         }
 
         // Read from server-only env var (no NEXT_PUBLIC_ prefix)
-        const userInfoUrl =
-            process.env.PING_USERINFO_URL ??
-            "https://enterprisestssit.standardbank.co.za/idp/userinfo.openid";
+        const userInfoUrl = API_CONFIG.ping.userInfoUrl;
 
         console.log("═══════════════════════════════════════════════════");
         console.log("[PingAuth] STEP 3 — UserInfo request");
