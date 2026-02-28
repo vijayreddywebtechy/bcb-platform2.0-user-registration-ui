@@ -27,19 +27,19 @@ This document sequences the API integrations logically based on their execution 
 
 ### 5. Mobile Auth (OTP Service Authenticator)
 * **Purpose**: Establishes a server-to-server authenticated context using standard client credentials (IBM client ID & secret) to authorize subsequent Mobile OTP dispatches.
-* **Internal Proxy Route**: `POST /api/auth/mobile-otp`
+* **Internal Proxy Route**: `POST /api/otp-token`
 * **Gateway Endpoint**: `POST https://api-gatewaynp.standardbank.co.za/npextorg/extnonprod/sysauth/oauth2/token`
 
 ### 6. Mobile OTP (Generate/Send)
 * **Purpose**: Translates a JSON request into a secure SOAP XML envelope to dispatch a fresh SMS OTP token to a mobile device.
-* **Data Context**: Requires the `{"functionId": "GEN"}` parameter.
-* **Internal Proxy Route**: `POST /api/otp/unsecured-lending`
+* **Data Context**: Requires the `{"mobile": {"code": "27", "number": "..."}}` payload parameter.
+* **Internal Proxy Route**: `POST /api/send-otp`
 * **Gateway Endpoint**: `POST https://api-gatewaynp.standardbank.co.za/npextorg/extnonprod/unsecured-lending/otp`
 
 ### 7. Validate OTP
 * **Purpose**: Cross-references the generated OTP against the user's manual input to authorise an action (e.g., verifying a business account or approving a workflow).
-* **Data Context**: Requires the `{"functionId": "VAL"}` and the input `{"otp": "123456"}` parameter.
-* **Internal Proxy Route**: `POST /api/otp/unsecured-lending`
+* **Data Context**: Requires the `{"mobile": {...}, "otpValue": "123456", "otpQName": "..."}` payload parameters.
+* **Internal Proxy Route**: `POST /api/verify-otp`
 * **Gateway Endpoint**: `POST https://api-gatewaynp.standardbank.co.za/npextorg/extnonprod/unsecured-lending/otp`
 
 ### 8. Customer Account List (BPID)
