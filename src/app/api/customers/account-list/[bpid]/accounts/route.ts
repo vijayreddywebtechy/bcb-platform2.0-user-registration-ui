@@ -23,9 +23,13 @@ export async function GET(
             return NextResponse.json({ error: "Missing Authorization header" }, { status: 401 });
         }
 
-        const ibmClientId = process.env.NEXT_PUBLIC_IBM_CLIENT_ID;
-        const ibmClientSecret = process.env.NEXT_PUBLIC_IBM_CLIENT_SECRET;
-        const clientCertificate = process.env.NEXT_PUBLIC_CLIENT_CERTIFICATE;
+        //const ibmClientId = process.env.NEXT_PUBLIC_IBM_CLIENT_ID;
+        //const ibmClientSecret = process.env.NEXT_PUBLIC_IBM_CLIENT_SECRET;
+        //const clientCertificate = process.env.NEXT_PUBLIC_CLIENT_CERTIFICATE;
+
+        const ibmClientId = process.env.GATEWAY_NEXT_PUBLIC_IBM_CLIENT_ID;
+        const ibmClientSecret = process.env.GATEWAY_NEXT_PUBLIC_IBM_CLIENT_SECRET;
+        const clientCertificate = process.env.GATEWAY_NEXT_PUBLIC_CLIENT_CERTIFICATE;
 
         if (!ibmClientSecret || !clientCertificate) {
             console.error("[AccountList API] Missing secrets in backend environment variables (.env.local)");
@@ -37,24 +41,36 @@ export async function GET(
         const accountsUrl = `${apiBaseUrl}${API_CONFIG.endpoints.customerAccountsByBpid(bpid)}`;
         const cifCountry = process.env.CUSTOMER_CIF_COUNTRY ?? "ZA";
 
+        const headers = {
+            "Authorization": `Bearer ${accessToken}`,
+            "Accept": "*/*",
+            "Content-Type": "application/json",
+            "x-fapi-interaction-id": fapiInteractionId,
+            "cifCountry": cifCountry,
+            "X-IBM-Client-Id": ibmClientId || "",
+            "X-IBM-Client-Secret": ibmClientSecret,
+            "x-client-certificate": clientCertificate,
+            "Cookie": "sap-usercontext=sap-client=700"
+        };
+
         console.log("═══════════════════════════════════════════════════");
         console.log("[AccountList API] GET Accounts by BPID");
         console.log("  URL              :", accountsUrl);
         console.log("  x-fapi-id        :", fapiInteractionId);
         console.log("═══════════════════════════════════════════════════");
 
+        // --- PRINT CURL COMMAND ---
+        const curlHeaders = Object.entries(headers)
+            .map(([key, value]) => `--header '${key}: ${value}'`)
+            .join(' \\\n');
+
+        console.log("[AccountList API] GET Account List cURL:");
+        console.log(`curl --location '${accountsUrl}' \\\n${curlHeaders}\n`);
+        console.log("═══════════════════════════════════════════════════");
+
         const response = await fetch(accountsUrl, {
             method: "GET",
-            headers: {
-                "Authorization": `Bearer ${accessToken}`,
-                "Accept": "*/*",
-                "Content-Type": "application/json",
-                "x-fapi-interaction-id": fapiInteractionId,
-                "cifCountry": cifCountry,
-                "X-IBM-Client-Id": ibmClientId || "",
-                "X-IBM-Client-Secret": ibmClientSecret,
-                "x-client-certificate": clientCertificate,
-            }
+            headers,
         });
 
         let data: unknown;

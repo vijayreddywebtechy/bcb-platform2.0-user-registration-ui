@@ -5,4 +5,7 @@
 export const STORAGE_KEYS = {
     CUSTOMER_PROFILE: "customer_profile",
     USER_INFO: "user_info",
+    PING_ACCESS_TOKEN: "ping_access_token",
+    GATEWAY_ACCESS_TOKEN: "gateway_access_token",
+    ACCOUNT_LIST: "account_list",
 } as const;
