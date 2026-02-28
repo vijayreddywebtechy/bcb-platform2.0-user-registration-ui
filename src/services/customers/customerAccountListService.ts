@@ -40,6 +40,8 @@ export async function getCustomerAccountList(
         }
 
         console.log(`[CustomerAccountListService] Token Active. Fetching accounts for BPID: ${bpid}`);
+        bpid = "0533419624";
+        console.log(`[CustomerAccountListService] Fetching accounts for STATIC BPID: ${bpid}`);
 
         const response = await fetch(`/api/customers/account-list/${bpid}/accounts`, {
             method: "GET",

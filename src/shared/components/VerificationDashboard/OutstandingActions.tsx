@@ -1,17 +1,62 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import ActionCard from "@/shared/components/dynamic/cards/ActionCard";
 import Toolbar from "./Toolbar";
 import { User, ScanFace, Link2 } from "lucide-react";
+import { STORAGE_KEYS } from "@/config";
+
 type Props = {
   onIdentityVerificationClick?: () => void;
 };
 
 function OutstandingActions({ onIdentityVerificationClick }: Props) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const bpid = searchParams.get("bpid");
+
   const [visibleCards, setVisibleCards] = useState([1, 2, 3]);
+  const [userName, setUserName] = useState("Welcome");
+  const [organizationName, setOrganizationName] = useState("");
+
+  useEffect(() => {
+    // 1. Get user info dynamically
+    const userInfoStr = sessionStorage.getItem(STORAGE_KEYS.USER_INFO);
+    if (userInfoStr) {
+      try {
+        const userInfo = JSON.parse(userInfoStr);
+        // Supports standard OIDC claim names just in case if first_name/last_name variations exist
+        const firstName = userInfo.first_name || userInfo.given_name || "";
+        const lastName = userInfo.last_name || userInfo.family_name || "";
+        const fullName = `${firstName} ${lastName}`.trim();
+
+        if (fullName) {
+          setUserName(`Welcome, ${fullName}`);
+        } else if (userInfo.name) {
+          setUserName(`Welcome, ${userInfo.name}`);
+        }
+      } catch (e) {
+        console.error("Failed to parse user info:", e);
+      }
+    }
+
+    // 2. Get customer account list to find the matching company name via BPID
+    const accountListStr = sessionStorage.getItem(STORAGE_KEYS.ACCOUNT_LIST);
+    if (accountListStr && bpid) {
+      try {
+        const parsed = JSON.parse(accountListStr);
+        const customers = parsed.customerDetails || [];
+        const matchedCustomer = customers.find((c: any) => c.bpId === bpid);
+
+        if (matchedCustomer && matchedCustomer.customerName) {
+          setOrganizationName(matchedCustomer.customerName);
+        }
+      } catch (e) {
+        console.error("Failed to parse account list:", e);
+      }
+    }
+  }, [bpid]);
 
   const steps = [
     {
@@ -60,8 +105,8 @@ function OutstandingActions({ onIdentityVerificationClick }: Props) {
       <div className="bg-primary-dark">
         <div className="page-container">
           <Toolbar
-            userName="Welcome, Kobus"
-            organizationName="ABC Architects (Pty) Ltd"
+            userName={userName}
+            organizationName={organizationName}
             lastSignedIn="27 Oct 2025, 12:35 PM"
           />
           <div className="py-14">

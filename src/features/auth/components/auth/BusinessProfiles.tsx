@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { ChevronRight, Building } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ChevronRight } from "lucide-react";
 import AuthLayout from "./shared/AuthLayout";
 import AuthCard from "./shared/AuthCard";
 import SearchBox from "@/shared/components/dynamic/SearchBox";
@@ -9,61 +9,62 @@ import { Button } from "@/shared/components/ui/button";
 import Image from "next/image";
 import companyIcon from "@/assets/images/icons/icn_company.png";
 import Link from "next/link";
-import router from "next/router";
 import { useRouter } from "next/navigation";
+import { STORAGE_KEYS } from "@/config";
 
-interface BusinessProfile {
-  id: string;
-  name: string;
-  regNo: string;
-  needsVerification: boolean;
-  needsApproval: boolean;
+interface CustomerDetail {
+  bpId: string;
+  customerName: string;
+  relationshipType: string;
+  accountDetails: any[];
 }
 
-const mockProfiles: BusinessProfile[] = [
-  {
-    id: "1",
-    name: "ABC Architects (Pty) Ltd",
-    regNo: "2007/0345/123",
-    needsVerification: true,
-    needsApproval: true,
-  },
-  {
-    id: "2",
-    name: "ABC Logistics (Pty) Ltd",
-    regNo: "2003/1145/123",
-    needsVerification: true,
-    needsApproval: true,
-  },
-];
-
 function BusinessProfiles() {
+  const [allProfiles, setAllProfiles] = useState<CustomerDetail[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredProfiles, setFilteredProfiles] = useState(mockProfiles);
+  const [filteredProfiles, setFilteredProfiles] = useState<CustomerDetail[]>([]);
   const router = useRouter();
+
+  useEffect(() => {
+    const accountListStr = sessionStorage.getItem(STORAGE_KEYS.ACCOUNT_LIST);
+    if (accountListStr) {
+      try {
+        const parsed = JSON.parse(accountListStr);
+        if (parsed?.customerDetails && Array.isArray(parsed.customerDetails)) {
+          setAllProfiles(parsed.customerDetails);
+          setFilteredProfiles(parsed.customerDetails);
+        }
+      } catch (e) {
+        console.error("Failed to parse account list from session storage", e);
+      }
+    }
+  }, []);
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
     if (query.trim() === "") {
-      setFilteredProfiles(mockProfiles);
+      setFilteredProfiles(allProfiles);
     } else {
-      const filtered = mockProfiles.filter(
+      const filtered = allProfiles.filter(
         (profile) =>
-          profile.name.toLowerCase().includes(query.toLowerCase()) || profile.regNo.includes(query)
+          profile.customerName.toLowerCase().includes(query.toLowerCase()) ||
+          profile.bpId.includes(query)
       );
       setFilteredProfiles(filtered);
     }
   };
 
-  const handleProfileSelect = (profile: BusinessProfile) => {
+  const handleProfileSelect = (bpId: string) => {
     // Add your navigation or logic here
-    // router.push(`/business-profiles/${profile.id}`);
-    router.push(`/identity-verification`);
+    router.push(`/identity-verification?bpid=${bpId}`);
   };
 
   const handleSignOut = () => {
-    // Add your sign out logic here
+    sessionStorage.clear();
+    router.push("/");
   };
+
+  const displayProfiles = filteredProfiles.slice(0, 2);
 
   return (
     <AuthLayout>
@@ -89,16 +90,16 @@ function BusinessProfiles() {
           </span>
           <span className="text-secondary text-xs">
             Companies found{" "}
-            <span className="font-medium text-primary-dark">{mockProfiles.length}</span>
+            <span className="font-medium text-primary-dark">{allProfiles.length}</span>
           </span>
         </div>
 
         {/* Profiles List */}
         <div className="space-y-4 mb-12 max-h-80 overflow-y-auto">
-          {filteredProfiles.map((profile) => (
+          {displayProfiles.map((profile) => (
             <button
-              key={profile.id}
-              onClick={() => handleProfileSelect(profile)}
+              key={profile.bpId}
+              onClick={() => handleProfileSelect(profile.bpId)}
               className="w-full bg-blue-50 hover:bg-blue-100 transition-colors rounded-xl p-4 md:pl-6 flex items-center justify-between group"
             >
               <div className="flex items-center gap-4 flex-1">
@@ -110,37 +111,33 @@ function BusinessProfiles() {
                 {/* Text Content */}
                 <div className="text-left flex-1">
                   <h3 className="text-neutral-900 font-medium text-sm leading-normal mb-1">
-                    {profile.name}
+                    {profile.customerName}
                   </h3>
                   <p className="text-secondary text-xs leading-normal mb-1">
-                    Reg No. <span className="text-green-600">{profile.regNo}</span>
+                    BPID: <span className="text-green-600">{profile.bpId}</span>
                   </p>
                   <div className="flex flex-wrap space-y-1">
-                    {profile.needsVerification && (
-                      <p className="text-xs leading-normal flex flex-wrap gap-1">
-                        <span>Business Profile</span>
-                        <Link
-                          href="#"
-                          className="text-primary-dark hover:underline"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          Needs Verification
-                        </Link>
-                      </p>
-                    )}
-                    {profile.needsApproval && (
-                      <p className="text-xs leading-normal flex flex-wrap gap-1">
-                        {" "}
-                        <span>Role & Access</span>
-                        <a
-                          href="#"
-                          className="text-primary-dark hover:underline"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          Needs Approval
-                        </a>
-                      </p>
-                    )}
+                    <p className="text-xs leading-normal flex flex-wrap gap-1">
+                      <span>Business Profile</span>
+                      <Link
+                        href="#"
+                        className="text-primary-dark hover:underline"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        Needs Verification
+                      </Link>
+                    </p>
+                    <p className="text-xs leading-normal flex flex-wrap gap-1">
+                      {" "}
+                      <span>Role & Access</span>
+                      <a
+                        href="#"
+                        className="text-primary-dark hover:underline"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        Needs Approval
+                      </a>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -152,17 +149,21 @@ function BusinessProfiles() {
               />
             </button>
           ))}
+          {allProfiles.length === 0 && (
+            <div className="text-center text-sm text-neutral-500 py-4">
+              No business profiles found.
+            </div>
+          )}
         </div>
 
         {/* Sign Out Button */}
-        <Link href="/" className="block">
-          <Button onClick={handleSignOut} variant="outline" className="w-full">
-            SIGN OUT
-          </Button>
-        </Link>
+        <Button onClick={handleSignOut} variant="outline" className="w-full">
+          SIGN OUT
+        </Button>
       </AuthCard>
     </AuthLayout>
   );
 }
 
 export default BusinessProfiles;
+
