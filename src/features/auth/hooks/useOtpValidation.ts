@@ -66,7 +66,10 @@ export function useOtpValidation() {
                     }
 
                     const { getCustomerAccountList } = await import("@/services/customers/customerAccountListService");
-                    const accountResponse = await getCustomerAccountList(bpid);
+                    //const accountResponse = await getCustomerAccountList(bpid);
+                    //TODO : Remove Hardcoded for testing
+                    const bpid_test = "0533419624";
+                    const accountResponse = await getCustomerAccountList(bpid_test);
 
                     if (accountResponse.success && accountResponse.data) {
                         console.log("[CustomerAccountList] successfully fetched accounts. Continuing to business profile selection...");

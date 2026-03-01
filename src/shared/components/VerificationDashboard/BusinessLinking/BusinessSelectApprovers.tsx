@@ -6,6 +6,7 @@ import { Button } from "@/shared/components/ui/button";
 import { Checkbox } from "@/shared/components/ui/checkbox";
 import { Label } from "@/shared/components/ui/label";
 import SearchBox from "@/shared/components/dynamic/SearchBox";
+import { retrieveDirectorsFlow } from "@/services/customers/directorsRetrievalService";
 
 interface Director {
   id: string;
@@ -59,53 +60,40 @@ function BusinessSelectApprovers({ onCaptureDetails, onBack }: BusinessSelectApp
   const [allDirectors, setAllDirectors] = useState<Director[]>([]);
 
   useEffect(() => {
-    try {
-      const dataStr = sessionStorage.getItem("CUSTOMER_DETAILS");
-      if (dataStr) {
-        const data = JSON.parse(dataStr);
-        // Sample response mapping mapping based on typical ExtOrg API format
-        // Modify this according to the exact structure
-        let mappedDirectors: Director[] = [];
-
-        const entities = data?.relatedEntities || data?.customerDetails?.relatedParties || [];
-
-        if (Array.isArray(entities) && entities.length > 0) {
-          mappedDirectors = entities.map((entity: any, index: number) => {
-            const firstName = entity.firstName || "";
-            const lastName = entity.lastName || "";
-            const fullName = entity.fullName || `${firstName} ${lastName}`.trim();
+    const fetchDirectors = async () => {
+      try {
+        const result = await retrieveDirectorsFlow();
+        if (result && result.success && result.success.length > 0) {
+          const mappedDirectors: Director[] = result.success.map((dir, index) => {
+            const firstName = dir.additionalDetails?.firstName || "";
+            const lastName = dir.additionalDetails?.lastName || "";
+            const fullName = dir.additionalDetails?.fullName || `${firstName} ${lastName}`.trim();
             const initials = fullName
-              .split(" ")
-              .map((n: string) => n[0])
-              .join("")
-              .substring(0, 2)
-              .toUpperCase();
+              ? fullName.split(" ").map((n: string) => n[0]).join("").substring(0, 2).toUpperCase()
+              : "DR";
 
             return {
-              id: entity.id || String(index + 1),
+              id: String(dir.uuid || dir.bpid || index + 1),
               name: fullName || `Director ${index + 1}`,
-              role: entity.role || "Director, Member",
+              role: "Director, Member",
               initials: initials || "DR",
-              mobile: entity.mobile || "*** *** ****",
-              email: entity.email || "*****@****.com",
-              profile: entity.profileStatus || "Digital ID, Active",
+              mobile: dir.contactNumber !== "Not available" ? dir.contactNumber! : "*** *** ****",
+              email: dir.email !== "Not available" ? dir.email! : "*****@****.com",
+              profile: dir.isActive ? "Digital ID, Active" : "Inactive",
             };
           });
-        }
-
-        // If real API data contains directors, use them, otherwise fallback to mock
-        if (mappedDirectors.length > 0) {
           setAllDirectors(mappedDirectors);
         } else {
+          // Fallback to mock if none returned
           setAllDirectors(getMockDirectors());
         }
-      } else {
+      } catch (e) {
+        console.error("Failed to parse customer details:", e);
         setAllDirectors(getMockDirectors());
       }
-    } catch (e) {
-      console.error("Failed to parse customer details:", e);
-      setAllDirectors(getMockDirectors());
-    }
+    };
+
+    fetchDirectors();
   }, []);
 
   // Filter directors based on search query

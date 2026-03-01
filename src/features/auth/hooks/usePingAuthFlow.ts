@@ -55,7 +55,12 @@ export function usePingAuthFlow({ onOtpReady, onCustomerFetchError }: UsePingAut
                         if (customerUuid && typeof customerUuid === "string") {
                             try {
                                 const { getCustomerByUuid } = await import("@/services/customers/customerService");
-                                const customerProfile = await getCustomerByUuid(customerUuid, tokenData.access_token);
+                                //const customerProfile = await getCustomerByUuid(customerUuid, tokenData.access_token);
+
+                                //TODO : Remove Hardcoded for testing
+                                const uuid = "02002100-00a4-1eef-bcd0-1c9f8bb93848";
+                                const customerProfile = await getCustomerByUuid(uuid, tokenData.access_token);
+
                                 console.log("[CustomerAPI] Customer Profile received:", JSON.stringify(customerProfile, null, 2));
 
                                 sessionStorage.setItem(STORAGE_KEYS.CUSTOMER_PROFILE, JSON.stringify(customerProfile));

@@ -21,12 +21,12 @@ function IdentityVerification({ }: Props) {
 
   useEffect(() => {
     try {
-      const selectedCompanyStr = localStorage.getItem(STORAGE_KEYS.SELECTED_COMPANY);
-      if (!selectedCompanyStr) {
+      const selectedCustomerStr = localStorage.getItem(STORAGE_KEYS.SELECTED_CUSTOMER);
+      if (!selectedCustomerStr) {
         throw new Error("Missing company object");
       }
 
-      const parsed = JSON.parse(selectedCompanyStr);
+      const parsed = JSON.parse(selectedCustomerStr);
       if (!parsed || !parsed.bpid) {
         throw new Error("Missing BPID in selected company");
       }

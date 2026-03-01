@@ -57,19 +57,19 @@ function BusinessProfiles() {
   const handleProfileSelect = (bpId: string) => {
     const profile = allProfiles.find((p) => p.bpId === bpId);
     if (profile) {
-      const selectedCompany = {
-        companyName: profile.customerName,
+      const selectedCustomer = {
+        customerName: profile.customerName,
         bpid: profile.bpId,
         accountList: profile.accountDetails || [],
       };
-      localStorage.setItem(STORAGE_KEYS.SELECTED_COMPANY, JSON.stringify(selectedCompany));
+      localStorage.setItem(STORAGE_KEYS.SELECTED_CUSTOMER, JSON.stringify(selectedCustomer));
       // In a real app we might also set React state, but here we just navigate.
       router.push("/identity-verification");
     }
   };
 
   const handleSignOut = () => {
-    localStorage.removeItem(STORAGE_KEYS.SELECTED_COMPANY);
+    localStorage.removeItem(STORAGE_KEYS.SELECTED_CUSTOMER);
     localStorage.removeItem(STORAGE_KEYS.USER_ROLES);
     sessionStorage.clear();
     router.push("/");

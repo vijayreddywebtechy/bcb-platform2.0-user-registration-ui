@@ -42,14 +42,14 @@ function OutstandingActions({ onIdentityVerificationClick }: Props) {
     }
 
     // 2. Get selected company details to extract BPID and company name internally
-    const selectedCompanyStr = localStorage.getItem(STORAGE_KEYS.SELECTED_COMPANY);
-    if (selectedCompanyStr) {
+    const selectedCustomerStr = localStorage.getItem(STORAGE_KEYS.SELECTED_CUSTOMER);
+    if (selectedCustomerStr) {
       try {
-        const parsed = JSON.parse(selectedCompanyStr);
+        const parsed = JSON.parse(selectedCustomerStr);
         setBpid(parsed.bpid);
-        setOrganizationName(parsed.companyName || "");
+        setOrganizationName(parsed.customerName || "");
       } catch (e) {
-        console.error("Failed to parse selected company:", e);
+        console.error("Failed to parse selected customer:", e);
       }
     }
   }, []);

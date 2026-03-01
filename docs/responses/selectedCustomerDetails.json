@@ -1,0 +1,78 @@
+{
+    "customerDetails": [
+        {
+            "bpId": "0210626968",
+            "customerName": "",
+            "relationshipType": "DIRECTOR",
+            "accountDetails": [
+                {
+                    "accountNumber": "5221266361239881",
+                    "accountType": "GENERIC CARD",
+                    "productNumber": "0000000000000000000000000000000000000146",
+                    "productName": "GOLD REGULAR MASTERCARD",
+                    "accountStatus": "OPEN",
+                    "accountOpenDate": "2020-12-01"
+                },
+                {
+                    "accountNumber": "5221266361239899",
+                    "accountType": "GENERIC CARD",
+                    "productNumber": "0000000000000000000000000000000000000146",
+                    "productName": "GOLD REGULAR MASTERCARD",
+                    "accountStatus": "OPEN",
+                    "accountOpenDate": "2020-12-01"
+                },
+                {
+                    "accountNumber": "5221266361239907",
+                    "accountType": "GENERIC CARD",
+                    "productNumber": "0000000000000000000000000000000000000146",
+                    "productName": "GOLD REGULAR MASTERCARD",
+                    "accountStatus": "OPEN",
+                    "accountOpenDate": "2020-12-01"
+                }
+            ]
+        },
+        {
+            "bpId": "0451947114",
+            "customerName": "",
+            "relationshipType": "DIRECTOR",
+            "accountDetails": []
+        },
+        {
+            "bpId": "0531205515",
+            "customerName": "",
+            "relationshipType": "DIRECTOR",
+            "accountDetails": []
+        },
+        {
+            "bpId": "0531812160",
+            "customerName": "",
+            "relationshipType": "DIRECTOR",
+            "accountDetails": []
+        },
+        {
+            "bpId": "0532570354",
+            "customerName": "",
+            "relationshipType": "DIRECTOR",
+            "accountDetails": []
+        },
+        {
+            "bpId": "0533192313",
+            "customerName": "",
+            "relationshipType": "DIRECTOR",
+            "accountDetails": []
+        },
+        {
+            "bpId": "0533419624",
+            "customerName": "",
+            "relationshipType": "DIRECTOR",
+            "accountDetails": []
+        },
+        {
+            "bpId": "0533937044",
+            "customerName": "",
+            "relationshipType": "DIRECTOR",
+            "accountDetails": []
+        }
+    ]
+}
+// https://api-gatewaynp.standardbank.co.za/npextorg/extnonprod/customer-account-list/customer/account/BPID/0000076516 -->

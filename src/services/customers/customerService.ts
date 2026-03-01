@@ -29,7 +29,6 @@ export async function getCustomerByUuid(
     }
 
     console.log(`[CustomerService] Fetching customer data for UUID: ${uuid}`);
-    uuid = "02002100-00a4-1eef-bcd0-1c9f8bb93848";
 
     const response = await fetch(`/api/customers/${uuid}`, {
         method: "GET",

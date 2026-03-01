@@ -6,6 +6,7 @@ import { STORAGE_KEYS } from "@/config";
 import { Button } from "@/shared/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/shared/components/ui/radio-group";
 import { Label } from "@/shared/components/ui/label";
+import { getCustomerAccountList } from "@/services/customers/customerAccountListService";
 
 interface BusinessRoleDefinitionProps {
   onSelectApprovers?: () => void;
@@ -49,6 +50,7 @@ function BusinessRoleDefinition({ onSelectApprovers, onCancel }: BusinessRoleDef
   const [selectedRole, setSelectedRole] = useState<string>("admin");
   const [isAuthorised, setIsAuthorised] = useState<string>("yes");
   const [isDirector, setIsDirector] = useState<string>("yes");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     try {
@@ -72,8 +74,27 @@ function BusinessRoleDefinition({ onSelectApprovers, onCancel }: BusinessRoleDef
     }
   }, []);
 
-  const handleSelectApprovers = () => {
-    onSelectApprovers?.();
+  const handleSelectApprovers = async () => {
+    try {
+      setIsLoading(true);
+      const selectedCustomerStr = localStorage.getItem(STORAGE_KEYS.SELECTED_CUSTOMER);
+      if (selectedCustomerStr) {
+        const selectedCustomer = JSON.parse(selectedCustomerStr);
+        if (selectedCustomer?.bpid) {
+          const response = await getCustomerAccountList(selectedCustomer.bpid);
+          if (response.success && response.data) {
+            localStorage.setItem(STORAGE_KEYS.SELECTED_CUSTOMER_DETAILS, JSON.stringify(response.data));
+          } else {
+            console.error("Failed to fetch customer details:", response.error);
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching customer details:", error);
+    } finally {
+      setIsLoading(false);
+      onSelectApprovers?.();
+    }
   };
 
   const handleCancel = () => {
@@ -220,11 +241,11 @@ function BusinessRoleDefinition({ onSelectApprovers, onCancel }: BusinessRoleDef
 
       {/* Action Buttons */}
       <div className="flex flex-col sm:flex-row gap-4 w-full lg:max-w-[482px]">
-        <Button variant="outline" onClick={handleCancel} className="sm:flex-1">
+        <Button variant="outline" onClick={handleCancel} className="sm:flex-1" disabled={isLoading}>
           CANCEL
         </Button>
-        <Button onClick={handleSelectApprovers} className="sm:flex-1">
-          SELECT APPROVERS
+        <Button onClick={handleSelectApprovers} className="sm:flex-1" disabled={isLoading}>
+          {isLoading ? "LOADING..." : "SELECT APPROVERS"}
         </Button>
       </div>
     </>
