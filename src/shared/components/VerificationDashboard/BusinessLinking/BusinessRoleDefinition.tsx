@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link2, Info } from "lucide-react";
+import { STORAGE_KEYS } from "@/config";
 import { Button } from "@/shared/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/shared/components/ui/radio-group";
 import { Label } from "@/shared/components/ui/label";
@@ -11,7 +12,7 @@ interface BusinessRoleDefinitionProps {
   onCancel?: () => void;
 }
 
-const roles = [
+const DEFAULT_ROLES = [
   {
     value: "admin",
     label: "Admin/Owner",
@@ -44,9 +45,32 @@ const roles = [
 ];
 
 function BusinessRoleDefinition({ onSelectApprovers, onCancel }: BusinessRoleDefinitionProps) {
+  const [rolesList, setRolesList] = useState<{ value: string; label: string; description: string }[]>(DEFAULT_ROLES);
   const [selectedRole, setSelectedRole] = useState<string>("admin");
   const [isAuthorised, setIsAuthorised] = useState<string>("yes");
   const [isDirector, setIsDirector] = useState<string>("yes");
+
+  useEffect(() => {
+    try {
+      const storedRolesStr = localStorage.getItem(STORAGE_KEYS.USER_ROLES);
+      if (storedRolesStr) {
+        const parsedData = JSON.parse(storedRolesStr);
+        if (parsedData?.items && Array.isArray(parsedData.items) && parsedData.items.length > 0) {
+          const mappedRoles = parsedData.items.map((r: any) => ({
+            value: r.roleId || r.roleCode,
+            label: r.roleName,
+            description: r.description || "",
+          }));
+          setRolesList(mappedRoles);
+          if (mappedRoles.length > 0) {
+            setSelectedRole(mappedRoles[0].value);
+          }
+        }
+      }
+    } catch (e) {
+      console.error("Failed to parse roles from local storage:", e);
+    }
+  }, []);
 
   const handleSelectApprovers = () => {
     onSelectApprovers?.();
@@ -80,23 +104,20 @@ function BusinessRoleDefinition({ onSelectApprovers, onCancel }: BusinessRoleDef
       {/* Two-column layout */}
       <div className="flex flex-col md:flex-row gap-6 mb-8">
         {/* Left: Role Selection */}
-        <div>
+        <div className="flex-none min-w-[320px] lg:min-w-[400px]">
           <RadioGroup
             value={selectedRole}
             onValueChange={setSelectedRole}
-            className="flex flex-col gap-3"
+            className="grid grid-cols-1 auto-rows-[1fr] gap-3"
           >
-            {roles.map((role) => {
+            {rolesList.map((role) => {
               const isSelected = selectedRole === role.value;
               return (
                 <label
                   key={role.value}
                   htmlFor={`role-${role.value}`}
-                  className={`flex items-start gap-4 p-4 rounded-xl border cursor-pointer transition-all ${
-                    isSelected
-                      ? "border-primary bg-blue-50"
-                      : "border-neutral-300 bg-white hover:border-gray-300"
-                  }`}
+                  className={`flex items-start gap-4 p-4 rounded-xl border cursor-pointer transition-all h-full ${isSelected ? "border-primary bg-blue-50" : "border-neutral-300 bg-white hover:border-gray-300"
+                    }`}
                 >
                   <RadioGroupItem
                     value={role.value}
@@ -104,8 +125,10 @@ function BusinessRoleDefinition({ onSelectApprovers, onCancel }: BusinessRoleDef
                     className="mt-1 shrink-0"
                   />
                   <div>
-                    <p className="font-medium text-secondary text-lg md:text-xl">{role.label}</p>
-                    <p className="text-xs text-neutral-800 leading-relaxed mt-2">
+                    <p className="font-medium text-secondary text-lg md:text-xl whitespace-nowrap">
+                      {role.label}
+                    </p>
+                    <p className="text-xs text-neutral-800 leading-relaxed mt-2 line-clamp-3">
                       {role.description}
                     </p>
                   </div>

@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import ActionCard from "@/shared/components/dynamic/cards/ActionCard";
 import Toolbar from "./Toolbar";
 import { User, ScanFace, Link2 } from "lucide-react";
 import { STORAGE_KEYS } from "@/config";
+import { getRoles } from "@/services/entitlements/entitlementsService";
 
 type Props = {
   onIdentityVerificationClick?: () => void;
@@ -13,12 +14,11 @@ type Props = {
 
 function OutstandingActions({ onIdentityVerificationClick }: Props) {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const bpid = searchParams.get("bpid");
 
   const [visibleCards, setVisibleCards] = useState([1, 2, 3]);
   const [userName, setUserName] = useState("Welcome");
   const [organizationName, setOrganizationName] = useState("");
+  const [bpid, setBpid] = useState<string | null>(null);
 
   useEffect(() => {
     // 1. Get user info dynamically
@@ -41,22 +41,18 @@ function OutstandingActions({ onIdentityVerificationClick }: Props) {
       }
     }
 
-    // 2. Get customer account list to find the matching company name via BPID
-    const accountListStr = sessionStorage.getItem(STORAGE_KEYS.ACCOUNT_LIST);
-    if (accountListStr && bpid) {
+    // 2. Get selected company details to extract BPID and company name internally
+    const selectedCompanyStr = localStorage.getItem(STORAGE_KEYS.SELECTED_COMPANY);
+    if (selectedCompanyStr) {
       try {
-        const parsed = JSON.parse(accountListStr);
-        const customers = parsed.customerDetails || [];
-        const matchedCustomer = customers.find((c: any) => c.bpId === bpid);
-
-        if (matchedCustomer && matchedCustomer.customerName) {
-          setOrganizationName(matchedCustomer.customerName);
-        }
+        const parsed = JSON.parse(selectedCompanyStr);
+        setBpid(parsed.bpid);
+        setOrganizationName(parsed.companyName || "");
       } catch (e) {
-        console.error("Failed to parse account list:", e);
+        console.error("Failed to parse selected company:", e);
       }
     }
-  }, [bpid]);
+  }, []);
 
   const steps = [
     {
@@ -87,12 +83,20 @@ function OutstandingActions({ onIdentityVerificationClick }: Props) {
     },
   ];
 
-  const handleStepClick = (stepNumber: number) => {
+  const handleStepClick = async (stepNumber: number) => {
     if (stepNumber === 2) {
       onIdentityVerificationClick?.();
     }
     if (stepNumber === 3) {
-      router.push("/business-linking");
+      try {
+        const roles = await getRoles();
+        localStorage.setItem(STORAGE_KEYS.USER_ROLES, JSON.stringify(roles));
+        router.push("/business-linking");
+      } catch (error) {
+        console.error("Failed to fetch roles:", error);
+        // Redirect gracefully on failure
+        router.push("/business-profiles");
+      }
     }
   };
 

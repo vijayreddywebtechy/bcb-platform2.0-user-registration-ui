@@ -9,7 +9,7 @@ import { API_CONFIG } from "@/config";
  */
 export async function POST() {
     try {
-        const url = `${API_CONFIG.baseApiGatewayUrl}${API_CONFIG.endpoints.mobileOtpToken}`;
+        const url = `${API_CONFIG.baseApiGatewayUrl}${API_CONFIG.endpoints.sysauthToken}`;
 
         // Get server-only Client ID/Secret, fallback to NEXT_PUBLIC versions if needed.
         const clientId = process.env.IBM_CLIENT_ID ?? process.env.NEXT_PUBLIC_IBM_CLIENT_ID;

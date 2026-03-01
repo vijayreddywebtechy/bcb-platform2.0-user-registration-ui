@@ -55,11 +55,22 @@ function BusinessProfiles() {
   };
 
   const handleProfileSelect = (bpId: string) => {
-    // Add your navigation or logic here
-    router.push(`/identity-verification?bpid=${bpId}`);
+    const profile = allProfiles.find((p) => p.bpId === bpId);
+    if (profile) {
+      const selectedCompany = {
+        companyName: profile.customerName,
+        bpid: profile.bpId,
+        accountList: profile.accountDetails || [],
+      };
+      localStorage.setItem(STORAGE_KEYS.SELECTED_COMPANY, JSON.stringify(selectedCompany));
+      // In a real app we might also set React state, but here we just navigate.
+      router.push("/identity-verification");
+    }
   };
 
   const handleSignOut = () => {
+    localStorage.removeItem(STORAGE_KEYS.SELECTED_COMPANY);
+    localStorage.removeItem(STORAGE_KEYS.USER_ROLES);
     sessionStorage.clear();
     router.push("/");
   };

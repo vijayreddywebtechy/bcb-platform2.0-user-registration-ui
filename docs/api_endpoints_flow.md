@@ -28,7 +28,7 @@ This document sequences the API integrations logically based on their execution 
 ### 5. Fetch Customer Profile
 * **Purpose**: Uses the Ping Access Token and user information (like SUB ID) to fetch the initial customer classification details directly from the Customer proxy API.
 * **Internal Proxy Route**: `GET /api/customers/[uuid]`
-* **Gateway Endpoint**: `GET https://api-gatewaynp.standardbank.co.za/npextorg/extnonprod/customer/cif/v2/retail/customer/{uuid}`
+* **Gateway Endpoint**: `GET https://api-gatewaynp.standardbank.co.za/npextorg/extnonprod/external-partners/customers/{uuid}`
 
 ### 6. Mobile Auth (OTP Service Authenticator)
 * **Purpose**: Establishes a server-to-server authenticated context using standard client credentials (IBM client ID & secret) to authorize subsequent Mobile OTP dispatches.

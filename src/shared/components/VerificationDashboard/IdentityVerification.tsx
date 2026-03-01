@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { STORAGE_KEYS } from "@/config";
 import OutstandingActions from "./OutstandingActions";
 import FaceVerificationStep from "./FaceVerificationStep";
 import VerificationInstructions from "./VerificationInstructions";
@@ -12,10 +14,34 @@ type Step = 1 | 2 | 3 | 4 | 5;
 
 type Props = {};
 
-function IdentityVerification({}: Props) {
+function IdentityVerification({ }: Props) {
+  const router = useRouter();
   const [step, setStep] = useState<Step>(1);
+  const [isValidating, setIsValidating] = useState(true);
+
+  useEffect(() => {
+    try {
+      const selectedCompanyStr = localStorage.getItem(STORAGE_KEYS.SELECTED_COMPANY);
+      if (!selectedCompanyStr) {
+        throw new Error("Missing company object");
+      }
+
+      const parsed = JSON.parse(selectedCompanyStr);
+      if (!parsed || !parsed.bpid) {
+        throw new Error("Missing BPID in selected company");
+      }
+
+      setIsValidating(false);
+    } catch (e) {
+      console.error("Selected company validation failed:", e);
+      // Fallback redirect
+      router.push("/business-profiles");
+    }
+  }, [router]);
 
   const goTo = (s: Step) => setStep(s);
+
+  if (isValidating) return null;
 
   return (
     <>

@@ -10,7 +10,7 @@ import { API_CONFIG } from "@/config";
  */
 export async function POST() {
     try {
-        const url = `${API_CONFIG.baseApiGatewayUrl}${API_CONFIG.endpoints.accountsMobileToken}`;
+        const url = `${API_CONFIG.baseApiGatewayUrl}${API_CONFIG.endpoints.sysauthToken}`;
 
         // Get standard Nextjs public client ID or fallback to server explicitly bounded one
         const clientId = process.env.NEXT_PUBLIC_IBM_CLIENT_ID;

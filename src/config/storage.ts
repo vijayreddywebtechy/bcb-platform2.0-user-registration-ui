@@ -8,4 +8,6 @@ export const STORAGE_KEYS = {
     PING_ACCESS_TOKEN: "ping_access_token",
     GATEWAY_ACCESS_TOKEN: "gateway_access_token",
     ACCOUNT_LIST: "account_list",
+    SELECTED_COMPANY: "selectedCompany",
+    USER_ROLES: "userRoles",
 } as const;

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link2, Info } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
 import { Checkbox } from "@/shared/components/ui/checkbox";
@@ -22,40 +22,91 @@ interface BusinessSelectApprovalProps {
   onBack?: () => void;
 }
 
+const getMockDirectors = (): Director[] => [
+  {
+    id: "1",
+    name: "Jonathan Khumalo",
+    role: "Director, Member",
+    initials: "JK",
+    mobile: "*** *** 4567",
+    email: "jo*****.kh*****@abc******tects.co.za",
+    profile: "Digital ID, Active",
+  },
+  {
+    id: "2",
+    name: "Seth Naidoo",
+    role: "Director, Member",
+    initials: "SN",
+    mobile: "*** *** 4567",
+    email: "se**.na*****@abc******tects.co.za",
+    profile: "Digital ID, Active",
+  },
+  {
+    id: "3",
+    name: "Tasmin Reilly",
+    role: "Director, Member",
+    initials: "TR",
+    mobile: "*** *** 4567",
+    email: "ta*****.re*****@abc******tects.co.za",
+    profile: "Digital ID, Active",
+  },
+];
+
 function BusinessSelectApprovers({ onCaptureDetails, onBack }: BusinessSelectApprovalProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedDirectors, setSelectedDirectors] = useState<string[]>(["1", "2"]);
 
-  // Mock data for directors
-  const allDirectors: Director[] = [
-    {
-      id: "1",
-      name: "Jonathan Khumalo",
-      role: "Director, Member",
-      initials: "JK",
-      mobile: "*** *** 4567",
-      email: "jo*****.kh*****@abc******tects.co.za",
-      profile: "Digital ID, Active",
-    },
-    {
-      id: "2",
-      name: "Seth Naidoo",
-      role: "Director, Member",
-      initials: "SN",
-      mobile: "*** *** 4567",
-      email: "se**.na*****@abc******tects.co.za",
-      profile: "Digital ID, Active",
-    },
-    {
-      id: "3",
-      name: "Tasmin Reilly",
-      role: "Director, Member",
-      initials: "TR",
-      mobile: "*** *** 4567",
-      email: "ta*****.re*****@abc******tects.co.za",
-      profile: "Digital ID, Active",
-    },
-  ];
+  const [allDirectors, setAllDirectors] = useState<Director[]>([]);
+
+  useEffect(() => {
+    try {
+      const dataStr = sessionStorage.getItem("CUSTOMER_DETAILS");
+      if (dataStr) {
+        const data = JSON.parse(dataStr);
+        // Sample response mapping mapping based on typical ExtOrg API format
+        // Modify this according to the exact structure
+        let mappedDirectors: Director[] = [];
+
+        const entities = data?.relatedEntities || data?.customerDetails?.relatedParties || [];
+
+        if (Array.isArray(entities) && entities.length > 0) {
+          mappedDirectors = entities.map((entity: any, index: number) => {
+            const firstName = entity.firstName || "";
+            const lastName = entity.lastName || "";
+            const fullName = entity.fullName || `${firstName} ${lastName}`.trim();
+            const initials = fullName
+              .split(" ")
+              .map((n: string) => n[0])
+              .join("")
+              .substring(0, 2)
+              .toUpperCase();
+
+            return {
+              id: entity.id || String(index + 1),
+              name: fullName || `Director ${index + 1}`,
+              role: entity.role || "Director, Member",
+              initials: initials || "DR",
+              mobile: entity.mobile || "*** *** ****",
+              email: entity.email || "*****@****.com",
+              profile: entity.profileStatus || "Digital ID, Active",
+            };
+          });
+        }
+
+        // If real API data contains directors, use them, otherwise fallback to mock
+        if (mappedDirectors.length > 0) {
+          setAllDirectors(mappedDirectors);
+        } else {
+          setAllDirectors(getMockDirectors());
+        }
+      } else {
+        setAllDirectors(getMockDirectors());
+      }
+    } catch (e) {
+      console.error("Failed to parse customer details:", e);
+      setAllDirectors(getMockDirectors());
+    }
+  }, []);
 
   // Filter directors based on search query
   const filteredDirectors = allDirectors.filter((director) =>
