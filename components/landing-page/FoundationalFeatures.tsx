@@ -91,7 +91,10 @@ function FoundationalFeatures() {
             Are you an existing Standard Bank business client?
           </span>
           <Link href="/">
-            <Button variant="outline" className="uppercase font-medium tracking-wide border-primary text-primary hover:bg-primary hover:text-white">
+            <Button
+              variant="outline"
+              className="uppercase font-medium tracking-wide border-primary text-primary hover:bg-primary hover:text-white"
+            >
               Get Early Access
             </Button>
           </Link>

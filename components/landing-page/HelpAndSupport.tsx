@@ -7,7 +7,7 @@ import icnLinkOut from "@/assets/images/icons/icn_link_out.svg";
 
 function HelpAndSupport() {
   return (
-    <section className="py-10 md:py-12 lg:py-16 bg-blue-50">
+    <section id="help-and-support" className="py-10 md:py-12 lg:py-16 bg-blue-50">
       <div className="page-container">
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
           {/* Left heading */}

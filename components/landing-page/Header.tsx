@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import sbLogo from "@/assets/images/logos/sb_business_commercial.svg";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 
 interface NavItem {
   label: string;

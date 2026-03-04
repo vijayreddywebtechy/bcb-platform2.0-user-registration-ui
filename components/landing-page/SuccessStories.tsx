@@ -9,6 +9,7 @@ import logistics from "@/assets/images/landing/logistics.png";
 import icnPlayW33 from "@/assets/images/icons/icn_play_w33.svg";
 import icnLinkW33 from "@/assets/images/icons/icn_link_w33.svg";
 import icnLinkOut from "@/assets/images/icons/icn_link_out.svg";
+import { ChevronRight } from "lucide-react";
 
 interface Story {
   image: StaticImageData;
@@ -72,13 +73,15 @@ function StoryCard({ image, category, date, title, description, cta }: Story) {
   return (
     <div className="flex flex-col">
       {/* Image with icon overlay */}
-      <div className="relative rounded-xl overflow-hidden aspect-[4/3]">
+      <div className="relative rounded-xl overflow-hidden aspect-[5/3] group cursor-pointer">
         <Image
           src={image}
           alt={title}
           fill
           className="object-cover"
         />
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-gray-950/80 to-gray-800/40 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100" />
         <div className="absolute bottom-0 left-0 w-16 h-16 rounded-tr-md bg-primary flex items-center justify-center">
           <Image src={cta.icon} alt="" width={33} height={33} />
         </div>
@@ -102,24 +105,10 @@ function StoryCard({ image, category, date, title, description, cta }: Story) {
 
         <Link
           href={cta.href}
-          className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-primary-light hover:text-primary transition-colors uppercase tracking-wide"
+          className="mt-6 inline-flex items-center text-sm font-medium text-primary-light hover:text-primary transition-colors uppercase tracking-wide group"
         >
           {cta.label}
-          <svg
-            width="10"
-            height="14"
-            viewBox="0 0 8 12"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M1.5 1L6.5 6L1.5 11"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <ChevronRight size={20} className="-mt-0.5 group-hover:ml-1 transition-all" />
         </Link>
       </div>
     </div>
@@ -128,7 +117,7 @@ function StoryCard({ image, category, date, title, description, cta }: Story) {
 
 function SuccessStories() {
   return (
-    <section className="py-10 md:py-12 lg:py-16 bg-neutral-900">
+    <section id="success-stories" className="py-10 md:py-12 lg:py-16 bg-neutral-900">
       <div className="page-container">
         <SectionHeader
           title="Client success stories"
