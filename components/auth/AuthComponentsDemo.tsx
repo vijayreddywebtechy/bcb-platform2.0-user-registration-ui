@@ -7,7 +7,7 @@ import TermsAndConditions from "@/components/auth/TermsAndConditions";
 import { Button } from "@/components/ui/button";
 
 export default function AuthComponentsDemo() {
-  const [activeComponent, setActiveComponent] = useState<"approval" | "invitation" | "terms">("approval");
+  const [activeComponent, setActiveComponent] = useState<"approval" | "invitation" | "terms">("invitation");
 
   const renderComponent = () => {
     switch (activeComponent) {
