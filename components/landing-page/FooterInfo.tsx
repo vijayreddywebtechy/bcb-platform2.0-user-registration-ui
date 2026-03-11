@@ -55,9 +55,18 @@ const contactBlocks: ContactBlock[] = [
 const getToKnowUs: LinkBlock = {
   title: "Get to know us",
   links: [
-    { label: "Standard Bank Group", href: "/" },
-    { label: "Investor relations", href: "/" },
-    { label: "Who we sponsor", href: "/" },
+    {
+      label: "Standard Bank Group",
+      href: process.env.NEXT_PUBLIC_LANDING_STANDARD_BANK_GROUP ?? "/",
+    },
+    {
+      label: "Investor relations",
+      href: process.env.NEXT_PUBLIC_LANDING_INVESTOR_RELATIONS ?? "/",
+    },
+    {
+      label: "Who we sponsor",
+      href: process.env.NEXT_PUBLIC_LANDING_WHO_WE_SPONSOR ?? "/",
+    },
   ],
 };
 
@@ -81,11 +90,20 @@ const fraudBlock: ContactBlock = {
 const extraLinks = [
   {
     label: "Click here for more information about unethical behaviour",
-    href: "/",
+    href: process.env.NEXT_PUBLIC_LANDING_UNETHICAL_BEHAVIOUR ?? "/",
   },
-  { label: "Compliments or complaints", href: "/" },
-  { label: "Give us a call", href: "/" },
-  { label: "Contact us", href: "/" },
+  {
+    label: "Compliments or complaints",
+    href: process.env.NEXT_PUBLIC_LANDING_COMPLIMENTS_COMPLAINTS ?? "/",
+  },
+  {
+    label: "Give us a call",
+    href: process.env.NEXT_PUBLIC_LANDING_GIVE_US_CALL_FOOTER ?? "/",
+  },
+  {
+    label: "Contact us",
+    href: process.env.NEXT_PUBLIC_LANDING_CONTACT_US ?? "/",
+  },
 ];
 
 function Chevron() {
@@ -144,6 +162,8 @@ function FooterInfo() {
                 <div key={link.label}>
                   <Link
                     href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-sm text-white/80 hover:text-white transition-colors"
                   >
                     {link.label}
@@ -169,6 +189,8 @@ function FooterInfo() {
                 <div key={link.label}>
                   <Link
                     href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-sm text-white/80 hover:text-white transition-colors"
                   >
                     {link.label}

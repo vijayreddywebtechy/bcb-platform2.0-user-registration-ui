@@ -90,7 +90,7 @@ function FoundationalFeatures() {
           <span className="text-sm md:text-base text-secondary">
             Are you an existing Standard Bank business client?
           </span>
-          <Link href="/">
+          <Link href="/signin">
             <Button
               variant="outline"
               className="uppercase font-medium tracking-wide border-primary text-primary hover:bg-primary hover:text-white"

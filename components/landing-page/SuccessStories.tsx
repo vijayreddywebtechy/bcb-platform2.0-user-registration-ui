@@ -35,7 +35,7 @@ const stories: Story[] = [
       "See how our partnership with Jacobs Transport helped them expand their operations, embrace sustainability, and take bold steps into the future.",
     cta: {
       label: "WATCH VIDEO",
-      href: "/",
+      href: process.env.NEXT_PUBLIC_LANDING_SUCCESS_STORY_VIDEO ?? "#",
       icon: icnPlayW33,
     },
   },
@@ -49,7 +49,7 @@ const stories: Story[] = [
       "We partnered with Lowmar Farm by providing a financial solution comprising a multi-product structure to finance the new hydro project.",
     cta: {
       label: "READ MORE",
-      href: "/",
+      href: process.env.NEXT_PUBLIC_LANDING_SUCCESS_STORY_HYDRO ?? "#",
       icon: icnLinkW33,
     },
   },
@@ -63,7 +63,7 @@ const stories: Story[] = [
       "See how GALXBOY rose from local hustle to global legacy. When you lift your community, your story becomes theirs.",
     cta: {
       label: "READ MORE",
-      href: "/",
+      href: process.env.NEXT_PUBLIC_LANDING_SUCCESS_STORY_HYDRO ?? "#",
       icon: icnPlayW33,
     },
   },
@@ -105,6 +105,8 @@ function StoryCard({ image, category, date, title, description, cta }: Story) {
 
         <Link
           href={cta.href}
+          target="_blank"
+          rel="noopener noreferrer"
           className="mt-6 inline-flex items-center text-sm font-medium text-primary-light hover:text-primary transition-colors uppercase tracking-wide group"
         >
           {cta.label}
@@ -133,7 +135,11 @@ function SuccessStories() {
         </div>
 
         <div className="mt-10 md:mt-12 flex justify-center">
-          <Link href="/" target="_blank">
+          <Link
+            href={process.env.NEXT_PUBLIC_LANDING_SUCCESS_STORIES_MORE ?? "#"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Button
               className="px-6"
             >

@@ -24,7 +24,11 @@ function SwitchNow() {
               </p>
 
               <div className="mt-6 md:mt-8">
-                <Link href="/" target="_blank">
+                <Link
+                  href={process.env.NEXT_PUBLIC_LANDING_SWITCH_NOW ?? "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Button className="px-6">
                     Switch Now
                     <Image

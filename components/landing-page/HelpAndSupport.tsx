@@ -35,7 +35,11 @@ function HelpAndSupport() {
                 We&rsquo;re here to help with your questions or queries
               </p>
               <div className="mt-9">
-                <Link href="/" target="_blank">
+                <Link
+                  href={process.env.NEXT_PUBLIC_LANDING_GIVE_US_CALL ?? "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Button className="px-6">
                     Give Us A Call
                     <Image

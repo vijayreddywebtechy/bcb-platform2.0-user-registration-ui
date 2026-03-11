@@ -38,7 +38,11 @@ function AccountsAndServices() {
           </p>
 
           <div className="mt-8">
-            <Link href="/" target="_blank">
+            <Link
+              href={process.env.NEXT_PUBLIC_LANDING_EXPLORE_SOLUTIONS ?? "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Button className="px-6">
                 Explore Solutions
                 <Image
