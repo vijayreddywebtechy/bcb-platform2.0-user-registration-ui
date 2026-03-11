@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import PageHeader from "@/components/dynamic/PageHeader";
 import { ManageProfilePage } from "@/components/manage-profile/ManageProfilePage";
@@ -14,7 +15,9 @@ export default function Page() {
         pageTitle="Manage Profile"
         pageDescription="Set notification preferences and manage linked devices"
       />
-      <ManageProfilePage />
+      <Suspense fallback={null}>
+        <ManageProfilePage />
+      </Suspense>
     </DashboardLayout>
   );
 }

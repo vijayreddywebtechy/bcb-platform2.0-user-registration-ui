@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   Mail,
   MessageSquareText,
@@ -295,7 +296,15 @@ function LinkedDevicesTab() {
 type Tab = "notifications" | "devices";
 
 export function ManageProfilePage() {
-  const [activeTab, setActiveTab] = useState<Tab>("notifications");
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get("tab");
+  const [activeTab, setActiveTab] = useState<Tab>(
+    tabParam === "devices" ? "devices" : "notifications"
+  );
+
+  useEffect(() => {
+    if (tabParam === "devices") setActiveTab("devices");
+  }, [tabParam]);
 
   const tabs: { id: Tab; label: string }[] = [
     { id: "notifications", label: "Notifications" },

@@ -24,15 +24,15 @@ const links: LinkCard[] = [
     label: "I want to transact on",
     title: "Online Banking for Business",
     description: "Sign in automatically",
-    url: "#",
+    url: process.env.NEXT_PUBLIC_URL_ONLINE_BANKING ?? "#",
   },
   {
     id: "2",
     icon: icnTradeFinance,
     label: "Submit trade instructions",
-    title: "Trade Suite",
+    title: "TradeSuite",
     description: "Sign in automatically",
-    url: "#",
+    url: process.env.NEXT_PUBLIC_URL_TRADESUITE ?? "#",
   },
   {
     id: "3",
@@ -40,15 +40,7 @@ const links: LinkCard[] = [
     label: "I want to transact on",
     title: "Business Online",
     description: "You will need to sign in again",
-    url: "#",
-  },
-  {
-    id: "4",
-    icon: icnScreen,
-    label: "I want to transact on",
-    title: "Business Online",
-    description: "You will need to sign in again",
-    url: "#",
+    url: process.env.NEXT_PUBLIC_URL_BUSINESS_ONLINE ?? "#",
   },
 ];
 
@@ -56,6 +48,8 @@ function LinkCard({ link }: { link: LinkCard }) {
   return (
     <Link
       href={link.url}
+      target="_blank"
+      rel="noopener noreferrer"
       className="relative flex flex-col bg-gradient-to-br from-[#0047BB] to-[#003A9B] rounded-2xl p-4 md:px-6 md:py-8 text-white hover:shadow-xl transition-all duration-300 group overflow-hidden h-full"
     >
       {/* Hover glow */}

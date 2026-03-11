@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import iconSecure from "@/assets/images/icons/icn_people_1_secure.svg";
 import securityImage from "@/assets/images/cards/security_upgrade_app.png";
@@ -8,6 +9,8 @@ import securityImage from "@/assets/images/cards/security_upgrade_app.png";
 type Props = {};
 
 function SecurityStatus({}: Props) {
+  const router = useRouter();
+
   return (
     <div className="bg-white rounded-2xl shadow-sm h-full flex flex-col">
       {/* Header */}
@@ -48,7 +51,10 @@ function SecurityStatus({}: Props) {
 
           {/* Button */}
           <Button
-            variant="outline" className="w-full">
+            variant="outline"
+            className="w-full"
+            onClick={() => router.push("/manage-profile?tab=devices")}
+          >
             CHECK MY DEVICES
           </Button>
         </div>
