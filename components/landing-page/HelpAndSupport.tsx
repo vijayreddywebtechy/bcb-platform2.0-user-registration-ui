@@ -55,7 +55,7 @@ function HelpAndSupport() {
             </div>
 
             {/* Stay informed card */}
-            <div className="bg-white rounded-2xl p-6 md:p-8 flex flex-col items-center text-center">
+            {/* <div className="bg-white rounded-2xl p-6 md:p-8 flex flex-col items-center text-center">
               <h3 className="text-lg md:text-xl font-medium text-secondary">
                 Stay informed
               </h3>
@@ -67,7 +67,7 @@ function HelpAndSupport() {
                   <Button className="px-6">Subscribe Now</Button>
                 </Link>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -18,13 +18,23 @@ const MiniNavbar: React.FC = () => {
 
         <div className="flex items-stretch gap-4">
           {/* Personal */}
-          <Link href="/solutions" className={navLinkClass}>
+          <Link
+            href={process.env.NEXT_PUBLIC_MINI_NAV_PERSONAL ?? "/"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={navLinkClass}
+          >
             <span>Personal</span>
             <Image src={icnLinkOut} alt="Personal Icon" width={12} height={12} />
           </Link>
 
           {/* Corporate */}
-          <Link href="/contact" className={navLinkClass}>
+          <Link
+            href={process.env.NEXT_PUBLIC_MINI_NAV_CORPORATE ?? "/"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={navLinkClass}
+          >
             <span>Corporate</span>
             <Image src={icnLinkOut} alt="Corporate Icon" width={12} height={12} />
           </Link>
@@ -32,14 +42,24 @@ const MiniNavbar: React.FC = () => {
 
         <div className="flex items-stretch gap-4">
           {/* Explore Solutions */}
-          <Link href="/solutions" className={navLinkClass}>
+          <Link
+            href={process.env.NEXT_PUBLIC_MINI_NAV_EXPLORE_SOLUTIONS ?? "/"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={navLinkClass}
+          >
             <span>Explore Solutions</span>
             <Image src={icnTelescope} alt="Share Icon" width={16} height={16} />
           </Link>
 
-          {/* Contact Us */}
-          <Link href="/contact" className={navLinkClass}>
-            <span>Contact Us</span>
+          {/* Help Centre (Interim) */}
+          <Link
+            href={process.env.NEXT_PUBLIC_MINI_NAV_HELP_CENTRE ?? "/"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={navLinkClass}
+          >
+            <span>Help Centre (Interim)</span>
             <Image src={icnCallCentre} alt="Phone Icon" width={16} height={16} />
           </Link>
 
