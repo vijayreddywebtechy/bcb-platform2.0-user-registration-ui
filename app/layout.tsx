@@ -4,8 +4,8 @@ import "./globals.css";
 import { bentonSansPro } from "./fonts";
 
 export const metadata: Metadata = {
-  title: "BizHub",
-  description: "Bizhub User Registration",
+  title: "SB One",
+  description: "SB One User Registration",
 };
 
 export default function RootLayout({

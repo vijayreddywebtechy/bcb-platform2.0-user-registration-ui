@@ -45,13 +45,13 @@ const links = [
     icon: UserCircle,
     href: "/manage-profile",
   },
-  {
-    id: 5,
-    title: "Customise Appearance",
-    subtitle: "Personalise Layout & Look",
-    icon: PaintRoller,
-    action: "customise-appearance",
-  },
+  // {
+  //   id: 5,
+  //   title: "Customise Appearance",
+  //   subtitle: "Personalise Layout & Look",
+  //   icon: PaintRoller,
+  //   action: "customise-appearance",
+  // },
 ];
 
 function MyLinks({}: Props) {
@@ -122,12 +122,12 @@ function MyLinks({}: Props) {
         })}
       </CardBody>
 
-      <CardFooter>
+      {/* <CardFooter>
         <button className="w-full text-center text-sm font-bold text-primary-dark transition-colors flex items-center justify-center gap-1">
           EDIT LINKS
           <ChevronRight className="w-6 h-6 -mt-1" strokeWidth={1.2} />
         </button>
-      </CardFooter>
+      </CardFooter> */}
     </Card>
 
     <CustomiseAppearanceModal

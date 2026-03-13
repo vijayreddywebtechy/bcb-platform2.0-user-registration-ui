@@ -59,9 +59,16 @@ function BusinessOffers({}: Props) {
       </div>
 
       {/* Button */}
-      <Button className="w-full">
-        TELL ME MORE
-      </Button>
+      <a
+        href={process.env.NEXT_PUBLIC_DASHBOARD_BUSINESS_OFFERS_TELL_ME_MORE ?? "#"}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block"
+      >
+        <Button className="w-full">
+          TELL ME MORE
+        </Button>
+      </a>
       </div>
       </div>
     </div>
